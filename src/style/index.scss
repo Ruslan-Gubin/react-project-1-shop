@@ -1,0 +1,23 @@
+@import 'common/libs/normalize.css';
+@import 'common/fonts';
+@import 'common/var';
+@import 'common/extends';
+@import 'common/mixins';
+
+
+
+@import 'src/components/App/App';
+
+
+
+
+body {
+    font-family: Montserrat;
+    background-color: $color-error-dark;
+    .testscss{
+    color: #d21313;
+    &:hover{
+        color: $color-blue;
+    }
+    }
+}

@@ -1,0 +1,14 @@
+@import 'mixin/cartmain';
+@import 'mixin/gridBody';
+@import 'mixin/scrollStyle';
+
+
+@mixin stop-scroll {
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+}
+
