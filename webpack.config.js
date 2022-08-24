@@ -3,6 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
+
+
+
 const mode = process.env.NODE_ENV || 'development';
 const devMode = mode === 'development';
 const target = devMode ? 'web' : 'browserslist';
@@ -14,23 +17,27 @@ module.exports = {
   devtool,
   devServer: {
     port: 3000,
+    historyApiFallback: true,
+    static: {
+      directory: path.join(__dirname, "/"),
+    },
     open: true,
     hot: true,
   },
   entry: ['@babel/polyfill', path.resolve(__dirname, 'src', 'index.tsx')], 
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        extractComments: false,
-        terserOptions: {
-          format: {
-            comments: false,
-          },
-        },
-      }),
-    ],
-  },
+  // optimization: {
+  //   minimize: true,
+  //   minimizer: [
+  //     new TerserPlugin({
+  //       extractComments: false,
+  //       terserOptions: {
+  //         format: {
+  //           comments: false,
+  //         },
+  //       },
+  //     }),
+  //   ],
+  // },
 
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -45,10 +52,13 @@ module.exports = {
     rules: [
       {
         test: /\.(ts|js)x?$/,
-        exclude: /node_modules/,
+        exclude: /(node_modules|bower_components)/,
         use: [
           {
             loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+            },
           },
         ],
       },
@@ -65,7 +75,8 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                plugins: [require('postcss-preset-env')],
+                plugins: [
+                  require('postcss-preset-env')],
               },
             },
           },
@@ -103,16 +114,6 @@ module.exports = {
         ],
         type: 'asset/resource',
       },
-      {
-        test: /\.m?js$/i,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
-        },
-      },
     ],
   },
   plugins: [
@@ -122,5 +123,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
     }),
+    
+      
   ],
 };

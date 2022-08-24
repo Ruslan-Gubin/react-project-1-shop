@@ -5,19 +5,11 @@
 @import 'common/mixins';
 
 
+@import 'src/App/App';
+@import 'src/App/components/ProductCard/ProductCard';
+@import 'src/App/components/Posts/Posts';
+// @import 'src/components/Navigation/Navigation';
+// @import 'src/components/RepoCard/RepoCard';
 
-@import 'src/components/App/App';
-
-
-
-
-body {
-    font-family: Montserrat;
-    background-color: $color-error-dark;
-    .testscss{
-    color: #d21313;
-    &:hover{
-        color: $color-blue;
-    }
-    }
-}
+// @import 'src/pages/home/HomePages';
+// @import 'src/pages/favorites/FavouritesPage';
