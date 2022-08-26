@@ -1,26 +1,35 @@
-import  React, { FC } from "react";
+import  React, { FC, useState } from "react";
 import { IPost } from "../../../models/products";
+import { useUpdatePostMutation } from "../../../store/post/postApi";
 
 interface PostItemProps {
   post: IPost;
   remove: (post: IPost) => void;
-  update: (post: IPost) => void;
 }
 
-const PostsItem: FC<PostItemProps> = ({ post, remove, update }) => {
+const PostsItem: FC<PostItemProps> = ({ post, remove}) => {
+  const [updatePost, {}] = useUpdatePostMutation();
+  const [ status, setStatus] = useState(false)
+  const [text, setText] = useState('')
+  const [title, setTitle] = useState('')
 
-  const handleRemove = (event: React.MouseEvent) => {
-    event.stopPropagation()
-    remove(post)
-  }
-  const handleUpdate = (event: React.MouseEvent) => {
-    const title = ''
-    update({...post, title})
-  }
+  const handlerOpen = (event: React.MouseEvent) => {
+    setStatus( true)
+    }
+
 
   return (
-    <div className="post-item" onClick={handleUpdate}>
-      {post.text} {post.title}
+    <div className="post-item" onClick={handlerOpen}>
+      {/* {status && 
+      <div>
+      <input placeholder={post.text} type="text" value={text} onChange={(e)=> setText(e.target.value)}/>
+      <input placeholder={post.title} type="text" value={title} onChange={(e)=> setTitle(e.target.value)}/>
+      <button type='submit'>Update Post</button>
+      
+      </div>
+      } */}
+      {post.text}
+       {/* {post.title} */}
       <button onClick={()=> remove(post)}>Delete</button>
     </div>
   );

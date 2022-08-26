@@ -8,33 +8,37 @@ export const postApi = createApi({
   tagTypes: ['Post'],
   endpoints: (build) => ({
     getPosts: build.query<IPost[], number>({
-      query: () => ({
-        url: '/post',     
-      }),
-      providesTags: result => ['Post']
+      query: () => 'post',
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }) => ({ type: 'Post' as const, id })),
+              { type: 'Post', id: 'LIST' },
+            ]
+          : [{ type: 'Post', id: 'LIST' }],
     }),
-    createPost: build.mutation<IPost, IPost>({
-      query: (post) => ({
-        url: 'post',
+      createPost: build.mutation<IPost, IPost>({
+        query: (body) => ({
+          url: 'post',
         method: 'POST',
-        body: post
+        body,
       }),
-      invalidatesTags: ['Post'],
+      invalidatesTags: [{ type: 'Post', id: 'LIST' }],
     }),
     updatePost: build.mutation<IPost, IPost>({
       query: (post) => ({
-        url: `/post/${post.id}`,
+        url: `post/${post._id}`,
         method: 'PUT',
         body: post
       }),
-      invalidatesTags: ['Post'],
+      invalidatesTags: [{ type: 'Post', id: 'LIST' }],
     }),
     deletePost: build.mutation<IPost, IPost>({
       query: (post) => ({
         url: `post/${post._id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Post'],
+      invalidatesTags: [{ type: 'Post', id: 'LIST' }],
     }),
   })
 })
