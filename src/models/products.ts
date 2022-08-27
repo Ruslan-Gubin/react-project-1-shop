@@ -29,8 +29,12 @@ export interface IPost {
   body: any
   valueTitile:string
   valueText: string
-  id: number
-  _id: number
+  id: string
+  _id: string
  title: string
  text: string
+ date: any
+ user_name: string
+ user_icons: any
+ img: string
 }
