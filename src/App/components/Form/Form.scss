@@ -1,0 +1,35 @@
+.form-container {
+  .form {
+    &-header {
+      display: flex;
+      align-items:center;
+      justify-content: center;
+      &__title {
+        font-family: $Montserat;
+        font-weight: bold;
+        font-size: $font-size-average;
+        color: $color-black-hover;
+      }
+    }
+
+    &-body {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    &-footer {
+      &__buttons {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        &-cancel {
+          margin-right: 10px;
+        }
+        &-ready {
+          padding-right: 10px;
+        }
+      }
+    }
+  }
+}

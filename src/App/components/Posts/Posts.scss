@@ -11,25 +11,7 @@
         align-items: center;
         justify-content: space-around;
 padding: 5px;
-        &-search {
-            &-input {
-                font-family: $CormBolt;
-                border: 1px solid $color-dark-grey;
-                border-radius: 10px;
-                padding: 10px;
-                font-size: $font-size-button;
-                color: $color-header-bg-dark;
-                
-                &:focus {
-                    border: 1px solid $color-green;
-                    box-shadow: $box-shadow;
-                }
-            }
-            &-submit {
-                margin-left: 10px;
-                @extend %btn-goback-green
-            }
-        }
+        
     }
-
+    
 }

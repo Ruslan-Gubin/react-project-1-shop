@@ -1,0 +1,27 @@
+.button-main__primary {
+    @include button-main($color-primary, $color-primary-hover)
+  }
+  .button-main__red {
+    @include button-main($color-red, $color-red-hover)
+  }
+
+  .button-main__green {
+    @include button-main($color-green, $color-green-hover)
+  }
+
+  .button-main__orange {
+    @include button-main($color-orange, $color-orange-hover)
+  }
+  .button-main__secondary {
+    @include button-main($color-secondary, $color-secondary-hover)
+  }
+  .button-main__yellow {
+    @include button-main($color-orange, $color-yellow-hover)
+  }
+  .button-main__black {
+    @include button-main($color-black, $color-black-hover)
+  }
+  .button-main__info {
+    @include button-main($color-info, $color-info-hover)
+  }
+

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PropsClildren } from "../../../models/children";
 
-const ButtonGoBack = ({ ...props }: PropsClildren) => {
+const ButtonGoBack = ({children, ...props }: PropsClildren) => {
     const [text, setText] = useState('Вернуться назад')
 
   const navigation = useNavigate();
@@ -10,7 +10,8 @@ const ButtonGoBack = ({ ...props }: PropsClildren) => {
   
   return (  
     <button className={props.class || 'btn-back'} onClick={goBack} >
-     {props.text || text}     
+     {props.text || text}  
+     {children}   
     </button>  
   );
 };

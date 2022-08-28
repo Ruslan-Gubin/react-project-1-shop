@@ -1,0 +1,14 @@
+@mixin button-main($bgColor, $hoverBgColor) {
+    background-color: $bgColor;
+    box-shadow: $box-shadow;
+    padding: $spasing-button;
+    border-radius: $border-radius-button;
+    box-sizing: border-box;
+    color: $white;
+    font-size: $font-size-button;
+    transition: all 0.2s ease-in;
+    &:hover {
+        transition: all 0.2s ease-in;
+        background-color: $hoverBgColor;
+    }
+    }

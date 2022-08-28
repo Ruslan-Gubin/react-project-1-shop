@@ -7,6 +7,11 @@ import {
   useUpdatePostMutation,
 } from "../../../store/post/postApi";
 import CustomLink from "../CustomLink";
+import Form from "../Form";
+import Modal from "../Modal";
+import ButtonMain from "../Ui/ButtonMain";
+import FormSearch from "../Ui/FormSearch";
+import InputMain from "../Ui/InputMain";
 import PostsItem from "./PostsItem";
 
 interface PostFormAdd {
@@ -18,6 +23,7 @@ const PostConteiner = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
+  const [modalActive, setModalActive] = useState(true);
   const { isLoading, isError, data = [] } = useGetPostsQuery(5);
   const [createPost, {}] = useCreatePostMutation();
   const [updatePost, {}] = useUpdatePostMutation();
@@ -41,37 +47,41 @@ const PostConteiner = () => {
     const form = e.target;
     let query = form.search.value;
     setSearchParams({ post: query.toLowerCase() });
-    form.search.value = ''
+    form.search.value = "";
   };
+
+  const closeModal: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault()
+    setModalActive(false)
+    setText(""), setTitle("");
+  }
 
   return (
     <div className="post-main">
-    <div className="post-main__forms">
-
-      <div className="post-main__forms-search">
-        <form  autoComplete="off" onSubmit={handletSubmitSearch}>
-          <input placeholder="Поиск" className="post-main__forms-search-input" type="search" name="search" />
-          <input className="post-main__forms-search-submit" type="submit" value="Найти" />
-        </form>
-      </div>
-
-      <form onSubmit={handlerSubmit}>
-        title:
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          />
-        <label>
-          text:
-          <input
-            type="text"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            />
-        </label>
-        <input type="submit" />
-      </form>
+      <div className="post-main__forms">
+        <FormSearch name='search' placeholder='Поиск' submitImput={handletSubmitSearch}>
+        <InputMain  setText={setTitle} name="search" placeholder='поиск'/>
+        <ButtonMain bgColor='green'>Найти</ButtonMain>
+          </FormSearch>
+        <ButtonMain bgColor="info" onClick={() => setModalActive(true)}>
+          Создать пост
+        </ButtonMain>
+        <Modal
+          handlerSubmit={handlerSubmit}
+          active={modalActive}
+          setActive={setModalActive}
+        >
+          <Form
+            titleText={'Форма заполнение поста:'}
+            setText={setText}
+            setTitle={setTitle}
+            handlerSubmit={handlerSubmit}
+            closeForm={closeModal}
+            >
+              <InputMain name="text" text={title} setText={setTitle} placeholder="Заголовок" />
+        <textarea className='modal-body__value-text' placeholder="Comment text..."  value={text} onChange={(e) => setText(e.target.value)}/>
+          </Form>
+        </Modal>
       </div>
 
       {isLoading ? <h2>Loading...</h2> : isError}
