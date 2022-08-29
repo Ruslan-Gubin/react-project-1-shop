@@ -5,7 +5,10 @@ interface InputMainType {
     name?: string
     value?: string
     text?: string
-    setText?: any    
+    setText?: any  
+    autoComplete?: string 
+    required?: boolean
+    autoFocus?: any
 }
 
 const InputMain:JSXElementConstructor <InputMainType> = ({
@@ -13,11 +16,19 @@ const InputMain:JSXElementConstructor <InputMainType> = ({
     name,
     text,
     setText,
+    autoComplete = "off",
+    required = false,
+    autoFocus = 'off',
 }) => {
     
     return (
         <>
             <input
+            minLength={3}
+            autoFocus={autoFocus}
+            required={required}
+            type='textarea'
+            autoComplete={autoComplete}
           placeholder={placeholder}
           className="input-main"
           name={name}

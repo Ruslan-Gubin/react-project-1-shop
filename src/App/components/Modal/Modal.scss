@@ -29,4 +29,18 @@
     }
   }
 }
+
+  .modal-content-night {
+    padding: 20px 40px;
+    border-radius: 10px;
+    background-color: $ccb;
+    transform: scale(0.5);
+    transition: 0.4s all;
+    width: auto;
+
+    &.active {
+        transform: scale(1);
+    }
+  }
+
   

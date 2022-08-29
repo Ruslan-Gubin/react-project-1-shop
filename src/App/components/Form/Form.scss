@@ -19,6 +19,7 @@
     }
 
     &-footer {
+      position: relative;
       &__buttons {
         display: flex;
         align-items: center;
@@ -29,6 +30,12 @@
         &-ready {
           padding-right: 10px;
         }
+      }
+      &__date{
+        position: absolute;
+        left: 0;
+        bottom: 0;
+
       }
     }
   }
