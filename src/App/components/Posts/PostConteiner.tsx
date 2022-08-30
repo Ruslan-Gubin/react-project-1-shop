@@ -21,7 +21,13 @@ const PostConteiner: FC<PostFormAdd> = () => {
         <PostSearchUtils />
         <ModalActiveUtils />
       </div>
+      <div className="post-main__items">
+  
       <PostItemsRender />
+
+
+
+      </div>
     </div>
   );
 };

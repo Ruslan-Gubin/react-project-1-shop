@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
+import PostItemsSinglPage from "../../App/components/PostItemsSinglPage";
 import { IPost } from "../../models/products";
 import {
   useDeletePostMutation,
   useGetPostsQuery,
 } from "../../store/post/postApi";
-import SinglePagePostItem from "./SinglePagePostItem";
 
 const SingelPage = () => {
   const { id } = useParams();
@@ -23,8 +23,7 @@ const SingelPage = () => {
         data
           .filter((post) => post._id == id)
           .map((post) => (
-            <SinglePagePostItem
-              key={post._id}
+            <PostItemsSinglPage
               post={post}
               remove={handleRemove}
             />

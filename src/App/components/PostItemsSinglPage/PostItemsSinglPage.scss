@@ -1,0 +1,73 @@
+.post-container {
+    display: flex;
+    justify-content: center;
+    padding:  3rem 0;
+    
+    .post-card {
+      width: clamp(39rem, calc(20rem + 2vw), 22rem);
+      overflow: hidden;
+      box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1);
+      border-radius: $border-radius-average;
+      background: $color-card-bg;
+      background: $liner-gradient-post-card;
+      
+      &__header {
+        
+        &-image {
+          max-width: 100%;
+          display: block;
+          object-fit: cover;
+        }
+      }
+      &__body {
+        padding: 1rem;
+        display: flex;
+      flex-direction: column;
+      gap: .5rem;
+  
+      &-text {
+        font-size: $font-size-card-text;
+      }
+      
+      &-title {
+        font-size: $font-size-average;
+        text-transform: capitalize;
+      }
+    }
+    
+    &__footer {
+      display: flex;
+      justify-content: space-between;
+      padding: $spasing-one-rem;
+      
+      
+      &-user {
+        display: flex;
+        gap: $spasing-one-rem;
+        
+        &-image {
+          border-radius: 50%;
+        }
+        & p{
+          color: $color-header-bg-dark;
+          font-size: $font-size-button;
+        }
+        &-info > small {
+          color: $color-secondary-hover;
+        }
+      }
+      
+      &-buttons {
+        display: flex;
+        gap: $spasing-one-rem;
+        &-goback {
+          
+        }
+        &-remove {
+          
+        }
+        
+      }
+    }
+  } 
+  }
