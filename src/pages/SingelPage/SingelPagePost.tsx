@@ -24,6 +24,7 @@ const SingelPage = () => {
           .filter((post) => post._id == id)
           .map((post) => (
             <PostItemsSinglPage
+            key={post._id}
               post={post}
               remove={handleRemove}
             />

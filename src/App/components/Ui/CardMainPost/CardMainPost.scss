@@ -1,8 +1,5 @@
 .post-main__container {
   display: block;
-
-  //  width: 300px;
-  //  height: 300px;
   
   .post-main__card {
 width: 100%;
@@ -39,7 +36,12 @@ height: 100%;
             }
           }
 &-title{
+  font-size: $font-size-button;
   text-align: center;
+  color: $color-black;
+  &:hover {
+    text-decoration: underline;
+  }
 }
         }
 
