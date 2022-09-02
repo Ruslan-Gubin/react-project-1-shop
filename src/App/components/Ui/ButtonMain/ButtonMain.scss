@@ -24,4 +24,7 @@
   .button-main__info {
     @include button-main($color-info, $color-info-hover)
   }
+  .button-main__nobg {
+    @include button-main($color-info-nobg, $color-info-nobg-hover)
+  }
 

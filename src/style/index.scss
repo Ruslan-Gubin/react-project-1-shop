@@ -3,13 +3,11 @@
 @import 'common/var';
 @import 'common/extends';
 @import 'common/mixins';
+@import "swiper/css";
 
 
 @import 'src/App/App';
 @import 'src/App/components/ProductCard/ProductCard';
-@import 'src/App/components/Posts/Posts';
-@import 'src/App/components/CustomLink/CustomLink';
-@import 'src/App/components/ButtonGoBack/ButtonGoBack';
 @import 'src/App/components/Layout/Layout';
 @import 'src/App/components/Header/Header';
 @import 'src/App/components/Posts/Posts';
@@ -17,6 +15,11 @@
 @import 'src/App/components/Form/Form';
 @import 'src/App/components/PostItemsSinglPage/PostItemsSinglPage';
 @import 'src/App/components/Pagination/Pagination';
+@import 'src/App/components/CardProduct/CardProduct';
+@import 'src/App/components/ImagesSlider/ImagesSlider';
+@import 'src/App/components/FooterContainer/FooterContainer';
+@import 'src/App/components/FooterContainer/FooterIcons/FooterIcons';
+@import 'src/App/components/FooterContainer/FooterMenu/FooterMenu';
 
 @import 'src/App/components/Ui/FormSearch/FormSearch';
 @import 'src/App/components/Ui/ButtonMain/ButtonMain';
@@ -24,9 +27,12 @@
 @import 'src/App/components/Ui/TextareaMain/TextareaMain';
 @import 'src/App/components/Ui/Watch/Watch';
 @import 'src/App/components/Ui/CardMainPost/CardMainPost';
+@import 'src/App/components/Ui/CustomLink/CustomLink';
+@import 'src/App/components/Ui/ButtonGoBack/ButtonGoBack';
 
 @import 'src/pages/SingelPage/SingelPage';
 @import 'src/pages/Post/Post';
+@import 'src/pages/Products/Products';
 
 
 

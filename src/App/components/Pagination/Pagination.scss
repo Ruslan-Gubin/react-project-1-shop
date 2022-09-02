@@ -12,16 +12,14 @@ justify-content: center;
     margin: 10px;
     width: 35px;
     height: 35px;
-    background-color: $color-info-hover;
+    background-color: $color-info;
     color: white;
     border-radius: 50%;
     box-shadow: $box-shadow;
     cursor: pointer;
     transition: .3s all ease-in;
 
-    &:hover {
-        background-color: $color-info-hover-black;
-    }
+   
 }
 .page {
     display: flex;
@@ -31,12 +29,11 @@ justify-content: center;
     cursor: pointer;
     width: 35px;
     height: 35px;
-    background-color: $ccb;
     border-radius: 50%;
     box-shadow: $box-shadow; 
     color: white;
     transition: .3s all ease-in;
     &:hover {
-        background-color: $c80;
+        transform: translateY(-10px);
     }
 }

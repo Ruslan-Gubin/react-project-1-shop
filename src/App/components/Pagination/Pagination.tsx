@@ -22,7 +22,7 @@ const Pagination = (props) => {
 
   return (
     <div className="pagination-container">
-        {props.currentPage > 1 ? <ButtonMain bgColor="info" onClick={prevPage}>Prev</ButtonMain> : <ButtonMain bgColor="secondary" >Prev</ButtonMain>}
+        {props.currentPage > 1 ? <ButtonMain bgColor="info" onClick={prevPage}>Prev</ButtonMain> : <ButtonMain bgColor="nobg" >Prev</ButtonMain>}
       {pageNumbers.map((page, index) => (
           <div
           key={index}
@@ -32,7 +32,7 @@ const Pagination = (props) => {
           {page}
         </div>
       ))}
-      {props.currentPage !< pageNumbers.length ? <ButtonMain bgColor="info" onClick={nextPage}>Next</ButtonMain> : <ButtonMain bgColor="secondary" >Next</ButtonMain>}
+      {props.currentPage !< pageNumbers.length ? <ButtonMain bgColor="info" onClick={nextPage}>Next</ButtonMain> : <ButtonMain bgColor="nobg" >Next</ButtonMain>}
     </div>
   );
 };

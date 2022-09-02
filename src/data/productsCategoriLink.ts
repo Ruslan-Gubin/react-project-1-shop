@@ -1,0 +1,32 @@
+interface categoriItemsType {
+    img: string
+    catigoriName: string
+}
+
+export const categoriItems: Array <categoriItemsType> = [
+  {
+    img: "https://i.ibb.co/0Qrz6mS/14497.webp",
+    catigoriName: "Канцтовары",
+  },
+  {
+    img: "https://i.ibb.co/wgTYf6R/228454755.webp",
+    catigoriName: "Товары для детей",
+  },
+  {
+    img: "https://i.ibb.co/mR685xT/2.webp",
+    catigoriName: "Красота и здоровье",
+  },
+  {
+    img: "https://i.ibb.co/GM1hJzn/14401.webp",
+    catigoriName: "Товары для дома",
+  },
+  {
+    img: "https://i.ibb.co/wLcLrzq/14449.webp",
+    catigoriName: "Сад огород",
+  },
+  {
+    img: "https://i.ibb.co/VWJZLnY/image-16.webp",
+    catigoriName: "Одежда",
+  }
+]
+

@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import CustomLink from "../../CustomLink";
+import CustomLink from "../../Ui/CustomLink";
 import CardMainPost from "../../Ui/CardMainPost/CardMainPost";
 
 const PostItemsRender = (props) => {

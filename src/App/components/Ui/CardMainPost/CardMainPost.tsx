@@ -1,24 +1,25 @@
 import React, { FC, useState } from "react";
 import { PostItemProps } from "../../../../models/PostsItemProps";
 
-const CardMainPost: FC<PostItemProps> = ({post}) => {
+const CardMainPost: FC<PostItemProps> = ({ post }) => {
   const [status, setStatus] = useState(false);
 
   const handlerOpen = (event: React.MouseEvent) => {
     setStatus(true);
   };
+
   return (
     <div className="post-main__container" key={post._id}>
       <div className="post-main__card" onClick={handlerOpen}>
         <div className="post-main__card-header">
           {post.img ? (
-            post.img
-            ) : (
-              <img
+            <img src={post.img} alt={post.title} />
+          ) : (
+            <img
               src="https://source.unsplash.com/600x400/?computer"
               alt="card__image"
-              />
-              )}
+            />
+          )}
         </div>
         <div className="post-main__card-footer">
           <div className="post-main__card-footer-info">
@@ -41,7 +42,3 @@ const CardMainPost: FC<PostItemProps> = ({post}) => {
 };
 
 export default CardMainPost;
-
-
-
-// "img": "https://i.ibb.co/c6z0ZSk/2989418-41459-710x550x.jpg"

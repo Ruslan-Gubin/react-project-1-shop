@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import { PostItemProps } from "../../../models/PostsItemProps";
-import ButtonGoBack from "../ButtonGoBack";
+import ButtonGoBack from "../Ui/ButtonGoBack";
 import ButtonMain from "../Ui/ButtonMain";
 
 
@@ -10,12 +10,17 @@ const PostItemsSinglPage: FC<PostItemProps> = ({ post, remove }) => {
         <div className="post-container" >
       <div className="post-card" >
         <div className="post-card__header">
-          <img
+          {post.img ? 
+        <img style={{width: '100%'}} src={post.img} alt="post.title" />  
+        :
+        <img
             src="https://source.unsplash.com/600x400/?computer"
             alt="card__image"
             className="post-card__header-image"
             width="600"
           />
+        }
+          
         </div>
         <div className="post-card__body">
           <h4 className="post-card__body-title">{post.title}</h4>

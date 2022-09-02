@@ -1,49 +1,45 @@
 .post-main__container {
   display: block;
-  
+
   .post-main__card {
-width: 100%;
-height: 100%;
-        overflow: hidden;
-        
-        &-header {
-          
-        }
-        
-        &-footer {
-          height: 100%;
-          display: flex;
-          background-color: white;
-          padding: 10px;
-          font-size: 15px;
-          &-info {
-            padding-left: 10px;
-            text-align: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 
-            &-img {
-              
-              & img {      
-                border-radius: 50%;
-              }
-            }
-            &-name {
-            }
-            color: rgb(72, 67, 67);
-            
-            
-            &-date {
-              color: rgb(102, 97, 97);
-            }
+    &-header {
+    }
+
+    &-footer {
+      height: 100%;
+      display: flex;
+      background-color: white;
+      padding: 10px;
+      font-size: 15px;
+      &-info {
+        padding-left: 10px;
+        text-align: center;
+
+        &-img {
+          & img {
+            border-radius: 50%;
           }
-&-title{
-  font-size: $font-size-button;
-  text-align: center;
-  color: $color-black;
-  &:hover {
-    text-decoration: underline;
-  }
-}
         }
+        &-name {
+        }
+        color: rgb(72, 67, 67);
 
+        &-date {
+          color: rgb(102, 97, 97);
+        }
+      }
+      &-title {
+        font-size: $font-size-button;
+        text-align: center;
+        color: $color-black;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
   }
 }

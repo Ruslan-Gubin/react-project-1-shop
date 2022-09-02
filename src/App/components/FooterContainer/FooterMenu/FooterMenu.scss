@@ -1,0 +1,13 @@
+.footer-menu {
+    @extend %footer-links;
+    & li {
+      & a {
+        font-size: 1.2rem;
+        @extend %footer-links-a;
+        opacity: .75;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }

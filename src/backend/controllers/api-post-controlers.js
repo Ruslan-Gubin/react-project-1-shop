@@ -9,8 +9,8 @@ const getAllPosts = async (req, res) => {
     .catch((error) => handleError(res, error));
 };
 const addPost = async (req, res) => {
-  const { title, text } = req.body;
-  const post = new Post({ title, text });
+  const { title, text, img } = req.body;
+  const post = new Post({ title, text, img });
   await post
     .save()
     .then((post) => res.status(201).json(post))

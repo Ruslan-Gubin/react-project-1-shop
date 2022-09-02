@@ -1,4 +1,4 @@
-import CustomLink from '../CustomLink';
+import CustomLink from '../Ui/CustomLink';
 
 const Header = () => {
 
@@ -15,7 +15,7 @@ const Header = () => {
         
     <div className="header-navbar__links">
       <CustomLink activeCl={linkClActive} noActive={linkCl} to="/"  text='Главная'></CustomLink>
-      <CustomLink activeCl={linkClActive} noActive={linkCl}  to="/product" text='Наша продукция'></CustomLink>
+      <CustomLink activeCl={linkClActive} noActive={linkCl}  to="/products" text='Наша продукция'></CustomLink>
       <CustomLink activeCl={linkClActive} noActive={linkCl} to="/post" text='Посты'></CustomLink>
     </div>
       </div>

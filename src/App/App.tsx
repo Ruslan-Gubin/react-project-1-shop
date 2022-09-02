@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "../pages/home";
 import Post from "../pages/post";
-import Product from "../pages/product";
+import Products from "../pages/Products";
 import Layout from "./components/Layout";
 import NotfoundPage from "./components/NotfoundPage";
 import LoginPage from "../pages/LoginPage";
@@ -15,10 +15,10 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="product" element={<Product />} >
-          <Route path='pens' element={<p>Pens</p>}/>
-            <Route path='notebooks' element={<p>Notebooks</p>}/>
-</Route>
+          <Route path="products" element={<Products />} />
+          {/* <Route path='pens' element={<p>Pens</p>}/>
+            <Route path='notebooks' element={<p>Notebooks</p>}/> */}
+{/* </Route> */}
           <Route path="login" element={<LoginPage />} />
           <Route path="post" element={<Post />} />
           <Route path="post/:id" element={<SingelPage />} />

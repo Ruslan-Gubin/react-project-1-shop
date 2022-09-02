@@ -1,4 +1,4 @@
-import { FC,  useState } from "react";
+import { FC, useState } from "react";
 import { IPost } from "../../../models/products";
 import { useGetPostsQuery } from "../../../store/post/postApi";
 import paginationCalculatorPage from "../../../utils/paginationCalculatorPage";
@@ -25,9 +25,8 @@ const PostConteiner: FC<PostFormAdd> = () => {
 
   const testPagination =  paginationCalculatorPage(data,currentPage,postsPerPage)
 
-
   return (
-    <div className="post-main">
+    <div className="post-main container">
       <div className="post-main__forms">
         <PostSearchUtils />
         <ModalActiveUtils />

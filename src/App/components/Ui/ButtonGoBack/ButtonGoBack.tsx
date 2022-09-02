@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { PropsClildren } from "../../../models/children";
+import { PropsClildren } from "../../../../models/children";
 
 const ButtonGoBack = ({children, ...props }: PropsClildren) => {
     const [text, setText] = useState('Вернуться назад')
