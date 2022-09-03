@@ -8,7 +8,7 @@ const PostSearchUtils = () => {
   const [title, setTitle] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const handletSubmitSearch: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const handlerSubmitSearch: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     const form = e.target;
     let query = form.search.value;
@@ -20,14 +20,12 @@ const PostSearchUtils = () => {
     <FormSearch
       name="search"
       placeholder="Поиск"
-      submitImput={handletSubmitSearch}
+      submitImput={handlerSubmitSearch}
     >
       <InputMain
-        autoComplete="on"
-        required={true}
         setText={setTitle}
         name="search"
-        placeholder="поиск"
+        placeholder="Поиск"
       />
       <ButtonMain bgColor="green">Найти</ButtonMain>
     </FormSearch>

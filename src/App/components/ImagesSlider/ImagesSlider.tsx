@@ -14,10 +14,6 @@ const ImagesSlider = ({imagesSwiper}) => {
 
   return <>
     <Swiper
-    style={{
-        "--swiper-navigation-color": "#fff",
-        "--swiper-pagination-color": "#fff",
-      }}
       loop={true}
       spaceBetween={10}
       navigation={true}

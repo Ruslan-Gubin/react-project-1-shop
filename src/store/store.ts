@@ -1,9 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { postApi } from "./post/postApi";
+import { postsReducer } from "./post/postsReducer";
 
 
 const rootReducer = combineReducers({
-    
+    posts: postsReducer,
 })
 
 
