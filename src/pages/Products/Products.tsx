@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import CardProduct from "../../App/components/CardProduct";
 import ImagesSlider from "../../App/components/ImagesSlider";
 import { imagesSwiper } from "../../data/imagesSwiper";
@@ -17,7 +17,10 @@ const Products: FC<ProductsType> = () => {
         <div className="products-categori">
           <div className="products-categori__items">
             {categoriItems.map((item, index) => (
-              <CardProduct  item={item} key={index} />
+              <Link to={`/${item.link}`} key={index}>
+                <CardProduct  item={item}  />
+              </Link>
+
             ))}
           </div>
         </div>

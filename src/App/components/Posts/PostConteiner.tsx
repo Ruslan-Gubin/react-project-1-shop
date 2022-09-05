@@ -1,14 +1,12 @@
-import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { FC, useState } from "react";
 import { IPost } from "../../../models/products";
 import { useGetPostsQuery } from "../../../store/post/postApi";
 import paginationCalculatorPage from "../../../utils/paginationCalculatorPage";
 import Pagination from "../Pagination";
-import ButtonGoBack from "../Ui/ButtonGoBack";
 import InputMain from "../Ui/InputMain";
 import {
   ModalActiveUtils,
   PostItemsRender,
-  PostSearchUtils,
 } from "./PostContairerUtils";
 
 interface PostFormAdd {
@@ -23,23 +21,22 @@ interface PostFormAdd {
 const PostConteiner: FC<PostFormAdd> = () => { 
   const { isLoading, isError, data = [] } = useGetPostsQuery(5);
   const [currentPage, setCurrentPage] = useState(1)
-  const [ postsPerPage] = useState(8)
+  const [ postsPerPage] = useState(12)
   const [value, setValue] = useState('');
- 
 
-const filtresPosts = data.filter(item => {
-  return item.title.toLowerCase().includes(value.toLowerCase())
-})
 
+  const filtresPosts =  data.filter(item => {
+     return item.title.toLowerCase().includes(value.toLowerCase())
+   })
+
+  
   const pagination =  paginationCalculatorPage(filtresPosts,currentPage,postsPerPage)
 
   return (
     <div className="post-main container">
       <div className="post-main__forms">
+<InputMain text={value} setText={setValue} placeholder='Найти'/>    
 
-
-<InputMain text={value} setText={setValue}/>
-        
         <ModalActiveUtils />
       </div>
       <div className="post-main__items">

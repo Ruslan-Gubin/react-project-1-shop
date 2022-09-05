@@ -7,9 +7,25 @@ const productsSchema = new Schema(
       type: String,
       required: true,
     },
+    category: {
+      type: String,
+      // required: true,
+    },
     img: {
       type: String,
       required: true,
+    },
+    img2: {
+      type: String,
+    },
+    img3: {
+      type: String,
+    },
+    img4: {
+      type: String,
+    },
+    img5: {
+      type: String,
     },
     price: {
       type: Number,
@@ -22,12 +38,10 @@ const productsSchema = new Schema(
   }
 );
 
- const Notebooks = mongoose.model("Notebooks", productsSchema);
-const Album = mongoose.model("Album", productsSchema);
-const Pens = mongoose.model("Pens", productsSchema);
+module.exports = mongoose.model("Stationery", productsSchema);
 
-module.exports = {
-  Notebooks,
-  Album,
-  Pens
-};
+//  const Stationery = mongoose.model("Stationery", productsSchema);
+
+// module.exports = {
+//   Stationery
+// };

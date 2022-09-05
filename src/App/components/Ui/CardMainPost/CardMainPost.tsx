@@ -29,9 +29,6 @@ const CardMainPost: FC<PostItemProps> = ({ post }) => {
             <p className="post-main__card-footer-info-name">
               {post.user_name || "Guest"}
             </p>
-            <small className="post-main__card-footer-info-date">
-              {new Date(post.date).toLocaleDateString()}
-            </small>
           </div>
 
           <p className="post-main__card-footer-title">{post.title}</p>

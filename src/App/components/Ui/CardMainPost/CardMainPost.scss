@@ -1,43 +1,63 @@
 .post-main__container {
-  display: block;
 
   .post-main__card {
-    width: 100%;
-    height: 100%;
     overflow: hidden;
-
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    text-align: center;
+    &:hover {
+      .post-main__card-footer {
+        
+        background-color: #43434395;
+        
+      }
+    }
     &-header {
+      & img {
+        width: 100%;
+        height: 180px;
+      }
     }
 
     &-footer {
-      height: 100%;
+      position: absolute;
+      bottom: 0px;
+      left: 0;
       display: flex;
-      background-color: white;
       padding: 10px;
       font-size: 15px;
+      justify-content: space-around;
+      align-items: center;
+      margin-top: auto;
+      width: 100%;
+      border-top-left-radius: 30px;
+      overflow: hidden;
+      
       &-info {
         padding-left: 10px;
-        text-align: center;
 
         &-img {
+
           & img {
             border-radius: 50%;
           }
         }
         &-name {
         }
-        color: rgb(72, 67, 67);
+        color: rgb(213, 204, 204);
 
         &-date {
           color: rgb(102, 97, 97);
         }
       }
       &-title {
+        padding-left: 20px;
         font-size: $font-size-button;
-        text-align: center;
-        color: $color-black;
+        color: rgb(213, 204, 204);
+        font-weight: bold;
         &:hover {
-          text-decoration: underline;
+          color: rgb(236, 224, 223);
         }
       }
     }

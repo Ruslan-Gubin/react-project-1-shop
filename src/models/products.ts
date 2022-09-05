@@ -4,12 +4,14 @@ interface IRating {
 }
 
 export interface IProduct {
-  _id: number;
-  name: string;
-  price: number;
-  oldPrice: number;
-  img: string;
-  reting: IRating;
+  category: string
+    id: string
+    _id: string;
+    name: string;
+    price: number;
+    oldPrice: number;
+    img: string;
+    reting: IRating;
 }
 
 export interface IProductTest {

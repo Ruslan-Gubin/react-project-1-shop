@@ -9,9 +9,11 @@ interface InputMainType {
     autoComplete?: string 
     required?: boolean
     autoFocus?: any
+    type?: any
 }
 
 const InputMain:JSXElementConstructor <InputMainType> = ({
+    children,
     placeholder,
     name,
     text,
@@ -19,6 +21,7 @@ const InputMain:JSXElementConstructor <InputMainType> = ({
     autoComplete = "off",
     required = false,
     autoFocus = 'off',
+    type='text',
 }) => {
     
     return (
@@ -27,7 +30,7 @@ const InputMain:JSXElementConstructor <InputMainType> = ({
             minLength={3}
             autoFocus={autoFocus}
             required={required}
-            type='textarea'
+            type={type}
             autoComplete={autoComplete}
           placeholder={placeholder}
           className="input-main"
@@ -35,7 +38,7 @@ const InputMain:JSXElementConstructor <InputMainType> = ({
           value={text}
           onChange={(e) => setText(e.target.value)}
           />
-         
+         {children}
           </>
      
     );

@@ -2,9 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const chalk = require("chalk");
 const cors = require("cors");
-const notebooksApiRoutes = require("../routes/api-notebooks-routes");
-const albumsApiRoutes = require("../routes/api-album.routes");
-const pensApiRoutes = require("../routes/api-pens-routes");
+const stationeryApiRoutes = require("../routes/api-stationery.routes");
 const postApiRouter = require('../routes/post');
 const { MONGO_DB_PRODUCTS } = require("../../constants/namePassDb");
 
@@ -23,9 +21,7 @@ app.use(express.json());
     .then((res) => console.log(successNsg("DB Product ok")))
     .catch((err) => console.log(errorNsg("DB error, err")));
     
-app.use(notebooksApiRoutes);
-app.use(albumsApiRoutes);
-app.use(pensApiRoutes);
+app.use(stationeryApiRoutes);
 app.use(postApiRouter);
 
   app.listen(process.env.PORT || 4444, (error) => {

@@ -32,7 +32,6 @@
         }
 
         &-text{
-            font-family: $CormSemiBold;
             font-weight: bold;
             font-size: 20px;
             transition: all .3s ease;
@@ -58,10 +57,10 @@ margin-left: 50px;
         &-activ {
             font-size: $font-size-header-link;
             margin-left: 20px;
-            color: rgb(226, 203, 203);
+            color: rgb(246, 241, 241);
             transition: all 0.3s ease;
             &:hover {
-                border-bottom: 0.3px solid rgb(226, 203, 203);
+                border-bottom: 0.3px solid rgb(183, 167, 167);
             }
         }
     }
