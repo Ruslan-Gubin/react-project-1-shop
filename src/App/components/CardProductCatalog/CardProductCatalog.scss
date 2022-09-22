@@ -51,9 +51,9 @@
                 &-oldprice{
                     
                     transition: all 1s ease;
-                    color: $color-error-light;
+                    color: $c80;
                     text-decoration: line-through;
-                    transform: translateX(100px);
+                    transform: translateX(200px);
                 }
             }
             &-name{

@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 
 interface CardProductType {
-
     img: string
     catigoriName: string
 }

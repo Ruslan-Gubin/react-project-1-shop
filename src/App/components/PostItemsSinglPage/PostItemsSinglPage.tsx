@@ -6,8 +6,9 @@ import ButtonMain from "../Ui/ButtonMain";
 
 
 const PostItemsSinglPage: FC<PostItemProps> = ({ post, remove }) => {
+
     return (
-        <div className="post-container" >
+      <div className="post-container" >
       <div className="post-card" >
         <div className="post-card__header">
           {post.img ? 

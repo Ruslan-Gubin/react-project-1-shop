@@ -24,7 +24,7 @@ const [activeModal, setActiveModal] = useState(false)
     setActiveModal(!activeModal);       
 },[activeModal])
 
-    const handlerSubmit: React.FormEventHandler<HTMLFormElement> = async (
+    const addStationery: React.FormEventHandler<HTMLFormElement> = async (
         event
       ) => {
         event.preventDefault();
@@ -43,7 +43,7 @@ const [activeModal, setActiveModal] = useState(false)
         <ButtonMain onClick={handlerAddProduct} bgColor='info'>Добавить</ButtonMain>
         <Modal active={activeModal} setActive={setActiveModal}>          
 <Form 
-handlerSubmit={handlerSubmit}
+handlerSubmit={addStationery}
 titleText={"Добавить новый товар:"}
 closeForm={closeModal}
 >
@@ -74,7 +74,7 @@ img2.length > 5 &&
 <InputMain  name="img3" text={img4} setText={setImg4} placeholder="Вставить URL фото 4 (необязательно)"/>
 }
 {img4.length > 5 &&
-<InputMain required={true} name="img" text={img5} setText={setImg5} placeholder="Вставить URL фото 5 (необязательно)"/>
+<InputMain  name="img" text={img5} setText={setImg5} placeholder="Вставить URL фото 5 (необязательно)"/>
 } 
 
 <TextareaMain rows={3} cols={50} name="productName" required={true} text={name} setText={setName} placeholder="Описание "/>                  

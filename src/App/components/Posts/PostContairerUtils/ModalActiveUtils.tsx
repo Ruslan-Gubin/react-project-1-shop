@@ -19,13 +19,13 @@ const ModalActiveUtils = ({}) => {
   ) => {
     event.preventDefault();
     await createPost({ text, title, img } as IPost).unwrap();
-    setText(""), setTitle("");
+    setText(""), setTitle(""),setImg('');
   };
 
   const closeModal: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     setModalActive(false);
-    setText(""), setTitle("");
+    setText(""), setTitle(""),setImg('');
   };
 
   return (

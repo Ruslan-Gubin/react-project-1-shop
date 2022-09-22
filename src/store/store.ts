@@ -1,31 +1,55 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { postApi } from "./post/postApi";
-import { postsReducer } from "./post/postsReducer";
 import { stationeryApi } from "./product/productsApi";
-
+import todoReducer from "./todoSlice/todoSlice";
+import { 
+    persistStore,
+     persistReducer,
+     FLUSH,
+     REHYDRATE,
+     PAUSE,
+     PERSIST,
+     PURGE,
+     REGISTER,
+    } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import stationerySlice from "./product/stationerySlice";
 
 const rootReducer = combineReducers({
-    posts: postsReducer,
+    stationery: stationerySlice,
+    todos: todoReducer,
+    [postApi.reducerPath]: postApi.reducer,
+    [stationeryApi.reducerPath]: stationeryApi.reducer,
 })
 
+const persistConfig = {
+    key: 'root',
+    version: 1,
+    storage,
+blacklist: ([   
+    [stationeryApi.reducerPath],
+    [stationeryApi.reducerPath]
+])
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+const store = configureStore({
+ reducer: persistedReducer,
 
 
-export const store = configureStore({
- reducer: {
-    [postApi.reducerPath]: postApi.reducer,
-    [stationeryApi.reducerPath]: stationeryApi.reducer
-},
-    middleware:
-        (getDefaultMiddleware) => 
-             getDefaultMiddleware()
+    middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+        serializableCheck: {
+            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },})
              .concat([
                 postApi.middleware,
-                stationeryApi.middleware
+                stationeryApi.middleware,
             ])
-            
-               
-    
-
 })
+
+export const persistor = persistStore(store)
+export default store
 
 export type TypeRootState = ReturnType<typeof store.getState>

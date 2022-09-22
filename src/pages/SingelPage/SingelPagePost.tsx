@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
+import Modal from "../../App/components/Modal";
 import PostItemsSinglPage from "../../App/components/PostItemsSinglPage";
+import InputMain from "../../App/components/Ui/InputMain";
 import { IPost } from "../../models/products";
 import {
   useDeletePostMutation,

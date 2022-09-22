@@ -13,14 +13,13 @@ const Products: FC<ProductsType> = () => {
   return (
     <div className="products-wrapper">
       <div className="products-container container">
-        <ImagesSlider imagesSwiper={imagesSwiper}/>
+        <ImagesSlider imagesSwiper={imagesSwiper} />
         <div className="products-categori">
           <div className="products-categori__items">
             {categoriItems.map((item, index) => (
               <Link to={`/${item.link}`} key={index}>
-                <CardProduct  item={item}  />
+                <CardProduct item={item} />
               </Link>
-
             ))}
           </div>
         </div>

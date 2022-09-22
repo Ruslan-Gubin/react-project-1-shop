@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "../pages/home";
+import Home from "../pages/Home";
 import Post from "../pages/post";
 import Products from "../pages/Products";
 import Layout from "./components/Layout";
@@ -8,8 +8,9 @@ import LoginPage from "../pages/LoginPage";
 import SingelPage from "../pages/SingelPage";
 import "../style/index.scss";
 import Stationeri from "../pages/Stationeri";
+import { test } from "../hints/typescript/treningFunction";
 
-
+test();
 const App = () => {
   return (
     <>
@@ -19,8 +20,6 @@ const App = () => {
           <Route path="products" element={<Products />} />
           <Route path="stationeri" element={<Stationeri />} />
 
-          
-          
           {/* <Route path='pens' element={<p>Pens</p>}/>
             <Route path='notebooks' element={<p>Notebooks</p>}/> */}
 

@@ -1,48 +1,25 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import CardProductCatalog from "../../App/components/CardProductCatalog";
 import Pagination from "../../App/components/Pagination";
 import InputMain from "../../App/components/Ui/InputMain";
-import { IProduct } from "../../models/products";
-import {
-  useGetProductsQuery,
-  useRemoveProductMutation,
-} from "../../store/product/productsApi";
+import { useGetProductsQuery } from "../../store/product/productsApi";
 import paginationCalculatorPage from "../../utils/paginationCalculatorPage";
 import FormAddProductUtils from "./stationeryUtils/FormAddProductUtils";
 
 const Stationeri = () => {
   const { isLoading, isError, data = [] } = useGetProductsQuery(0);
-  const [removeProduct, {}] = useRemoveProductMutation();
   const [textSearch, setTextSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(12);
-  const [clickMenuPens,setClickMenuPens] = useState(true)
+  const [clickMenuPens, setClickMenuPens] = useState(false);
+  const [clickMenuNotebooks, setClickMenuNotebooks] = useState(false);
 
   const searchText = data.filter((item) => {
     return item.name.toLowerCase().includes(textSearch.toLowerCase());
   });
-  const handlerCategoriPens = searchText.filter((item) => {
-    if (clickMenuPens) {
-return item.category.includes('pens')
-
-}
-
-})
-console.log(handlerCategoriPens);
-     
-    
-
-  
-
-  const handlerRemovePdoduct = useCallback(
-    async (product: IProduct) => {
-      await removeProduct(product).unwrap();
-    },
-    [removeProduct]
-  );
 
   const pagination = paginationCalculatorPage(
-    handlerCategoriPens,
+    searchText,
     currentPage,
     postsPerPage
   );
@@ -60,26 +37,32 @@ console.log(handlerCategoriPens);
       </div>
       <div className="product-catalog__container ">
         <div className="product-catalog__links">
-          <div onClick={()=> setClickMenuPens(!clickMenuPens)} className="product-catalog__links-item" >Ручки</div>
-          <div className="product-catalog__links-item">Тетради</div>
+          <div
+            onClick={() => setClickMenuPens(!clickMenuPens)}
+            className="product-catalog__links-item"
+          >
+            Ручки
+          </div>
+          <div
+            onClick={() => setClickMenuNotebooks(!clickMenuNotebooks)}
+            className="product-catalog__links-item"
+          >
+            Тетради
+          </div>
           <div className="product-catalog__links-item">Дневники</div>
           <div className="product-catalog__links-item">Пластилин</div>
         </div>
         <div className="product-catalog__items">
           {!isLoading &&
             pagination.map((product) => (
-              <CardProductCatalog
-                product={product}
-                remove={handlerRemovePdoduct}
-                key={product._id}
-              />
+              <CardProductCatalog {...product} key={product._id} />
             ))}
         </div>
       </div>
       <Pagination
         currentPage={currentPage}
         postsPerPage={postsPerPage}
-        totalCountries={handlerCategoriPens.length}
+        totalCountries={searchText.length}
         setCurrentPage={setCurrentPage}
       />
     </div>
