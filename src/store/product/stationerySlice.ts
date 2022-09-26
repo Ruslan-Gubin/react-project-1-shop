@@ -10,7 +10,10 @@ const stationerySlice = createSlice({
 
         },
         removeStationery(state, action) {
-
+            // state.data = state.data.filter(item => item.id !== action.payload.id)
+        //  const newItem =  order.filter(item => item._id !== id)
+        //  return setOrder(newItem)
+        console.log('object')
         },
         toggleProductBuy(state, action) {
 

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import CardProductCatalog from "../../App/components/CardProductCatalog";
 import Pagination from "../../App/components/Pagination";
 import InputMain from "../../App/components/Ui/InputMain";
+import { useLocaleStorage } from "../../hooks";
 import { useGetProductsQuery } from "../../store/product/productsApi";
 import paginationCalculatorPage from "../../utils/paginationCalculatorPage";
 import FormAddProductUtils from "./stationeryUtils/FormAddProductUtils";
@@ -13,17 +14,30 @@ const Stationeri = () => {
   const [postsPerPage] = useState(12);
   const [clickMenuPens, setClickMenuPens] = useState(false);
   const [clickMenuNotebooks, setClickMenuNotebooks] = useState(false);
+  const [order, setOrder] = useLocaleStorage([], 'order')
 
   const searchText = data.filter((item) => {
     return item.name.toLowerCase().includes(textSearch.toLowerCase());
   });
+
+   const addToOrder = (id) => {
+    const newItem =  data.find(item => item._id === id)
+    if (!order.includes(newItem)) {
+      setOrder([...order, newItem]) 
+    }
+  }
+
+   const removeToOrder = (id) => { 
+   const newItem =  order.filter(item => item._id !== id)
+   return setOrder(newItem)
+  }
 
   const pagination = paginationCalculatorPage(
     searchText,
     currentPage,
     postsPerPage
   );
-
+  
   return (
     <div className="product-catalog container">
       {isError && <p>Error</p>}
@@ -55,7 +69,11 @@ const Stationeri = () => {
         <div className="product-catalog__items">
           {!isLoading &&
             pagination.map((product) => (
-              <CardProductCatalog {...product} key={product._id} />
+              <CardProductCatalog 
+              order={order}
+              removeToOrder={removeToOrder}
+              addToOrder={addToOrder}
+              {...product} key={product._id} />
             ))}
         </div>
       </div>

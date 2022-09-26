@@ -1,6 +1,7 @@
+
+@include scloll-main(8px, $color-yellow, 10px, $color-card-bg);
 body {
   margin: 0;
-
   .wrapper{
     overflow: hidden;
     display: flex;
@@ -13,16 +14,14 @@ body {
         flex: 1 1 auto;
     }
     }
-
-
-
-}
-.container {
-  padding: 20px 0;
-  position: relative;
-  width: 60%;
-  margin: 0 auto;
-  @media (max-width: 1200px) {
-    width: 90%;
   }
-}
+  .container {
+    padding: 20px 0;
+    position: relative;
+    width: 60%;
+    margin: 0 auto;
+    @media (max-width: 1200px) {
+      width: 90%;
+    }
+  }
+ 

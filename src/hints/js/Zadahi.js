@@ -138,7 +138,6 @@ console.log(sum(10)(10)(10)(10)());// 40
 //    13    15    17    19
 // 21    23    25    27    29
 const rowSumOddNumbers = (input) => {
-    return function () {
         let step = 2;
         let firstNumberInRow = 1;
         for (let i = 1; i < input; i++) {
@@ -151,7 +150,6 @@ const rowSumOddNumbers = (input) => {
             firstNumberInRow += 2;
         }
         return result;
-    }
 }
 
 console.log(rowSumOddNumbers(1)); //1
@@ -161,4 +159,40 @@ console.log(rowSumOddNumbers(4)); //64
 console.log(rowSumOddNumbers(5)); //125
 console.log(rowSumOddNumbers(42)); //74088
 //================================================
+function solution(str, ending){
+  
+}
+
+console.log(solution('abcde', 'cde'))// true
+console.log(solution('abcde', 'abc')) //false
+///=================================================
+function reverseWords(str) {
+    // return str.split(' ').map(a => a.split('').reverse().join('')).join(' ')
+  }
+  console.log(reverseWords('The quick brown fox jumps over the lazy dog.'))
+  //'ehT kciuq nworb xof spmuj revo eht yzal .god'
+  console.log(reverseWords('apple')); //'elppa'
+  console.log(reverseWords('a b c d')); //'a b c d'
+  console.log(reverseWords('double  spaced  words')); //'elbuod  decaps  sdrow'
+  //=================================================
+  function disemvowel(str) {
+    const map = 'aeiou'
+      // return str.split('').filter(a =>  map.toLowerCase().includes(a.toLowerCase()) === false).join('')
+      // return str.replace(/[aeiou]/gi, '');
+    
+    }
+    
+    console.log(disemvowel("This website is for losers LOL!"))//, "Ths wbst s fr lsrs LL!")
+    console.log(disemvowel("No offense but,\nYour writing is among the worst I've ever read"))//, "N ffns bt,\nYr wrtng s mng th wrst 'v vr rd")
+    console.log(disemvowel("What are you, a communist?"))//, "Wht r y,  cmmnst?"
+    //=================================================
+    const removeSmallest = (numbers) =>  {
+        //  return numbers.filter((n,i) => i !== numbers.indexOf(Math.min(...numbers)));
+        }
+        console.log(removeSmallest([1, 2, 3, 4, 5])) // [1, 2, 3, 4, 5]")
+        console.log(removeSmallest([5, 3, 2, 1, 4])) // [5, 3, 2, 1, 4]")
+        console.log(removeSmallest([2, 2, 1, 2, 1])) // [2, 2, 2, 1]")
+        console.log(removeSmallest([]))       //[]
+        //===================================================
+
 
