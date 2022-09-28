@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import {  useEffect, useRef, useState } from "react";
+
 import { useRemoveProductMutation } from "../../../store/product/productsApi";
 import { formatterRub } from "../../../utils/intl-Number-Format";
 import ButtonMain from "../Ui/ButtonMain";
@@ -14,6 +15,9 @@ const CardProductCatalog = ({
   removeToOrder,
   order,
   product,
+  addProductLocal,
+  removeProductLocal,
+  countRender,
 }) => {
   const [removeProduct, {}] = useRemoveProductMutation();
   const [buttonBye, setButtonBye] = useState(false);
@@ -68,7 +72,7 @@ const CardProductCatalog = ({
               onClick={() => handlerRemoveLocal(_id)}
               bgColor="secondary"
               >
-                В Корзине
+                В Корзине:{countRender(_id)}
               </ButtonMain>
             ) : (
               <ButtonMain 
@@ -76,9 +80,17 @@ const CardProductCatalog = ({
                 В Корзину
               </ButtonMain>
             )}
+            {buttonBye && 
+            <>
+              <ButtonMain onClick={() => addProductLocal(_id)} bgColor="green">+</ButtonMain>
+              <ButtonMain onClick={() => removeProductLocal(_id)} bgColor="green">-</ButtonMain>
+            </>
+            }
+            {!buttonBye && 
             <ButtonMain onClick={() => removeProduct(product)} bgColor="red">
               Удалить
             </ButtonMain>
+            }
           </div>
         </div>
       </div>

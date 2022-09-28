@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import CardProductCatalog from "../../App/components/CardProductCatalog";
 import Categories from "../../App/components/Categories";
 import Pagination from "../../App/components/Pagination";
@@ -17,17 +17,17 @@ const Stationeri = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(12);
   const [order, setOrder] = useLocaleStorage([], "order");
-  const [counterProduct,addCounterProduct,removeCounterProduct] = useCounter(1)
+  const [counterProduct] = useCounter(0)
 
   const initSelect = (data) => data.map(i => ({...i,counter: counterProduct}))
 
-  const searchText = data.filter((item) => {
+  const searchText = initSelect(data).filter((item) => {
     return item.name.toLowerCase().includes(textSearch.toLowerCase());
   });
 
   const addToOrder = (id) => {
     const newItem = initSelect(data).find((item) => item._id === id);
-    if (!order.includes(newItem)) {
+    if (order.includes(newItem) === false) {
       setOrder([...order, newItem]);
     }
   };
@@ -46,6 +46,28 @@ const Stationeri = () => {
   const countPrice = (order) => {
     return order.reduce((acc, item) => acc + item.price, 0);
   };
+
+ const addProductLocal = useCallback((id) => {
+   const newItem = order.find((item) => item._id === id);
+   newItem.counter++
+  const mapItem = order.filter(item => item._id !== id)
+  console.log('render:  addProductLocal')
+ return setOrder([...mapItem,newItem])
+  },[order])
+
+ const removeProductLocal = useCallback((id) => {
+   const newItem = order.find((item) => item._id === id);
+   newItem.counter--
+  const mapItem = order.filter(item => item._id !== id)
+  console.log('render:  removeProductLocal')
+ return setOrder([...mapItem,newItem])
+  },[order])
+
+  const countRender = (id) => {
+    const newItem = order.find((item) => item._id === id);
+    console.log('render:  countRender')
+    return newItem.counter
+  }
 
   return (
     <div className="product-catalog container">
@@ -72,6 +94,9 @@ const Stationeri = () => {
           {!isLoading &&
             pagination.map((product) => (
               <CardProductCatalog
+              countRender={countRender}
+              removeProductLocal={removeProductLocal}
+              addProductLocal={addProductLocal}
               product={product}
                 order={order}
                 removeToOrder={removeToOrder}
