@@ -1,7 +1,6 @@
-import {  useEffect, useRef, useState } from "react";
-import {
-  useRemoveProductMutation,
-} from "../../../store/product/productsApi";
+import { useEffect, useRef, useState } from "react";
+import { useRemoveProductMutation } from "../../../store/product/productsApi";
+import { formatterRub } from "../../../utils/intl-Number-Format";
 import ButtonMain from "../Ui/ButtonMain";
 
 const CardProductCatalog = ({
@@ -14,30 +13,28 @@ const CardProductCatalog = ({
   addToOrder,
   removeToOrder,
   order,
-  toggles,
+  product,
 }) => {
- 
   const [removeProduct, {}] = useRemoveProductMutation();
   const [buttonBye, setButtonBye] = useState(false);
-  
-  const ref = useRef(_id)
-  const handlerClickBue = () => {
-      return  addToOrder(_id),setButtonBye(true)
-    };
-    
-    const handlerRemoveLocal = () => {
-        return removeToOrder(_id),setButtonBye(false)
+
+  const ref = useRef(_id);
+  const handlerClickBue = (id) => {
+    return addToOrder(id), setButtonBye(true);
+  };
+
+  const handlerRemoveLocal = (id) => {
+    return removeToOrder(id), setButtonBye(false);
   };
 
   useEffect(() => {
     for (let i = 0; i < order.length; i++) {
-        const item = order[i]
-        if (ref.current === item._id) {
-            setButtonBye(true)
-        } 
+      const item = order[i];
+      if (ref.current === item._id) {
+        setButtonBye(true);
+      }
     }
-     console.log('add prosuct')   
-  },[buttonBye])
+  }, [buttonBye]);
 
   const sumPersent = (a, b) => Math.ceil(((a - b) / b) * 100);
 
@@ -58,9 +55,9 @@ const CardProductCatalog = ({
                 Скидка:{sumPersent(price, oldPrice)}%
               </div>
             )}
-            <div className="card-product__body-prices-price">{price} Руб</div>
+            <div className="card-product__body-prices-price">{formatterRub.format(price)}</div>
 
-            <div className="card-product__body-prices-oldprice">{oldPrice}</div>
+            <div className="card-product__body-prices-oldprice">{formatterRub.format(oldPrice)}</div>
           </div>
           <div className="card-product__body-name">{name}</div>
         </div>
@@ -68,16 +65,14 @@ const CardProductCatalog = ({
           <div className="card-product__footer-buttons">
             {buttonBye ? (
               <ButtonMain
-              ref={ref}
-                onClick={() => handlerRemoveLocal()}
-                bgColor="secondary"
+              onClick={() => handlerRemoveLocal(_id)}
+              bgColor="secondary"
               >
                 В Корзине
               </ButtonMain>
             ) : (
               <ButtonMain 
-              
-              onClick={() => handlerClickBue()}>
+              onClick={() => handlerClickBue(_id)}>
                 В Корзину
               </ButtonMain>
             )}

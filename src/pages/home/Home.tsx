@@ -1,5 +1,6 @@
 import {  useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
+import { MultiplaySelect } from "../../App/components/CustomSelect";
 import List from "../../App/components/List";
 
 import Test from "../../App/components/Test";
@@ -34,6 +35,7 @@ const Home = () => {
 <InputField  text={text}  handleInput={setText} 
 handleSubmit={()=> {dispatch(addTodo({text})), setText('')}}/>           
         <TodosList />
+        <MultiplaySelect />
         {formatter.format(100)}
         {formatter.format(101)}
         {formatter.format(102)}

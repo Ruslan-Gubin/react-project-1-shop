@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 const ENTER = 'Enter'    
 
@@ -64,4 +64,4 @@ return () => {
     );
 };
 
-export default InputValueData;
+export {InputValueData};

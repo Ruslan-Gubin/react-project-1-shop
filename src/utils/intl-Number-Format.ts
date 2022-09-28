@@ -17,3 +17,11 @@ export const formatter = new Intl.NumberFormat('ru', {
 //gigabit,gigabyte,gram,hectare,hour,inch,kilobit,kilobyte,kilogram,kilometer,leter,
 //megabit,meter,mile,mouth,percent,petabyte,year,yard,week,terabyte,stone,second,
 
+export const formatterRub = new Intl.NumberFormat('ru', {
+  style: 'currency',
+  currency:'RUB',
+  maximumFractionDigits: 0,
+
+})
+
+// https://metanit.com/web/javascript/18.4.php

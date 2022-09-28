@@ -1,9 +1,13 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useState } from "react";
 import CardProductCatalog from "../../App/components/CardProductCatalog";
+import Categories from "../../App/components/Categories";
 import Pagination from "../../App/components/Pagination";
+import {CustomSelect} from "../../App/components/CustomSelect";
+import ButtonMain from "../../App/components/Ui/ButtonMain";
 import InputMain from "../../App/components/Ui/InputMain";
-import { useLocaleStorage } from "../../hooks";
+import { useCounter, useLocaleStorage } from "../../hooks";
 import { useGetProductsQuery } from "../../store/product/productsApi";
+import { formatterRub } from "../../utils/intl-Number-Format";
 import paginationCalculatorPage from "../../utils/paginationCalculatorPage";
 import FormAddProductUtils from "./stationeryUtils/FormAddProductUtils";
 
@@ -12,32 +16,37 @@ const Stationeri = () => {
   const [textSearch, setTextSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(12);
-  const [clickMenuPens, setClickMenuPens] = useState(false);
-  const [clickMenuNotebooks, setClickMenuNotebooks] = useState(false);
-  const [order, setOrder] = useLocaleStorage([], 'order')
+  const [order, setOrder] = useLocaleStorage([], "order");
+  const [counterProduct,addCounterProduct,removeCounterProduct] = useCounter(1)
+
+  const initSelect = (data) => data.map(i => ({...i,counter: counterProduct}))
 
   const searchText = data.filter((item) => {
     return item.name.toLowerCase().includes(textSearch.toLowerCase());
   });
 
-   const addToOrder = (id) => {
-    const newItem =  data.find(item => item._id === id)
+  const addToOrder = (id) => {
+    const newItem = initSelect(data).find((item) => item._id === id);
     if (!order.includes(newItem)) {
-      setOrder([...order, newItem]) 
+      setOrder([...order, newItem]);
     }
-  }
+  };
 
-   const removeToOrder = (id) => { 
-   const newItem =  order.filter(item => item._id !== id)
-   return setOrder(newItem)
-  }
+  const removeToOrder = (id) => {
+    const newItem = order.filter((item) => item._id !== id);
+    return setOrder(newItem);
+  };
 
   const pagination = paginationCalculatorPage(
     searchText,
     currentPage,
     postsPerPage
   );
-  
+
+  const countPrice = (order) => {
+    return order.reduce((acc, item) => acc + item.price, 0);
+  };
+
   return (
     <div className="product-catalog container">
       {isError && <p>Error</p>}
@@ -48,32 +57,28 @@ const Stationeri = () => {
           setText={setTextSearch}
         />
         <FormAddProductUtils />
+        <ButtonMain bgColor="green">
+          {formatterRub.format(countPrice(order))}
+        </ButtonMain>
       </div>
-      <div className="product-catalog__container ">
-        <div className="product-catalog__links">
-          <div
-            onClick={() => setClickMenuPens(!clickMenuPens)}
-            className="product-catalog__links-item"
-          >
-            Ручки
-          </div>
-          <div
-            onClick={() => setClickMenuNotebooks(!clickMenuNotebooks)}
-            className="product-catalog__links-item"
-          >
-            Тетради
-          </div>
-          <div className="product-catalog__links-item">Дневники</div>
-          <div className="product-catalog__links-item">Пластилин</div>
+
+      <div className="product-catalog__container">
+        <div className="product-catalog__container-info">
+        <Categories data={data} />
+        <CustomSelect />
+        
         </div>
         <div className="product-catalog__items">
           {!isLoading &&
             pagination.map((product) => (
-              <CardProductCatalog 
-              order={order}
-              removeToOrder={removeToOrder}
-              addToOrder={addToOrder}
-              {...product} key={product._id} />
+              <CardProductCatalog
+              product={product}
+                order={order}
+                removeToOrder={removeToOrder}
+                addToOrder={addToOrder}
+                {...product}
+                key={product._id}
+              />
             ))}
         </div>
       </div>

@@ -1,0 +1,21 @@
+.product-catalog__links{
+  font-size: $font-size-button;
+  font-weight: bold;
+  margin-right: 10px;
+  &-item {
+      margin-bottom: 10px;
+      border-radius: 15px;
+      box-shadow: $box-shadow;
+      border: 1px solid rgba(255, 255, 255, 0.112);
+      color: rgb(228, 224, 224);
+      padding: 10px;
+      cursor: pointer;
+      transition: all .6s ease;
+      &:hover {
+          transform: translateX(-10px);
+          background-color: $color-blue;
+          color:rgba(16, 16, 16, 0.843);
+      }
+      
+  }
+}

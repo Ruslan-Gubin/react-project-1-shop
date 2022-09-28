@@ -1,0 +1,97 @@
+.multiplay-select {
+
+  @keyframes scaleIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    50% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  &__control {
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    border-bottom: 1px solid #66676e !important;
+    box-shadow: none !important;
+    
+    &--menu-is-open {
+      border-color: rgb(203, 194, 194) !important;
+    }
+  }
+  &__value-container {
+    padding: 0 !important;
+    cursor: pointer !important;
+  }
+  
+  &__input-container {
+    color: white !important;
+  }
+  
+  &__indicator-separator {
+    display: none !important;
+  }
+  
+  &__indicators {
+    cursor: pointer !important;
+  }
+  
+  &__indicator {
+    color:$c80 !important;
+    
+    &:hover {
+      color: $color-card-bg !important;
+    }
+  }
+  
+  &__single-value{
+    color:rgb(204, 197, 197) !important;
+
+  } 
+  &__molti-value {
+    background-color:rgba( #0add1c, 0.6) !important;
+    border-radius: 0.5rem !important;
+  }
+  &__molti-value__vabel {
+    font-size: 80% !important;
+  }
+  &__molti-value__remove {
+    color: rgba(rgb(226, 19, 19), 0.8) !important;
+    &:hover {
+      background-color: transparent !important;
+      color: rgba(rgb(146, 22, 22), 1) !important;
+    }
+  }
+  &__menu {
+    background-color: #292a2e !important;
+    color: rgba(rgb(244, 232, 232), 0.6) !important;
+    
+    animation: scaleIn 0.35s ease-in-out ; 
+    
+  }
+  &__option {
+    background-color: #292a2e !important;
+
+    cursor: pointer !important;
+    &--is-focused {
+      background-color: lighten(#292a2e, 8%) !important;
+    }
+  }
+  &-container {
+    div {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+    
+    &:hover,
+    &--menu-is-open {
+      border-color: #292a2e !important;
+    }
+    
+  }
+}

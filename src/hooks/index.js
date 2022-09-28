@@ -6,3 +6,4 @@ export {useDebounce} from './useDebounce';
 export {useRequest} from './useRequest';
 export {useLocaleStorage} from './useLocaleStorage';
 export {useToggle} from './useToggle';
+export {useCounter} from './useCounter';
