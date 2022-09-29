@@ -13,10 +13,10 @@ import {
      REGISTER,
     } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import stationerySlice from "./product/stationerySlice";
+import orderSlice from "./product/stationerySlice";
 
 const rootReducer = combineReducers({
-    stationery: stationerySlice,
+    order: orderSlice,
     todos: todoReducer,
     [postApi.reducerPath]: postApi.reducer,
     [stationeryApi.reducerPath]: stationeryApi.reducer,
@@ -36,8 +36,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const store = configureStore({
  reducer: persistedReducer,
-
-
+ 
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
         serializableCheck: {

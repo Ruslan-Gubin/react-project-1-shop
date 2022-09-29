@@ -5,7 +5,6 @@ import TodosItem from "./TodosItem";
 
 const TodosList = () => {
     const todos = useSelector(state => state.todos.todos)
-
     return (
 
         <ul>

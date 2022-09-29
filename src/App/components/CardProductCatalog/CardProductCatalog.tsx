@@ -1,6 +1,8 @@
 import {  useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useRemoveProductMutation } from "../../../store/product/productsApi";
+import { addToOrders, removeToOrder } from "../../../store/product/stationerySlice";
 import { formatterRub } from "../../../utils/intl-Number-Format";
 import ButtonMain from "../Ui/ButtonMain";
 
@@ -11,34 +13,46 @@ const CardProductCatalog = ({
   oldPrice,
   img,
   img2,
-  addToOrder,
-  removeToOrder,
-  order,
+  // addToOrder,
+  // removeToOrder,
+  counter,
+  // order,
   product,
   addProductLocal,
   removeProductLocal,
   countRender,
 }) => {
+  const orders = useSelector(state => state.order.order)
   const [removeProduct, {}] = useRemoveProductMutation();
   const [buttonBye, setButtonBye] = useState(false);
 
-  const ref = useRef(_id);
-  const handlerClickBue = (id) => {
-    return addToOrder(id), setButtonBye(true);
-  };
+  const dispatch = useDispatch()
+  
+  const addInOrder = () => dispatch(addToOrders({product}))
+ 
+  const removeInOrder = () => {
+    dispatch(removeToOrder({_id}))
+    setButtonBye(!buttonBye);
+  } 
+    
+  
+    
+  // const handlerClickBue = (id) => {
+  //   return addToOrder(id), setButtonBye(true);
+  // };
 
-  const handlerRemoveLocal = (id) => {
-    return removeToOrder(id), setButtonBye(false);
-  };
+  // const handlerRemoveLocal = (id) => {
+  //   return removeToOrder(id), setButtonBye(false);
+  // };
 
   useEffect(() => {
-    for (let i = 0; i < order.length; i++) {
-      const item = order[i];
-      if (ref.current === item._id) {
+    for (let i = 0; i < orders.length; i++) {
+      const item = orders[i];
+      if (item._id === _id) {
         setButtonBye(true);
-      }
+      }  
     }
-  }, [buttonBye]);
+  }, [orders]);
 
   const sumPersent = (a, b) => Math.ceil(((a - b) / b) * 100);
 
@@ -67,16 +81,18 @@ const CardProductCatalog = ({
         </div>
         <div className="card-product__footer">
           <div className="card-product__footer-buttons">
-            {buttonBye ? (
+          {buttonBye  ? (
               <ButtonMain
-              onClick={() => handlerRemoveLocal(_id)}
+              // onClick={() => handlerRemoveLocal(_id)}
+              onClick={removeInOrder}
               bgColor="secondary"
               >
-                В Корзине:{countRender(_id)}
+                В Корзине: 
+                {/* В Корзине: {countRender(_id)} */}
               </ButtonMain>
             ) : (
               <ButtonMain 
-              onClick={() => handlerClickBue(_id)}>
+              onClick={addInOrder}>
                 В Корзину
               </ButtonMain>
             )}
