@@ -1,29 +1,57 @@
-import { createSlice } from '@reduxjs/toolkit';
-
+import { createSlice } from "@reduxjs/toolkit";
 
 const orderSlice = createSlice({
-    name: 'order',
-    initialState: {
-        order: [],
+  name: "order",
+  initialState: {
+    order: [],
+  },
+  reducers: {
+    addToOrders(state, action) {
+      const newItem = action.payload.product;
+      newItem.counter = +1;
+      newItem.selected = true;
+      state.order.push(newItem);
     },
-    reducers: {
-        addToOrders(state, action) {
-            const newItem = action.payload.product
-            newItem.counter++
-            state.order.push(newItem)
-        },
 
-        removeToOrder(state, action) {
-            state.order = state.order.filter(item => item._id !== action.payload._id)
-        },
+    removeToOrder(state, action) {
+      state.order = state.order.filter(
+        (item) => item._id !== action.payload._id
+      );
+    },
 
-        countPrice(state, action) {}, 
-        addProductLocal(state, action) {}, 
-        removeProductLocal(state, action) {}, 
-        countRender(state, action) {}, 
-    }
-})
+    addCountProduct(state, action) {
+      const newItem = action.payload.product;
+      const prevItem = action.payload.order.find(
+        (item) => item._id === action.payload._id
+      );
+      newItem.counter = prevItem.counter + 1;
+      const lastArrayOrder = action.payload.order.filter(
+        (item) => item._id !== action.payload._id
+      );
+      state.order = [...lastArrayOrder, newItem];
+    },
 
-export const {addToOrders, removeToOrder,countPrice,addProductLocal,removeProductLocal,countRender} = orderSlice.actions
+    removeCountProduct(state, action) {
+      const newItem = action.payload.product;
+      if (newItem.counter > 1) {
+        const prevItem = action.payload.order.find(
+          (item) => item._id === action.payload._id
+        );
+        newItem.counter = prevItem.counter - 1;
+        const lastArrayOrder = action.payload.order.filter(
+          (item) => item._id !== action.payload._id
+        );
+        state.order = [...lastArrayOrder, newItem];
+      }
+    },
+  },
+});
 
-export default orderSlice.reducer
+export const {
+  addToOrders,
+  removeToOrder,
+  addCountProduct,
+  removeCountProduct,
+} = orderSlice.actions;
+
+export default orderSlice.reducer;
