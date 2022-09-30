@@ -11,7 +11,6 @@ import "swiper/css/free-mode";
 const ImagesSlider = ({imagesSwiper}) => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
    
-
   return <>
     <Swiper
       loop={true}

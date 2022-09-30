@@ -49,4 +49,4 @@ handleSubmit={()=> {dispatch(addTodo({text})), setText('')}}/>
 };
 
 
-export default Home;
+export  {Home};

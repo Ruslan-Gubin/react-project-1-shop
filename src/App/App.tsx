@@ -1,32 +1,24 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "../pages/Home";
-import Post from "../pages/post";
-import Products from "../pages/Products";
-import Layout from "./components/Layout";
-import NotfoundPage from "./components/NotfoundPage";
-import LoginPage from "../pages/LoginPage";
-import SingelPage from "../pages/SingelPage";
+import { Layout } from "./components/Layout";
 import "../style/index.scss";
-import Stationeri from "../pages/Stationeri";
-import { test } from "../hints/typescript/treningFunction";
-
-test();
+import * as page from "../pages";
+  
 const App = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="products" element={<Products />} />
-          <Route path="stationeri" element={<Stationeri />} />
+          <Route index element={<page.Home />} />
+          <Route path="products" element={<page.Products />} />
+          <Route path="product/:id" element={<page.Product />} />
 
           {/* <Route path='pens' element={<p>Pens</p>}/>
             <Route path='notebooks' element={<p>Notebooks</p>}/> */}
 
-          <Route path="login" element={<LoginPage />} />
-          <Route path="post" element={<Post />} />
-          <Route path="post/:id" element={<SingelPage />} />
-          <Route path="*" element={<NotfoundPage />} />
+          <Route path="login" element={<page.LoginPage />} />
+          <Route path="post" element={<page.Post />} />
+          <Route path="post/:id" element={<page.SingelPage />} />
+          <Route path="*" element={<page.NotfoundPage />} />
         </Route>
       </Routes>
     </>

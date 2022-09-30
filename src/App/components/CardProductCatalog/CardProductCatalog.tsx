@@ -1,48 +1,39 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useRemoveProductMutation } from "../../../store/product/productsApi";
-import {
-  addCountProduct,
-  addToOrders,
-  removeCountProduct,
-  removeToOrder,
-} from "../../../store/product/stationerySlice";
+import { useGetProductsQuery, useRemoveProductMutation } from "../../../store/product/productsApi";
+import * as prodSlice from "../../../store/product/stationerySlice";
+import { getImgForSlider } from "../../../utils";
 import { formatterRub } from "../../../utils/intl-Number-Format";
+import ImagesSlider from "../ImagesSlider";
 import ButtonMain from "../Ui/ButtonMain";
 
-const CardProductCatalog = ({
-  _id,
-  name,
-  price,
-  oldPrice,
-  img,
-  img2,
-  product,
-}) => {
+const CardProductCatalog = ({ _id, product }) => {
   const order = useSelector((state) => state.order.order);
   const [removeProduct, {}] = useRemoveProductMutation();
   const [buttonBye, setButtonBye] = useState(false);
-
   const dispatch = useDispatch();
+  const {  data = [] } = useGetProductsQuery(0);
 
   const addInOrder = useCallback(() => {
-    dispatch(addToOrders({ product, order }));
+    dispatch(prodSlice.addToOrders({ product, order }));
+    setButtonBye(true);
   }, [buttonBye]);
 
   const removeInOrder = useCallback(() => {
-    dispatch(removeToOrder({ _id }));
-    setButtonBye(!buttonBye);
+    dispatch(prodSlice.removeToOrder({ _id }));
+    setButtonBye(false);
   }, [buttonBye]);
 
-  const addCount = () => dispatch(addCountProduct({ product, _id, order }));
+  const addCount = () =>
+    dispatch(prodSlice.addCountProduct({ product, _id, order }));
 
   const removeCount = () =>
-    dispatch(removeCountProduct({ product, _id, order }));
+    dispatch(prodSlice.removeCountProduct({ product, _id, order }));
 
   useEffect(() => {
     for (let i = 0; i < order.length; i++) {
       const item = order[i];
-      if (item._id === _id) {
+      if (item._id === product._id) {
         setButtonBye(true);
       }
     }
@@ -67,25 +58,25 @@ const CardProductCatalog = ({
           <img
             className="card-product__header-img"
             alt="img"
-            src={img || img2}
+            src={product.img || product.img2}
           />
         </div>
         <div className="card-product__body">
           <div className="card-product__body-prices">
-            {oldPrice && (
+            {product.oldPrice && (
               <div className="card-product__body-prices-precent">
-                Скидка:{sumPersent(price, oldPrice)}%
+                Скидка:{sumPersent(product.price, product.oldPrice)}%
               </div>
             )}
             <div className="card-product__body-prices-price">
-              {formatterRub.format(price)}
+              {formatterRub.format(product.price)}
             </div>
 
             <div className="card-product__body-prices-oldprice">
-              {formatterRub.format(oldPrice)}
+              {formatterRub.format(product.oldPrice)}
             </div>
           </div>
-          <div className="card-product__body-name">{name}</div>
+          <div className="card-product__body-name">{product.name}</div>
         </div>
         <div className="card-product__footer">
           <div className="card-product__footer-buttons">

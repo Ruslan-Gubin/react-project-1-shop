@@ -2,20 +2,33 @@
   font-size: $font-size-button;
   font-weight: bold;
   margin-right: 10px;
+
+  
   &-item {
+    margin-bottom: 10px;
+    border-radius: $border-radius-button;
+    box-shadow: $box-shadow;
+    border: 1px solid rgba(255, 255, 255, 0.112);
+    color: $color-card-bg;
+    padding: 10px;
+    cursor: pointer;
+    transition: all .6s ease;
+    &:hover {
+      transform: translateX(-10px);
+      background-color: $color-blue;
+    }
+    
+    &__active {
       margin-bottom: 10px;
-      border-radius: 15px;
+      border-radius: $border-radius-button;
       box-shadow: $box-shadow;
       border: 1px solid rgba(255, 255, 255, 0.112);
-      color: rgb(228, 224, 224);
+      color: $color-card-bg;
       padding: 10px;
       cursor: pointer;
       transition: all .6s ease;
-      &:hover {
-          transform: translateX(-10px);
-          background-color: $color-blue;
-          color:rgba(16, 16, 16, 0.843);
-      }
-      
+      transform: translateX(-10px);
+      background-color: $color-blue;
+    }
   }
 }

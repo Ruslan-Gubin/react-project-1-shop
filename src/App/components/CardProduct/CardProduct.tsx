@@ -5,7 +5,7 @@ interface CardProductType {
     catigoriName: string
 }
 
-const CardProduct: FC<CardProductType> = ({item}) => {
+const CardProducts: FC<CardProductType> = ({item}) => {
     return (
         <div className="products-item" >
             <img className='products-item__img' src={item.img} alt={item.catigoriName} />
@@ -14,4 +14,4 @@ const CardProduct: FC<CardProductType> = ({item}) => {
     );
 };
 
-export default CardProduct;
+export default CardProducts;

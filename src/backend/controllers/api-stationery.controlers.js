@@ -24,11 +24,11 @@ const deleteStationery = async (req, res) => {
 };
 
 const editStationery = async (req, res) => {
-  const { category, name, img, img2, img3, img4, img5, price, oldPrice } = req.body;
+  const { category, name, img, img2, img3, img4, img5, price, oldPrice, department } = req.body;
   const { id } = req.params;
   await Stationery.findByIdAndUpdate(
     id,
-    { category, name, img, img2, img3, img4, img5, price, oldPrice },
+    { category, name, img, img2, img3, img4, img5, price, oldPrice, department },
     { new: true }
   )
     .then((elem) => res.status(200).json(elem))
@@ -36,8 +36,8 @@ const editStationery = async (req, res) => {
 };
 
 const addStationery = async (req, res) => {
-  const { category, name, img, img2, img3, img4, img5, price, oldPrice } = req.body;
-  const stationery = new Stationery({ category, name, img, img2, img3, img4, img5, price, oldPrice });
+  const { category, name, img, img2, img3, img4, img5, price, oldPrice, department } = req.body;
+  const stationery = new Stationery({ category, name, img, img2, img3, img4, img5, price, oldPrice, department });
   await stationery
     .save()
     .then((stationery) => res.status(201).json(stationery))

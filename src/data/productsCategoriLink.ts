@@ -1,39 +1,39 @@
 interface categoriItemsType {
     img: string
     catigoriName: string
-    link?: string
+    department?: string
 }
 
 export const categoriItems: Array <categoriItemsType> = [
   {
     img: "https://i.ibb.co/0Qrz6mS/14497.webp",
-    catigoriName: "Канцтовары",
-    link: 'stationeri'
+    catigoriName: "канцтовары",
+    department: 'stationery'
   },
   {
     img: "https://i.ibb.co/wgTYf6R/228454755.webp",
-    catigoriName: "Товары для детей",
-    link: 'products-for-children'
+    catigoriName: "товары для детей",
+    department: 'products-for-children'
   },
   {
     img: "https://i.ibb.co/mR685xT/2.webp",
-    catigoriName: "Красота и здоровье",
-    link: 'beauty-and-health'
+    catigoriName: "красота и здоровье",
+    department: 'beauty-and-health'
   },
   {
     img: "https://i.ibb.co/GM1hJzn/14401.webp",
-    catigoriName: "Товары для дома",
-    link: 'household-products'
+    catigoriName: "товары для дома",
+    department: 'household-products'
   },
   {
     img: "https://i.ibb.co/wLcLrzq/14449.webp",
-    catigoriName: "Сад огород",
-    link: 'garden-garden'
+    catigoriName: "сад огород",
+    department: 'garden-garden'
   },
   {
     img: "https://i.ibb.co/VWJZLnY/image-16.webp",
-    catigoriName: "Одежда",
-    link: 'clothing'
+    catigoriName: "одежда",
+    department: 'clothing'
   }
 ]
 

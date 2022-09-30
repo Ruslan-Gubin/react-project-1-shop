@@ -14,7 +14,7 @@ const options = [
     {label: 'Альбомы', value: 'album'},
   ]
 
-const FormAddProductUtils = () => {
+const FormAddProductUtils = ({department}) => {
   const [activeModal, setActiveModal] = useState(false);
   const [createProducts, {}] = useCreateProductsMutation();
   const [name, setName] = useState("");
@@ -56,6 +56,7 @@ const FormAddProductUtils = () => {
       name,
       price,
       oldPrice,
+      department,
     } as IProduct).unwrap();
     removeTextInput()
   };
@@ -191,3 +192,7 @@ const FormAddProductUtils = () => {
 };
 
 export default FormAddProductUtils;
+
+
+
+//   "department": "stationery",

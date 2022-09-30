@@ -9,24 +9,30 @@ import { useCounter } from "../../hooks";
 import { useGetProductsQuery } from "../../store/product/productsApi";
 import { formatterRub } from "../../utils/intl-Number-Format";
 import paginationCalculatorPage from "../../utils/paginationCalculatorPage";
-import FormAddProductUtils from "./stationeryUtils/FormAddProductUtils";
+import FormAddProductUtils from "./productUtils/FormAddProductUtils";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { filterDataDepatment, getValueObject } from "../../utils";
+import ButtonGoBack from "../../App/components/Ui/ButtonGoBack";
 
-const Stationeri = () => {
+const Product = () => {
   const order = useSelector((state) => state.order.order);
   const { isLoading, isError, data = [] } = useGetProductsQuery(0);
   const [textSearch, setTextSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(12);
-
   const [counterProduct] = useCounter(0);
+
+  const id = useParams();
 
   const initSelect = (data) =>
     data.map((i) => ({ ...i, counter: counterProduct, selected: false }));
 
-  const searchText = initSelect(data).filter((item) => {
-    return item.name.toLowerCase().includes(textSearch.toLowerCase());
-  });
+  const searchText = initSelect(filterDataDepatment(id, data)).filter(
+    (item) => {
+      return item.name.toLowerCase().includes(textSearch.toLowerCase());
+    }
+  );
 
   const totalAmount = order.reduce(
     (acc, item) => acc + item.price * item.counter,
@@ -48,7 +54,8 @@ const Stationeri = () => {
           text={textSearch}
           setText={setTextSearch}
         />
-        <FormAddProductUtils />
+        <ButtonGoBack text="Вернуться к каталогу"/>
+        <FormAddProductUtils department={getValueObject(id)} />
         <ButtonMain bgColor="green">
           Общая сумма: {formatterRub.format(totalAmount)}
         </ButtonMain>
@@ -56,7 +63,10 @@ const Stationeri = () => {
 
       <div className="product-catalog__container">
         <div className="product-catalog__container-info">
-          <Categories data={data} />
+          <Categories
+            data={filterDataDepatment(id, data)}
+            isLoading={isLoading}
+          />
           <CustomSelect />
         </div>
         <div className="product-catalog__items">
@@ -80,4 +90,4 @@ const Stationeri = () => {
   );
 };
 
-export default Stationeri;
+export { Product };
