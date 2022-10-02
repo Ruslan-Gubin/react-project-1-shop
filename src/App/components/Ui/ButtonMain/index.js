@@ -1,1 +1,1 @@
-export {default} from './ButtonMain'
+export {ButtonMain} from './ButtonMain'

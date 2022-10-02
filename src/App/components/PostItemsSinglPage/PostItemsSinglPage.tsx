@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import { PostItemProps } from "../../../models/PostsItemProps";
-import ButtonGoBack from "../Ui/ButtonGoBack";
-import ButtonMain from "../Ui/ButtonMain";
+import { ButtonGoBack } from "../Ui";
+import { ButtonMain } from "../Ui";
 
 
 const PostItemsSinglPage: FC<PostItemProps> = ({ post, remove }) => {

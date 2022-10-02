@@ -1,0 +1,1 @@
+export {PostItemsRender} from './PostItemsRender';

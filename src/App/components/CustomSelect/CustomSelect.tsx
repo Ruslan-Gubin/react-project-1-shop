@@ -1,28 +1,17 @@
-import { useCallback, useState } from "react";
-import Select,{OnChangeValue} from "react-select";
-import { IOption } from "../../../models";
+import Select from "react-select";
 
 
-const CustomSelect = ({options}) => {
-  const [currentCategory, setCurrentCategory] = useState('')
-
-  const getValue = useCallback(() => {
-    return currentCategory ? options.find(c => c.value === currentCategory) : ''
-  },[currentCategory])
-
-  const onChange = useCallback((newValue: OnChangeValue<IOption, boolean>) => {
-    setCurrentCategory((newValue as IOption).value)
-  },[currentCategory])
-
+const CustomSelect = ({options = [], placeholder = '', onChange, defaultValue = 0}) => {
+ 
   return (
     <>
-    <Select
-    classNamePrefix='custom-select'
-    onChange={onChange} 
-    value={getValue()} 
-    options={options} 
-    isSearchable={false}
-    placeholder='Сортировка'
+    <Select 
+     classNamePrefix='custom-select'  
+     defaultValue={defaultValue}
+     options={options}
+     isSearchable={false} 
+     onChange={onChange} 
+     placeholder={placeholder || 'Сортировка'}
     />    
     </>
   );

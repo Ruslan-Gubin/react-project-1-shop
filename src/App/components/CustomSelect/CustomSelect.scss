@@ -14,6 +14,7 @@
       transform: scale(1);
     }
   }
+  
   &__control {
     background-color: transparent !important;
     border: none !important;
@@ -22,7 +23,7 @@
     box-shadow: none !important;
     
     &--menu-is-open {
-      border-color: rgb(203, 194, 194) !important;
+      border-color: rgb(95, 44, 44) !important;
     }
   }
   &__value-container {
@@ -51,12 +52,11 @@
   }
   
   &__single-value{
-    font-size: 20px;
+    overflow: hidden;
     font-weight: bold;
-    text-align: center;
-    color:$color-header-bg-dark !important;
-
+    color:$color-card-bg !important;
   } 
+ 
   &__molti-value {
     background-color:rgba( #0add1c, 0.6) !important;
     border-radius: 0.5rem !important;
@@ -80,7 +80,7 @@
   }
   &__option {
     background-color: #292a2e !important;
-
+    
     cursor: pointer !important;
     &--is-focused {
       background-color: lighten(#292a2e, 8%) !important;

@@ -7,8 +7,7 @@ const getValueObject = (id) => {
 }
 
 const filterDataDepatment = (id, data) => {
-  const filterData = data.filter(item => item.department == getValueObject(id))
-  return filterData
+  return data.filter(item => item.department == getValueObject(id))
 }
 
 export {filterDataDepatment, getValueObject}

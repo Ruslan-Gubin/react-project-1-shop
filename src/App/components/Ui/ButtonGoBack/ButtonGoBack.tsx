@@ -16,4 +16,4 @@ const ButtonGoBack = ({children, ...props }: PropsClildren) => {
   );
 };
 
-export default ButtonGoBack;
+export  {ButtonGoBack};

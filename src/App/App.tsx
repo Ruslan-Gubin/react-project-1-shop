@@ -16,7 +16,7 @@ const App = () => {
             <Route path='notebooks' element={<p>Notebooks</p>}/> */}
 
           <Route path="login" element={<page.LoginPage />} />
-          <Route path="post" element={<page.Post />} />
+          <Route path="post" element={<page.Posts />} />
           <Route path="post/:id" element={<page.SingelPage />} />
           <Route path="*" element={<page.NotfoundPage />} />
         </Route>

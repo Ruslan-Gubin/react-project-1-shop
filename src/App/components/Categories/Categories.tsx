@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { categoryFilterName } from "../../../utils";
 
-const Categories = ({ data, isLoading }) => {
+const Categories = ({ data, isLoading , setMenuValue}) => {
   const [activeCategory, setActiveCategory] = useState(0);
+  
+  useEffect(() => {
+      setMenuValue(activeCategory)
+  },[activeCategory])
 
   return (
     <div className="product-catalog__links">
       {!isLoading &&
-        categoryFilterName(data).map((item, index) => (
+        categoryFilterName(data, true).map((item, index) => (
           <div
+          
             onClick={() => setActiveCategory(index)}
             key={item}
             className={
@@ -24,4 +29,4 @@ const Categories = ({ data, isLoading }) => {
   );
 };
 
-export default Categories;
+export {Categories};

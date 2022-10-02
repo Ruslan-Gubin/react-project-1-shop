@@ -23,4 +23,4 @@ const ButtonMain: FC<ButtonMainType> = ({
   );
 };
 
-export default ButtonMain;
+export  {ButtonMain};

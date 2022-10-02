@@ -1,5 +1,5 @@
 import React, { JSXElementConstructor } from "react";
-import ButtonMain from "../Ui/ButtonMain";
+import { ButtonMain } from "../Ui";
 import Watch from "../Ui/Watch";
 
 interface FormType {

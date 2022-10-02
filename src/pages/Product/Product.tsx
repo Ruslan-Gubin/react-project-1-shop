@@ -1,46 +1,64 @@
-import { useState } from "react";
-import CardProductCatalog from "../../App/components/CardProductCatalog";
-import Categories from "../../App/components/Categories";
-import Pagination from "../../App/components/Pagination";
-import { CustomSelect } from "../../App/components/CustomSelect";
-import ButtonMain from "../../App/components/Ui/ButtonMain";
-import InputMain from "../../App/components/Ui/InputMain";
+import {  useEffect, useRef, useState } from "react";
 import { useCounter } from "../../hooks";
 import { useGetProductsQuery } from "../../store/product/productsApi";
-import { formatterRub } from "../../utils/intl-Number-Format";
-import paginationCalculatorPage from "../../utils/paginationCalculatorPage";
-import FormAddProductUtils from "./productUtils/FormAddProductUtils";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { filterDataDepatment, getValueObject } from "../../utils";
-import ButtonGoBack from "../../App/components/Ui/ButtonGoBack";
+import * as utils from "../../utils";
+import * as component from "../../App/components";
+import { ButtonGoBack, ButtonMain, InputMain } from "../../App/components/Ui";
+import { productSortingArray } from "../../data";
 
 const Product = () => {
   const order = useSelector((state) => state.order.order);
   const { isLoading, isError, data = [] } = useGetProductsQuery(0);
   const [textSearch, setTextSearch] = useState("");
+  const [selectedOption, setSelectedOption] = useState(productSortingArray[0]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(12);
   const [counterProduct] = useCounter(0);
-
+  const [dataDepartment, setDataDepartment] = useState([]);
+  const [menuValue, setMenuValue] = useState("");
   const id = useParams();
 
-  const initSelect = (data) =>
-    data.map((i) => ({ ...i, counter: counterProduct, selected: false }));
-
-  const searchText = initSelect(filterDataDepatment(id, data)).filter(
-    (item) => {
-      return item.name.toLowerCase().includes(textSearch.toLowerCase());
+  useEffect(() => {
+    if (!isLoading) {
+      setDataDepartment(utils.filterDataDepatment(id, data));
     }
-  );
+  }, []);
+
+  let searchTextRef = useRef();
+
+  const initSelect = (data) =>
+    data.map((i) => ({
+      ...i,
+      counter: counterProduct,
+      selected: false,
+      discount: utils.sumDiscount(i.price, i.oldPrice),
+    }));
+
+  searchTextRef = initSelect(dataDepartment).filter((item) => {
+    return item.name.toLowerCase().includes(textSearch.toLowerCase());
+  });
+
+  const menuSortCategoryIndex = utils.categoryFilterName(dataDepartment, false)[
+    menuValue
+  ];
+
+  menuValue !== 0
+    ? (searchTextRef = searchTextRef.filter(
+        (item) => item.category == menuSortCategoryIndex
+      ))
+    : false;
+      
+  utils.selectOptionsSort(selectedOption, productSortingArray, searchTextRef);
 
   const totalAmount = order.reduce(
     (acc, item) => acc + item.price * item.counter,
     0
   );
 
-  const pagination = paginationCalculatorPage(
-    searchText,
+  const pagination = utils.paginationCalculatorPage(
+    searchTextRef,
     currentPage,
     postsPerPage
   );
@@ -54,25 +72,29 @@ const Product = () => {
           text={textSearch}
           setText={setTextSearch}
         />
-        <ButtonGoBack text="Вернуться к каталогу"/>
-        <FormAddProductUtils department={getValueObject(id)} />
+        <ButtonGoBack text="Вернуться к каталогу" />
+        <component.FormAddProduct department={utils.getValueObject(id)} />
         <ButtonMain bgColor="green">
-          Общая сумма: {formatterRub.format(totalAmount)}
+          Общая сумма: {utils.formatterRub.format(totalAmount)}
         </ButtonMain>
       </div>
-
       <div className="product-catalog__container">
         <div className="product-catalog__container-info">
-          <Categories
-            data={filterDataDepatment(id, data)}
+          <component.Categories
+            data={dataDepartment}
+            setMenuValue={setMenuValue}
             isLoading={isLoading}
           />
-          <CustomSelect />
+          <component.CustomSelect
+            options={productSortingArray}
+            onChange={(value) => setSelectedOption(value)}
+            defaultValue={selectedOption}
+          />
         </div>
         <div className="product-catalog__items">
           {!isLoading &&
             pagination.map((product) => (
-              <CardProductCatalog
+              <component.CardProductCatalog
                 product={product}
                 {...product}
                 key={product._id}
@@ -80,10 +102,10 @@ const Product = () => {
             ))}
         </div>
       </div>
-      <Pagination
+      <component.Pagination
         currentPage={currentPage}
         postsPerPage={postsPerPage}
-        totalCountries={searchText.length}
+        totalCountries={searchTextRef.length}
         setCurrentPage={setCurrentPage}
       />
     </div>

@@ -44,4 +44,4 @@ const InputMain:JSXElementConstructor <InputMainType> = ({
     );
 };
 
-export default InputMain;
+export {InputMain};

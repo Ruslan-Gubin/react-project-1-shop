@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
-import CustomLink from "../../Ui/CustomLink";
-import CardMainPost from "../../Ui/CardMainPost/CardMainPost";
+import CustomLink from "../Ui/CustomLink";
+import CardMainPost from "../Ui/CardMainPost/CardMainPost";
 
 const PostItemsRender = (props) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -24,4 +24,4 @@ const PostItemsRender = (props) => {
   );
 };
 
-export default PostItemsRender;
+export  {PostItemsRender};

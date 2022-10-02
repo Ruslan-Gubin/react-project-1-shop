@@ -54,4 +54,4 @@ const ImagesSlider = ({imagesSwiper}) => {
       </> 
 };
 
-export default ImagesSlider;
+export  {ImagesSlider};

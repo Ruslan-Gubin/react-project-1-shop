@@ -1,9 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IProduct } from "../../models/products";
 
-
-
-
 export const stationeryApi = createApi({
     reducerPath: "stationeryApi",
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:4444/api'}),

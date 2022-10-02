@@ -4,8 +4,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 
-
-
 const mode = process.env.NODE_ENV || 'development';
 const devMode = mode === 'development';
 const target = devMode ? 'web' : 'browserslist';
@@ -25,25 +23,12 @@ module.exports = {
     hot: true,
   },
   entry: ['@babel/polyfill', path.resolve(__dirname, 'src', 'index.tsx')], 
-  // optimization: {
-  //   minimize: true,
-  //   minimizer: [
-  //     new TerserPlugin({
-  //       extractComments: false,
-  //       terserOptions: {
-  //         format: {
-  //           comments: false,
-  //         },
-  //       },
-  //     }),
-  //   ],
-  // },
-
   output: {
     path: path.resolve(__dirname, 'dist'),
     clean: true,
     filename: '[name].[contenthash].js',
-    assetModuleFilename: 'assets/[name][ext]'
+    assetModuleFilename: 'assets/[name][ext]',
+    publicPath: '/',
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],

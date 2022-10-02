@@ -1,12 +1,11 @@
 import React, { useCallback, useState } from "react";
-import Form from "../../../App/components/Form";
-import Modal from "../../../App/components/Modal";
-import ButtonMain from "../../../App/components/Ui/ButtonMain";
-import InputMain from "../../../App/components/Ui/InputMain";
-import TextareaMain from "../../../App/components/Ui/TextareaMain";
+import Form from "../Form";
+import Modal from "../Modal";
+import TextareaMain from "../Ui/TextareaMain";
 import { IProduct } from "../../../models/products";
 import { useCreateProductsMutation } from "../../../store/product/productsApi";
-import { CustomSelect } from "../../../App/components/CustomSelect";
+import { CustomSelect } from "../CustomSelect";
+import { ButtonMain, InputMain } from "../Ui";
 
 const options = [
     {label: 'Тетрадь', value: 'notebooks'},
@@ -14,7 +13,7 @@ const options = [
     {label: 'Альбомы', value: 'album'},
   ]
 
-const FormAddProductUtils = ({department}) => {
+const FormAddProduct = ({department}) => {
   const [activeModal, setActiveModal] = useState(false);
   const [createProducts, {}] = useCreateProductsMutation();
   const [name, setName] = useState("");
@@ -191,7 +190,7 @@ const FormAddProductUtils = ({department}) => {
   );
 };
 
-export default FormAddProductUtils;
+export {FormAddProduct};
 
 
 

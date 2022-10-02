@@ -1,1 +1,1 @@
-export {default} from './ImagesSlider'
+export {ImagesSlider} from './ImagesSlider'

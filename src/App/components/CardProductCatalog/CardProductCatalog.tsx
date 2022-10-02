@@ -1,18 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useGetProductsQuery, useRemoveProductMutation } from "../../../store/product/productsApi";
+import { useRemoveProductMutation } from "../../../store/product/productsApi";
 import * as prodSlice from "../../../store/product/stationerySlice";
-import { getImgForSlider } from "../../../utils";
-import { formatterRub } from "../../../utils/intl-Number-Format";
-import ImagesSlider from "../ImagesSlider";
-import ButtonMain from "../Ui/ButtonMain";
+import { formatterRub, sumDiscount } from "../../../utils";
+import { ButtonMain } from "../Ui";
 
 const CardProductCatalog = ({ _id, product }) => {
   const order = useSelector((state) => state.order.order);
   const [removeProduct, {}] = useRemoveProductMutation();
   const [buttonBye, setButtonBye] = useState(false);
   const dispatch = useDispatch();
-  const {  data = [] } = useGetProductsQuery(0);
 
   const addInOrder = useCallback(() => {
     dispatch(prodSlice.addToOrders({ product, order }));
@@ -49,8 +46,6 @@ const CardProductCatalog = ({ _id, product }) => {
     return product.counter;
   };
 
-  const sumPersent = (a, b) => Math.ceil(((a - b) / b) * 100);
-
   return (
     <div className="card-product__wrapper">
       <div className="card-product__container">
@@ -65,7 +60,7 @@ const CardProductCatalog = ({ _id, product }) => {
           <div className="card-product__body-prices">
             {product.oldPrice && (
               <div className="card-product__body-prices-precent">
-                Скидка:{sumPersent(product.price, product.oldPrice)}%
+                Скидка:{sumDiscount(product.price, product.oldPrice)}%
               </div>
             )}
             <div className="card-product__body-prices-price">
@@ -109,4 +104,4 @@ const CardProductCatalog = ({ _id, product }) => {
   );
 };
 
-export default CardProductCatalog;
+export { CardProductCatalog };

@@ -1,1 +1,1 @@
-export { default } from './CardProductCatalog'
+export { CardProductCatalog } from './CardProductCatalog'

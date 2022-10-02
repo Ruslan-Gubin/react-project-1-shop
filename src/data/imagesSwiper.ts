@@ -3,7 +3,7 @@ export interface imageSwiperType {
   images: string
 }
 
-export const imagesSwiper: Array<imageSwiperType> = [
+const imagesSwiper: Array<imageSwiperType> = [
     { images: "https://i.ibb.co/SV8TFyG/1629596390-50-krot-mobi-p-kamennii-most-mesta-krasivo-foto-55.jpg" },
     { images: "https://i.ibb.co/dDwLj6X/1649130762-22-vsegda-pomnim-com-p-osennyaya-priroda-foto-24.jpg" },
     { images: "https://i.ibb.co/5jsRwRM/Animals-panther-1.jpg" },
@@ -18,7 +18,7 @@ export const imagesSwiper: Array<imageSwiperType> = [
     { images: "https://i.ibb.co/7gz1hq0/img1-akspic-ru-nebo-otel-voda-priroda-fjord-2560x1600.jpg" }
   ];
 
-
+export {imagesSwiper}
 
 
 

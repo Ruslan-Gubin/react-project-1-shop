@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { IPost } from "../../../../models/products";
-import { useCreatePostMutation } from "../../../../store/post/postApi";
-import Form from "../../Form";
-import Modal from "../../Modal";
-import ButtonMain from "../../Ui/ButtonMain";
-import InputMain from "../../Ui/InputMain";
-import TextareaMain from "../../Ui/TextareaMain";
+import { IPost } from "../../../models/products";
+import { useCreatePostMutation } from "../../../store/post/postApi";
+import Form from "../Form";
+import Modal from "../Modal";
+import { ButtonMain, InputMain } from "../Ui";
+import TextareaMain from "../Ui/TextareaMain";
 
-const ModalActiveUtils = ({}) => {
+const ModalActive = ({}) => {
   const [modalActive, setModalActive] = useState(false);
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
@@ -71,4 +70,4 @@ const ModalActiveUtils = ({}) => {
   );
 };
 
-export default ModalActiveUtils;
+export  {ModalActive};

@@ -1,6 +1,6 @@
 
 
-export const formatter = new Intl.NumberFormat('ru', {
+const formatter = new Intl.NumberFormat('ru', {
   style: 'unit',
   unit:'kilometer-per-second', // value | value-per-value
   unitDisplay: 'long' // short-км/c | long-километров в секунду
@@ -17,11 +17,12 @@ export const formatter = new Intl.NumberFormat('ru', {
 //gigabit,gigabyte,gram,hectare,hour,inch,kilobit,kilobyte,kilogram,kilometer,leter,
 //megabit,meter,mile,mouth,percent,petabyte,year,yard,week,terabyte,stone,second,
 
-export const formatterRub = new Intl.NumberFormat('ru', {
+const formatterRub = new Intl.NumberFormat('ru', {
   style: 'currency',
   currency:'RUB',
   maximumFractionDigits: 0,
 
 })
 
+export {formatterRub,formatter}
 // https://metanit.com/web/javascript/18.4.php

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import ButtonMain from "../../Ui/ButtonMain";
-import FormSearch from "../../Ui/FormSearch";
-import InputMain from "../../Ui/InputMain";
+import { ButtonMain, InputMain } from "../Ui";
+import FormSearch from "../Ui/FormSearch";
 
-const PostSearchUtils = () => {
+const PostSearch = () => {
   const [title, setTitle] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -32,4 +31,4 @@ const PostSearchUtils = () => {
   );
 };
 
-export default PostSearchUtils;
+export  {PostSearch};

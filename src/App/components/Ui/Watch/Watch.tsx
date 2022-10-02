@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import ButtonMain from '../ButtonMain';
+import { ButtonMain } from '../ButtonMain';
+
 
 const Watch = () => {
     const [date, setDate] = useState(new Date().toLocaleTimeString());

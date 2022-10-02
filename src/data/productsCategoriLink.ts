@@ -4,7 +4,7 @@ interface categoriItemsType {
     department?: string
 }
 
-export const categoriItems: Array <categoriItemsType> = [
+const productsCategoriLink: Array <categoriItemsType> = [
   {
     img: "https://i.ibb.co/0Qrz6mS/14497.webp",
     catigoriName: "канцтовары",
@@ -37,3 +37,4 @@ export const categoriItems: Array <categoriItemsType> = [
   }
 ]
 
+export {productsCategoriLink}

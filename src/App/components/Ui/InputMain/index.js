@@ -1,1 +1,1 @@
-export {default} from './InputMain'
+export {InputMain} from './InputMain'

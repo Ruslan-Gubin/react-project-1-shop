@@ -1,4 +1,4 @@
-import ButtonMain from "../Ui/ButtonMain";
+import { ButtonMain } from "../Ui";
 
 const Pagination = (props) => {
   const pageNumbers = [];
@@ -49,4 +49,4 @@ const Pagination = (props) => {
   );
 };
 
-export default Pagination;
+export {Pagination};

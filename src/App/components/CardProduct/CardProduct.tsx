@@ -14,4 +14,4 @@ const CardProducts: FC<CardProductType> = ({item}) => {
     );
 };
 
-export default CardProducts;
+export  {CardProducts};

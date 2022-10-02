@@ -1,4 +1,7 @@
 .product-catalog {
+    &__container-info{
+        width: 150px;
+    }
     &__input-search {
         display: flex;
         align-items: center;
@@ -25,4 +28,5 @@
     & img {
         
     }
+
 }
