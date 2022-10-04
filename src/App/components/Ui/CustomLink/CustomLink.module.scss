@@ -1,0 +1,12 @@
+@use '../../../../scss/common/var';
+
+.link {
+  font-size: 1.8rem;
+  color: var.$c80;
+  transition: all 0.2s ease;
+}
+.active {
+  font-size: 2rem;
+  color: var.$color-primary;
+  transition: all 0.2s ease;
+}

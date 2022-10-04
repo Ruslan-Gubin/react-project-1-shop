@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
-import CustomLink from "../Ui/CustomLink";
-import CardMainPost from "../Ui/CardMainPost/CardMainPost";
+import { CardMainPost, CustomLink } from "../Ui";
+import styles from './PostItemsRender.module.scss';
 
 const PostItemsRender = (props) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,7 +14,7 @@ const PostItemsRender = (props) => {
       {props.currentPosts
         .filter((post) => post.title.includes(postQuery))
         .map((post) => (         
-<div className="post-main__items-element" key={post._id}>
+<div className={styles.element} key={post._id}>
           <CustomLink   to={`/post/${post._id}`}>
             <CardMainPost  post={post} />
           </CustomLink>

@@ -1,5 +1,7 @@
+import React from "react";
 import Select from "react-select";
 
+import './CustomSelect.scss'
 
 const CustomSelect = ({options = [], placeholder = '', onChange, defaultValue = 0}) => {
  

@@ -1,0 +1,35 @@
+@use '../../scss/common/exented';
+
+.catalog {
+    .info{  
+        width: 150px;
+    }
+    .search {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;  
+        margin-bottom: 20px;  
+    }
+    
+    .container {
+        display: flex;
+        &-info{
+            display: flex;
+            flex-direction: column;
+        }
+    }       
+    .items {
+        @extend %gridMainPost;
+        width: 100%;
+        
+    }
+}
+
+.input {  
+    display: flex;
+    justify-content: space-around;
+    & img {
+        
+    }
+
+}

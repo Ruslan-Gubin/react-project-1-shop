@@ -1,1 +1,1 @@
-export {default} from './Watch'
+export {Watch} from './Watch'

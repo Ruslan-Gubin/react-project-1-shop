@@ -1,0 +1,20 @@
+@use '../../../scss/common/exented';
+
+.icons {
+    @extend %footer-links;
+    & li {
+      & a {
+        font-size: 2rem;
+        @extend %footer-links-a;
+& img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40px;
+  height: 40px;
+}
+        
+      }
+    }
+  }

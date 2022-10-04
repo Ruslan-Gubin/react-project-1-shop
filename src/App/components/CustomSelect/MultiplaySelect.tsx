@@ -3,6 +3,8 @@ import Select, {OnChangeValue} from "react-select";
 import { IOption } from "../../../models";
 import makeAnimated from 'react-select/animated';
 
+import './MultiplaySelect.scss'
+
 const options: IOption[] = [
   {label: 'React', value: 'react'},
   {label: 'JavaScript', value: 'javascript'},

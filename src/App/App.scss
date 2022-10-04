@@ -1,27 +1,2 @@
 
-@include scloll-main(8px, $color-yellow, 10px, $color-card-bg);
-body {
-  margin: 0;
-  .wrapper{
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    margin: 0;
-    background: linear-gradient(to bottom , $color-black-hover, $color-blue);
-    
-       .main{
-        flex: 1 1 auto;
-    }
-    }
-  }
-  .container {
-    padding: 20px 0;
-    position: relative;
-    width: 60%;
-    margin: 0 auto;
-    @media (max-width: 1200px) {
-      width: 90%;
-    }
-  }
  

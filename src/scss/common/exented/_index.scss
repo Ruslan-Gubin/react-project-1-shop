@@ -1,0 +1,34 @@
+@forward 'btnBuy';
+@forward 'btnGoBack';
+@forward 'btnProducts';
+@forward 'containerGradient';
+@forward 'gridCard';
+@forward 'gridMainPosts';
+@forward 'headerMessage';
+@forward 'footerLinks';
+
+
+// %tplborder{
+//     border-bottom: 5px solid #000;
+//     color: aqua;
+//     margin: 5px;
+//     padding: 5px;
+// }
+// .test-sample {
+//     @extend %tplborder;
+// }
+
+
+// %btn-icon {
+//     position: relative;
+    
+//     &::before {
+//         content: '';
+//         display: inline-block;
+//         position: absolute;
+//         top: 50%;
+//         transform: translate(-50%);
+//         background-repeat: no-repeat;
+//         background-size: cover;
+//     }
+// }

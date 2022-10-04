@@ -1,0 +1,26 @@
+@use "../../../scss/common/var";
+
+.item {
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  border-radius: var.$border-radius-average;
+  box-shadow: var.$box-shadow;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px 0;
+  .img {
+    width: 100px;
+  }
+
+  .text {
+    font-family: var.$ff-Gilroy-Bold;
+    font-weight: bold;
+    color: var.$color-gold-text;
+    font-size: 25px;
+    margin: 20px 10px;
+  }
+}

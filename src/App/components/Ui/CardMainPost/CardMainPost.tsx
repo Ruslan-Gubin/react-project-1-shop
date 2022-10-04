@@ -1,5 +1,6 @@
 import React, { FC, useState } from "react";
 import { PostItemProps } from "../../../../models/PostsItemProps";
+import styles from './CardMainPost.module.scss';
 
 const CardMainPost: FC<PostItemProps> = ({ post }) => {
   const [status, setStatus] = useState(false);
@@ -9,9 +10,9 @@ const CardMainPost: FC<PostItemProps> = ({ post }) => {
   };
 
   return (
-    <div className="post-main__container" key={post._id}>
-      <div className="post-main__card" onClick={handlerOpen}>
-        <div className="post-main__card-header">
+    <div className={styles.container} key={post._id}>
+      <div className={styles.card} onClick={handlerOpen}>
+        <div className={styles.header}>
           {post.img ? (
             <img src={post.img} alt={post.title} />
           ) : (
@@ -21,21 +22,21 @@ const CardMainPost: FC<PostItemProps> = ({ post }) => {
             />
           )}
         </div>
-        <div className="post-main__card-footer">
-          <div className="post-main__card-footer-info">
-            <div className="post-main__card-footer-info-img">
+        <div className={styles.footer}>
+          <div className={styles.info}>
+            <div className={styles.img}>
               <img src="https://i.pravatar.cc/40?img=1" alt="user__image" />
             </div>
-            <p className="post-main__card-footer-info-name">
+            <p>
               {post.user_name || "Guest"}
             </p>
           </div>
 
-          <p className="post-main__card-footer-title">{post.title}</p>
+          <p className={styles.title}>{post.title}</p>
         </div>
       </div>
     </div>
   );
 };
 
-export default CardMainPost;
+export  {CardMainPost};

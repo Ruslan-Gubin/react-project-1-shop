@@ -1,0 +1,66 @@
+@use '../../../scss/common/var';
+
+.header {
+    height: 65px;
+    width: 100%;
+    .navbar {
+        width: 60%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0 auto;
+        @media (max-width: 1400px) {
+            width: 90%;
+        }
+    }
+    .logo{
+        background-color: var.$color-white;
+        height: 40px;
+        width: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom-left-radius: 15px;
+        border-top-right-radius: 15px;
+        border-top-left-radius: 5px;
+        
+        cursor: pointer;
+        transition: all .3s ease;
+        &:hover{
+            transition: all .3s ease;
+            transform: rotate(-45deg);
+        }
+
+        &-text{
+            font-weight: bold;
+            font-size: 20px;
+            transition: all .3s ease;
+            &:hover {
+                transition: all .3s ease;
+            transform: rotate(45deg);
+            }
+        }
+    }
+     .links{
+        font-family: var.$ff-Gilroy-Heavy;
+        margin-left: 50px;
+        .links-default {
+            font-size: var.$font-size-header-link;
+            margin-left: 20px;
+            color: var.$color-primary;
+            &:hover {
+                border-bottom: 0.3px solid var.$color-primary;
+            }
+        }
+        .links-active {
+            font-size: var.$font-size-header-link;
+            margin-left: 20px;
+            color: rgb(246, 241, 241);
+            &:hover {
+                border-bottom: 0.3px solid rgb(183, 167, 167);
+            }
+        }
+    }
+    
+}

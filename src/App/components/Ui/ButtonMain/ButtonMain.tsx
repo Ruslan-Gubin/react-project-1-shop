@@ -1,4 +1,5 @@
-import { FC, useState } from "react";
+import React from "react";
+import './ButtonMain.scss';
 
 interface ButtonMainType {
   children?: any;
@@ -7,7 +8,7 @@ interface ButtonMainType {
   disabled?: boolean
 }
 
-const ButtonMain: FC<ButtonMainType> = ({
+const ButtonMain: React.FC<ButtonMainType> = ({
   children,
   onClick,
   bgColor = "primary",

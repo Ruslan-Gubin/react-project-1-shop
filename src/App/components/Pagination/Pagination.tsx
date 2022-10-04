@@ -1,6 +1,9 @@
+import React from 'react'
 import { ButtonMain } from "../Ui";
 
-const Pagination = (props) => {
+import styles from './Pagination.module.scss';
+
+const Pagination: React.FC = (props) => {
   const pageNumbers = [];
 
   for (
@@ -21,7 +24,7 @@ const Pagination = (props) => {
   const paginate = (pageNumber) => props.setCurrentPage(pageNumber);
 
   return (
-    <div className="pagination-container">
+    <div className={styles.pagination}>
       {props.currentPage > 1 ? (
         <ButtonMain bgColor="info" onClick={prevPage}>
           Prev
@@ -33,7 +36,7 @@ const Pagination = (props) => {
         <div
           key={index}
           onClick={() => paginate(page)}
-          className={props.currentPage == page ? "current-page" : "page"}
+          className={props.currentPage == page ? styles['current-page'] : styles.page}
         >
           {page}
         </div>

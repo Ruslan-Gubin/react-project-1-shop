@@ -1,11 +1,14 @@
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { IProduct } from "../../../models/products";
 import { useRemoveProductMutation } from "../../../store/product/productsApi";
 import * as prodSlice from "../../../store/product/stationerySlice";
 import { formatterRub, sumDiscount } from "../../../utils";
 import { ButtonMain } from "../Ui";
 
-const CardProductCatalog = ({ _id, product }) => {
+import styles from './CardProductCatalog.module.scss';
+
+const CardProductCatalog: React.FC<IProduct> = ({ _id, product }) => {
   const order = useSelector((state) => state.order.order);
   const [removeProduct, {}] = useRemoveProductMutation();
   const [buttonBye, setButtonBye] = useState(false);
@@ -47,34 +50,34 @@ const CardProductCatalog = ({ _id, product }) => {
   };
 
   return (
-    <div className="card-product__wrapper">
-      <div className="card-product__container">
-        <div className="card-product__header">
+    <div className={styles.wrapper}>
+      <div className={styles.product}>
+        <div className={styles.header}>
           <img
-            className="card-product__header-img"
+            className={styles.img}
             alt="img"
             src={product.img || product.img2}
           />
         </div>
-        <div className="card-product__body">
-          <div className="card-product__body-prices">
+        <div className={styles.body}>
+          <div className={styles.prices}>
             {product.oldPrice && (
-              <div className="card-product__body-prices-precent">
+              <div className={styles.precent}>
                 Скидка:{sumDiscount(product.price, product.oldPrice)}%
               </div>
             )}
-            <div className="card-product__body-prices-price">
+            <div className={styles.price}>
               {formatterRub.format(product.price)}
             </div>
 
-            <div className="card-product__body-prices-oldprice">
+            <div className={styles.oldprice}>
               {formatterRub.format(product.oldPrice)}
             </div>
           </div>
-          <div className="card-product__body-name">{product.name}</div>
+          <div className={styles.name}>{product.name}</div>
         </div>
-        <div className="card-product__footer">
-          <div className="card-product__footer-buttons">
+        <div className={styles.footer}>
+          <div className={styles.buttons}>
             {buttonBye ? (
               <ButtonMain onClick={removeInOrder} bgColor="secondary">
                 В Корзине: {resCounter()}

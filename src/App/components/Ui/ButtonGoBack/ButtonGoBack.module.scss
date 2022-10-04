@@ -1,0 +1,8 @@
+@use '../../../../scss/common/exented';
+@use '../../../../scss/common/var';
+
+.button{
+    @extend %btn-goback-blue;
+    font-family: var.$ff-cormorantgaramond-bold;
+}
+

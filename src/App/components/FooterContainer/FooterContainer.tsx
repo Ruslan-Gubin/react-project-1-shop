@@ -1,10 +1,10 @@
 import React from "react";
-import FooterIcons from "./FooterIcons/FooterIcons";
-import FooterMenu from "./FooterMenu/FooterMenu";
+import { FooterMenu, FooterIcons } from "../";
+import styles from './FooterContainer.module.scss';
 
 const FooterContainer = () => {
   return (
-    <div className="footer">
+    <div className={styles.footer}>
       <FooterIcons />
       <FooterMenu />
       <p>@2022 Online Shop || RGS</p>

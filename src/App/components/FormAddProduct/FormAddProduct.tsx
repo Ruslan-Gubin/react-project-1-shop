@@ -1,11 +1,9 @@
 import React, { useCallback, useState } from "react";
 import Form from "../Form";
 import Modal from "../Modal";
-import TextareaMain from "../Ui/TextareaMain";
 import { IProduct } from "../../../models/products";
 import { useCreateProductsMutation } from "../../../store/product/productsApi";
-import { CustomSelect } from "../CustomSelect";
-import { ButtonMain, InputMain } from "../Ui";
+import { ButtonMain, InputMain, TextareaMain } from "../Ui";
 
 const options = [
     {label: 'Тетрадь', value: 'notebooks'},

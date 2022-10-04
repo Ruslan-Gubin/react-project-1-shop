@@ -1,19 +1,23 @@
-import CustomLink from '../Ui/CustomLink';
+import React from 'react';
+import { CustomLink } from '../Ui';
+
+
+import styles from './Header.modules.scss';
 
 const Header = () => {
 
-    const linkClActive = 'header-navbar__links-item'
-    const linkCl = 'header-navbar__links-activ'
+    const linkClActive = styles['links-default']
+    const linkCl = styles['links-active']
 
     return (
-        <header className="header-navbar">
-      <div className="header-navbar__container">
-        <div className="header-navbar__logo">
-<div className="header-navbar__logo-text">GRS</div>
+        <header className={styles.header}>
+      <div className={styles.navbar}>
+        <div className={styles.logo}>
+<div className={styles['logo-text']}>GRS</div>
         </div>
         
         
-    <div className="header-navbar__links">
+    <div className={styles.links}>
       <CustomLink activeCl={linkClActive} noActive={linkCl} to="/"  text='Главная'></CustomLink>
       <CustomLink activeCl={linkClActive} noActive={linkCl}  to="/products" text='Наша продукция'></CustomLink>
       <CustomLink activeCl={linkClActive} noActive={linkCl} to="/post" text='Посты'></CustomLink>

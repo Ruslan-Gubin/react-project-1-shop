@@ -3,6 +3,7 @@ import { Autoplay, EffectFade } from 'swiper';
 import { FreeMode, Navigation, Thumbs } from "swiper";
 import { useState } from "react";
 
+import './ImagesSlider.scss';
 import 'swiper/css/effect-fade';
 import "swiper/css/navigation";
 import "swiper/css/thumbs";

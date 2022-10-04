@@ -1,0 +1,75 @@
+@use '../../../scss/common/var';
+
+.post {
+    display: flex;
+    justify-content: center;
+    padding:  3rem 0;
+    
+    .card {
+      width: clamp(39rem, calc(20rem + 2vw), 22rem);
+      overflow: hidden;
+      box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1);
+      border-radius: var.$border-radius-average;
+      background: var.$color-card-bg;
+      background: var.$liner-gradient-post-card;
+      
+      .header {
+        
+       .image {
+          width: 100%;
+          display: block;
+          object-fit: cover;
+        }
+      }
+      .body {
+        padding: 1rem;
+        display: flex;
+      flex-direction: column;
+      gap: .5rem;
+  
+      &-text {
+        font-size: var.$font-size-card-text;
+      }
+      
+      &-title {
+        font-size: var.$font-size-average;
+        text-transform: capitalize;
+      }
+    }
+    
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      padding: var.$spasing-one-rem;
+      
+      
+      .user {
+        display: flex;
+        gap: var.$spasing-one-rem;
+        
+        &-image {
+          border-radius: 50%;
+        }
+        & p{
+          color: var.$color-header-bg-dark;
+          font-size: var.$font-size-button;
+        }
+        &-info > small {
+          color: var.$color-secondary-hover;
+        }
+      }
+      
+      &-buttons {
+        display: flex;
+        gap: var.$spasing-one-rem;
+        &-goback {
+          
+        }
+        &-remove {
+          
+        }
+        
+      }
+    }
+  } 
+  }

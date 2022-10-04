@@ -3,8 +3,7 @@ import { IPost } from "../../../models/products";
 import { useCreatePostMutation } from "../../../store/post/postApi";
 import Form from "../Form";
 import Modal from "../Modal";
-import { ButtonMain, InputMain } from "../Ui";
-import TextareaMain from "../Ui/TextareaMain";
+import { ButtonMain, InputMain, TextareaMain } from "../Ui";
 
 const ModalActive = ({}) => {
   const [modalActive, setModalActive] = useState(false);

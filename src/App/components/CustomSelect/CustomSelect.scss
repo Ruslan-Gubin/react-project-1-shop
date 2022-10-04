@@ -1,3 +1,4 @@
+@use '../../../scss/common/var';
 
 .custom-select {
   
@@ -44,17 +45,17 @@
   }
   
   &__indicator {
-    color:$c80 !important;
+    color: var.$c80 !important;
     
     &:hover {
-      color: $color-card-bg !important;
+      color: var.$color-card-bg !important;
     }
   }
   
   &__single-value{
     overflow: hidden;
     font-weight: bold;
-    color:$color-card-bg !important;
+    color: var.$color-card-bg !important;
   } 
  
   &__molti-value {

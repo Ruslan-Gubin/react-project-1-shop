@@ -1,7 +1,6 @@
 import { Link, useMatch } from "react-router-dom";
 import { PropsClildren } from "../../../../models/children";
-
-
+import styles from './CustomLink.module.scss';
 
 const CustomLink = ({children, to, ...props}: PropsClildren) => {
     const math = useMatch({
@@ -12,7 +11,7 @@ const CustomLink = ({children, to, ...props}: PropsClildren) => {
    
             <Link 
             to={to} 
-            className= {math ? (props.activeCl || 'custom-link__active') : (props.noActive || 'custom-link')}
+            className= {math ? (props.activeCl || styles.active) : (props.noActive || styles.link)}
             >
             {props.text}
             {children}
@@ -21,4 +20,4 @@ const CustomLink = ({children, to, ...props}: PropsClildren) => {
     );
 };
 
-export default CustomLink;
+export {CustomLink};

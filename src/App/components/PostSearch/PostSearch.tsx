@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { ButtonMain, InputMain } from "../Ui";
-import FormSearch from "../Ui/FormSearch";
+import { ButtonMain, InputMain, FormSearch } from "../Ui";
 
 const PostSearch = () => {
   const [title, setTitle] = useState("");

@@ -1,3 +1,5 @@
+@use '../../../scss/common/var';
+
 .multiplay-select {
 
   @keyframes scaleIn {
@@ -42,10 +44,10 @@
   }
   
   &__indicator {
-    color:$c80 !important;
+    color: var.$c80 !important;
     
     &:hover {
-      color: $color-card-bg !important;
+      color: var.$color-card-bg !important;
     }
   }
   

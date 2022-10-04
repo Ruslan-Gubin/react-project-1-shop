@@ -1,30 +1,33 @@
+@use '../../../../scss/common/mixin/battonMain';
+@use '../../../../scss/common/var';
+
 .button-main__primary {
-    @include button-main($color-primary, $color-primary-hover)
+    @include battonMain.button-main(var.$color-primary, var.$color-primary-hover)
   }
   .button-main__red {
-    @include button-main($color-red, $color-red-hover)
+    @include battonMain.button-main(var.$color-red, var.$color-red-hover)
   }
 
   .button-main__green {
-    @include button-main($color-green, $color-green-hover)
+    @include battonMain.button-main(var.$color-green, var.$color-green-hover)
   }
 
   .button-main__orange {
-    @include button-main($color-orange, $color-orange-hover)
+    @include battonMain.button-main(var.$color-orange, var.$color-orange-hover)
   }
   .button-main__secondary {
-    @include button-main($color-secondary, $color-secondary-hover)
+    @include battonMain.button-main(var.$color-secondary, var.$color-secondary-hover)
   }
   .button-main__yellow {
-    @include button-main($color-orange, $color-yellow-hover)
+    @include battonMain.button-main(var.$color-orange, var.$color-yellow-hover)
   }
   .button-main__black {
-    @include button-main($color-black, $color-black-hover)
+    @include battonMain.button-main(var.$color-black, var.$color-black-hover)
   }
   .button-main__info {
-    @include button-main($color-info, $color-info-hover)
+    @include battonMain.button-main(var.$color-info, var.$color-info-hover)
   }
   .button-main__nobg {
-    @include button-main($color-info-nobg, $color-info-nobg-hover)
+    @include battonMain.button-main(var.$color-info-nobg, var.$color-info-nobg-hover)
   }
 

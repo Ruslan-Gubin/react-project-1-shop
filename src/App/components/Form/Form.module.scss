@@ -1,0 +1,44 @@
+@use '../../../scss/common/var';
+
+.container {
+
+  .form {
+    .header {
+      display: flex;
+      align-items:center;
+      justify-content: center;
+      .title {
+        font-family: var.$ff-cormorantgaramond-bold;
+        font-size: var.$font-size-average;
+        color: var.$color-black-hover;
+      }
+    }
+
+    .body {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .footer {
+      position: relative;
+      &__buttons {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        .cancel {
+          margin-right: 10px;
+        }
+        .ready {
+          padding-right: 10px;
+        }
+      }
+      &__date{
+        position: absolute;
+        left: 0;
+        bottom: 0;
+
+      }
+    }
+  }
+}

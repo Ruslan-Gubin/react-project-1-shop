@@ -1,0 +1,23 @@
+@use '../../scss/common/exented';
+
+.wrapper {
+  .post {
+  
+    
+    .forms {
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 5px;
+    }
+    
+    .items{
+      @extend %gridMainPost;
+    }
+    
+    
+    
+  }  
+  
+}

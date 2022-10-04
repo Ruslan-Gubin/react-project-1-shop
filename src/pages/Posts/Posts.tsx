@@ -1,9 +1,10 @@
-import { FC, useState } from "react";
+import React, { FC, useState } from "react";
 import { ModalActive, Pagination, PostItemsRender } from "../../App/components";
 import { InputMain } from "../../App/components/Ui";
 import { IPost } from "../../models/products";
 import { useGetPostsQuery } from "../../store/post/postApi";
 import { paginationCalculatorPage } from "../../utils";
+import styles from "./Posts.module.scss";
 
 interface PostFormAdd {
   post?: IPost;
@@ -13,42 +14,61 @@ interface PostFormAdd {
   search?: any;
 }
 
-const Posts: FC<PostFormAdd> = () => {
+const Posts: React.FC<PostFormAdd> = () => {
   const { isLoading, isError, data = [] } = useGetPostsQuery(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(12);
   const [value, setValue] = useState("");
+  const [post, setPost] = React.useState([]);
 
-  const filtresPosts = data.filter((item) => {
-    return item.title.toLowerCase().includes(value.toLowerCase());
-  });
+  React.useEffect(() => {
+    if (!isLoading) {
+      new Promise((resolve, reject) => {
+        resolve(data);
+      })
+        .then((data) => setPost(data))
+        .catch((err) => console.log("Error", err));
+    }
+  }, []);
 
-  const pagination = paginationCalculatorPage(
-    filtresPosts,
-    currentPage,
-    postsPerPage
-  );
+  const handlerKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+    if (e.key === "Enter") {
+      setPost(
+        data.filter((item) =>
+          item.title.toLowerCase().includes(value.toLowerCase())
+        )
+      );
+      setValue("");
+    }
+  };
+
+  const pagination = paginationCalculatorPage(post, currentPage, postsPerPage);
 
   return (
-    <div className="post-page">
-      <div className="post-main container">
-        <div className="post-main__forms">
-          <InputMain text={value} setText={setValue} placeholder="Найти" />
+    <div className={styles.wrapper}>
+      <div className={styles.post}>
+        <div className={styles.forms}>
+          <InputMain
+            onKeyDown={handlerKeyDown}
+            text={value}
+            setText={setValue}
+            placeholder="Найти"
+          />
 
           <ModalActive />
         </div>
-        <div className="post-main__items">
+        <div className={styles.items}>
           <PostItemsRender
             isError={isError}
             isLoading={isLoading}
             currentPosts={pagination}
           />
         </div>
-        <div className="post-main__pagination">
+        <div>
           <Pagination
             currentPage={currentPage}
             postsPerPage={postsPerPage}
-            totalCountries={filtresPosts.length}
+            totalCountries={post.length}
             setCurrentPage={setCurrentPage}
           />
         </div>

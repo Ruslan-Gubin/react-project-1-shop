@@ -8,3 +8,7 @@ export {ModalActive} from './ModalActive';
 export {PostItemsRender} from './PostItemsRender';
 export {PostSearch} from './PostSearch';
 export {FormAddProduct} from './FormAddProduct';
+export {NotFoundBlock} from './NotFoundBlock';
+export {ScrollingList} from './ScrollingList';
+export {FooterMenu} from './FooterMenu';
+export {FooterIcons} from './FooterIcons';

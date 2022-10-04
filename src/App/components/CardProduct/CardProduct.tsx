@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 
+import styles from './CardProduct.module.scss';
+
 interface CardProductType {
     img: string
     catigoriName: string
@@ -7,9 +9,9 @@ interface CardProductType {
 
 const CardProducts: FC<CardProductType> = ({item}) => {
     return (
-        <div className="products-item" >
-            <img className='products-item__img' src={item.img} alt={item.catigoriName} />
-            <span className='products-item__text'>{item.catigoriName}</span>
+        <div className={styles.item} >
+            <img className={styles.img} src={item.img} alt={item.catigoriName} />
+            <span className={styles.text}>{item.catigoriName}</span>
             </div>
     );
 };

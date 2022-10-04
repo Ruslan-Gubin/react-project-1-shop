@@ -1,1 +1,1 @@
-export { default } from './FormSearch'
+export { FormSearch } from './FormSearch'

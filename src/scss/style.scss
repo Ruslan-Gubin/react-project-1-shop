@@ -1,0 +1,7 @@
+@forward 'common/libs';
+@forward 'swiper/css';
+@use '../scss/common/var';
+@use '../scss/common/mixin';
+
+
+@include mixin.scloll-main(8px, var.$color-yellow, 10px, var.$color-card-bg);

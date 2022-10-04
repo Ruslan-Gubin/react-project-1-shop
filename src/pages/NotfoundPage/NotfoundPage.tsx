@@ -1,9 +1,10 @@
+import { NotFoundBlock } from "../../App/components";
 
 
 const NotfoundPage = () => {
     return (
         <div>
-            <h2>NotfoundPage</h2>
+            <NotFoundBlock />
         </div>
     );
 };

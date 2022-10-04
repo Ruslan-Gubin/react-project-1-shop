@@ -6,7 +6,7 @@ const TodosItem = ({id, completed, text}) => {
     return (
         <li>
             <input type="checkbox" checked={completed} onChange={() => {dispatch(toggleTodoComplete({id}))}} />
-            <span>{text}</span>
+            <span style={{fontSize: 25, color: 'white'}}>{text}</span>
             <span onClick={()=> {dispatch(removeTodo({id}))}} style={{color: 'red',cursor: 'pointer'}}>&times;</span>
             </li>
             )    

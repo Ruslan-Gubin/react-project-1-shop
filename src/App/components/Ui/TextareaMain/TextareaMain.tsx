@@ -1,4 +1,5 @@
 import React, { JSXElementConstructor } from 'react';
+import styles from './TextareaMain.module.scss';
 
 interface TexteriaType {
 name?: string
@@ -27,7 +28,7 @@ const TextareaMain: JSXElementConstructor <TexteriaType> = ({
     return (
       
             <textarea 
-            className='textarea-main'
+            className={styles.textarea}
             minLength={minLength}
             disabled = {disabled}
             autoFocus = {autoFocus}
@@ -49,4 +50,4 @@ const TextareaMain: JSXElementConstructor <TexteriaType> = ({
     );
 };
 
-export default TextareaMain;
+export  {TextareaMain};

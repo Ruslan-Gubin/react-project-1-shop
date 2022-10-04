@@ -1,9 +1,9 @@
 import React from "react";
-import InputMain from "../InputMain";
+import styles from './FormSearch.module.scss';
 
 const FormSearch = ({ children, submitImput }: any) => {
   return (
-    <div className="post-main__forms-search">
+    <div className={styles.search}>
       <form autoComplete="off" onSubmit={submitImput}>       
         {children}
       </form>
@@ -11,4 +11,4 @@ const FormSearch = ({ children, submitImput }: any) => {
   );
 };
 
-export default FormSearch;
+export {FormSearch};

@@ -8,7 +8,7 @@ const mode = process.env.NODE_ENV || 'development';
 const devMode = mode === 'development';
 const target = devMode ? 'web' : 'browserslist';
 const devtool = devMode ? 'source-map' : undefined;
- 
+
 module.exports = {
   mode,
   target,
@@ -31,7 +31,7 @@ module.exports = {
     publicPath: '/',
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js','.css', '.scss'],
   },
   module: {
     rules: [
@@ -55,7 +55,8 @@ module.exports = {
         test: /\.(c|sa|sc)ss$/i,
         use: [
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
+          { loader: "css-modules-typescript-loader"},
+             "css-loader", 
           {
             loader: 'postcss-loader',
             options: {
@@ -101,14 +102,15 @@ module.exports = {
       },
     ],
   },
+  
+    
+   
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public', 'index.html'),
-    }),
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
-    }),
-    
-      
-  ],
+    }), 
+       new MiniCssExtractPlugin({
+         filename: '[name].[contenthash].css',
+        }),
+      ],
 };

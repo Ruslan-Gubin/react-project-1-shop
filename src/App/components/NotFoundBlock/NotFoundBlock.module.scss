@@ -1,0 +1,19 @@
+@use '../../../scss/common/var';
+
+.root {
+  margin-top: 100px;
+  text-align: center;
+  color: var.$color-white;
+  font-size: 20px;
+
+ &__text {
+  color: var.$color-white;
+   margin-bottom: 20px;
+  }
+  .button{
+    background-color: var.$color-orange-black;
+    color: var.$color-primary-hover;
+    border-radius: var.$border-radius-button;
+    
+  }
+}

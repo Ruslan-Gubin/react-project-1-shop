@@ -1,1 +1,1 @@
-export {dafault} from './CardMainPost'
+export {CardMainPost} from './CardMainPost'

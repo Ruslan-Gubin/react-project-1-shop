@@ -1,6 +1,7 @@
 import React, { JSXElementConstructor } from "react";
-import { ButtonMain } from "../Ui";
-import Watch from "../Ui/Watch";
+import { ButtonMain, Watch } from "../Ui";
+
+import styles from './Form.module.scss';
 
 interface FormType {
   children:any
@@ -20,16 +21,16 @@ const Form: JSXElementConstructor<FormType> = ({
   }) => {
 
   return (
-    <div className="form-container">
-      <form className="form" onSubmit={handlerSubmit}>
-        <div className="form-header">
-          <span className="form-header__title">{props.titleText}</span>
+    <div className={styles.container}>
+      <form className={styles.form} onSubmit={handlerSubmit}>
+        <div className={styles.header}>
+          <span className={styles.title}>{props.titleText}</span>
         </div>
-        <div className="form-body">{children}</div>
-        <div className="form-footer">
-          <div className="form-footer__buttons">
-            <div className="form-footer__buttons-cancel">
-              <div className="form-footer__date">
+        <div className={styles.body}>{children}</div>
+        <div className={styles.footer}>
+          <div className={styles.footer__buttons}>
+            <div className={styles.cancel}>
+              <div className={styles.footer__date}>
               {watch && <Watch />}
               </div>
               <ButtonMain onClick={closeForm} bgColor="red">
@@ -37,7 +38,7 @@ const Form: JSXElementConstructor<FormType> = ({
               </ButtonMain>
             </div>
 
-            <div className="form-footer__buttons-ready">
+            <div className={styles.ready}>
               <ButtonMain>Подтвердить</ButtonMain>
             </div>
           </div>
