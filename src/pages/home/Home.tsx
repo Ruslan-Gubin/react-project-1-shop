@@ -19,20 +19,15 @@ const Home = () => {
     const [isVisible, toggleVisible] = useToggle(false)
   const enterRef = React.useRef()
 
-  const handlerKeyDown = (e) => {
+  const handlerKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
     if (e.key === 'Enter') {    
         dispatch(addTodo({ text })), setText("");
     }
   }
- 
-
-  // useEffect(() =>  {
-  // setTimeout(() => setDate(RUDate.format(new Date)),1000)
-  // },[date])
+  
 
   return (
     <div>
-      {/* <ButtonMain bgColor="black">{date}</ButtonMain> */}
     {!isVisible ?
     <ButtonMain onClick={()=> toggleVisible(true)}> Show Todo</ButtonMain>  
     :
@@ -42,7 +37,7 @@ const Home = () => {
       {isMobile && <ButtonMain bgColor="green">Это Мобилка</ButtonMain>}
       {isTablet && <ButtonMain bgColor="info">Это Планшет</ButtonMain>}
       {isDesktop && <ButtonMain bgColor="orange">Это Desktop</ButtonMain>}
-      <InputMain  text={text} setText={setText} onKeyDown={handlerKeyDown}/>
+      <InputMain  value={text} setValue={setText} onKeyDown={handlerKeyDown}/>
       <ButtonMain
         onClick={() => {
             dispatch(addTodo({ text })), setText("");

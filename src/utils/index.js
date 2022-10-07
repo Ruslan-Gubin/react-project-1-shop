@@ -1,5 +1,5 @@
 export {paginationCalculatorPage} from './paginationCalculatorPage';
-export {categoryFilterName} from './categoryFilterName';
+export {categoryFilterName, selectAddProduct} from './categoryFilterName';
 export {InputValueData} from './InoputValueDataUtils';
 export {filterDataDepatment, getValueObject} from './filterDataDepatment';
 export {formatterRub,formatter} from './intl-Number-Format';

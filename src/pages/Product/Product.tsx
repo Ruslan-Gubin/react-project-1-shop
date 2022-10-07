@@ -2,12 +2,13 @@ import React,{ useEffect, useRef, useState } from "react";
 import { useCounter } from "../../hooks";
 import { useGetProductsQuery } from "../../store/product/productsApi";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import * as utils from "../../utils";
 import * as component from "../../App/components";
-import { ButtonGoBack, ButtonMain, InputMain } from "../../App/components/Ui";
+import { ButtonGoBack, ButtonMain, SearchInput } from "../../App/components/Ui";
 import { productSortingArray } from "../../data";
 import styles from './Product.module.scss';
+import cartPng from '../../assets/img/icons/shopping-cart.png';
 
 const Product = () => {
   const order = useSelector((state) => state.order.order);
@@ -25,7 +26,7 @@ const Product = () => {
     if (!isLoading) {
       setDataDepartment(utils.filterDataDepatment(id, data));
     }
-  }, []);
+  }, [data]);
 
   let searchTextRef = useRef();
 
@@ -68,16 +69,23 @@ const Product = () => {
     <div className={styles.catalog}>
       {isError && <p>Error</p>}
       <div className={styles.search}>
-        <InputMain
-          placeholder="Поиск"
-          text={textSearch}
-          setText={setTextSearch}
+        <SearchInput
+          placeholder="Поиск товара"
+          register={textSearch}
+          setValue={setTextSearch}
           />
         <ButtonGoBack text="Вернуться к каталогу" />
-        <component.FormAddProduct department={utils.getValueObject(id)} />
+        <component.FormAddProduct data={dataDepartment} department={utils.getValueObject(id)} />
+        <div className={styles.cart}>
+        <Link to='/cart'>
         <ButtonMain bgColor="green">
-          Общая сумма: {utils.formatterRub.format(totalAmount)}
+    <img className={styles.cartPng} src={cartPng} alt="cartPng" />
+    <div className={styles.totalPrice}>
+          {utils.formatterRub.format(totalAmount)}
+    </div>
         </ButtonMain>
+        </Link>
+        </div>
       </div>
       <div className={styles.container}>
       <div className={styles.info}>

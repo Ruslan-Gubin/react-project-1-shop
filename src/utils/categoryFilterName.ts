@@ -1,18 +1,17 @@
-const categoryFilterName = (data, translate:boolean) => { 
-  const searcCaregory = data.map((item) => {
-    if(translate) {
-      if (item.category === "Все") return "all";
-      if (item.category === "album") return "Альбомы";
-      if (item.category === "notebooks") return "Тетради";
-      if (item.category === "pens") return "Ручки";
-    }
-    return item.category;
-  });
-  if (translate) {
-    searcCaregory.unshift('Все')
-  } else {
-    searcCaregory.unshift('all')
-  }
+import { IProduct } from "../models/products";
+
+const categoryFilterName = (data: Array<IProduct>, translate:boolean = false) => { 
+  const searcCaregory = data.map((item) => item.category);
+  
+  translate ? searcCaregory.unshift('Все') : searcCaregory.unshift('all')
+
   return (Array.from(new Set(searcCaregory))).filter(item => item !== '') 
 };
-export { categoryFilterName };
+
+const selectAddProduct = (array: Array<IProduct>) => {
+  const arraySetcategory = Array.from(new Set(array.map(item => item.category)))
+  const res = arraySetcategory.map(item => ({label:  item, value: item}))
+  return res
+}
+
+export { categoryFilterName, selectAddProduct};

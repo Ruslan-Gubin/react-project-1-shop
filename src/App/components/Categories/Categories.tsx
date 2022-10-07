@@ -3,7 +3,14 @@ import { categoryFilterName } from "../../../utils";
 
 import styles from "./Categories.module.scss";
 
-const Categories: React.FC = ({ data, isLoading, setMenuValue }) => {
+interface ICategories {
+  data: [];
+  isLoading: boolean;
+  setMenuValue: () => void;
+}
+
+
+const Categories: React.FC<ICategories> = ({ data, isLoading, setMenuValue }) => {
   const [activeCategory, setActiveCategory] = useState(0);
 
   useEffect(() => {

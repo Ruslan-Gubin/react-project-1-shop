@@ -1,43 +1,32 @@
-import React, { JSXElementConstructor } from "react";
+import React, { JSXElementConstructor, useCallback } from "react";
+import { InputMainType } from "../../../../models";
 import styles from "./InputMain.module.scss";
 
-interface InputMainType {
-  children?: any;
-  placeholder?: string;
-  name?: string;
-  text?: string;
-  setText?: any;
-  autoComplete?: string;
-  required?: boolean;
-  autoFocus?: any;
-  type?: any;
-  onKeyDown?:React.KeyboardEventHandler<HTMLInputElement>;
-}
-
 const InputMain: JSXElementConstructor<InputMainType> = ({
+  className = styles.input,
   children,
   placeholder,
-  name,
-  text,
-  onKeyDown ,
-  setText,
+  onKeyDown,
+  value,
+  setValue,
   autoComplete = "off",
   required = false,
   autoFocus = "off",
   type = "text",
 }) => {
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
-  const inputRef = React.useRef<HTMLInputElement>(null)
+  const handlerChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(
+    (e) => {
+      setValue(e.target.value);
+    },
+    [value]
+  );
 
-  const handlerChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setText(e.target.value)
-  }
-  
-   
   React.useEffect(() => {
-    if (inputRef.current) inputRef.current.focus()  
-  },[])
-  
+    if (inputRef.current) inputRef.current.focus();
+  }, []);
+
   return (
     <>
       <input
@@ -49,10 +38,9 @@ const InputMain: JSXElementConstructor<InputMainType> = ({
         type={type}
         autoComplete={autoComplete}
         placeholder={placeholder}
-        className={styles.input}
-        name={name}
-        value={text}
-        onChange={(e)=> handlerChange(e)}
+        className={className}
+        value={value}
+        onChange={(e) => handlerChange(e)}
       />
       {children}
     </>

@@ -44,15 +44,15 @@ const ModalActive = ({}) => {
           <InputMain
             required={true}
             name="img"
-            text={img}
-            setText={setImg}
+            value={img}
+            setValue={setImg}
             placeholder="Добавить изображения"
           />
           <InputMain
             required={true}
             name="text"
-            text={title}
-            setText={setTitle}
+            value={title}
+            setValue={setTitle}
             placeholder="Заголовок"
           />
           <TextareaMain

@@ -1,6 +1,6 @@
-import React, { FC, useState } from "react";
+import React, { useState } from "react";
 import { ModalActive, Pagination, PostItemsRender } from "../../App/components";
-import { InputMain } from "../../App/components/Ui";
+import { InputMain, SearchInput } from "../../App/components/Ui";
 import { IPost } from "../../models/products";
 import { useGetPostsQuery } from "../../store/post/postApi";
 import { paginationCalculatorPage } from "../../utils";
@@ -29,12 +29,11 @@ const Posts: React.FC<PostFormAdd> = () => {
         .then((data) => setPost(data))
         .catch((err) => console.log("Error", err));
     }
-  }, []);
+  }, [data]);
 
   const handlerKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
-    if (e.key === "Enter") {
-      setPost(
-        data.filter((item) =>
+    if (e.key === "Enter") {   
+      setPost(data.filter((item) =>
           item.title.toLowerCase().includes(value.toLowerCase())
         )
       );
@@ -48,11 +47,11 @@ const Posts: React.FC<PostFormAdd> = () => {
     <div className={styles.wrapper}>
       <div className={styles.post}>
         <div className={styles.forms}>
-          <InputMain
+          <SearchInput
             onKeyDown={handlerKeyDown}
-            text={value}
-            setText={setValue}
-            placeholder="Найти"
+            value={value}
+            setValue={setValue}
+            placeholder="Найти пост"
           />
 
           <ModalActive />

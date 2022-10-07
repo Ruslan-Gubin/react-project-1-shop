@@ -1,6 +1,7 @@
 @use '../../../scss/common/var';
 
 .custom-select {
+ 
   
   @keyframes scaleIn {
     0% {
@@ -24,7 +25,7 @@
     box-shadow: none !important;
     
     &--menu-is-open {
-      border-color: rgb(95, 44, 44) !important;
+      border-color: var.$color-blue-black !important;
     }
   }
   &__value-container {
@@ -33,7 +34,7 @@
   }
   
   &__input-container {
-    color: white !important;
+    color: var.$color-white !important;
   }
   
   &__indicator-separator {
@@ -45,7 +46,7 @@
   }
   
   &__indicator {
-    color: var.$c80 !important;
+    color: var.$color-card-bg !important;
     
     &:hover {
       color: var.$color-card-bg !important;
@@ -55,7 +56,7 @@
   &__single-value{
     overflow: hidden;
     font-weight: bold;
-    color: var.$color-card-bg !important;
+    color: var.$color-header-bg-dark !important;
   } 
  
   &__molti-value {

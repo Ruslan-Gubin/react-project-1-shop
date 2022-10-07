@@ -1,0 +1,109 @@
+@use '../../../scss/common/var';
+
+.root {
+  display: flex;
+  width: 70%;
+  .ul {
+    .item {
+      background-color: rgb(200, 194, 194,0.3);
+      background-image: var.$liner-gradient-basket-goods;
+      
+      border-radius: var.$border-radius-average;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var.$spasing-medium;
+      box-shadow: var.$box-shadow;
+      padding: var.$spasing-small;
+      .img { 
+        cursor: pointer;  
+        padding-left: var.$spasing-small;  
+        img {
+          border-radius: var.$border-radius-average;
+          overflow: hidden;  
+          width: 100px;
+          width: 75px;
+        }       
+      }
+      
+      .name {
+        font-family: 'Gilroy-Light';
+        font-weight: 300;
+        width: 50%;
+        word-break: break-word;
+        color: var.$color-card-bg;
+        font-size: var.$font-size-button;
+        p {
+          
+        }
+      }
+      
+      .buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20%;
+        .increment {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+        }
+        .count {
+          font-size: var.$font-size-title-normal;
+          font-weight: bold;
+          color: var.$color-black;
+          margin: 0 var.$spasing-small;
+        }       
+        .decrement {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+        }
+      }
+      
+      
+      .tailPrice {
+        width: 10%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .price {
+          color: var.$color-black;
+          font-size: var.$font-size-title-normal;
+          margin-bottom: var.$spasing-button;
+          font-weight: bold;
+          cursor: pointer;
+        }
+        .oldPrice {
+          color: var.$ccb;
+          text-decoration: line-through;
+          font-size: var.$font-size-average;
+          cursor: pointer;
+          margin-bottom: 10px;
+        }
+        }
+        .delete {
+          width: 34px;
+          height: 34px;
+          opacity: 0.6;
+          transform: translateX(100px);
+          transition: all .4s ease-in-out;
+          cursor: pointer;
+          &:hover {
+            opacity: 1;
+          }
+        }
+        
+        &:hover {
+        .delete {
+          transform: translateX(0px);
+        }
+        
+    }
+    
+    
+  }
+  }
+}
+

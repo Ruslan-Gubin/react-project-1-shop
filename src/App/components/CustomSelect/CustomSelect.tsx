@@ -1,9 +1,21 @@
 import React from "react";
-import Select from "react-select";
+import Select, { ActionMeta, GroupBase, OptionsOrGroups } from "react-select";
+import { StateManagerAdditionalProps } from "react-select/dist/declarations/src/useStateManager";
 
 import './CustomSelect.scss'
 
-const CustomSelect = ({options = [], placeholder = '', onChange, defaultValue = 0}) => {
+ interface Ioptions {
+  label: string
+  value: string
+}
+interface ICustomSelect {
+  options: any ;
+  placeholder?: string
+  onChange:((newValue: any, actionMeta: ActionMeta<any>) => void)
+  defaultValue?: any
+}
+
+const CustomSelect: React.FC<ICustomSelect> = ({options = [], placeholder = '', onChange, defaultValue}) => {
  
   return (
     <>

@@ -5,3 +5,4 @@ export {Posts} from './Posts/Posts';
 export {LoginPage} from './LoginPage/LoginPage';
 export {Home} from './Home/Home';
 export {NotfoundPage} from './NotfoundPage/NotfoundPage';
+export {Basket} from './Basket/Basket';

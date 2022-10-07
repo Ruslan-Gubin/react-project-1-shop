@@ -19,17 +19,15 @@ const CardProductCatalog: React.FC<IProduct> = ({ _id, product }) => {
     setButtonBye(true);
   }, [buttonBye]);
 
-  const removeInOrder = useCallback(() => {
+  const removeInOrder = useCallback((_id: string) => {
     dispatch(prodSlice.removeToOrder({ _id }));
     setButtonBye(false);
   }, [buttonBye]);
 
-  const addCount = () =>
-    dispatch(prodSlice.addCountProduct({ product, _id, order }));
-
-  const removeCount = () =>
-    dispatch(prodSlice.removeCountProduct({ product, _id, order }));
-
+  const addCount = React.useCallback(() => dispatch(prodSlice.addCountGoods({ _id })),[order])
+    
+  const removeCount = React.useCallback(() => dispatch(prodSlice.removeCountGoods({ _id })),[order])
+    
   useEffect(() => {
     for (let i = 0; i < order.length; i++) {
       const item = order[i];
@@ -79,7 +77,7 @@ const CardProductCatalog: React.FC<IProduct> = ({ _id, product }) => {
         <div className={styles.footer}>
           <div className={styles.buttons}>
             {buttonBye ? (
-              <ButtonMain onClick={removeInOrder} bgColor="secondary">
+              <ButtonMain onClick={()=> removeInOrder(_id)} bgColor="secondary">
                 В Корзине: {resCounter()}
               </ButtonMain>
             ) : (

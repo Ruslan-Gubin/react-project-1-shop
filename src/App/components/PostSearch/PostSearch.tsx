@@ -21,7 +21,8 @@ const PostSearch = () => {
       submitImput={handlerSubmitSearch}
     >
       <InputMain
-        setText={setTitle}
+        value={title}
+        setValue={setTitle}
         name="search"
         placeholder="Поиск"
       />

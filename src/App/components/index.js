@@ -12,3 +12,5 @@ export {NotFoundBlock} from './NotFoundBlock';
 export {ScrollingList} from './ScrollingList';
 export {FooterMenu} from './FooterMenu';
 export {FooterIcons} from './FooterIcons';
+export {BasketInfo} from './BasketInfo';
+export {BasketGoods} from './BasketGoods';

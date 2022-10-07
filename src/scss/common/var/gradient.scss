@@ -1,3 +1,4 @@
+@use './color.scss';
 
 $header-gradient-message: linear-gradient(to right, #a64545, #8a3131, #a44343, #740f0f, #771717,#570a0a,#8a3131);
 
@@ -10,3 +11,5 @@ $linear-gradient-violet: linear-gradient(to bottom, #e4bcf8, #aa1ff5, #aa1ff5, #
 $liner-gradient-post-singelpage: linear-gradient(-45deg, #EECFBA, #C5DDE8);
 
 $liner-gradient-post-card: linear-gradient(to right, #FFFFFF, #ECE9E6);
+
+$liner-gradient-basket-goods: linear-gradient(to top ,color.$color-blue-black, color.$ccb, );

@@ -18,6 +18,7 @@ const App = () => {
 
           <Route path="login" element={<page.LoginPage />} />
           <Route path="post" element={<page.Posts />} />
+          <Route path="cart" element={<page.Basket />} />
           <Route path="post/:id" element={<page.SingelPage />} />
           <Route path="*" element={<page.NotfoundPage />} />
         </Route>
