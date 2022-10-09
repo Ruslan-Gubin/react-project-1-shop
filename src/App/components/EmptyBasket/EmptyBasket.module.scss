@@ -1,0 +1,24 @@
+@use '../../../scss/common/var';
+
+.root {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding-top: 100px;
+color: var.$color-card-bg;
+  .title {
+    font-size: var.$font-size-title-normal;
+    margin-bottom: 20px;
+  }
+  
+  .text {
+    font-size: var.$font-size-average;
+    margin-bottom: 20px;
+  }
+
+  .button {
+
+  }
+
+}

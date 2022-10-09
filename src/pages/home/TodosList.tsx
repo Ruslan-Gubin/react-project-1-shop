@@ -1,9 +1,10 @@
+import React from 'react';
 import {useSelector} from 'react-redux'
 import TodosItem from "./TodosItem";
 
 
 
-const TodosList = () => {
+const TodosList = React.memo(() => {
     const todos = useSelector(state => state.todos.todos)
     return (
 
@@ -17,6 +18,6 @@ const TodosList = () => {
                     
         </ul>
     );
-};
+});
 
 export default TodosList;

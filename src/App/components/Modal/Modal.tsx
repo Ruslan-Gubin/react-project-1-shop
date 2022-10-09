@@ -1,8 +1,8 @@
-import { JSXElementConstructor, useEffect, useState } from "react";
+import React, { JSXElementConstructor, useEffect, useState } from "react";
 
 import styles from './Modal.module.scss';
 
-const Modal: JSXElementConstructor<any> = ({children, ...props}) => {
+const Modal: JSXElementConstructor<any> = React.memo(({children, ...props}) => {
 const [date,setDate] = useState(new Date().toLocaleTimeString())
 
     return (
@@ -29,7 +29,7 @@ const [date,setDate] = useState(new Date().toLocaleTimeString())
       
 </div>
     );
-};
+});
 
 export default Modal;
 

@@ -4,7 +4,7 @@ import { CustomLink } from '../Ui';
 
 import styles from './Header.modules.scss';
 
-const Header = () => {
+const Header = React.memo(() => {
 
     const linkClActive = styles['links-default']
     const linkCl = styles['links-active']
@@ -25,6 +25,6 @@ const Header = () => {
       </div>
     </header>
     );
-};
+});
 
 export default Header;

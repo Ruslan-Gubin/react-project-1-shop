@@ -6,7 +6,7 @@ import { ButtonMain } from "../Ui";
 
 import styles from './PostItemsSinglPage.module.scss';
 
-const PostItemsSinglPage: React.FC<PostItemProps> = ({ post, remove }) => {
+const PostItemsSinglPage: React.FC<PostItemProps> = React.memo(({ post, remove }) => {
 
     return (
       <div className={styles.post} >
@@ -56,6 +56,6 @@ const PostItemsSinglPage: React.FC<PostItemProps> = ({ post, remove }) => {
       </div>
     </div>
     );
-};
+});
 
 export default PostItemsSinglPage;

@@ -8,6 +8,8 @@ interface CssExports {
   'img': string;
   'increment': string;
   'item': string;
+  'mediaPrice': string;
+  'mobileRemove': string;
   'name': string;
   'oldPrice': string;
   'price': string;

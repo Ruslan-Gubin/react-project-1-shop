@@ -1,9 +1,10 @@
 
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './NotFoundBlock.module.scss';
 
 
-const NotFoundBlock = () => {
+const NotFoundBlock = React.memo(() => {
   return (
     <div className={styles.root}>
       <h2>Страница не найдена</h2>
@@ -13,6 +14,6 @@ const NotFoundBlock = () => {
     </Link>
     </div>
   );
-};
+});
 
 export  {NotFoundBlock};

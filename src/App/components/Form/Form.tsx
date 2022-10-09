@@ -11,7 +11,7 @@ interface FormType {
   titleText: string
 }
 
-const Form: JSXElementConstructor<FormType> = ({ 
+const Form: JSXElementConstructor<FormType> = React.memo(({ 
   watch,
    children, 
    handlerSubmit, 
@@ -46,6 +46,6 @@ const Form: JSXElementConstructor<FormType> = ({
       </form>
     </div>
   );
-};
+});
 
 export default Form;

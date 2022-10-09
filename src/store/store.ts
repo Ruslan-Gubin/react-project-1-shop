@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { postApi } from "./post/postApi";
-import { stationeryApi } from "./product/productsApi";
+import { postApi } from "./postApi/postApi";
+import { stationeryApi } from "./productApi/productsApi";
 import todoReducer from "./todoSlice/todoSlice";
 import {
   persistStore,
@@ -13,11 +13,14 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import orderSlice from "./product/stationerySlice";
+import orderSlice from "./orderSlice/orderSlice";
+import filters from "./filterSlice/filterSlice";
+
 
 const rootReducer = combineReducers({
   order: orderSlice,
   todos: todoReducer,
+  filters,
   [postApi.reducerPath]: postApi.reducer,
   [stationeryApi.reducerPath]: stationeryApi.reducer,
 });

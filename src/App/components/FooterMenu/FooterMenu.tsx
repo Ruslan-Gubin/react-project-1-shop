@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import styles from './FooterMenu.module.scss';
 
-const FooterMenu = () => {
+const FooterMenu = React.memo(() => {
     return (
         <ul className={styles.menu}>
            <li> <Link to="/">Home</Link></li>
@@ -10,6 +10,6 @@ const FooterMenu = () => {
            <li> <Link to="/post">Post</Link></li>    
             </ul>
     );
-};
+});
 
 export {FooterMenu};

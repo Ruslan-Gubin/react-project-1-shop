@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { ButtonMain, InputMain, FormSearch } from "../Ui";
 
-const PostSearch = () => {
+const PostSearch = React.memo(() => {
   const [title, setTitle] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -29,6 +29,6 @@ const PostSearch = () => {
       <ButtonMain bgColor="green">Найти</ButtonMain>
     </FormSearch>
   );
-};
+});
 
 export  {PostSearch};

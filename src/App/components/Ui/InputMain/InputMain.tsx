@@ -2,7 +2,7 @@ import React, { JSXElementConstructor, useCallback } from "react";
 import { InputMainType } from "../../../../models";
 import styles from "./InputMain.module.scss";
 
-const InputMain: JSXElementConstructor<InputMainType> = ({
+const InputMain: JSXElementConstructor<InputMainType> = React.memo(({
   className = styles.input,
   children,
   placeholder,
@@ -45,6 +45,6 @@ const InputMain: JSXElementConstructor<InputMainType> = ({
       {children}
     </>
   );
-};
+});
 
 export { InputMain };

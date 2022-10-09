@@ -8,7 +8,7 @@ interface ButtonMainType {
   disabled?: boolean
 }
 
-const ButtonMain: React.FC<ButtonMainType> = ({
+const ButtonMain: React.FC<ButtonMainType> = React.memo(({
   children,
   onClick,
   bgColor = "primary",
@@ -22,6 +22,6 @@ const ButtonMain: React.FC<ButtonMainType> = ({
     {children}
     </button>
   );
-};
+});
 
 export  {ButtonMain};

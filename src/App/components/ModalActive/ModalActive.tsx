@@ -1,11 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { IPost } from "../../../models/products";
-import { useCreatePostMutation } from "../../../store/post/postApi";
+import { useCreatePostMutation } from "../../../store/postApi/postApi";
 import Form from "../Form";
 import Modal from "../Modal";
 import { ButtonMain, InputMain, TextareaMain } from "../Ui";
 
-const ModalActive = ({}) => {
+const ModalActive = React.memo(({}) => {
   const [modalActive, setModalActive] = useState(false);
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
@@ -67,6 +67,6 @@ const ModalActive = ({}) => {
       </Modal>
     </>
   );
-};
+});
 
 export  {ModalActive};

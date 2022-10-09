@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
-const LoginPage = () => {
+const LoginPage = React.memo(() => {
    const navigate = useNavigate()
     const location = useLocation()
     const {sigin} = useAuth()
@@ -29,6 +29,6 @@ const LoginPage = () => {
            
         </div>
     );
-};
+});
 
 export  {LoginPage};

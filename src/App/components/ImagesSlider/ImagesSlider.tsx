@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from 'swiper';
 import { FreeMode, Navigation, Thumbs } from "swiper";
-import { useState } from "react";
+import React, { useState } from "react";
 
 import './ImagesSlider.scss';
 import 'swiper/css/effect-fade';
@@ -9,7 +9,7 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "swiper/css/free-mode";
 
-const ImagesSlider = ({imagesSwiper}) => {
+const ImagesSlider = React.memo(({imagesSwiper}) => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
    
   return <>
@@ -53,6 +53,6 @@ const ImagesSlider = ({imagesSwiper}) => {
         
       </Swiper>
       </> 
-};
+});
 
 export  {ImagesSlider};

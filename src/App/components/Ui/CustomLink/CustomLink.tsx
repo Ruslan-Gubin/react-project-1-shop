@@ -1,8 +1,9 @@
+import React from "react";
 import { Link, useMatch } from "react-router-dom";
 import { PropsClildren } from "../../../../models/children";
 import styles from './CustomLink.module.scss';
 
-const CustomLink = ({children, to, ...props}: PropsClildren) => {
+const CustomLink = React.memo(({children, to, ...props}: PropsClildren) => {
     const math = useMatch({
         path: to,
         end: to.length === 1,
@@ -18,6 +19,6 @@ const CustomLink = ({children, to, ...props}: PropsClildren) => {
             </Link>
     
     );
-};
+});
 
 export {CustomLink};

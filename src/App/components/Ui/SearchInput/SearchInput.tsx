@@ -5,33 +5,28 @@ import close from "../../../../assets/img/icons/close-icon_4232054.png";
 import styles from "./SearchInput.module.scss";
 
 interface ISerch {
-  setValue: any;
-  register: string;
   placeholder?: string;
+  register: string;
   handlerSearchClick?: () => void;
   onKeyDown?:() => void;
+  onChange: any;
 }
 
-const SearchInput: React.FC<ISerch> = ({
+const SearchInput: React.FC<ISerch> = React.memo(({
   placeholder,
   register,
-  setValue,
   handlerSearchClick,
-  onKeyDown
+  onKeyDown,
+  onChange,
 }) => {
-  const [initialValue, setInitialValue] = React.useState(register);
 
   const handlerChange: React.ChangeEventHandler<HTMLInputElement> =
     React.useCallback(
       (e) => {
-        setInitialValue(e.target.value);
+        onChange(e.target.value);
       },
-      [initialValue]
+      [register]
     );
-
-  React.useEffect(() => {
-    setValue(initialValue);
-  }, [initialValue]);
 
   return (
     <div className={styles.root}>
@@ -47,19 +42,19 @@ const SearchInput: React.FC<ISerch> = ({
         className={styles.input}
         type="text"
         placeholder={placeholder}
-        value={initialValue}
-        onChange={(event) => handlerChange(event)}
+        value={register}
+        onChange={(e) => handlerChange(e)}
       />
-      {initialValue && (
+      {register && (
         <img
           className={styles.close}
-          onClick={() => setInitialValue("")}
+          onClick={() => onChange("")}
           src={close}
           alt="close"
         />
       )}
     </div>
   );
-};
+});
 
 export { SearchInput };

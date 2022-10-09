@@ -1,7 +1,7 @@
 import React, { useRef, useState} from 'react';
 import { useScroll } from '../../../hooks';
 
-const ScrollingList: React.FC = () => {
+const ScrollingList: React.FC = React.memo(() => {
     const [todos, setTodos] = useState([])
     const [page, setPage] = useState(1);
     const limit = 20;
@@ -30,6 +30,6 @@ const ScrollingList: React.FC = () => {
             <div ref={childRef} style={{height: 20, background: 'green'}}/>
         </div>
     );
-};
+});
 
 export {ScrollingList}

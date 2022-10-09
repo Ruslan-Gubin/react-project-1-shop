@@ -16,6 +16,7 @@ export interface IProduct {
   img5: string;
   reting?: IRating;
   department: string;
+  counter?: number | null;
 }
 
 export interface IProductTest {

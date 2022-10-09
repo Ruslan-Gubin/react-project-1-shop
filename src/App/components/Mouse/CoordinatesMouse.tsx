@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
 
-const CoordinatesMouse = (props) => {
+const CoordinatesMouse = React.memo((props) => {
     const [x, setX] = useState(0)
     const [y, setY] = useState(0)
     const ref = useRef()
@@ -20,7 +20,7 @@ const CoordinatesMouse = (props) => {
             
         </div>
     );
-};
+});
 
 export default CoordinatesMouse;
 

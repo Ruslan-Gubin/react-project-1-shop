@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ButtonMain } from '../ButtonMain';
 
 
-const Watch = () => {
+const Watch = React.memo(() => {
     const [date, setDate] = useState(new Date().toLocaleTimeString());
 
     useEffect(() => {
@@ -16,6 +16,6 @@ const Watch = () => {
         <ButtonMain  disabled={true} bgColor="info">{date}</ButtonMain>
         
     );
-};
+});
 
 export  {Watch};

@@ -1,6 +1,5 @@
 import React from "react";
-import Select, { ActionMeta, GroupBase, OptionsOrGroups } from "react-select";
-import { StateManagerAdditionalProps } from "react-select/dist/declarations/src/useStateManager";
+import Select, { ActionMeta } from "react-select";
 
 import './CustomSelect.scss'
 
@@ -15,8 +14,8 @@ interface ICustomSelect {
   defaultValue?: any
 }
 
-const CustomSelect: React.FC<ICustomSelect> = ({options = [], placeholder = '', onChange, defaultValue}) => {
- 
+const CustomSelect: React.FC<ICustomSelect> = React.memo(({options = [], placeholder = '', onChange, defaultValue}) => {
+
   return (
     <>
     <Select 
@@ -29,6 +28,6 @@ const CustomSelect: React.FC<ICustomSelect> = ({options = [], placeholder = '', 
     />    
     </>
   );
-};
+});
 
 export  {CustomSelect};

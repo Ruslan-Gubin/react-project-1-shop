@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import Form from "../Form";
 import Modal from "../Modal";
-import { useCreateProductsMutation } from "../../../store/product/productsApi";
+import { useCreateProductsMutation } from "../../../store/productApi/productsApi";
 import { ButtonMain, InputMain, TextareaMain } from "../Ui";
 import { CustomSelect } from "../CustomSelect";
 import { selectAddProduct } from "../../../utils";
@@ -13,7 +13,7 @@ interface Idepartment {
   data: [];
 }
 
-const FormAddProduct: React.FC<Idepartment> = ({ data, department }) => {
+const FormAddProduct: React.FC<Idepartment> = React.memo(({ data, department }) => {
   const [activeModal, setActiveModal] = useState(false);
   const [createProducts, {}] = useCreateProductsMutation();
   const [name, setName] = useState("");
@@ -186,6 +186,6 @@ const FormAddProduct: React.FC<Idepartment> = ({ data, department }) => {
       </Modal>
     </>
   );
-};
+});
 
 export { FormAddProduct };

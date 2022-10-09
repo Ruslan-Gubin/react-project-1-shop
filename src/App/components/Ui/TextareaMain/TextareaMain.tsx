@@ -14,7 +14,7 @@ text: string
 setText: any
 }
 
-const TextareaMain: JSXElementConstructor <TexteriaType> = ({
+const TextareaMain: JSXElementConstructor <TexteriaType> = React.memo(({
     placeholder,
     required = false,
     cols = 20,
@@ -48,6 +48,6 @@ const TextareaMain: JSXElementConstructor <TexteriaType> = ({
             </textarea>
         
     );
-};
+});
 
 export  {TextareaMain};

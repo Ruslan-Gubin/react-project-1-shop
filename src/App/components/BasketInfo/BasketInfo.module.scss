@@ -1,3 +1,67 @@
+@use '../../../scss/common/var';
+
+
+%-display-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: var.$font-size-button;
+}
+
 .root {
-  
+  position: fixed;
+  top: 140px;
+  width: 300px;
+  background-image: var.$liner-gradient-basket-info;
+  border-radius: var.$border-radius-average;
+  box-shadow: var.$box-shadow;
+  padding:  10px;
+  color: var.$color-card-bg;
+  @media (max-width: 1070px) {
+    position: relative;
+    top: 0;
+    width: 100%;
+  }
+  .title{
+    @extend %-display-flex;
+    font-size: var.$font-size-title-normal;
+    & p {}  
+    & span { }
+  }
+
+  .goods {
+    @extend %-display-flex;
+    & p {}  
+    & span { }
+  }
+
+  .discount {
+    @extend %-display-flex;
+    margin-bottom: 30px;
+    & p {}  
+    & span { }
+  }
+
+  .button {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    & p {
+      width: 12rem;
+    }
+  }
+
+  .rools {
+    display: flex;
+    justify-content: center;
+    font-size: var.$font-size-basket-rools;
+    color: var.$color-black-hover;
+    & img {
+      margin-right: 5px;
+      height: 15px;
+      width: 15px;
+    }
+  }
+
 }

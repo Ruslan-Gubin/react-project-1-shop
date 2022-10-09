@@ -4,7 +4,7 @@ import { Layout } from "./components/Layout";
 import "../scss/style.scss";
 import * as page from "../pages";
   
-const App = () => {
+const App = React.memo(() => {
   return (
     <>
       <Routes>
@@ -25,6 +25,6 @@ const App = () => {
       </Routes>
     </>
   );
-};
+});
 
 export default App;

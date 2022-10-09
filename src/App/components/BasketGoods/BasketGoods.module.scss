@@ -2,12 +2,12 @@
 
 .root {
   display: flex;
-  width: 70%;
+ 
   .ul {
+    width: 100%;
     .item {
       background-color: rgb(200, 194, 194,0.3);
-      background-image: var.$liner-gradient-basket-goods;
-      
+      background-image: var.$liner-gradient-basket-goods;   
       border-radius: var.$border-radius-average;
       overflow: hidden;
       display: flex;
@@ -16,26 +16,46 @@
       margin-bottom: var.$spasing-medium;
       box-shadow: var.$box-shadow;
       padding: var.$spasing-small;
+      @media (max-width: 750px) {
+      }
       .img { 
         cursor: pointer;  
-        padding-left: var.$spasing-small;  
-        img {
+        padding-left: var.$spasing-small; 
+        @media (max-width: 750px) {
+          display: none;
+        } 
+       img {
           border-radius: var.$border-radius-average;
           overflow: hidden;  
-          width: 100px;
           width: 75px;
+          height: 100px;
         }       
       }
-      
+      .mediaPrice {
+        color: rgb(62, 61, 62);
+        font-weight: bold;
+        font-size: 20px;
+        position: relative;
+      }
       .name {
-        font-family: 'Gilroy-Light';
         font-weight: 300;
         width: 50%;
         word-break: break-word;
         color: var.$color-card-bg;
-        font-size: var.$font-size-button;
+        font-size: var.$font-size-average;
+        font-family: var.$ff-cormorantgaramond-regular;
         p {
           
+        }
+        @media (max-width: 750px) {
+         width: auto;
+        }
+        .mobileRemove{
+          position: relative;
+          top: 0;
+          left: 100px;
+          width: 20px;
+          height: 20px;
         }
       }
       
@@ -60,6 +80,22 @@
           height: 40px;
           border-radius: 50%;
         }
+        @media (max-width: 750px) {
+          .increment {
+            width: 20px;
+            height: 20px;
+          }
+          .count {
+            font-size: var.$font-size-button;
+            font-weight: bold;
+            color: var.$color-black;
+            margin: 0 var.$spasing-small;
+          } 
+          .decrement {
+            width: 20px;
+            height: 20px;
+          }            
+          }
       }
       
       
@@ -81,8 +117,16 @@
           font-size: var.$font-size-average;
           cursor: pointer;
           margin-bottom: 10px;
+          @media (max-width: 750px) {
+            display: none;
+          }
+        }
+        
+        @media (max-width: 750px) {
+          display: none;
         }
         }
+
         .delete {
           width: 34px;
           height: 34px;
@@ -93,17 +137,19 @@
           &:hover {
             opacity: 1;
           }
+
         }
         
         &:hover {
         .delete {
           transform: translateX(0px);
         }
+      }
         
-    }
     
     
   }
   }
+  
 }
 

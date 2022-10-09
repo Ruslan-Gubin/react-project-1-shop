@@ -1,9 +1,9 @@
-import { useState } from "react";
+import React,{ useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PropsClildren } from "../../../../models/children";
 import styles from './ButtonGoBack.module.scss';
 
-const ButtonGoBack = ({children, ...props }: PropsClildren) => {
+const ButtonGoBack = React.memo(({children, ...props }: PropsClildren) => {
     const [text, setText] = useState('Вернуться назад')
 
   const navigation = useNavigate();
@@ -15,6 +15,6 @@ const ButtonGoBack = ({children, ...props }: PropsClildren) => {
      {children}   
     </button>  
   );
-};
+});
 
 export  {ButtonGoBack};

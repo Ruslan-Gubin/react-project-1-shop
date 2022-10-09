@@ -1,12 +1,13 @@
+import React from "react";
 import { useParams } from "react-router-dom";
 import PostItemsSinglPage from "../../App/components/PostItemsSinglPage";
 import { IPost } from "../../models/products";
 import {
   useDeletePostMutation,
   useGetPostsQuery,
-} from "../../store/post/postApi";
+} from "../../store/postApi/postApi";
 
-const SingelPage = () => {
+const SingelPage = React.memo(() => {
   const { id } = useParams();
   const { isLoading, isError, data = [] } = useGetPostsQuery(5);
   const [deletePost, {}] = useDeletePostMutation();
@@ -31,6 +32,6 @@ const SingelPage = () => {
           ))}
     </div>
   );
-};
+});
 
 export  {SingelPage};

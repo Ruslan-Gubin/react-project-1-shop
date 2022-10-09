@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Select, {OnChangeValue} from "react-select";
 import { IOption } from "../../../models";
 import makeAnimated from 'react-select/animated';
@@ -16,7 +16,7 @@ const options: IOption[] = [
 
 const animatedComponents = makeAnimated()
 
-const MultiplaySelect = () => {
+const MultiplaySelect = React.memo(() => {
   const [currentCategorys, setCurrentCategorys] = useState(['scss', 'javascript'])
 
   const getValue = () => {
@@ -43,6 +43,6 @@ const MultiplaySelect = () => {
     />    
     </>
   );
-};
+});
 
 export {MultiplaySelect};

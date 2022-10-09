@@ -7,13 +7,13 @@ interface CardProductType {
     catigoriName: string
 }
 
-const CardProducts: FC<CardProductType> = ({item}) => {
+const CardProducts: FC<CardProductType> = React.memo(({item}) => {
     return (
         <div className={styles.item} >
             <img className={styles.img} src={item.img} alt={item.catigoriName} />
             <span className={styles.text}>{item.catigoriName}</span>
             </div>
     );
-};
+});
 
 export  {CardProducts};

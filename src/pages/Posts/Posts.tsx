@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ModalActive, Pagination, PostItemsRender } from "../../App/components";
 import { InputMain, SearchInput } from "../../App/components/Ui";
 import { IPost } from "../../models/products";
-import { useGetPostsQuery } from "../../store/post/postApi";
+import { useGetPostsQuery } from "../../store/postApi/postApi";
 import { paginationCalculatorPage } from "../../utils";
 import styles from "./Posts.module.scss";
 
@@ -14,7 +14,7 @@ interface PostFormAdd {
   search?: any;
 }
 
-const Posts: React.FC<PostFormAdd> = () => {
+const Posts: React.FC<PostFormAdd> = React.memo(() => {
   const { isLoading, isError, data = [] } = useGetPostsQuery(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(12);
@@ -49,8 +49,8 @@ const Posts: React.FC<PostFormAdd> = () => {
         <div className={styles.forms}>
           <SearchInput
             onKeyDown={handlerKeyDown}
-            value={value}
-            setValue={setValue}
+            register={value}
+            onChange={(value:string) => setValue(value)}
             placeholder="Найти пост"
           />
 
@@ -74,6 +74,6 @@ const Posts: React.FC<PostFormAdd> = () => {
       </div>
     </div>
   );
-};
+});
 
 export { Posts };

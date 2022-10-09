@@ -11,7 +11,7 @@ import { RUDate } from "../../utils/intlDateTimeFormat";
 import InputField from "./InputField";
 import TodosList from "./TodosList";
 
-const Home = () => {
+const Home = React.memo(() => {
   const { isMobile, isTablet, isDesktop } = useMatchMedia();
   const [text, setText] = useState("");
   const dispatch = useDispatch();
@@ -62,6 +62,6 @@ const Home = () => {
       {formatter.format(111)}
     </div>
   );
-};
+});
 
 export { Home };

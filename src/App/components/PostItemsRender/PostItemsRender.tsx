@@ -1,8 +1,9 @@
+import React from "react";
 import { useSearchParams } from "react-router-dom";
 import { CardMainPost, CustomLink } from "../Ui";
 import styles from './PostItemsRender.module.scss';
 
-const PostItemsRender = (props) => {
+const PostItemsRender = React.memo((props) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const postQuery = searchParams.get("post") || "";
@@ -22,6 +23,6 @@ const PostItemsRender = (props) => {
         ))}    
     </>
   );
-};
+});
 
 export  {PostItemsRender};

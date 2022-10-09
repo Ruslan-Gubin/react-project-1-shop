@@ -1,7 +1,8 @@
+import React from 'react';
 import { useDispatch} from 'react-redux';
 import { removeTodo, toggleTodoComplete } from "../../store/todoSlice/todoSlice";
 
-const TodosItem = ({id, completed, text}) => {
+const TodosItem = React.memo(({id, completed, text}) => {
     const dispatch = useDispatch()
     return (
         <li>
@@ -10,6 +11,6 @@ const TodosItem = ({id, completed, text}) => {
             <span onClick={()=> {dispatch(removeTodo({id}))}} style={{color: 'red',cursor: 'pointer'}}>&times;</span>
             </li>
             )    
-};
+});
 
 export default TodosItem;

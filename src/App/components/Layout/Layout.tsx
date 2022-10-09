@@ -1,10 +1,10 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Footer from "../FooterContainer";
+import { FooterContainer } from "../FooterContainer";
 import Header from "../Header";
 import styles from "./Layout.module.scss";
 
-const Layout = () => {
+const Layout = React.memo(() => {
   return (
     <div className={styles.wrapper}>
       <Header />
@@ -13,9 +13,9 @@ const Layout = () => {
         <Outlet />
         </div>
       </div>
-      <Footer />
+      <FooterContainer />
     </div>
   );
-};
+});
 
 export { Layout };

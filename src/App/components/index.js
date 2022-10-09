@@ -14,3 +14,5 @@ export {FooterMenu} from './FooterMenu';
 export {FooterIcons} from './FooterIcons';
 export {BasketInfo} from './BasketInfo';
 export {BasketGoods} from './BasketGoods';
+export {EmptyBasket} from './EmptyBasket';
+export {FooterContainer} from './FooterContainer';

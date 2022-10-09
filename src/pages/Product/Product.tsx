@@ -1,107 +1,100 @@
-import React,{ useEffect, useRef, useState } from "react";
-import { useCounter } from "../../hooks";
-import { useGetProductsQuery } from "../../store/product/productsApi";
-import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useGetProductsQuery } from "../../store/productApi/productsApi";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import * as utils from "../../utils";
 import * as component from "../../App/components";
-import { ButtonGoBack, ButtonMain, SearchInput } from "../../App/components/Ui";
+import * as ui from "../../App/components/Ui";
+import * as slice from "../../store/filterSlice/filterSlice";
 import { productSortingArray } from "../../data";
-import styles from './Product.module.scss';
-import cartPng from '../../assets/img/icons/shopping-cart.png';
+import styles from "./Product.module.scss";
+import cartPng from "../../assets/img/icons/shopping-cart.png";
 
-const Product = () => {
+const Product = React.memo(() => {
   const order = useSelector((state) => state.order.order);
+  const sliceState = useSelector((state) => state.filters);
   const { isLoading, isError, data = [] } = useGetProductsQuery(0);
-  const [textSearch, setTextSearch] = useState("");
-  const [selectedOption, setSelectedOption] = useState(productSortingArray[0]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(12);
-  const [counterProduct] = useCounter(0);
-  const [dataDepartment, setDataDepartment] = useState([]);
-  const [menuValue, setMenuValue] = useState("");
+  const [productPerPage] = useState(12);
+  const dispatch = useDispatch();
   const id = useParams();
 
   useEffect(() => {
     if (!isLoading) {
-      setDataDepartment(utils.filterDataDepatment(id, data));
+      dispatch(slice.setDataDepartment({ id, data }));
     }
   }, [data]);
-
-  let searchTextRef = useRef();
 
   const initSelect = (data) =>
     data.map((i) => ({
       ...i,
-      counter: counterProduct,
+      counter: 0,
       selected: false,
       discount: utils.sumDiscount(i.price, i.oldPrice),
     }));
+   
 
-  searchTextRef = initSelect(dataDepartment).filter((item) => {
-    return item.name.toLowerCase().includes(textSearch.toLowerCase());
+  let searchText = initSelect(sliceState.dataDepartments).filter((item) => {
+    return item.name.toLowerCase().includes(sliceState.textSearch.toLowerCase());    
   });
 
-  const menuSortCategoryIndex = utils.categoryFilterName(dataDepartment, false)[
-    menuValue
-  ];
-
-  menuValue !== 0
-    ? (searchTextRef = searchTextRef.filter(
-        (item) => item.category == menuSortCategoryIndex
+  sliceState.menuValue !== "Все"
+    ? (searchText = searchText.filter(
+        (item) => item.category == sliceState.menuValue
       ))
     : false;
-      
-  utils.selectOptionsSort(selectedOption, productSortingArray, searchTextRef);
 
-  const totalAmount = order.reduce(
-    (acc, item) => acc + item.price * item.counter,
-    0
+  utils.selectOptionsSort(
+    sliceState.filterSelect,
+    productSortingArray,
+    searchText
   );
 
   const pagination = utils.paginationCalculatorPage(
-    searchTextRef,
+    searchText,
     currentPage,
-    postsPerPage
+    productPerPage
   );
 
   return (
     <div className={styles.catalog}>
       {isError && <p>Error</p>}
       <div className={styles.search}>
-        <SearchInput
+        <ui.SearchInput
           placeholder="Поиск товара"
-          register={textSearch}
-          setValue={setTextSearch}
-          />
-        <ButtonGoBack text="Вернуться к каталогу" />
-        <component.FormAddProduct data={dataDepartment} department={utils.getValueObject(id)} />
+          register={sliceState.textSearch}
+          onChange={(value: string) => dispatch(slice.setTextSearch(value))}
+        />
+        <ui.ButtonGoBack text="Вернуться к каталогу" />
+        <component.FormAddProduct
+          data={sliceState.dataDepartments}
+          department={utils.getValueObject(id)}
+        />
         <div className={styles.cart}>
-        <Link to='/cart'>
-        <ButtonMain bgColor="green">
-    <img className={styles.cartPng} src={cartPng} alt="cartPng" />
-    <div className={styles.totalPrice}>
-          {utils.formatterRub.format(totalAmount)}
-    </div>
-        </ButtonMain>
-        </Link>
+          <ui.CustomLink to="/cart">
+            <ui.ButtonMain bgColor="green">
+              <img className={styles.cartPng} src={cartPng} alt="cartPng" />
+              <div className={styles.totalPrice}>
+                {utils.formatterRub.format(utils.totalSum(order))}
+              </div>
+            </ui.ButtonMain>
+          </ui.CustomLink>
         </div>
       </div>
       <div className={styles.container}>
-      <div className={styles.info}>
-        <div className={styles["container-info"]}>
-          <component.Categories
-            data={dataDepartment}
-            setMenuValue={setMenuValue}
-            isLoading={isLoading}
+        <div className={styles.info}>
+          <div className={styles["container-info"]}>
+            <component.Categories
+              data={sliceState.dataDepartments}
+              isLoading={isLoading}
             />
-          <component.CustomSelect
-            options={productSortingArray}
-            onChange={(value) => setSelectedOption(value)}
-            defaultValue={selectedOption}
+            <component.CustomSelect
+              options={productSortingArray}
+              onChange={(value) => dispatch(slice.setSelectId({ value }))}
+              defaultValue={sliceState.filterSelect}
             />
+          </div>
         </div>
-            </div>
         <div className={styles.items}>
           {!isLoading &&
             pagination.map((product) => (
@@ -115,12 +108,12 @@ const Product = () => {
       </div>
       <component.Pagination
         currentPage={currentPage}
-        postsPerPage={postsPerPage}
-        totalCountries={searchTextRef.length}
+        postsPerPage={productPerPage}
+        totalCountries={searchText.length}
         setCurrentPage={setCurrentPage}
       />
     </div>
   );
-};
+});
 
 export { Product };

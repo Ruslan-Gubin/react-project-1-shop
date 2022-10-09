@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react"
+import React, { useCallback,  useState } from "react"
 
 
 const useCounter = (initialValue) => {
@@ -13,6 +13,6 @@ const useCounter = (initialValue) => {
   },[counter])
   
   return [counter,incriment,decrement]
-}
+};
 
 export {useCounter}

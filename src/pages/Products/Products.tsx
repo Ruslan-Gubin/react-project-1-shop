@@ -1,8 +1,10 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { CardProducts, ImagesSlider } from "../../App/components";
 import { productsCategoriLink } from "../../data";
-import { useGetProductsQuery } from "../../store/product/productsApi";
+import { resetMenuId } from "../../store/filterSlice/filterSlice";
+import { useGetProductsQuery } from "../../store/productApi/productsApi";
 import { getImgForSlider } from "../../utils";
 import styles from './Products.module.scss' 
 
@@ -10,8 +12,10 @@ interface ProductsType {
   item?: Object;
 }
 
-const Products: React.FC<ProductsType> = () => {
+const Products: React.FC<ProductsType> = React.memo(() => {
   const {  data = [] } = useGetProductsQuery(0);
+  const dispatch = useDispatch()
+
   return (
     <div className={styles.products}>
       <div className='container'>
@@ -19,7 +23,7 @@ const Products: React.FC<ProductsType> = () => {
         <div className={styles.category}>
           <div className={styles.items}>
             {productsCategoriLink.map((item, index) => (
-              <Link to={`/product/${item.department}`}   key={item.department} >
+              <Link onClick={() => dispatch(resetMenuId())} to={`/product/${item.department}`}   key={item.department} >
             <CardProducts key={item.catigoriName} item={item} /> 
              </Link>
             ))}
@@ -28,6 +32,6 @@ const Products: React.FC<ProductsType> = () => {
       </div>
     </div>
   );
-};
+});
 
 export  {Products};

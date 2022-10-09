@@ -3,7 +3,7 @@ import { ButtonMain } from "../Ui";
 
 import styles from './Pagination.module.scss';
 
-const Pagination: React.FC = (props) => {
+const Pagination: React.FC = React.memo((props) => {
   const pageNumbers = [];
 
   for (
@@ -50,6 +50,6 @@ const Pagination: React.FC = (props) => {
       )}
     </div>
   );
-};
+});
 
 export {Pagination};
