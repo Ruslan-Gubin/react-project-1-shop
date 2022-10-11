@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IPost } from "../../../models/products";
-import { useCreatePostMutation } from "../../../store/postApi/postApi";
+import { useCreatePostMutation } from "../../../store/rtkQuery/postApi/postApi";
 import Form from "../Form";
 import Modal from "../Modal";
 import { ButtonMain, InputMain, TextareaMain } from "../Ui";

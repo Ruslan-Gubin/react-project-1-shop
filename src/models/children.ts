@@ -7,4 +7,5 @@ export interface PropsClildren  {
   to?: any 
   activeCl?:any
   noActive?:any
+  onClick?: Function
 };

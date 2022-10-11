@@ -23,5 +23,5 @@
   },
   "include": [
     "src/**/*.tsx", "src/**/*.ts", "declarations.d.ts"
-  ]
+, "src/store/pagination", "src/store/pagination"  ]
 }

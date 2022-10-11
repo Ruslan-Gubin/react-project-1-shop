@@ -1,0 +1,1 @@
+export {productsApi,useGetProductsQuery, useCreateProductsMutation, useRemoveProductMutation} from './productsApi';

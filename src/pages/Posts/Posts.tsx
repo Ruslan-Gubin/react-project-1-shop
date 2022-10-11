@@ -1,56 +1,34 @@
-import React, { useState } from "react";
-import { ModalActive, Pagination, PostItemsRender } from "../../App/components";
-import { InputMain, SearchInput } from "../../App/components/Ui";
-import { IPost } from "../../models/products";
-import { useGetPostsQuery } from "../../store/postApi/postApi";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { ModalActive, PostItemsRender } from "../../App/components";
+import { CustomPagination, SearchInput } from "../../App/components/Ui";
+import * as slice from "../../store/slice";
+import { useGetPostsQuery } from "../../store/rtkQuery";
 import { paginationCalculatorPage } from "../../utils";
 import styles from "./Posts.module.scss";
 
-interface PostFormAdd {
-  post?: IPost;
-  handlerSubmit?: () => void;
-  closeForm?: () => void;
-  setText?: string;
-  search?: any;
-}
-
-const Posts: React.FC<PostFormAdd> = React.memo(() => {
+const Posts: React.FC = React.memo(() => {
   const { isLoading, isError, data = [] } = useGetPostsQuery(5);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(12);
-  const [value, setValue] = useState("");
-  const [post, setPost] = React.useState([]);
+  const { perPage, page } = useSelector((state) => state.paginationPost);
+  const { post, searchValue } = useSelector((state) => state.posts);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if (!isLoading) {
-      new Promise((resolve, reject) => {
-        resolve(data);
-      })
-        .then((data) => setPost(data))
-        .catch((err) => console.log("Error", err));
-    }
-  }, [data]);
+    !isLoading ? dispatch(slice.setStatePost({ data })) : false;
+    if (searchValue) dispatch(slice.resetPagePost());
+  }, [data, searchValue]);
 
-  const handlerKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
-    if (e.key === "Enter") {   
-      setPost(data.filter((item) =>
-          item.title.toLowerCase().includes(value.toLowerCase())
-        )
-      );
-      setValue("");
-    }
-  };
-
-  const pagination = paginationCalculatorPage(post, currentPage, postsPerPage);
+  const pagination = paginationCalculatorPage(post, page, perPage);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.post}>
         <div className={styles.forms}>
           <SearchInput
-            onKeyDown={handlerKeyDown}
-            register={value}
-            onChange={(value:string) => setValue(value)}
+            register={searchValue}
+            onChange={(value: string) =>
+              dispatch(slice.setsearchValuePost({ value }))
+            }
             placeholder="Найти пост"
           />
 
@@ -64,11 +42,15 @@ const Posts: React.FC<PostFormAdd> = React.memo(() => {
           />
         </div>
         <div>
-          <Pagination
-            currentPage={currentPage}
-            postsPerPage={postsPerPage}
+          <CustomPagination
             totalCountries={post.length}
-            setCurrentPage={setCurrentPage}
+            counterPerPage={perPage}
+            currentPage={page}
+            clickNumber={(pageNumber: string) =>
+              dispatch(slice.setPaginatePost({ pageNumber }))
+            }
+            prevPage={() => dispatch(slice.setPrevPagePost())}
+            nextPage={(page: string) => dispatch(slice.setNextPagePost(page))}
           />
         </div>
       </div>

@@ -7,3 +7,4 @@ export {CustomLink} from './CustomLink';
 export {FormSearch} from './FormSearch';
 export {Watch} from './Watch';
 export {SearchInput} from './SearchInput';
+export {CustomPagination} from './CustomPagination';

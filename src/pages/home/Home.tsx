@@ -4,7 +4,7 @@ import { MultiplaySelect } from "../../App/components/CustomSelect";
 import Test from "../../App/components/Test";
 import { ButtonMain, InputMain } from "../../App/components/Ui";
 import { useMatchMedia, useToggle } from "../../hooks";
-import { addTodo } from "../../store/todoSlice/todoSlice";
+import { addTodo } from "../../store/slice/todoSlice/todoSlice";
 import { formatter } from "../../utils/intl-Number-Format";
 import { RUDate } from "../../utils/intlDateTimeFormat";
 

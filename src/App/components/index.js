@@ -1,5 +1,4 @@
 export {Categories} from './Categories';
-export {Pagination} from './Pagination';
 export {CustomSelect} from './CustomSelect';
 export {CardProductCatalog} from './CardProductCatalog';
 export {CardProducts} from './CardProduct';
@@ -16,3 +15,4 @@ export {BasketInfo} from './BasketInfo';
 export {BasketGoods} from './BasketGoods';
 export {EmptyBasket} from './EmptyBasket';
 export {FooterContainer} from './FooterContainer';
+export {ProductSinglPage} from './ProductSinglPage';

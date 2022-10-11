@@ -1,6 +1,6 @@
 import { useCallback, useRef } from "react";
 
-export  function useDebounce(callback, delay) {
+export  function useDebounce(callback:()=> void, delay:number) {
   const timer = useRef();
 
   const debouncedCallback = useCallback(

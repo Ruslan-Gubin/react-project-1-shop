@@ -5,9 +5,9 @@ import { IPost } from "../../models/products";
 import {
   useDeletePostMutation,
   useGetPostsQuery,
-} from "../../store/postApi/postApi";
+} from "../../store/rtkQuery/postApi/postApi";
 
-const SingelPage = React.memo(() => {
+const SingelPagePost = React.memo(() => {
   const { id } = useParams();
   const { isLoading, isError, data = [] } = useGetPostsQuery(5);
   const [deletePost, {}] = useDeletePostMutation();
@@ -15,7 +15,7 @@ const SingelPage = React.memo(() => {
   const handleRemove = async (post: IPost) => {
     await deletePost(post).unwrap();
   };
-
+  
   return (
     <div>
       {isLoading && <h2>Loading...</h2>}
@@ -25,7 +25,7 @@ const SingelPage = React.memo(() => {
           .filter((post) => post._id == id)
           .map((post) => (
             <PostItemsSinglPage
-            key={post._id}
+              key={post._id}
               post={post}
               remove={handleRemove}
             />
@@ -34,4 +34,4 @@ const SingelPage = React.memo(() => {
   );
 });
 
-export  {SingelPage};
+export { SingelPagePost };

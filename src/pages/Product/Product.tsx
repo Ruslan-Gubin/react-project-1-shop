@@ -1,46 +1,45 @@
-import React, { useEffect, useState } from "react";
-import { useGetProductsQuery } from "../../store/productApi/productsApi";
+import React from "react";
+import { useGetProductsQuery } from "../../store/rtkQuery";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as utils from "../../utils";
 import * as component from "../../App/components";
 import * as ui from "../../App/components/Ui";
-import * as slice from "../../store/filterSlice/filterSlice";
-import { productSortingArray } from "../../data";
+import * as slice from "../../store/slice";
+import { cartPng, productSortingArray } from "../../data";
+import { IProduct } from "../../models/products";
 import styles from "./Product.module.scss";
-import cartPng from "../../assets/img/icons/shopping-cart.png";
 
 const Product = React.memo(() => {
   const order = useSelector((state) => state.order.order);
   const sliceState = useSelector((state) => state.filters);
+  const { page, perPage } = useSelector((state) => state.paginationProduct);
   const { isLoading, isError, data = [] } = useGetProductsQuery(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [productPerPage] = useState(12);
+  const {id} = useParams();
   const dispatch = useDispatch();
-  const id = useParams();
-
-  useEffect(() => {
+  
+  React.useEffect(() => {
     if (!isLoading) {
       dispatch(slice.setDataDepartment({ id, data }));
     }
   }, [data]);
 
-  const initSelect = (data) =>
-    data.map((i) => ({
-      ...i,
-      counter: 0,
-      selected: false,
-      discount: utils.sumDiscount(i.price, i.oldPrice),
-    }));
-   
+  let searchText = utils
+    .initSelect(sliceState.dataDepartments)
+    .filter((item: IProduct) => {
+      return item.title
+        .toLowerCase()
+        .includes(sliceState.textSearch.toLowerCase());
+    });
 
-  let searchText = initSelect(sliceState.dataDepartments).filter((item) => {
-    return item.name.toLowerCase().includes(sliceState.textSearch.toLowerCase());    
-  });
+  React.useEffect(() => {
+    if (sliceState.textSearch.length > 0)
+    dispatch(slice.resetPageProduct());
+  }, [sliceState.textSearch]);
 
   sliceState.menuValue !== "Все"
     ? (searchText = searchText.filter(
-        (item) => item.category == sliceState.menuValue
+        (item: IProduct) => item.category == sliceState.menuValue
       ))
     : false;
 
@@ -50,11 +49,7 @@ const Product = React.memo(() => {
     searchText
   );
 
-  const pagination = utils.paginationCalculatorPage(
-    searchText,
-    currentPage,
-    productPerPage
-  );
+  const pagination = utils.paginationCalculatorPage(searchText, page, perPage);
 
   return (
     <div className={styles.catalog}>
@@ -68,15 +63,14 @@ const Product = React.memo(() => {
         <ui.ButtonGoBack text="Вернуться к каталогу" />
         <component.FormAddProduct
           data={sliceState.dataDepartments}
-          department={utils.getValueObject(id)}
+          department={id}
         />
         <div className={styles.cart}>
           <ui.CustomLink to="/cart">
             <ui.ButtonMain bgColor="green">
               <img className={styles.cartPng} src={cartPng} alt="cartPng" />
-              <div className={styles.totalPrice}>
-                {utils.formatterRub.format(utils.totalSum(order))}
-              </div>
+              {order.length > 0 && <span>{order.length}</span>}             
+              <div>{utils.formatterRub.format(utils.totalSum(order))}</div>
             </ui.ButtonMain>
           </ui.CustomLink>
         </div>
@@ -97,20 +91,24 @@ const Product = React.memo(() => {
         </div>
         <div className={styles.items}>
           {!isLoading &&
-            pagination.map((product) => (
+            pagination.map((product: any) => (
               <component.CardProductCatalog
                 product={product}
                 {...product}
                 key={product._id}
-              />
+                />
             ))}
         </div>
       </div>
-      <component.Pagination
-        currentPage={currentPage}
-        postsPerPage={productPerPage}
+      <ui.CustomPagination
         totalCountries={searchText.length}
-        setCurrentPage={setCurrentPage}
+        counterPerPage={perPage}
+        currentPage={page}
+        clickNumber={(pageNumber: string) =>
+          dispatch(slice.setPaginateProduct({ pageNumber }))
+        }
+        prevPage={() => dispatch(slice.setPrevPageProduct())}
+        nextPage={(page: string) => dispatch(slice.setNextPageProduct(page))}
       />
     </div>
   );

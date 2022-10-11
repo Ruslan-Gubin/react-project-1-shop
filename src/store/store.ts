@@ -1,38 +1,36 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { postApi } from "./postApi/postApi";
-import { stationeryApi } from "./productApi/productsApi";
-import todoReducer from "./todoSlice/todoSlice";
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from "redux-persist";
+import { getPersistConfig } from "redux-deep-persist";
 import storage from "redux-persist/lib/storage";
-import orderSlice from "./orderSlice/orderSlice";
-import filters from "./filterSlice/filterSlice";
-
+import * as persist from "redux-persist";
+import * as rtkQuery from "./rtkQuery";
+import * as slice from "./slice";
 
 const rootReducer = combineReducers({
-  order: orderSlice,
-  todos: todoReducer,
-  filters,
-  [postApi.reducerPath]: postApi.reducer,
-  [stationeryApi.reducerPath]: stationeryApi.reducer,
+  posts: slice.postSlice,
+  order: slice.orderSlice,
+  todos: slice.todoSlice,
+  filters: slice.filterSlice,
+  paginationProduct: slice.paginationProductSlice,
+  paginationPost: slice.paginationPostSlice,
+  [rtkQuery.postApi.reducerPath]: rtkQuery.postApi.reducer,
+  [rtkQuery.productsApi.reducerPath]: rtkQuery.productsApi.reducer,
 });
 
-const persistConfig = {
+const config = getPersistConfig({
   key: "root",
   version: 1,
   storage,
-  blacklist: [[stationeryApi.reducerPath], [stationeryApi.reducerPath]],
-};
+  blacklist: [
+    "posts.post",
+    "filters.dataDepartments",
+    rtkQuery.productsApi.reducerPath,
+    rtkQuery.postApi.reducerPath,
+  ],
+  // whitelist: [],
+  rootReducer,
+});
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persist.persistReducer(config, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
@@ -40,12 +38,19 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        ignoredActions: [
+          persist.FLUSH,
+          persist.REHYDRATE,
+          persist.PAUSE,
+          persist.PERSIST,
+          persist.PURGE,
+          persist.REGISTER,
+        ],
       },
-    }).concat([postApi.middleware, stationeryApi.middleware]),
+    }).concat([rtkQuery.postApi.middleware, rtkQuery.productsApi.middleware]),
 });
 
-export const persistor = persistStore(store);
+export const persistor = persist.persistStore(store);
 export default store;
 
 export type TypeRootState = ReturnType<typeof store.getState>;

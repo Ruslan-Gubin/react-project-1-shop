@@ -15,7 +15,7 @@ const Basket = React.memo(() => {
 
           <div className={styles.basket}>
             <div className={styles.goods}><BasketGoods /> </div>
-            <div className={styles.info}><BasketInfo /> </div>      
+            <div><BasketInfo /> </div>      
           </div>
         </>
       ) : (

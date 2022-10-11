@@ -1,22 +1,24 @@
 import React, { useCallback, useState } from "react";
 import Form from "../Form";
 import Modal from "../Modal";
-import { useCreateProductsMutation } from "../../../store/productApi/productsApi";
+import { useCreateProductsMutation } from "../../../store/rtkQuery/productApi/productsApi";
 import { ButtonMain, InputMain, TextareaMain } from "../Ui";
 import { CustomSelect } from "../CustomSelect";
 import { selectAddProduct } from "../../../utils";
 import styles from "./FormAddProduct.module.scss";
 
 
-interface Idepartment {
-  department: string;
+interface IdepartmentProps {
+  department: {};
   data: [];
 }
 
-const FormAddProduct: React.FC<Idepartment> = React.memo(({ data, department }) => {
+const FormAddProduct: React.FC<IdepartmentProps> = React.memo(({ data, department }) => {
   const [activeModal, setActiveModal] = useState(false);
   const [createProducts, {}] = useCreateProductsMutation();
-  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescreption] = useState("");
+  const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [oldPrice, setOldPrice] = useState("");
   const [category, setCategory] = useState("");
@@ -30,8 +32,10 @@ const FormAddProduct: React.FC<Idepartment> = React.memo(({ data, department }) 
 
   const removeTextInput = () => {
     return (
-      setName(""),
+      setTitle(""),
+      setDescreption(""),
       setPrice(""),
+      setQuantity(""),
       setImg(""),
       setOldPrice(""),
       setImg2(""),
@@ -57,9 +61,11 @@ const FormAddProduct: React.FC<Idepartment> = React.memo(({ data, department }) 
       img3,
       img4,
       img5,
-      name,
+      title,
+      description,
       price,
       oldPrice,
+      quantity,
       department,
     }).unwrap();
     removeTextInput();
@@ -160,28 +166,41 @@ const FormAddProduct: React.FC<Idepartment> = React.memo(({ data, department }) 
               </InputMain>
             )}
           </div>
-
+          <InputMain
+            type="text"
+            value={title}
+            setValue={setTitle}
+            placeholder="Заголовок"
+            />
           <TextareaMain
             rows={3}
             cols={50}
             required={true}
-            text={name}
-            setText={setName}
-            placeholder="Описание "
+            text={description}
+            setText={setDescreption}
+            placeholder="Описание"
           />
+          <div className={styles.prices}>
           <InputMain
             required={true}
             type="number"
             value={price}
             setValue={setPrice}
             placeholder="Цена"
-          />
+            />
           <InputMain
             type="number"
             value={oldPrice}
             setValue={setOldPrice}
             placeholder="Старая цена"
-          />
+            />
+          <InputMain
+            type="number"
+            value={quantity}
+            setValue={setQuantity}
+            placeholder="Количество"
+            />
+            </div>
         </Form>
       </Modal>
     </>

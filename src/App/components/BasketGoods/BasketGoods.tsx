@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styles from './BasketGoods.module.scss';
-import removeGoodsPng from '../../../assets/img/icons/delete-goods-897632.png';
-import { addCountGoods, removeCountGoods, removeToOrder } from '../../../store/orderSlice/orderSlice';
+import { addCountGoods, removeCountGoods, removeToOrder } from '../../../store/slice';
 import { formatterRub } from '../../../utils';
 import { useMatchMedia } from '../../../hooks';
+import { removeGoodsPng } from '../../../data';
+import styles from './BasketGoods.module.scss';
 
 const BasketGoods: React.FC = React.memo(() => {
   const order = useSelector((state) => state.order.order);
@@ -27,7 +27,7 @@ const BasketGoods: React.FC = React.memo(() => {
               </div>
 
               <div className={styles.name}>
-              <p>{product.name}</p>
+              <p>{product.title}</p>
               {isMobile && 
               <>
               <span className={styles.mediaPrice}> Цена: {formatterRub.format(product.price)}</span>  

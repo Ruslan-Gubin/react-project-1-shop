@@ -1,7 +1,5 @@
 import React from "react";
-import search from "../../../../assets/img/icons/search-icon_4699282.png";
-import close from "../../../../assets/img/icons/close-icon_4232054.png";
-
+import { close, search } from "../../../../data";
 import styles from "./SearchInput.module.scss";
 
 interface ISerch {
@@ -19,14 +17,21 @@ const SearchInput: React.FC<ISerch> = React.memo(({
   onKeyDown,
   onChange,
 }) => {
-
+  const resetRef = React.useRef<HTMLInputElement>(null)
+  
   const handlerChange: React.ChangeEventHandler<HTMLInputElement> =
-    React.useCallback(
-      (e) => {
-        onChange(e.target.value);
-      },
-      [register]
+  React.useCallback(
+    (e) => {
+      onChange(e.target.value);     
+    },  
+    [register]
     );
+
+   const resetValue = () => {
+    onChange("")
+   if (resetRef && resetRef.current) resetRef.current.focus() 
+  }
+   
 
   return (
     <div className={styles.root}>
@@ -38,6 +43,7 @@ const SearchInput: React.FC<ISerch> = React.memo(({
       />
 
       <input
+      ref={resetRef}
       onKeyDown={onKeyDown}
         className={styles.input}
         type="text"
@@ -48,7 +54,7 @@ const SearchInput: React.FC<ISerch> = React.memo(({
       {register && (
         <img
           className={styles.close}
-          onClick={() => onChange("")}
+          onClick={() => resetValue()}
           src={close}
           alt="close"
         />

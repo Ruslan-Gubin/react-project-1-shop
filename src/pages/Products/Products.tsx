@@ -1,31 +1,40 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import { CardProducts, ImagesSlider } from "../../App/components";
 import { productsCategoriLink } from "../../data";
-import { resetMenuId } from "../../store/filterSlice/filterSlice";
-import { useGetProductsQuery } from "../../store/productApi/productsApi";
+import { useGetProductsQuery } from "../../store/rtkQuery/productApi/productsApi";
 import { getImgForSlider } from "../../utils";
-import styles from './Products.module.scss' 
+import styles from "./Products.module.scss";
+import { CustomLink } from "../../App/components/Ui";
+import { resetPageProduct, resetMenuId } from "../../store/slice";
 
 interface ProductsType {
   item?: Object;
 }
 
 const Products: React.FC<ProductsType> = React.memo(() => {
-  const {  data = [] } = useGetProductsQuery(0);
-  const dispatch = useDispatch()
+  const { data = [] } = useGetProductsQuery(0);
+  const dispatch = useDispatch();
+
+  const handlerLinkClick = () => {
+    dispatch(resetMenuId());
+    dispatch(resetPageProduct());
+  };
 
   return (
     <div className={styles.products}>
-      <div className='container'>
+      <div className="container">
         <ImagesSlider imagesSwiper={getImgForSlider(data)} />
         <div className={styles.category}>
           <div className={styles.items}>
             {productsCategoriLink.map((item, index) => (
-              <Link onClick={() => dispatch(resetMenuId())} to={`/product/${item.department}`}   key={item.department} >
-            <CardProducts key={item.catigoriName} item={item} /> 
-             </Link>
+              <CustomLink
+                onClick={() => handlerLinkClick()}
+                to={`/products/${item.department}`}
+                key={item.department}
+              >
+                <CardProducts key={item.catigoriName} item={item} />
+              </CustomLink>
             ))}
           </div>
         </div>
@@ -34,4 +43,4 @@ const Products: React.FC<ProductsType> = React.memo(() => {
   );
 });
 
-export  {Products};
+export { Products };

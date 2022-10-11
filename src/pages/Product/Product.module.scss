@@ -1,4 +1,5 @@
 @use '../../scss/common/exented';
+@use '../../scss/common/var';
 
 .catalog {
     .info{  
@@ -37,6 +38,9 @@
 .cart {
 display: flex;
 width: 100px;
+span{
+    font-size: 1.3rem;
+}
 .totalPrice {
 
 }

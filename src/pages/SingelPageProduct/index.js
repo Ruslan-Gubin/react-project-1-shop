@@ -1,0 +1,1 @@
+export {SingelPageProduct} from './SingelPageProduct';

@@ -6,7 +6,7 @@ interface IRating {
 export interface IProduct {
   category: string;
   _id?: string;
-  name: string;
+  title: string;
   price: number;
   oldPrice: number;
   img: string;
@@ -17,6 +17,8 @@ export interface IProduct {
   reting?: IRating;
   department: string;
   counter?: number | null;
+  quantity: number;
+  description: string
 }
 
 export interface IProductTest {

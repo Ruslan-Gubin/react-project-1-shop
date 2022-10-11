@@ -1,1 +1,0 @@
-export { SingelPage } from './SingelPagePost';
