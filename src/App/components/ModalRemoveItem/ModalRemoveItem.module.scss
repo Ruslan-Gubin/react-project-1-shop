@@ -1,0 +1,17 @@
+@use '../../../scss/common/var';
+
+.root {
+  font-family: var.$ff-Gilroy-Bold;
+
+  p {
+    font-size: var.$font-size-average;
+    color: var.$color-black-hover;
+    margin-bottom: 30px;
+  }
+  .footer {
+    display: flex;
+    justify-content: space-around;
+   padding-left: 280px;
+  }
+
+}

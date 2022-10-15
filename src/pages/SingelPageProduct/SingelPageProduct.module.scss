@@ -1,0 +1,19 @@
+@use '../../scss/common/exented';
+.root {
+
+
+  .menuLinks {
+    display: flex;
+    align-items: center;
+    .goBack {
+      @extend %arrowBack;
+    }
+    span {
+      font-size: 20px;
+      color: white;
+      margin-right: 10px;
+    }
+    
+  }
+
+}

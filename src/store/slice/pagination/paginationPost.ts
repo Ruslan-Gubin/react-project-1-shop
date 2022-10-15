@@ -31,7 +31,9 @@ const paginationPostSlice = createSlice({
   },
 });
 
-export const {resetPagePost, setPrevPagePost, setNextPagePost, setPaginatePost } =
+export const selectPaginationPost = (state) => state.paginationPost
+
+export const { resetPagePost, setPrevPagePost, setNextPagePost, setPaginatePost } =
 paginationPostSlice.actions;
 
 export default paginationPostSlice.reducer;

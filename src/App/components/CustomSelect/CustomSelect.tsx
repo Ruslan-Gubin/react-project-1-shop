@@ -1,5 +1,5 @@
 import React from "react";
-import Select, { ActionMeta } from "react-select";
+import Select, { ActionMeta, SingleValue } from "react-select";
 
 import './CustomSelect.scss'
 
@@ -8,10 +8,10 @@ import './CustomSelect.scss'
   value: string
 }
 interface ICustomSelect {
-  options: any ;
+  options: Ioptions[];
   placeholder?: string
-  onChange:((newValue: any, actionMeta: ActionMeta<any>) => void)
-  defaultValue?: any
+  onChange:(newValue: SingleValue<Ioptions>) => void
+  defaultValue?: Ioptions
 }
 
 const CustomSelect: React.FC<ICustomSelect> = React.memo(({options = [], placeholder = '', onChange, defaultValue}) => {
@@ -23,7 +23,7 @@ const CustomSelect: React.FC<ICustomSelect> = React.memo(({options = [], placeho
      defaultValue={defaultValue}
      options={options}
      isSearchable={false} 
-     onChange={onChange} 
+     onChange={(value)=> onChange(value)} 
      placeholder={placeholder || 'Сортировка'}
     />    
     </>

@@ -1,5 +1,12 @@
-export {productSortingArray} from './productSortingArray';
-export {imagesSwiper} from './imagesSwiper';
-export {productsCategoriLink} from './productsCategoriLink';
+export { productSortingArray } from "./productSortingArray";
+export { imagesSwiper } from "./imagesSwiper";
+export { productsCategoriLink } from "./productsCategoriLink";
 
-export {cartPng, removeGoodsPng, checkIcon, search, close, } from './icons';
+export {
+  cartPng,
+  removeGoodsPng,
+  checkIcon,
+  search,
+  close,
+  arrowLeft,
+} from "./icons";

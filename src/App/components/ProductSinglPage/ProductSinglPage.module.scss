@@ -3,6 +3,7 @@
 .root {
   display: flex;
  flex-direction: column;
+ padding-bottom: 50px;
   .title {
     font-family: var.$ff-Gilroy-Medium;
     font-size: var.$font-size-title-normal;
@@ -12,12 +13,13 @@
   .container {
     display: flex;
     padding: var.$spasing-medium 0;
-    
-    .image {
+   
+    .swiper {
       border-radius: var.$border-radius-average;
-      overflow: hidden;
       width: 50%;
       height: 650px;
+      height: 550px;
+     
       img{
         width: 100%;
         height: 100%;
@@ -43,10 +45,14 @@
           margin: 0 0 20px 20px;
           .price {
             color: var.$color-black-hover;
-            font-size: 35px;
+            font-size: 30px;
           }
           .oldPrice{
             text-decoration: line-through;
+            color: var.$color-secondary-hover;
+            font-size: var.$font-size-button;
+          }
+          .discount{
             color: var.$color-secondary-hover;
             font-size: var.$font-size-button;
           }
@@ -65,8 +71,8 @@
         font-size: var.$font-size-average;
         padding: var.$spasing-medium;
         color: var.$color-card-bg;
-        box-shadow: var.$box-shadow;
         border-radius: var.$spasing-medium;
+        min-height: 510px;
         max-height: 510px;
         overflow: hidden;
       }

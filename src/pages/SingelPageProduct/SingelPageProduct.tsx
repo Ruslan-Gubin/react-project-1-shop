@@ -1,34 +1,39 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { ProductSinglPage } from '../../App/components';
-import { ButtonGoBack } from '../../App/components/Ui';
-import { IProduct } from '../../models/products';
-import { useGetProductsQuery } from '../../store/rtkQuery';
-import { initSelect } from '../../utils';
-import styles from './SingelPageProduct.module.scss';
+import React from "react";
+import { Link, useParams } from "react-router-dom";
+import { ProductSinglPage } from "../../App/components";
+import { ButtonGoBack } from "../../App/components/Ui";
+import { arrowLeft, productsCategoriLink } from "../../data";
+import { useGetOneProductQuery } from "../../store/rtkQuery";
+import styles from "./SingelPageProduct.module.scss";
 
 const SingelPageProduct = () => {
-  const {isLoading, isError, data = []} = useGetProductsQuery(5) 
-  const {id} = useParams()
+  const  {id}  = useParams();
+  const {isLoading, isError,data = []} = useGetOneProductQuery({id});
+  let map = {};
  
+  productsCategoriLink.map((item) => {
+    if (item.department === data.department) map.name = item.catigoriName;
+  });
 
   return (
     <div className={styles.root}>
       {isLoading && <div>Loading...</div>}
       {isError && <div>isError...</div>}
       <div className={styles.menuLinks}>
-        <ButtonGoBack />
+        <ButtonGoBack className={styles.goBack} text={" "}>
+          <img src={arrowLeft} alt="arrow left" />
+        </ButtonGoBack>
+        <Link to={"/products"}>
+          <span>Каталог / </span>
+        </Link>
+        <Link to={`/products/${data.department}`}>
+          <span>{map.name}</span>
+        </Link>
       </div>
-      {!isLoading && initSelect(data).filter((obj) => obj._id == id)
-      .map((product:IProduct) => (
-        <ProductSinglPage
-        key={product._id}
-        product={product}
-        />
-      ))} 
-      <p>Рекламный блок</p>    
+      <ProductSinglPage />
+      {/* <p>Рекламный блок</p> */}
     </div>
   );
 };
 
-export {SingelPageProduct};
+export { SingelPageProduct };

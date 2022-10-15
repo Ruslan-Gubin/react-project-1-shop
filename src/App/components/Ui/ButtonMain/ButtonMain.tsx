@@ -1,14 +1,14 @@
 import React from "react";
 import './ButtonMain.scss';
 
-interface ButtonMainType {
-  children?: any;
-  onClick?: () => void;
+interface IButtonMain {
+  children?: React.ReactNode;
+  onClick?: (event:React.MouseEvent<HTMLButtonElement>) => void;
   bgColor?: string;
   disabled?: boolean
 }
 
-const ButtonMain: React.FC<ButtonMainType> = React.memo(({
+const ButtonMain: React.FC<IButtonMain> = React.memo(({
   children,
   onClick,
   bgColor = "primary",
@@ -18,8 +18,8 @@ const ButtonMain: React.FC<ButtonMainType> = React.memo(({
     <button
     disabled={disabled}
     className={`button-main__${bgColor}`} 
-    onClick={onClick}>
-    {children}
+    onClick={(event) => onClick?.(event)}>
+    {children && children}
     </button>
   );
 });

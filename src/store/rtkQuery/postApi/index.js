@@ -1,1 +1,1 @@
-export {postApi, useGetPostsQuery, useCreatePostMutation, useDeletePostMutation, useUpdatePostMutation} from './postApi';
+export {postApi,useGetOnePostQuery, useGetPostsQuery, useCreatePostMutation, useDeletePostMutation, useUpdatePostMutation} from './postApi';

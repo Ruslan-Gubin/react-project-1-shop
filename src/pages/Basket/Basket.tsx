@@ -1,18 +1,26 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BasketInfo, BasketGoods, EmptyBasket } from "../../App/components";
-import { ButtonGoBack } from "../../App/components/Ui";
+import { ButtonGoBack, ButtonMain } from "../../App/components/Ui";
+import { arrowLeft } from "../../data";
+import { clearOrder, selectOrder } from "../../store/slice";
 import styles from "./Basket.module.scss";
 
 const Basket = React.memo(() => {
-  const order = useSelector((state) => state.order.order);
+  const {order} = useSelector(selectOrder);
+  const dispatch = useDispatch()
 
   return (
     <div className={styles.root}>
       {order.length ? (
         <>
-          <div className={styles.button}><ButtonGoBack text="Назад" /></div>
-
+          <div className={styles.button}>
+          <ButtonGoBack className={styles.goBack} text={" "}>
+          <img src={arrowLeft} alt="arrow left" />
+        </ButtonGoBack>
+            {/* <ButtonGoBack text="Назад" /> */}
+          <ButtonMain onClick={() => dispatch(clearOrder())} bgColor='black'>Очистить корзину</ButtonMain>
+          </div>
           <div className={styles.basket}>
             <div className={styles.goods}><BasketGoods /> </div>
             <div><BasketInfo /> </div>      

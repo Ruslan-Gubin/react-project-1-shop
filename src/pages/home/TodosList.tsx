@@ -1,11 +1,12 @@
 import React from 'react';
 import {useSelector} from 'react-redux'
+import { selectTodos } from '../../store/slice';
 import TodosItem from "./TodosItem";
 
 
 
 const TodosList = React.memo(() => {
-    const todos = useSelector(state => state.todos.todos)
+    const {todos} = useSelector(selectTodos)
     return (
 
         <ul>

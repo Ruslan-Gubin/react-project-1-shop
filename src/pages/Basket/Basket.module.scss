@@ -1,7 +1,16 @@
+@use '../../scss/common/exented';
+
 .root {
   
   .button {
     padding-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .goBack {
+      @extend %arrowBack;
+    }
   }
   
   .basket {

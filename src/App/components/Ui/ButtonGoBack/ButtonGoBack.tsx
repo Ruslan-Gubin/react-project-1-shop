@@ -1,17 +1,21 @@
-import React,{ useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { PropsClildren } from "../../../../models/children";
 import styles from './ButtonGoBack.module.scss';
 
-const ButtonGoBack = React.memo(({children, ...props }: PropsClildren) => {
-    const [text, setText] = useState('Вернуться назад')
+interface PropsClildren  {
+  children?: JSX.Element | JSX.Element[];
+  text?: string
+  className?: string 
+};
+
+const ButtonGoBack: React.FC<PropsClildren> = React.memo(({children, ...props }) => {
 
   const navigation = useNavigate();
   const goBack = () => navigation(-1);
   
   return (  
-    <button className={props.class || styles.button} onClick={goBack} >
-     {props.text || text}  
+    <button className={props.className || styles.button} onClick={goBack} >
+     {props.text || 'Вернуться назад'}  
      {children}   
     </button>  
   );

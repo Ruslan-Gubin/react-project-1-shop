@@ -19,21 +19,18 @@ const productsSchema = new Schema(
       type: String,
       required: true,
     },
-    img: {
-      type: String,
+    types: {
+      type: Object,
+      color: {
+        type: Array,
+      },
+      size: {
+        type: Array,
+      },
+    },
+    images: {
+      type: Array,
       required: true,
-    },
-    img2: {
-      type: String,
-    },
-    img3: {
-      type: String,
-    },
-    img4: {
-      type: String,
-    },
-    img5: {
-      type: String,
     },
     price: {
       type: Number,
@@ -41,6 +38,18 @@ const productsSchema = new Schema(
     },
     oldPrice: Number,
     quantity: {
+      type: Number,
+      required: true,
+    },
+    discount: {
+      type: Number,
+      required: true,
+    },
+    selected: {
+      type: Boolean,
+      required: true,
+    },
+    counter: {
       type: Number,
       required: true,
     },

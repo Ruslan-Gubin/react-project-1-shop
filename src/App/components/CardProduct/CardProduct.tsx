@@ -1,13 +1,14 @@
-import React, { FC } from 'react';
+import React from 'react';
+import { IproductsCategoriLink } from '../../../data/productsCategoriLink';
 
 import styles from './CardProduct.module.scss';
 
-interface CardProductType {
-    img: string
-    catigoriName: string
+interface ICardProducts {
+    item: IproductsCategoriLink
 }
 
-const CardProducts: FC<CardProductType> = React.memo(({item}) => {
+const CardProducts:React.FC<ICardProducts> = React.memo(({item}) => {
+ 
     return (
         <div className={styles.item} >
             <img className={styles.img} src={item.img} alt={item.catigoriName} />

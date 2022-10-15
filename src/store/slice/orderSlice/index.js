@@ -3,8 +3,10 @@ import orderSlice from './orderSlice';
 export {orderSlice} 
 
 export {
-  addToOrders,
+  selectOrder,
+  removeCountGoods,
   removeToOrder,
   addCountGoods,
-  removeCountGoods,
+  addToOrders,
+  clearOrder,
 } from "./orderSlice";

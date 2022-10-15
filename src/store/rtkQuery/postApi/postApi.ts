@@ -17,6 +17,11 @@ export const postApi = createApi({
             ]
           : [{ type: 'Post', id: 'LIST' }],
     }),
+
+    getOnePost: build.query<IPost, IPost>({
+      query: (post) => `post/${post.id}`,   
+  }),
+
       createPost: build.mutation<IPost, IPost>({
         query: (body) => ({
           url: 'post',
@@ -43,4 +48,4 @@ export const postApi = createApi({
   })
 })
 
-export const {useGetPostsQuery, useCreatePostMutation, useDeletePostMutation, useUpdatePostMutation} = postApi;
+export const {useGetPostsQuery,useGetOnePostQuery, useCreatePostMutation, useDeletePostMutation, useUpdatePostMutation} = postApi;

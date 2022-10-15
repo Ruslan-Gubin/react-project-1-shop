@@ -1,19 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { PostItemProps } from "../../../models/PostsItemProps";
+import { Link, useParams } from "react-router-dom";
+import { useDeletePostMutation, useGetOnePostQuery } from "../../../store/rtkQuery";
 import { ButtonGoBack } from "../Ui";
 import { ButtonMain } from "../Ui";
 
 import styles from './PostItemsSinglPage.module.scss';
 
-const PostItemsSinglPage: React.FC<PostItemProps> = React.memo(({ post, remove }) => {
+const PostItemsSinglPage: React.FC = React.memo(() => {
+  const [deletePost, {}] = useDeletePostMutation();
+  const {id} = useParams()
+  const{ data = [],isError,isLoading} = useGetOnePostQuery({id})
 
     return (
       <div className={styles.post} >
+        {isError && <div>Error...</div>}
+        {isLoading && <div>Loading...</div>}
       <div className={styles.card} >
         <div className={styles.header}>
-          {post.img ? 
-        <img style={{width: '100%'}} src={post.img} alt="post.title" />  
+          {data.img ? 
+        <img style={{width: '100%'}} src={data.img} alt="post.title" />  
         :
         <img
             src="https://source.unsplash.com/600x400/?computer"
@@ -25,8 +30,8 @@ const PostItemsSinglPage: React.FC<PostItemProps> = React.memo(({ post, remove }
           
         </div>
         <div className={styles.body}>
-          <h4 className={styles["body-title"]}>{post.title}</h4>
-          <p className={styles["body-text"]}>{post.text}</p>
+          <h4 className={styles["body-title"]}>{data.title}</h4>
+          <p className={styles["body-text"]}>{data.text}</p>
         </div>
         <div className={styles.footer}>
           <div className={styles.user}>
@@ -36,8 +41,8 @@ const PostItemsSinglPage: React.FC<PostItemProps> = React.memo(({ post, remove }
               className={styles["user-image"]}
             />
             <div className={styles["user-info"]}>
-              <p>{post.user_name || "Guest"}</p>
-              <small>{new Date(post.date).toLocaleDateString()}</small>
+              <p>{data.user_name || "Guest"}</p>
+              <small>{new Date(data.date).toLocaleDateString()}</small>
             </div>
           </div>
           <div className={styles["footer-buttons"]}>
@@ -46,7 +51,7 @@ const PostItemsSinglPage: React.FC<PostItemProps> = React.memo(({ post, remove }
           </div>
             <div>
               <Link to="/post">
-                <ButtonMain bgColor="red" onClick={() => remove(post)}>
+                <ButtonMain bgColor="red" onClick={() => deletePost(data).unwrap()}>
                   Удалить
                 </ButtonMain>
               </Link>

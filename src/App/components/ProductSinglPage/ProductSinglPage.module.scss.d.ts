@@ -5,12 +5,13 @@ interface CssExports {
   'container': string;
   'description': string;
   'details': string;
-  'image': string;
+  'discount': string;
   'oldPrice': string;
   'price': string;
   'priceBlock': string;
   'priceGroup': string;
   'root': string;
+  'swiper': string;
   'title': string;
 }
 export const cssExports: CssExports;

@@ -1,10 +1,10 @@
-interface categoriItemsType {
+export interface IproductsCategoriLink {
     img: string
     catigoriName: string
     department?: string
 }
 
-const productsCategoriLink: Array <categoriItemsType> = [
+const productsCategoriLink:IproductsCategoriLink[] = [
   {
     img: "https://i.ibb.co/0Qrz6mS/14497.webp",
     catigoriName: "канцтовары",

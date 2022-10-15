@@ -5,8 +5,8 @@ const ScrollingList: React.FC = React.memo(() => {
     const [todos, setTodos] = useState([])
     const [page, setPage] = useState(1);
     const limit = 20;
-    const parentRef = useRef();
-    const childRef = useRef();
+    const parentRef = useRef<HTMLDivElement>(null);
+    const childRef = useRef<HTMLDivElement>(null);
     const intersected = useScroll(parentRef, childRef, () => fetchTodos(page, limit));
 
     function fetchTodos(page, limit) {
@@ -22,7 +22,7 @@ const ScrollingList: React.FC = React.memo(() => {
 
     return (
         <div ref={parentRef} style={{height: '80vh', overflow: 'auto'}}>
-            {todos.map(todo =>
+            {todos.map((todo) =>
                 <div key={todo.id} style={{padding: 30, border: '2px solid black'}}>
                     {todo.id}. {todo.title}
                 </div>

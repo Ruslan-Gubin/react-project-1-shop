@@ -1,77 +1,44 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { IProduct } from "../../../models/products";
+import * as prodSlice from "../../../store/slice";
 import { useRemoveProductMutation } from "../../../store/rtkQuery";
-import * as prodSlice from "../../../store/slice/orderSlice/orderSlice";
+import { Link, } from "react-router-dom";
 import { formatterRub, sumDiscount } from "../../../utils";
-import { ButtonMain } from "../Ui";
-
 import styles from "./CardProductCatalog.module.scss";
+import { ModalRemoveItem } from "../ModalRemoveItem";
+import { IProduct } from "../../../models/products";
+import { ButtonMain } from "../Ui";
+import { Modal } from "../Modal";
+
 
 interface ICardProductCatalogProps {
-  product: IProduct
-  _id: string
+  product: IProduct;
+  _id: string;
 }
 
 const CardProductCatalog: React.FC<ICardProductCatalogProps> = React.memo(
   ({ _id, product }) => {
-    const order = useSelector((state) => state.order.order);
+    const {order} = useSelector(prodSlice.selectOrder);
     const [removeProduct, {}] = useRemoveProductMutation();
-    const [buttonBye, setButtonBye] = useState(false);
+    const [modalActive, setModalActive] = React.useState(false);
     const dispatch = useDispatch();
+    
+    const findIdInOrder:IProduct[] = React.useCallback(order.find((item:IProduct) => item._id === _id),[order])
 
-    const addInOrder = useCallback(() => {
-      dispatch(prodSlice.addToOrders({ product }));
-      setButtonBye(true);
-    }, [buttonBye]);
-
-    const removeInOrder = useCallback(
-      (_id: string) => {
-        dispatch(prodSlice.removeToOrder({ _id }));
-        setButtonBye(false);
-      },
-      [buttonBye]
-    );
-
-    const addCount = React.useCallback(
-      () => dispatch(prodSlice.addCountGoods({ _id })),
-      [order]
-    );
-
-    const removeCount = React.useCallback(
-      () => dispatch(prodSlice.removeCountGoods({ _id })),
-      [order]
-    );
-
-    useEffect(() => {
-      for (let i = 0; i < order.length; i++) {
-        const item = order[i];
-        if (item._id === product._id) {
-          setButtonBye(true);
-        }
-      }
-    }, [order]);
-
-    const resCounter = React.useMemo(() => {
-      for (let i = 0; i < order.length; i++) {
-        if (order[i]._id === product._id)
-          return (product.counter = order[i].counter);
-      }
-    }, [order]);
-
+    const productCounter = React.useCallback(order.map((item:IProduct) => (item._id === product._id) && item.counter),[order])
+  
     return (
       <div className={styles.wrapper}>
         <div className={styles.product}>
-      <Link to={`${product._id}`}>
-          <div className={styles.header}>
-            <img
-              className={styles.img}
-              alt="img"
-              src={product.img || product.img2}
+          <Link to={`${product._id}`}>
+            <div className={styles.header}>
+              <img
+                className={styles.img}
+                alt="img"
+                src={product.images[0] || product.images[1]}
               />
-          </div>
-              </Link>
+            </div>
+          </Link>
           <div className={styles.body}>
             <div className={styles.prices}>
               {product.oldPrice && (
@@ -91,33 +58,41 @@ const CardProductCatalog: React.FC<ICardProductCatalogProps> = React.memo(
           </div>
           <div className={styles.footer}>
             <div className={styles.buttons}>
-              {buttonBye ? (
+              {findIdInOrder ? (
                 <ButtonMain
-                  onClick={() => removeInOrder(_id)}
+                  onClick={() => dispatch(prodSlice.removeToOrder({ _id }))}
                   bgColor="secondary"
                 >
-                  В Корзине: {resCounter}
+                  В Корзине: {productCounter}
                 </ButtonMain>
               ) : (
-                <ButtonMain onClick={addInOrder}>В Корзину</ButtonMain>
+                <ButtonMain onClick={()=> dispatch(prodSlice.addToOrders( product ))}>В Корзину</ButtonMain>
               )}
-              {buttonBye && (
+              {findIdInOrder && (
                 <>
-                  <ButtonMain onClick={() => addCount()} bgColor="green">
+                  <ButtonMain onClick={() => dispatch(prodSlice.addCountGoods({ _id }))} bgColor="green">
                     +
                   </ButtonMain>
-                  <ButtonMain onClick={removeCount} bgColor="green">
+                  <ButtonMain onClick={() => dispatch(prodSlice.removeCountGoods({ _id }))} bgColor="green">
                     -
                   </ButtonMain>
                 </>
               )}
-              {!buttonBye && (
+              {!findIdInOrder && (
                 <ButtonMain
-                  onClick={() => removeProduct(product)}
+                  onClick={() => setModalActive(!modalActive)}
                   bgColor="red"
                 >
                   Удалить
                 </ButtonMain>
+              )}
+              {modalActive && (
+                <Modal active={modalActive} setActive={setModalActive}>
+                  <ModalRemoveItem
+                    confirm={() => removeProduct(product)}
+                    cancel={() => setModalActive(!modalActive)}
+                  />
+                </Modal>
               )}
             </div>
           </div>

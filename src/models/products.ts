@@ -9,14 +9,10 @@ export interface IProduct {
   title: string;
   price: number;
   oldPrice: number;
-  img: string;
-  img2: string;
-  img3: string;
-  img4: string;
-  img5: string;
+  images: string[];
   reting?: IRating;
   department: string;
-  counter?: number | null;
+  counter: number;
   quantity: number;
   description: string
 }

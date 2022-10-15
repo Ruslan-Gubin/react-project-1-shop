@@ -1,6 +1,7 @@
 export {
   postApi,
   useGetPostsQuery,
+  useGetOnePostQuery,
   useCreatePostMutation,
   useDeletePostMutation,
   useUpdatePostMutation,
@@ -8,6 +9,7 @@ export {
 export {
   productsApi ,
   useGetProductsQuery,
-  useCreateProductsMutation,
+  useGetOneProductQuery,
   useRemoveProductMutation,
+  useCreateProductsMutation,
 } from "./productApi";

@@ -19,7 +19,6 @@ const filterSlice = createSlice({
     resetMenuId(state) {
       state.menuValue = "Все";
       state.textSearch = "";
-      console.log('object')
     },
 
     setSelectId(state, action) {
@@ -30,7 +29,6 @@ const filterSlice = createSlice({
       state.dataDepartments = action.payload.data.filter(
         (item: IProduct) => item.department == action.payload.id
       );
-
     },
 
     setTextSearch(state, action) {
@@ -38,6 +36,8 @@ const filterSlice = createSlice({
     },
   },
 });
+
+export const selectFilters = (state) => state.filters
 
 export const {
   setDataDepartment,

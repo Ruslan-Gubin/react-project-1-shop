@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCategoryValue, resetPageProduct } from "../../../store/slice";
+import { setCategoryValue, resetPageProduct, selectFilters } from "../../../store/slice";
 import { categoryFilterName } from "../../../utils";
 
 import styles from "./Categories.module.scss";
@@ -11,7 +11,7 @@ interface ICategories {
 }
 
 const Categories: React.FC<ICategories> = React.memo(({ data, isLoading }) => {
-  const { menuValue } = useSelector((state) => state.filters);
+  const { menuValue } = useSelector(selectFilters);
   const dispath = useDispatch();
 
   const handlerClickCategory = (item: string) => {

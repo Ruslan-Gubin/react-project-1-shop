@@ -18,8 +18,7 @@
       padding: var.$spasing-small;
       @media (max-width: 750px) {
       }
-      .img { 
-        cursor: pointer;  
+      .img {   
         padding-left: var.$spasing-small; 
         @media (max-width: 750px) {
           display: none;
@@ -37,14 +36,15 @@
         font-size: 20px;
         position: relative;
       }
-      .name {
-        font-weight: 300;
+      .title {
         width: 50%;
-        word-break: break-word;
-        color: var.$color-card-bg;
-        font-size: var.$font-size-average;
-        font-family: var.$ff-cormorantgaramond-regular;
+        
         p {
+          display: block;
+          word-break: break-word;
+          color: var.$color-card-bg;
+          font-size: var.$font-size-average;
+          font-family: var.$ff-cormorantgaramond-regular;
           
         }
         @media (max-width: 750px) {

@@ -2,11 +2,7 @@
   "compilerOptions": {
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -22,6 +18,10 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src/**/*.tsx", "src/**/*.ts", "declarations.d.ts"
-, "src/store/pagination", "src/store/pagination"  ]
+    "src",
+    "src/**/*.tsx",
+    "src/**/*.ts",
+    "src/store/pagination",
+    "src/models/assets"
+  ]
 }

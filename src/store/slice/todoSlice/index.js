@@ -2,4 +2,4 @@ import todoSlice from './todoSlice';
 
 export {todoSlice}
 
-export {addTodo, removeTodo, toggleTodoComplete} from './todoSlice';
+export {selectTodos, addTodo, removeTodo, toggleTodoComplete} from './todoSlice';

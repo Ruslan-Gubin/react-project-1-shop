@@ -8,6 +8,13 @@ const getAllPosts = async (req, res) => {
     .then((post) => res.status(200).json(post))
     .catch((error) => handleError(res, error));
 };
+
+const getOnePost = async (req, res) => {
+  await Post.findById(req.params.id)
+    .then((post) => res.status(200).json(post))
+    .catch((error) => handleError(res, error));
+};
+
 const addPost = async (req, res) => {
   const { title, text, img } = req.body;
   const post = new Post({ title, text, img });
@@ -24,7 +31,8 @@ const deletePost = async (req, res) => {
 };
 
 module.exports = {
-  getAllPosts,
   addPost,
+  getOnePost,
   deletePost,
+  getAllPosts,
 };

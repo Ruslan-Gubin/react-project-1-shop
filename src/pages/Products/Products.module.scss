@@ -2,6 +2,16 @@
 
 .products {
     text-align: center;
+
+    .swiper {
+        margin: 0 auto;
+        width: 70%;
+        height: 421px;
+        @media (max-width: 1200px) {
+            width: 100%;
+        }
+    }
+
     .container {
 
     }

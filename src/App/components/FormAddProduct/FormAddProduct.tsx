@@ -1,19 +1,19 @@
-import React, { useCallback, useState } from "react";
-import Form from "../Form";
-import Modal from "../Modal";
-import { useCreateProductsMutation } from "../../../store/rtkQuery/productApi/productsApi";
+import {
+  useCreateProductsMutation,
+  useGetProductsQuery,
+} from "../../../store/rtkQuery";
+import React, {  useState } from "react";
+import { useParams } from "react-router-dom";
+import { selectAddProduct, sumDiscount } from "../../../utils";
 import { ButtonMain, InputMain, TextareaMain } from "../Ui";
-import { CustomSelect } from "../CustomSelect";
-import { selectAddProduct } from "../../../utils";
 import styles from "./FormAddProduct.module.scss";
+import { CustomSelect } from "../CustomSelect";
+import { Modal } from "../Modal";
+import Form from "../Form";
 
-
-interface IdepartmentProps {
-  department: {};
-  data: [];
-}
-
-const FormAddProduct: React.FC<IdepartmentProps> = React.memo(({ data, department }) => {
+const FormAddProduct: React.FC = React.memo(() => {
+  const { id } = useParams();
+  const { isLoading, isError, data = [] } = useGetProductsQuery(0);
   const [activeModal, setActiveModal] = useState(false);
   const [createProducts, {}] = useCreateProductsMutation();
   const [title, setTitle] = useState("");
@@ -22,14 +22,14 @@ const FormAddProduct: React.FC<IdepartmentProps> = React.memo(({ data, departmen
   const [price, setPrice] = useState("");
   const [oldPrice, setOldPrice] = useState("");
   const [category, setCategory] = useState("");
-  const [selectCategory, setSelectCategory] = useState("");
+  const [selectCategory, setSelectCategory] = useState(selectAddProduct(data)[0]);
   const [newCategory, setNewCategory] = useState("");
   const [img, setImg] = useState("");
   const [img2, setImg2] = useState("");
   const [img3, setImg3] = useState("");
   const [img4, setImg4] = useState("");
   const [img5, setImg5] = useState("");
-
+ 
   const removeTextInput = () => {
     return (
       setTitle(""),
@@ -46,9 +46,6 @@ const FormAddProduct: React.FC<IdepartmentProps> = React.memo(({ data, departmen
       setNewCategory("")
     );
   };
-  const handlerAddProduct = useCallback(() => {
-    setActiveModal(!activeModal);
-  }, [activeModal]);
 
   const habdlerAddProduct: React.FormEventHandler<HTMLFormElement> = async (
     event
@@ -56,17 +53,20 @@ const FormAddProduct: React.FC<IdepartmentProps> = React.memo(({ data, departmen
     event.preventDefault();
     await createProducts({
       category: newCategory ? newCategory : selectCategory.value,
-      img,
-      img2,
-      img3,
-      img4,
-      img5,
+      images: [img, img2, img3, img4, img5],
       title,
       description,
       price,
       oldPrice,
       quantity,
-      department,
+      department: id,
+      types: {
+        color: [],
+        size: [],
+      },
+      counter: 0,
+      selected: false,
+      discount: sumDiscount(price, oldPrice),
     }).unwrap();
     removeTextInput();
   };
@@ -76,10 +76,12 @@ const FormAddProduct: React.FC<IdepartmentProps> = React.memo(({ data, departmen
     setActiveModal(false);
     removeTextInput();
   };
-
+  
   return (
     <>
-      <ButtonMain onClick={handlerAddProduct} bgColor="info">
+      {isError && <div>Error...</div>}
+      {isLoading && <div>Loading...</div>}
+      <ButtonMain onClick={() => setActiveModal(!activeModal)} bgColor="info">
         Добавить
       </ButtonMain>
       <Modal
@@ -88,15 +90,18 @@ const FormAddProduct: React.FC<IdepartmentProps> = React.memo(({ data, departmen
         setActive={setActiveModal}
       >
         <Form
-          handlerSubmit={habdlerAddProduct}
+          handlerSubmit={(event) => habdlerAddProduct(event)}
           titleText={"Добавить новый товар:"}
-          closeForm={closeModal}
+          closeForm={(e)=>closeModal(e)}
         >
           <div className={styles.category}>
+            {!isLoading &&
             <CustomSelect
-              onChange={(value) => setSelectCategory(value)}
-              options={selectAddProduct(data)}
+            defaultValue={selectCategory}
+            onChange={(value) => setSelectCategory(value)}
+            options={selectAddProduct(data)}
             />
+          }
             <InputMain
               value={newCategory}
               setValue={setNewCategory}
@@ -171,7 +176,7 @@ const FormAddProduct: React.FC<IdepartmentProps> = React.memo(({ data, departmen
             value={title}
             setValue={setTitle}
             placeholder="Заголовок"
-            />
+          />
           <TextareaMain
             rows={3}
             cols={50}
@@ -181,26 +186,26 @@ const FormAddProduct: React.FC<IdepartmentProps> = React.memo(({ data, departmen
             placeholder="Описание"
           />
           <div className={styles.prices}>
-          <InputMain
-            required={true}
-            type="number"
-            value={price}
-            setValue={setPrice}
-            placeholder="Цена"
+            <InputMain
+              required={true}
+              type="number"
+              value={price}
+              setValue={setPrice}
+              placeholder="Цена"
             />
-          <InputMain
-            type="number"
-            value={oldPrice}
-            setValue={setOldPrice}
-            placeholder="Старая цена"
+            <InputMain
+              type="number"
+              value={oldPrice}
+              setValue={setOldPrice}
+              placeholder="Старая цена"
             />
-          <InputMain
-            type="number"
-            value={quantity}
-            setValue={setQuantity}
-            placeholder="Количество"
+            <InputMain
+              type="number"
+              value={quantity}
+              setValue={setQuantity}
+              placeholder="Количество"
             />
-            </div>
+          </div>
         </Form>
       </Modal>
     </>

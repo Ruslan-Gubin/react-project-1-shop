@@ -16,8 +16,8 @@ const InputMain: JSXElementConstructor<InputMainType> = React.memo(({
 }) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
-  const handlerChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(
-    (e) => {
+  const handlerChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       setValue(e.target.value);
     },
     [value]

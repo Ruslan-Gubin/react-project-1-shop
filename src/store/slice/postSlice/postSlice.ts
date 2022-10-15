@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IPost } from "../../../models/products";
+import { sortArrayforDatePost } from "../../../utils";
 
 const postSlice = createSlice({
   name: "posts",
@@ -9,8 +10,9 @@ const postSlice = createSlice({
   },
   reducers: {
     setStatePost(state, action) {
-      const initialArray = action.payload.data.map((item: IPost) => item);
-      state.post = initialArray.filter((item: IPost) =>
+      const initialArray = action.payload.data.map((item: IPost) => item);     
+      const sortDateArray = sortArrayforDatePost(initialArray)
+      state.post = sortDateArray.filter((item: IPost) =>
         item.title.toLowerCase().includes(state.searchValue.toLowerCase())
       );
     },
@@ -20,6 +22,8 @@ const postSlice = createSlice({
     },
   },
 });
+
+export const selectPosts = (state) => state.posts;
 
 export const { setStatePost, setsearchValuePost } = postSlice.actions;
 

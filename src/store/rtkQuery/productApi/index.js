@@ -1,1 +1,7 @@
-export {productsApi,useGetProductsQuery, useCreateProductsMutation, useRemoveProductMutation} from './productsApi';
+export {
+  useGetOneProductQuery,
+  productsApi,
+  useGetProductsQuery,
+  useCreateProductsMutation,
+  useRemoveProductMutation,
+} from "./productsApi";

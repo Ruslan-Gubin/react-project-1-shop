@@ -24,11 +24,11 @@ const deleteProduct = async (req, res) => {
 };
 
 const editProduct = async (req, res) => {
-  const { category, description, title, img, img2, img3, img4, img5, price, oldPrice, quantity, department } = req.body;
+  const { category, title, description, images, types, price, oldPrice, quantity, department ,discount,selected,counter} = req.body;
   const { id } = req.params;
   await Products.findByIdAndUpdate(
     
-    { id,  category, title, description, img, img2, img3, img4, img5, price, oldPrice, quantity, department },
+    { id,  category, title, description, images, types, price, oldPrice, quantity, department ,discount,selected,counter},
     { new: true }
   )
     .then((elem) => res.status(200).json(elem))
@@ -36,8 +36,8 @@ const editProduct = async (req, res) => {
 };
 
 const addProduct = async (req, res) => {
-  const { category, title, description, img, img2, img3, img4, img5, price, oldPrice, quantity, department } = req.body;
-  const product = new Products({ category, title, description, img, img2, img3, img4, img5, price, oldPrice, quantity, department });
+  const { category, title, description, images, types, price, oldPrice, quantity, department ,discount,selected,counter} = req.body;
+  const product = new Products({ category, title, description, images, types, price, oldPrice, quantity, department ,discount,selected,counter});
   await product
     .save()
     .then((product) => res.status(201).json(product))

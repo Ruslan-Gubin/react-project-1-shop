@@ -9,16 +9,16 @@ import styles from "./Posts.module.scss";
 
 const Posts: React.FC = React.memo(() => {
   const { isLoading, isError, data = [] } = useGetPostsQuery(5);
-  const { perPage, page } = useSelector((state) => state.paginationPost);
-  const { post, searchValue } = useSelector((state) => state.posts);
+  const { perPage, page } = useSelector(slice.selectPaginationPost);
+  const { post, searchValue } = useSelector(slice.selectPosts);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     !isLoading ? dispatch(slice.setStatePost({ data })) : false;
-    if (searchValue) dispatch(slice.resetPagePost());
+    if (searchValue) dispatch(slice.resetPagePost());  
   }, [data, searchValue]);
 
-  const pagination = paginationCalculatorPage(post, page, perPage);
+  let pagination = paginationCalculatorPage(post, page, perPage);
 
   return (
     <div className={styles.wrapper}>

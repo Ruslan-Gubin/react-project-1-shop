@@ -8,6 +8,12 @@ const sortArrayforSelectDate = (array) => {
   );
 };
 
+const sortArrayforDatePost = (array) => {
+  return array.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+};
+
 const sortArrayforSelectDiscount = (array) => {
   return array.sort((a, b) => parseFloat(a.discount) - parseFloat(b.discount));
 };
@@ -25,6 +31,7 @@ sortArrayforSelect(data).reverse();
 };
 
 export {
+  sortArrayforDatePost,
   sortArrayforSelect,
   sortArrayforSelectDate,
   sortArrayforSelectDiscount,

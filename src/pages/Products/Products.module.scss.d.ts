@@ -4,6 +4,7 @@ interface CssExports {
   'category': string;
   'items': string;
   'products': string;
+  'swiper': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

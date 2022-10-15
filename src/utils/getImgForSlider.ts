@@ -1,15 +1,7 @@
+import { IProduct } from "../models/products";
 
- const getImgForSlider = (array) => {
-  const resArray = []
-  const resObject = {}
-  for (let i = 0; i < array.length; i++) {
-    const item = array[i];
-    resObject[i] = {images: item.img}
-  }
-  for (let value in resObject) {
-    resArray.push(resObject[value])
-  } 
-  return resArray;
+ const getImgForSlider = (array:IProduct[]) => {
+   return array.map((item) => item ? item.images[0] : false )
 }
 
 export {getImgForSlider}

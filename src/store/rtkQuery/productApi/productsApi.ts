@@ -16,6 +16,11 @@ export const productsApi = createApi({
             ]
              : [{ type: 'Products' , id: 'LIST'}],   
         }),
+
+        getOneProduct: build.query<IProduct[], IProduct>({
+            query: (products) => `products/${products.id}`,   
+        }),
+
         createProducts: build.mutation<IProduct[], unknown>({
             query: (body) => ({
                 url: 'products',
@@ -26,8 +31,8 @@ export const productsApi = createApi({
         }),
 
         removeProduct: build.mutation<IProduct[], IProduct>({
-            query: (stationery) => ({
-                url: `products/${stationery._id}`,
+            query: (products) => ({
+                url: `products/${products._id}`,
                 method: 'DELETE',
             }),
             invalidatesTags: [{type: 'Products', id: 'LIST'}],
@@ -36,4 +41,4 @@ export const productsApi = createApi({
     })
 })
 
-export const { useGetProductsQuery, useCreateProductsMutation, useRemoveProductMutation } = productsApi
+export const { useGetProductsQuery, useCreateProductsMutation, useRemoveProductMutation, useGetOneProductQuery } = productsApi

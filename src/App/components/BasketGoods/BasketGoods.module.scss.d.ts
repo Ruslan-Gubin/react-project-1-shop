@@ -10,11 +10,11 @@ interface CssExports {
   'item': string;
   'mediaPrice': string;
   'mobileRemove': string;
-  'name': string;
   'oldPrice': string;
   'price': string;
   'root': string;
   'tailPrice': string;
+  'title': string;
   'ul': string;
 }
 export const cssExports: CssExports;

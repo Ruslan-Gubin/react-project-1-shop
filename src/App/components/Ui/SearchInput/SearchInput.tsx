@@ -7,7 +7,7 @@ interface ISerch {
   register: string;
   handlerSearchClick?: () => void;
   onKeyDown?:() => void;
-  onChange: any;
+  onChange: (event: string) => void;
 }
 
 const SearchInput: React.FC<ISerch> = React.memo(({

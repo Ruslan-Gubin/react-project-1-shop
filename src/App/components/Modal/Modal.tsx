@@ -31,7 +31,7 @@ const [date,setDate] = useState(new Date().toLocaleTimeString())
     );
 });
 
-export default Modal;
+export  {Modal};
 
 
         

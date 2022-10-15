@@ -1,12 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { checkIcon } from '../../../data';
+import { selectOrder } from '../../../store/slice';
 import { formatterRub, totalSum, totalSumOldPrice } from '../../../utils';
 import { ButtonMain } from '../Ui';
 import styles from './BasketInfo.module.scss';
 
 const BasketInfo = React.memo(() => {
-  const order = useSelector((state) => state.order.order);
+  const {order} = useSelector(selectOrder);
 
   return (
     <div className={styles.root}>

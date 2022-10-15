@@ -31,6 +31,8 @@ const paginationProductSlice = createSlice({
   },
 });
 
+export const selectPaginationProduct = (state) => state.paginationProduct;
+
 export const {
   setPrevPageProduct,
   setNextPageProduct,

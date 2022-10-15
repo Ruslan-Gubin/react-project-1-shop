@@ -11,13 +11,12 @@ import { IProduct } from "../../models/products";
 import styles from "./Product.module.scss";
 
 const Product = React.memo(() => {
-  const order = useSelector((state) => state.order.order);
-  const sliceState = useSelector((state) => state.filters);
-  const { page, perPage } = useSelector((state) => state.paginationProduct);
+  const {order} = useSelector(slice.selectOrder);
+  const sliceState = useSelector(slice.selectFilters);
+  const { page, perPage } = useSelector(slice.selectPaginationProduct);
   const { isLoading, isError, data = [] } = useGetProductsQuery(0);
   const {id} = useParams();
   const dispatch = useDispatch();
-  
   React.useEffect(() => {
     if (!isLoading) {
       dispatch(slice.setDataDepartment({ id, data }));
@@ -49,8 +48,8 @@ const Product = React.memo(() => {
     searchText
   );
 
-  const pagination = utils.paginationCalculatorPage(searchText, page, perPage);
-
+  const pagination:object[] = utils.paginationCalculatorPage(searchText, page, perPage);
+   
   return (
     <div className={styles.catalog}>
       {isError && <p>Error</p>}
@@ -58,13 +57,10 @@ const Product = React.memo(() => {
         <ui.SearchInput
           placeholder="Поиск товара"
           register={sliceState.textSearch}
-          onChange={(value: string) => dispatch(slice.setTextSearch(value))}
+          onChange={(value) => dispatch(slice.setTextSearch(value))}
         />
         <ui.ButtonGoBack text="Вернуться к каталогу" />
-        <component.FormAddProduct
-          data={sliceState.dataDepartments}
-          department={id}
-        />
+        <component.FormAddProduct />
         <div className={styles.cart}>
           <ui.CustomLink to="/cart">
             <ui.ButtonMain bgColor="green">
@@ -91,7 +87,7 @@ const Product = React.memo(() => {
         </div>
         <div className={styles.items}>
           {!isLoading &&
-            pagination.map((product: any) => (
+            pagination.map((product) => (
               <component.CardProductCatalog
                 product={product}
                 {...product}
