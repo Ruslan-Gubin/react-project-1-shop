@@ -6,7 +6,7 @@ import styles from './Form.module.scss';
 interface FormType {
   children: React.ReactNode
   handlerSubmit:(event:React.FormEvent<HTMLFormElement>) => void
-  closeForm: (e:React.MouseEvent<HTMLButtonElement>) => void
+  closeForm: (event:React.MouseEvent<HTMLButtonElement>) => void
   watch?: boolean
   titleText: string
 }
@@ -20,7 +20,7 @@ const Form: JSXElementConstructor<FormType> = React.memo(({
   
   }) => {
 
-    const handlerCloseForm:React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    const handlerCloseForm = (e:React.MouseEvent<HTMLButtonElement>) => {
       closeForm(e)
     }
 

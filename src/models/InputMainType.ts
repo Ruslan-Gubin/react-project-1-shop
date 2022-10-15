@@ -1,16 +1,15 @@
 
 interface InputMainType {
-  children?: any;
+  children?: JSX.Element | React.ReactNode | null;
   placeholder?: string;
-  name?: string;
   autoComplete?: string;
   required?: boolean;
-  autoFocus?: any;
-  type?: any;
-  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
-  value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  type?: string;
+  onKeyDown?: () => void;
+  value: string ;
+  onChange: (value: string) => void;
   className?: string;
+  autofocus?: boolean;
 }
 
 export type {InputMainType} 

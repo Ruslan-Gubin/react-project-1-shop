@@ -11,7 +11,7 @@ import styles from "./ProductSinglPage.module.scss";
 
 
 const ProductSinglPage: React.FC = () => {
-  const  {id}  = useParams();
+  const  {id}  = useParams<{id?: string}>();
   const {isLoading, isError,data = []} = useGetOneProductQuery({id});
   const {order} = useSelector(selectOrder);
   const dispatch = useDispatch();

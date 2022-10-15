@@ -1,10 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { productSortingArray } from "../../../data";
+import { IfilterSlice } from "../../../models";
 import { IProduct } from "../../../models/products";
+import { TypeRootState } from "../../store";
 
 const filterSlice = createSlice({
   name: "filters",
-  initialState: {
+  initialState:<IfilterSlice> {
     menuValue: "Все",
     paginationPage: 1,
     filterSelect: productSortingArray[0],
@@ -12,7 +14,7 @@ const filterSlice = createSlice({
     textSearch: "",
   },
   reducers: {
-    setCategoryValue(state, action) {
+    setCategoryValue(state, action: PayloadAction<{item:string}>) {
       state.menuValue = action.payload.item;
     },
 
@@ -21,23 +23,23 @@ const filterSlice = createSlice({
       state.textSearch = "";
     },
 
-    setSelectId(state, action) {
+    setSelectId(state, action: PayloadAction<{value: string}>) {
       state.filterSelect = action.payload.value;
     },
 
-    setDataDepartment(state, action) {
-      state.dataDepartments = action.payload.data.filter(
-        (item: IProduct) => item.department == action.payload.id
-      );
+    setDataDepartment(state, action: PayloadAction<{id: string, data: IProduct[]}>) {
+        state.dataDepartments = action.payload.data.filter(
+          (item:IProduct) => item.department == action.payload.id
+          );
     },
 
-    setTextSearch(state, action) {
-      state.textSearch = action.payload;
+    setTextSearch(state, action: PayloadAction<{value: string}>) {
+      state.textSearch = action.payload.value;
     },
   },
 });
 
-export const selectFilters = (state) => state.filters
+export const selectFilters = (state: TypeRootState) => state.filters
 
 export const {
   setDataDepartment,

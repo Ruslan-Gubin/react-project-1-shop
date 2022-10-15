@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { TypeRootState } from "../../store";
 
 interface IpaginationProduct {
   page: number;
@@ -7,7 +8,7 @@ interface IpaginationProduct {
 
 const paginationPostSlice = createSlice({
   name: "paginationPost",
-  initialState: {
+  initialState:<IpaginationProduct> {
     page: 1,
     perPage: 12,
   },
@@ -17,11 +18,11 @@ const paginationPostSlice = createSlice({
       state.page !== 1 ? (state.page = state.page - 1) : false;
     },
 
-    setNextPagePost(state, action) {
+    setNextPagePost(state, action: PayloadAction<number>) {
       action.payload !== state.page ? (state.page = state.page + 1) : false;
     },
 
-    setPaginatePost(state, action) {
+    setPaginatePost(state, action: PayloadAction<{pageNumber: number}>) {
       state.page = action.payload.pageNumber;
     },
 
@@ -31,7 +32,7 @@ const paginationPostSlice = createSlice({
   },
 });
 
-export const selectPaginationPost = (state) => state.paginationPost
+export const selectPaginationPost = (state: TypeRootState) => state.paginationPost
 
 export const { resetPagePost, setPrevPagePost, setNextPagePost, setPaginatePost } =
 paginationPostSlice.actions;

@@ -22,8 +22,7 @@ const PostSearch = React.memo(() => {
     >
       <InputMain
         value={title}
-        setValue={setTitle}
-        name="search"
+        onChange={(value) => setTitle(value)}
         placeholder="Поиск"
       />
       <ButtonMain bgColor="green">Найти</ButtonMain>

@@ -1,15 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IPost } from "../../../models/products";
 import { sortArrayforDatePost } from "../../../utils";
+import { TypeRootState } from "../../store";
 
 const postSlice = createSlice({
   name: "posts",
   initialState: {
-    post: [],
-    searchValue: "",
+    post:<IPost[]> [],
+    searchValue:<string> "",
   },
   reducers: {
-    setStatePost(state, action) {
+    setStatePost(state, action: PayloadAction<{data:IPost[]}>) {
       const initialArray = action.payload.data.map((item: IPost) => item);     
       const sortDateArray = sortArrayforDatePost(initialArray)
       state.post = sortDateArray.filter((item: IPost) =>
@@ -17,13 +18,13 @@ const postSlice = createSlice({
       );
     },
 
-    setsearchValuePost(state, action) {
+    setsearchValuePost(state, action: PayloadAction<{value: string}>) {
       state.searchValue = action.payload.value;
     },
   },
 });
 
-export const selectPosts = (state) => state.posts;
+export const selectPosts = (state: TypeRootState) => state.posts;
 
 export const { setStatePost, setsearchValuePost } = postSlice.actions;
 

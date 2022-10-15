@@ -1,6 +1,6 @@
 import React from "react";
 import { useGetProductsQuery } from "../../store/rtkQuery";
-import { useDispatch, useSelector } from "react-redux";
+import {useSelector} from "react-redux";
 import { useParams } from "react-router-dom";
 import * as utils from "../../utils";
 import * as component from "../../App/components";
@@ -9,31 +9,33 @@ import * as slice from "../../store/slice";
 import { cartPng, productSortingArray } from "../../data";
 import { IProduct } from "../../models/products";
 import styles from "./Product.module.scss";
+import { useAppDispatch } from "../../store/store";
 
 const Product = React.memo(() => {
   const {order} = useSelector(slice.selectOrder);
   const sliceState = useSelector(slice.selectFilters);
   const { page, perPage } = useSelector(slice.selectPaginationProduct);
-  const { isLoading, isError, data = [] } = useGetProductsQuery(0);
-  const {id} = useParams();
-  const dispatch = useDispatch();
+  const { isLoading, isError, data = [] } = useGetProductsQuery(null);
+  const {id} = useParams<{id?: string}>();
+  const dispatch = useAppDispatch();
+  
   React.useEffect(() => {
-    if (!isLoading) {
+    if (!isLoading && !isError && id) {
       dispatch(slice.setDataDepartment({ id, data }));
     }
   }, [data]);
 
-  let searchText = utils
+  let searchText:IProduct[] = utils
     .initSelect(sliceState.dataDepartments)
     .filter((item: IProduct) => {
-      return item.title
-        .toLowerCase()
-        .includes(sliceState.textSearch.toLowerCase());
-    });
-
+      if (!isLoading && !isError) {
+        return item.title?.toLowerCase().includes(sliceState.textSearch.toLowerCase());
+      }
+     });   
+        
   React.useEffect(() => {
     if (sliceState.textSearch.length > 0)
-    dispatch(slice.resetPageProduct());
+    !isLoading ? dispatch(slice.resetPageProduct()) : null;
   }, [sliceState.textSearch]);
 
   sliceState.menuValue !== "Все"
@@ -42,13 +44,15 @@ const Product = React.memo(() => {
       ))
     : false;
 
-  utils.selectOptionsSort(
-    sliceState.filterSelect,
-    productSortingArray,
-    searchText
-  );
-
-  const pagination:object[] = utils.paginationCalculatorPage(searchText, page, perPage);
+    if (!isLoading) {
+      utils.selectOptionsSort(
+        sliceState.filterSelect,
+        productSortingArray,
+        searchText
+        );
+      }
+        
+    const pagination:IProduct[] = utils.paginationCalculatorPage(searchText, page, perPage) ;
    
   return (
     <div className={styles.catalog}>
@@ -57,7 +61,7 @@ const Product = React.memo(() => {
         <ui.SearchInput
           placeholder="Поиск товара"
           register={sliceState.textSearch}
-          onChange={(value) => dispatch(slice.setTextSearch(value))}
+          onChange={(value:string) => dispatch(slice.setTextSearch({value}))}
         />
         <ui.ButtonGoBack text="Вернуться к каталогу" />
         <component.FormAddProduct />
@@ -80,7 +84,7 @@ const Product = React.memo(() => {
             />
             <component.CustomSelect
               options={productSortingArray}
-              onChange={(value) => dispatch(slice.setSelectId({ value }))}
+              onChange={(value:string) => dispatch(slice.setSelectId( {value} ))}
               defaultValue={sliceState.filterSelect}
             />
           </div>

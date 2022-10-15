@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import * as persist from "redux-persist";
 import * as rtkQuery from "./rtkQuery";
 import * as slice from "./slice";
+import { useDispatch } from "react-redux";
 
 const rootReducer = combineReducers({
   posts: slice.postSlice,
@@ -50,7 +51,14 @@ const store = configureStore({
     }).concat([rtkQuery.postApi.middleware, rtkQuery.productsApi.middleware]),
 });
 
-export const persistor = persist.persistStore(store);
+const persistor = persist.persistStore(store);
 export default store;
 
-export type TypeRootState = ReturnType<typeof store.getState>;
+type AppDispatch = typeof store.dispatch;
+const useAppDispatch = () => useDispatch<AppDispatch>();
+
+type TypeRootState = ReturnType<typeof store.getState>;
+
+export type { AppDispatch, TypeRootState };
+
+export { persistor, useAppDispatch };

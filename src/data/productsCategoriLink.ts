@@ -1,7 +1,7 @@
 export interface IproductsCategoriLink {
     img: string
     catigoriName: string
-    department?: string
+    department: string
 }
 
 const productsCategoriLink:IproductsCategoriLink[] = [

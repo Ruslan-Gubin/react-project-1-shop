@@ -1,8 +1,7 @@
 import {
   useCreateProductsMutation,
-  useGetProductsQuery,
 } from "../../../store/rtkQuery";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { selectAddProduct, sumDiscount } from "../../../utils";
 import { ButtonMain, InputMain, TextareaMain } from "../Ui";
@@ -10,34 +9,38 @@ import styles from "./FormAddProduct.module.scss";
 import { CustomSelect } from "../CustomSelect";
 import { Modal } from "../Modal";
 import Form from "../Form";
+import { useSelector } from "react-redux";
+import { selectFilters } from "../../../store/slice";
 
 const FormAddProduct: React.FC = React.memo(() => {
+  const {dataDepartments} = useSelector(selectFilters)
   const { id } = useParams();
-  const { isLoading, isError, data = [] } = useGetProductsQuery(0);
   const [activeModal, setActiveModal] = useState(false);
   const [createProducts, {}] = useCreateProductsMutation();
-  const [title, setTitle] = useState("");
-  const [description, setDescreption] = useState("");
-  const [quantity, setQuantity] = useState("");
-  const [price, setPrice] = useState("");
-  const [oldPrice, setOldPrice] = useState("");
-  const [category, setCategory] = useState("");
-  const [selectCategory, setSelectCategory] = useState(selectAddProduct(data)[0]);
-  const [newCategory, setNewCategory] = useState("");
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescreption] = useState<string>("");
+  const [quantity, setQuantity] = useState<string>("");
+  const [price, setPrice] = useState<string>("");
+  const [oldPrice, setOldPrice] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [selectCategory, setSelectCategory] = useState(
+    selectAddProduct(dataDepartments)[0]
+  );
+  const [newCategory, setNewCategory] = useState<string>("");
   const [img, setImg] = useState("");
   const [img2, setImg2] = useState("");
   const [img3, setImg3] = useState("");
   const [img4, setImg4] = useState("");
   const [img5, setImg5] = useState("");
- 
+
   const removeTextInput = () => {
     return (
       setTitle(""),
       setDescreption(""),
       setPrice(""),
       setQuantity(""),
-      setImg(""),
       setOldPrice(""),
+      setImg(""),
       setImg2(""),
       setImg3(""),
       setImg4(""),
@@ -71,16 +74,14 @@ const FormAddProduct: React.FC = React.memo(() => {
     removeTextInput();
   };
 
-  const closeModal: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const closeModal: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     setActiveModal(false);
     removeTextInput();
   };
-  
+
   return (
     <>
-      {isError && <div>Error...</div>}
-      {isLoading && <div>Loading...</div>}
       <ButtonMain onClick={() => setActiveModal(!activeModal)} bgColor="info">
         Добавить
       </ButtonMain>
@@ -92,19 +93,17 @@ const FormAddProduct: React.FC = React.memo(() => {
         <Form
           handlerSubmit={(event) => habdlerAddProduct(event)}
           titleText={"Добавить новый товар:"}
-          closeForm={(e)=>closeModal(e)}
+          closeForm={(e) => closeModal(e)}
         >
-          <div className={styles.category}>
-            {!isLoading &&
-            <CustomSelect
-            defaultValue={selectCategory}
-            onChange={(value) => setSelectCategory(value)}
-            options={selectAddProduct(data)}
-            />
-          }
+          <div className={styles.category}>           
+              <CustomSelect
+                defaultValue={selectCategory}
+                onChange={(value) => setSelectCategory(value)}
+                options={selectAddProduct(dataDepartments)}
+              />
             <InputMain
               value={newCategory}
-              setValue={setNewCategory}
+              onChange={(value) => setNewCategory(value)}
               placeholder="Новая категория"
             />
           </div>
@@ -112,7 +111,7 @@ const FormAddProduct: React.FC = React.memo(() => {
             <InputMain
               required={true}
               value={img}
-              setValue={setImg}
+              onChange={(value) => setImg(value)}
               placeholder="Обязательное URL фото"
             />
             {img.length > 5 && (
@@ -123,7 +122,7 @@ const FormAddProduct: React.FC = React.memo(() => {
             {img.length > 5 && (
               <InputMain
                 value={img2}
-                setValue={setImg2}
+                onChange={(value) => setImg2(value)}
                 placeholder="Вставить URL фото 2 (необязательно)"
               >
                 {img2.length > 5 && (
@@ -136,7 +135,7 @@ const FormAddProduct: React.FC = React.memo(() => {
             {img2.length > 5 && (
               <InputMain
                 value={img3}
-                setValue={setImg3}
+                onChange={(value) => setImg3(value)}
                 placeholder="Вставить URL фото 3 (необязательно)"
               >
                 {img3.length > 5 && (
@@ -149,7 +148,7 @@ const FormAddProduct: React.FC = React.memo(() => {
             {img3.length > 5 && (
               <InputMain
                 value={img4}
-                setValue={setImg4}
+                onChange={(value) => setImg4(value)}
                 placeholder="Вставить URL фото 4 (необязательно)"
               >
                 {img4.length > 5 && (
@@ -162,7 +161,7 @@ const FormAddProduct: React.FC = React.memo(() => {
             {img4.length > 5 && (
               <InputMain
                 value={img5}
-                setValue={setImg5}
+                onChange={(value) => setImg5(value)}
                 placeholder="Вставить URL фото 5 (необязательно)"
               >
                 {img5.length > 5 && (
@@ -172,9 +171,8 @@ const FormAddProduct: React.FC = React.memo(() => {
             )}
           </div>
           <InputMain
-            type="text"
             value={title}
-            setValue={setTitle}
+            onChange={(value) => setTitle(value)}
             placeholder="Заголовок"
           />
           <TextareaMain
@@ -190,19 +188,19 @@ const FormAddProduct: React.FC = React.memo(() => {
               required={true}
               type="number"
               value={price}
-              setValue={setPrice}
+              onChange={(value) => setPrice(value)}
               placeholder="Цена"
             />
             <InputMain
               type="number"
               value={oldPrice}
-              setValue={setOldPrice}
+              onChange={(value) => setOldPrice(value)}
               placeholder="Старая цена"
             />
             <InputMain
               type="number"
               value={quantity}
-              setValue={setQuantity}
+              onChange={(value) => setQuantity(value)}
               placeholder="Количество"
             />
           </div>

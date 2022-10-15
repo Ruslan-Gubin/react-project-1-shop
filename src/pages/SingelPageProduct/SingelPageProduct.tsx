@@ -3,16 +3,20 @@ import { Link, useParams } from "react-router-dom";
 import { ProductSinglPage } from "../../App/components";
 import { ButtonGoBack } from "../../App/components/Ui";
 import { arrowLeft, productsCategoriLink } from "../../data";
+import { IproductsCategoriLink } from "../../data/productsCategoriLink";
+import { IProduct } from "../../models/products";
 import { useGetOneProductQuery } from "../../store/rtkQuery";
 import styles from "./SingelPageProduct.module.scss";
 
-const SingelPageProduct = () => {
-  const  {id}  = useParams();
-  const {isLoading, isError,data = []} = useGetOneProductQuery({id});
-  let map = {};
- 
-  productsCategoriLink.map((item) => {
-    if (item.department === data.department) map.name = item.catigoriName;
+const SingelPageProduct: React.FC = () => {
+  const { id } = useParams<string>();
+  const { isLoading, isError, data = [] } = useGetOneProductQuery({ id }as IProduct);
+  let map: { name?: string } = {};
+
+  productsCategoriLink.map((item: IproductsCategoriLink) => {
+      if (item.department === data.department) { 
+        map.name = item.catigoriName 
+      } 
   });
 
   return (

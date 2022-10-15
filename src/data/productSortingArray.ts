@@ -1,6 +1,6 @@
-import { sortArrayforSelectDate } from "../utils";
 
- interface IProductSortingArray  {
+
+export interface IProductSortingArray  {
   label: string;
   value: string;
 }

@@ -9,7 +9,7 @@ const ModalActive:React.FC = React.memo(() => {
   const [modalActive, setModalActive] = useState(false);
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
-  const [img, setImg] = useState("");
+  const [img, setImg] = useState<string>("");
   const [createPost, {}] = useCreatePostMutation();
 
   const handlerSubmit: React.FormEventHandler<HTMLFormElement> = async (
@@ -20,7 +20,7 @@ const ModalActive:React.FC = React.memo(() => {
     setText(""), setTitle(""),setImg('');
   };
 
-  const closeModal: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const closeModal: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     setModalActive(false);
     setText(""), setTitle(""),setImg('');
@@ -38,21 +38,19 @@ const ModalActive:React.FC = React.memo(() => {
         <Form
           titleText={"Форма заполнение поста:"}
           handlerSubmit={handlerSubmit}
-          closeForm={closeModal}
+          closeForm={(e)=> closeModal(e)}
           watch
         >
           <InputMain
             required={true}
-            name="img"
             value={img}
-            setValue={setImg}
+            onChange={(value) => setImg(value)}
             placeholder="Добавить изображения"
           />
           <InputMain
             required={true}
-            name="text"
             value={title}
-            setValue={setTitle}
+            onChange={(value) => setTitle(value)}
             placeholder="Заголовок"
           />
           <TextareaMain

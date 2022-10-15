@@ -1,15 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IProduct } from "../../../models/products";
+import { TypeRootState } from "../../store";
 
 const orderSlice = createSlice({
   name: "order",
   initialState: {
-    order: [],
+    order:<IProduct[]> [],
   },
   reducers: {
 
-    addToOrders(state, action) {
-      const newItem = action.payload;
+    addToOrders(state, action: PayloadAction<IProduct>) {
+      const newItem:IProduct = action.payload;
       const img = newItem.images[0]
  
         state.order.push({
@@ -20,20 +21,22 @@ const orderSlice = createSlice({
         });      
     },
 
-    removeToOrder(state, action) {
+    removeToOrder(state, action:PayloadAction<{_id: string}>) {
       state.order = state.order.filter(
         (item) => item._id !== action.payload._id
         );
     },
 
-    addCountGoods(state, action) {
-      const newItem = state.order.find(item => item._id === action.payload._id)    
-      newItem.counter = newItem.counter + 1;
+    addCountGoods(state, action:PayloadAction<{_id: string}>) {
+      const newItem = state.order.find(item => item._id === action.payload._id) 
+      if(newItem) {
+        newItem.counter = newItem.counter + 1;
+      }   
     },
   
-    removeCountGoods(state, action) {
+    removeCountGoods(state, action:PayloadAction<{_id: string}>) {
       const newItem = state.order.find(item => item._id === action.payload._id)    
-      if (newItem.counter > 1) {
+      if (newItem &&  newItem.counter > 1) {
         newItem.counter = newItem.counter - 1;
       }
     },
@@ -45,7 +48,7 @@ const orderSlice = createSlice({
   },
 });
 
-export const selectOrder = (state) => state.order
+export const selectOrder = (state: TypeRootState) => state.order
 
 export const {
   removeCountGoods,

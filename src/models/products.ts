@@ -4,17 +4,24 @@ interface IRating {
 }
 
 export interface IProduct {
-  category: string;
+  discount: number
+  selected: boolean
+  category?: string;
   _id?: string;
-  title: string;
-  price: number;
-  oldPrice: number;
-  images: string[];
+  title?: string;
+  price: number | string;
+  oldPrice: number | string;
+  images: string[] | string;
   reting?: IRating;
-  department: string;
+  department?: string;
   counter: number;
-  quantity: number;
-  description: string
+  quantity: number | string;
+  description?: string
+  // id?: string
+  types?: {
+    color?: string[]
+    size?: number[]
+  }
 }
 
 export interface IProductTest {

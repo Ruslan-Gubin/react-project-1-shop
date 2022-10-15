@@ -14,15 +14,15 @@ const Categories: React.FC<ICategories> = React.memo(({ data, isLoading }) => {
   const { menuValue } = useSelector(selectFilters);
   const dispath = useDispatch();
 
-  const handlerClickCategory = (item: string) => {
-    dispath(setCategoryValue({ item }));
+  const handlerClickCategory = (item:string) => {
+    dispath(setCategoryValue({item}));
     dispath(resetPageProduct());
+    
   };
-
   return (
     <div className={styles.links}>
       {!isLoading &&
-        categoryFilterName(data, true).map((item) => (
+        categoryFilterName(data, true).map((item:string) => (
           <div
             onClick={() => handlerClickCategory(item)}
             key={item}

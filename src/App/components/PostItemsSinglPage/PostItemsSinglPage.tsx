@@ -8,7 +8,7 @@ import styles from './PostItemsSinglPage.module.scss';
 
 const PostItemsSinglPage: React.FC = React.memo(() => {
   const [deletePost, {}] = useDeletePostMutation();
-  const {id} = useParams()
+  const {id} = useParams<{id?: string}>()
   const{ data = [],isError,isLoading} = useGetOnePostQuery({id})
 
     return (

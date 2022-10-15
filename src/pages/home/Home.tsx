@@ -16,43 +16,46 @@ const Home = React.memo(() => {
   const [text, setText] = useState("");
   const dispatch = useDispatch();
   const [date, setDate] = useState(RUDate.format(new Date()));
-    const [isVisible, toggleVisible] = useToggle(false)
-  const enterRef = React.useRef()
+  const [isVisible, toggleVisible] = useToggle(false);
+  const enterRef = React.useRef();
 
   const handlerKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
-    if (e.key === 'Enter') {    
-        dispatch(addTodo({ text })), setText("");
+    if (e.key === "Enter") {
+      dispatch(addTodo({ text })), setText("");
     }
-  }
-  
+  };
 
   return (
     <div>
-    {!isVisible ?
-    <ButtonMain onClick={()=> toggleVisible(true)}> Show Todo</ButtonMain>  
-    :
-    <ButtonMain onClick={()=> toggleVisible(false)}> Hide Todo</ButtonMain>
-    }
+      {!isVisible ? (
+        <ButtonMain onClick={() => toggleVisible(true)}> Show Todo</ButtonMain>
+      ) : (
+        <ButtonMain onClick={() => toggleVisible(false)}> Hide Todo</ButtonMain>
+      )}
 
       {isMobile && <ButtonMain bgColor="green">Это Мобилка</ButtonMain>}
       {isTablet && <ButtonMain bgColor="info">Это Планшет</ButtonMain>}
       {isDesktop && <ButtonMain bgColor="orange">Это Desktop</ButtonMain>}
-      <InputMain  value={text} setValue={setText} onKeyDown={handlerKeyDown}/>
+      <InputMain 
+      value={text} 
+      onChange={(value) => setText(value)}
+       onKeyDown={handlerKeyDown} 
+       />
       <ButtonMain
         onClick={() => {
-            dispatch(addTodo({ text })), setText("");
+          dispatch(addTodo({ text })), setText("");
         }}
         bgColor="black"
-        >
+      >
         Push
       </ButtonMain>
-        {isVisible && 
-<>
-      <TodosList />
-      <MultiplaySelect />
-      <Test />
-</>
-    }
+      {isVisible && (
+        <>
+          <TodosList />
+          <MultiplaySelect />
+          <Test />
+        </>
+      )}
 
       {formatter.format(100)}
       {formatter.format(101)}
