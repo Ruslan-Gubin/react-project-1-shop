@@ -1,9 +1,23 @@
-export {Product} from './Product';
-export {SingelPagePost} from './SingelPagePost';
-export {SingelPageProduct} from './SingelPageProduct';
-export {Products} from './Products';
-export {Posts} from './Posts';
-export {LoginPage} from './LoginPage';
-export {Home} from './Home';
-export {NotfoundPage} from './NotfoundPage';
-export {Basket} from './Basket';
+import { lazy } from 'react';
+
+const Posts = lazy(() => import('./Posts'))
+const Product = lazy(() => import('./Product'))
+const Products = lazy(() => import('./Products'))
+const SingelPagePost = lazy(() => import('./SingelPagePost'))
+const SingelPageProduct = lazy(() => import('./SingelPageProduct'))
+const LoginPage = lazy(() => import('./LoginPage'))
+const Home = lazy(() => import('./Home'))
+const NotfoundPage = lazy(() => import('./NotfoundPage'))
+const Basket = lazy(() => import('./Basket'))
+
+export {
+  Product,
+  Posts,
+  SingelPagePost,
+  Products,
+  LoginPage,
+  Home,
+  NotfoundPage,
+  Basket,
+  SingelPageProduct
+}

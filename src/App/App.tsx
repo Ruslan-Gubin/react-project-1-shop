@@ -7,6 +7,7 @@ import * as page from "../pages";
 const App = React.memo(() => {
   return (
     <>
+        <React.Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<page.Home />} />
@@ -20,8 +21,9 @@ const App = React.memo(() => {
           <Route path="*" element={<page.NotfoundPage />} />
         </Route>
       </Routes>
+        </React.Suspense>
     </>
   );
 });
 
-export default App;
+export {App};

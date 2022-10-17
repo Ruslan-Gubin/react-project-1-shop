@@ -14,19 +14,19 @@ import { Link } from "react-router-dom";
 
 const BasketGoods: React.FC = React.memo(() => {
   const { order } = useSelector(selectOrder);
-  const { isMobile, isTablet, isDesktop } = useMatchMedia();
+  const  isMobile  = useMatchMedia();
   const dispatch = useDispatch();
 
   const removeGoodsOrder = (_id: string) => dispatch(removeToOrder({ _id }));
 
   const addCount = React.useCallback(
     (_id: string) => dispatch(addCountGoods({ _id })),
-    [order]
+    []
   );
 
   const removeCount = React.useCallback(
     (_id: string) => dispatch(removeCountGoods({ _id })),
-    [order]
+    []
   );
 
   return (
@@ -36,7 +36,7 @@ const BasketGoods: React.FC = React.memo(() => {
           <li key={product._id} className={styles.item}>
             <div className={styles.img}>
               <Link to={`/products/${product.department}/${product._id}`}>
-                <img src={product.images} alt="product img" />
+                <img src={String(product.images)} alt="product img" />
               </Link>
             </div>
 
@@ -51,7 +51,7 @@ const BasketGoods: React.FC = React.memo(() => {
                     Цена: {formatterRub.format(Number(product.price))}
                   </span>
                   <img
-                    onClick={() => removeGoodsOrder(product._id)}
+                    onClick={() => removeGoodsOrder(String(product._id))}
                     className={styles.mobileRemove}
                     src={removeGoodsPng}
                     alt="delete"
@@ -62,14 +62,14 @@ const BasketGoods: React.FC = React.memo(() => {
 
             <div className={styles.buttons}>
               <button
-                onClick={() => removeCount(product._id)}
+                onClick={() => removeCount(String(product._id))}
                 className={styles.decrement}
               >
                 -
               </button>
               <span className={styles.count}>{product.counter}</span>
               <button
-                onClick={() => addCount(product._id)}
+                onClick={() => addCount(String(product._id))}
                 className={styles.increment}
               >
                 +
@@ -83,7 +83,7 @@ const BasketGoods: React.FC = React.memo(() => {
                 {formatterRub.format(Number(product.oldPrice))}
               </span>
               <img
-                onClick={() => removeGoodsOrder(product._id)}
+                onClick={() => removeGoodsOrder(String(product._id))}
                 className={styles.delete}
                 src={removeGoodsPng}
                 alt="delete"

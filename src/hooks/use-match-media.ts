@@ -1,6 +1,6 @@
-import { useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 
-const queries = [
+const queries:string[] = [
   '(max-width: 750px)',
   '(min-width: 750px) and (max-width: 1070px)',
   '(min-width: 1070px)',

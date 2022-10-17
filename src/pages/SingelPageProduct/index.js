@@ -1,1 +1,1 @@
-export {SingelPageProduct} from './SingelPageProduct';
+export {SingelPageProduct as default} from './SingelPageProduct';

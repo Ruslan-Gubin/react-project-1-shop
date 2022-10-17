@@ -1,1 +1,1 @@
-export { SingelPagePost } from './SingelPagePost';
+export { SingelPagePost as default } from './SingelPagePost';

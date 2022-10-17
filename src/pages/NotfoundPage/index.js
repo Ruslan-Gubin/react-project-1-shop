@@ -1,1 +1,1 @@
-export {NotfoundPage} from './NotfoundPage'
+export {NotfoundPage as default} from './NotfoundPage'

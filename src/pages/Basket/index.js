@@ -1,1 +1,1 @@
-export {Basket} from './Basket';
+export {Basket as default} from './Basket';
