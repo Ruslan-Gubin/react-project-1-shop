@@ -25,15 +25,9 @@ const Product = React.memo(() => {
 
   React.useEffect(() => {
     dispatch(slice.setSearchTextForMenu());
-  }, [sliceState.dataDepartments, sliceState.textSearch, sliceState.menuValue]);
-
-  React.useEffect(() => {
     if (sliceState.textSearch.length) dispatch(slice.resetPageProduct());
-  }, [sliceState.textSearch]);
-
-  React.useEffect(() => {
     if (!isLoading) dispatch(slice.setFilterPagination());
-  }, [sliceState.textMenuFilter, sliceState.page]);
+  }, [sliceState.dataDepartments, sliceState.textSearch, sliceState.menuValue, sliceState.page]);
 
   return (
     <div className={styles.catalog}>

@@ -13,7 +13,7 @@ const App = React.memo(() => {
           <Route path="products" element={<page.Products />} />
           <Route path="products/:id" element={<page.Product />} />
           <Route path="products/:id/:id" element={<page.SingelPageProduct />} />
-          <Route path="login" element={<page.LoginPage />} />
+          {/* <Route path="login" element={<page.LoginPage />} /> */}
           <Route path="post" element={<page.Posts />} />
           <Route path="cart" element={<page.Basket />} />
           <Route path="post/:id" element={<page.SingelPagePost />} />
