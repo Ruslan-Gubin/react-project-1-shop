@@ -18,11 +18,11 @@ export const productsApi = createApi({
              : [{ type: 'Products' , id: 'LIST'}],   
         }),
 
-        getOneProduct: build.query<IProduct, IProduct>({
-            query: (products) => `products/${products.id}`,   
+        getOneProduct: build.query<IProduct, string>({
+            query: (id) => `products/${id}`,   
         }),
 
-        createProducts: build.mutation<IProduct[], IProduct>({
+        createProducts: build.mutation<IProduct, IProduct>({
             query: (body) => ({
                 url: 'products',
                 method: 'POST',
@@ -31,9 +31,9 @@ export const productsApi = createApi({
             invalidatesTags: [{type: 'Products', id: 'LIST' }],
         }),
 
-        removeProduct: build.mutation<IProduct[], {_id: string}>({
-            query: (products) => ({
-                url: `products/${products._id}`,
+        removeProduct: build.mutation<IProduct, string>({
+            query: (id) => ({
+                url: `products/${id}`,
                 method: 'DELETE',
             }),
             invalidatesTags: [{type: 'Products', id: 'LIST'}],

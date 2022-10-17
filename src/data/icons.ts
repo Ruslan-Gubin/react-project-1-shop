@@ -5,4 +5,6 @@ import search from "../assets/img/icons/search-icon_4699282.png";
 import close from "../assets/img/icons/close-icon_4232054.png";
 import arrowLeft from "../assets/img/icons/arrow_left_15605.png";
 
+
+
 export {cartPng, removeGoodsPng, checkIcon, search, close, arrowLeft}

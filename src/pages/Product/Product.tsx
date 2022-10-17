@@ -1,78 +1,64 @@
 import React from "react";
 import { useGetProductsQuery } from "../../store/rtkQuery";
-import {useSelector} from "react-redux";
-import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import * as utils from "../../utils";
 import * as component from "../../App/components";
 import * as ui from "../../App/components/Ui";
 import * as slice from "../../store/slice";
 import { cartPng, productSortingArray } from "../../data";
-import { IProduct } from "../../models/products";
 import styles from "./Product.module.scss";
 import { useAppDispatch } from "../../store/store";
 
 const Product = React.memo(() => {
-  const {order} = useSelector(slice.selectOrder);
+  const { order } = useSelector(slice.selectOrder);
   const sliceState = useSelector(slice.selectFilters);
-  const { page, perPage } = useSelector(slice.selectPaginationProduct);
   const { isLoading, isError, data = [] } = useGetProductsQuery(null);
-  const {id} = useParams<{id?: string}>();
+  const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
-  
+
   React.useEffect(() => {
-    if (!isLoading && !isError && id) {
+    if (!isLoading && !isError && id && data) {
       dispatch(slice.setDataDepartment({ id, data }));
     }
   }, [data]);
 
-  let searchText:IProduct[] = utils
-    .initSelect(sliceState.dataDepartments)
-    .filter((item: IProduct) => {
-      if (!isLoading && !isError) {
-        return item.title?.toLowerCase().includes(sliceState.textSearch.toLowerCase());
-      }
-     });   
-        
   React.useEffect(() => {
-    if (sliceState.textSearch.length > 0)
-    !isLoading ? dispatch(slice.resetPageProduct()) : null;
+    dispatch(slice.setSearchTextForMenu());
+  }, [sliceState.dataDepartments, sliceState.textSearch, sliceState.menuValue]);
+
+  React.useEffect(() => {
+    if (sliceState.textSearch.length) dispatch(slice.resetPageProduct());
   }, [sliceState.textSearch]);
 
-  sliceState.menuValue !== "Все"
-    ? (searchText = searchText.filter(
-        (item: IProduct) => item.category == sliceState.menuValue
-      ))
-    : false;
+  React.useEffect(() => {
+    if (!isLoading) dispatch(slice.setFilterPagination());
+  }, [sliceState.textMenuFilter, sliceState.page]);
 
-    if (!isLoading) {
-      utils.selectOptionsSort(
-        sliceState.filterSelect,
-        productSortingArray,
-        searchText
-        );
-      }
-        
-    const pagination:IProduct[] = utils.paginationCalculatorPage(searchText, page, perPage) ;
-   
   return (
     <div className={styles.catalog}>
+      {isLoading && <div>Loading...</div>}
       {isError && <p>Error</p>}
       <div className={styles.search}>
         <ui.SearchInput
           placeholder="Поиск товара"
           register={sliceState.textSearch}
-          onChange={(value:string) => dispatch(slice.setTextSearch({value}))}
+          onChange={(value: string) => dispatch(slice.setTextSearch({ value }))}
         />
-        <ui.ButtonGoBack text="Вернуться к каталогу" />
+        <Link to={"/products"}>
+          <ui.ButtonMain>Вернуться к каталогу</ui.ButtonMain>
+        </Link>
         <component.FormAddProduct />
         <div className={styles.cart}>
-          <ui.CustomLink to="/cart">
-            <ui.ButtonMain bgColor="green">
-              <img className={styles.cartPng} src={cartPng} alt="cartPng" />
-              {order.length > 0 && <span>{order.length}</span>}             
-              <div>{utils.formatterRub.format(utils.totalSum(order))}</div>
-            </ui.ButtonMain>
-          </ui.CustomLink>
+          <>
+            <ui.CustomLink to="/cart">
+              <ui.ButtonMain bgColor="green">
+                <img className={styles.cartPng} src={cartPng} alt="cartPng" />
+                {order.length > 0 && <span>{order.length}</span>}
+                <div>{utils.formatterRub.format(utils.totalSum(order))}</div>
+              </ui.ButtonMain>
+            </ui.CustomLink>
+          </>
         </div>
       </div>
       <div className={styles.container}>
@@ -84,31 +70,30 @@ const Product = React.memo(() => {
             />
             <component.CustomSelect
               options={productSortingArray}
-              onChange={(value:string) => dispatch(slice.setSelectId( {value} ))}
+              onChange={(value) => dispatch(slice.setSelectId({ value }))}
               defaultValue={sliceState.filterSelect}
             />
           </div>
         </div>
         <div className={styles.items}>
           {!isLoading &&
-            pagination.map((product) => (
+            sliceState.filterPagination?.map((product) => (
               <component.CardProductCatalog
-                product={product}
-                {...product}
                 key={product._id}
-                />
+                product={product}
+              />
             ))}
         </div>
       </div>
       <ui.CustomPagination
-        totalCountries={searchText.length}
-        counterPerPage={perPage}
-        currentPage={page}
-        clickNumber={(pageNumber: string) =>
+        totalCountries={sliceState.textMenuFilter.length}
+        counterPerPage={sliceState.perPage}
+        currentPage={sliceState.page}
+        clickNumber={(pageNumber: number) =>
           dispatch(slice.setPaginateProduct({ pageNumber }))
         }
         prevPage={() => dispatch(slice.setPrevPageProduct())}
-        nextPage={(page: string) => dispatch(slice.setNextPageProduct(page))}
+        nextPage={(page: number) => dispatch(slice.setNextPageProduct(page))}
       />
     </div>
   );

@@ -8,7 +8,7 @@ const EmptyBasket = React.memo(() => {
     <div className={styles.root}>
     <h2 className={styles.title}>В корзине пока пусто</h2>
       <p className={styles.text}>Загляните на главную, чтобы выбрать товары</p>
-    <div className={styles.button}>
+    <div>
       <Link to={'/products'}>
       <ButtonMain bgColor='info'>Перейти к категориям</ButtonMain>
       </Link>

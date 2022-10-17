@@ -1,8 +1,14 @@
-import filterSlice from './filterSlice';
+import filterSlice from "./filterSlice";
 
-export {filterSlice}
+export { filterSlice };
 
 export {
+  setFilterPagination,
+  setPrevPageProduct,
+  setNextPageProduct,
+  setPaginateProduct,
+  resetPageProduct,
+  setSearchTextForMenu,
   selectFilters,
   setDataDepartment,
   setCategoryValue,

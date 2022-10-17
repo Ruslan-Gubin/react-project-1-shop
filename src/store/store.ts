@@ -11,7 +11,6 @@ const rootReducer = combineReducers({
   order: slice.orderSlice,
   todos: slice.todoSlice,
   filters: slice.filterSlice,
-  paginationProduct: slice.paginationProductSlice,
   paginationPost: slice.paginationPostSlice,
   [rtkQuery.postApi.reducerPath]: rtkQuery.postApi.reducer,
   [rtkQuery.productsApi.reducerPath]: rtkQuery.productsApi.reducer,
@@ -24,6 +23,8 @@ const config = getPersistConfig({
   blacklist: [
     "posts.post",
     "filters.dataDepartments",
+    "filters.textMenuFilter",
+    "filters.filterPagination",
     rtkQuery.productsApi.reducerPath,
     rtkQuery.postApi.reducerPath,
   ],

@@ -1,12 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { IProduct } from "../../../models/products";
 import { setCategoryValue, resetPageProduct, selectFilters } from "../../../store/slice";
 import { categoryFilterName } from "../../../utils";
 
 import styles from "./Categories.module.scss";
 
 interface ICategories {
-  data: [];
+  data: IProduct[];
   isLoading: boolean;
 }
 

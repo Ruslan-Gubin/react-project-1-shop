@@ -1,6 +1,7 @@
+import { IProduct } from "../models/products";
 import { sumDiscount } from "./sumDiscount";
 
-const initSelect = (data: any) =>
+const initSelect = (data: IProduct[]) =>
   data.map((i) => ({
     ...i,
     counter: 0,

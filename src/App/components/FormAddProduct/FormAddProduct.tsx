@@ -32,7 +32,7 @@ const FormAddProduct: React.FC = React.memo(() => {
   const [img3, setImg3] = useState("");
   const [img4, setImg4] = useState("");
   const [img5, setImg5] = useState("");
-
+  
   const removeTextInput = () => {
     return (
       setTitle(""),
@@ -54,23 +54,23 @@ const FormAddProduct: React.FC = React.memo(() => {
     event
   ) => {
     event.preventDefault();
-    await createProducts({
-      category: newCategory ? newCategory : selectCategory.value,
-      images: [img, img2, img3, img4, img5],
-      title,
-      description,
-      price,
-      oldPrice,
-      quantity,
-      department: id,
-      types: {
-        color: [],
-        size: [],
-      },
-      counter: 0,
-      selected: false,
-      discount: sumDiscount(price, oldPrice),
-    }).unwrap();
+      await createProducts({
+        category: newCategory ? newCategory : selectCategory.value,
+        images: [img, img2, img3, img4, img5],
+        title,
+        description,
+        price,
+        oldPrice,
+        quantity,
+        department: id,
+        types: {
+          color: [],
+          size: [],
+        },
+        counter: 0,
+        selected: false,
+        discount: sumDiscount(price, oldPrice),
+      }).unwrap();
     removeTextInput();
   };
 

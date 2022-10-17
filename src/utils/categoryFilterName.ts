@@ -1,7 +1,7 @@
 import { IProduct } from "../models/products";
 
 const categoryFilterName:Function = (data: IProduct[], translate:boolean = false) => { 
-  const searcCaregory:string[] = data.map((item) => item.category);
+  const searcCaregory = data.map((item) => item.category);
   
   translate ? searcCaregory.unshift('Все') : searcCaregory.unshift('all')
 
@@ -14,8 +14,8 @@ interface Ires{
 }
 
 const selectAddProduct:Function = (array:IProduct[]) => {
-  const arraySetcategory:string[] = Array.from(new Set(array.map(item => item.category)))
-  const res:Ires[] = arraySetcategory.map(item => ({label:  item, value: item}))
+  const arraySetcategory = Array.from(new Set(array.map(item => item.category)))
+  const res = arraySetcategory.map(item => ({label:  item, value: item}))
   return res
 }
 

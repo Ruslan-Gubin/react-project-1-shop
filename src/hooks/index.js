@@ -1,3 +1,4 @@
+export {useWhyDidYouUpdate} from './useWhyDidYouUpdate';
 export {useLocationParams} from './useLocationParams';
 export {useLocaleStorage} from './useLocaleStorage';
 export {useMatchMedia} from './use-match-media';

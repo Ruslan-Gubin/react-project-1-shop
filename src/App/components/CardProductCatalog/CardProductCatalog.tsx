@@ -13,19 +13,20 @@ import { Modal } from "../Modal";
 
 interface ICardProductCatalogProps {
   product: IProduct;
-  _id: string;
 }
 
 const CardProductCatalog: React.FC<ICardProductCatalogProps> = React.memo(
-  ({ _id, product }) => {
+  (  {product} ) => {
     const {order} = useSelector(prodSlice.selectOrder);
     const [removeProduct, {}] = useRemoveProductMutation();
     const [modalActive, setModalActive] = React.useState(false);
     const dispatch = useDispatch();
+    let _id:string = ""
+    if (product._id ) _id = product._id 
     
-    const findIdInOrder:IProduct[] = React.useCallback(order.find((item:IProduct) => item._id === _id),[order])
+    const findIdInOrder = order.find((item:IProduct) => item._id === product._id)
 
-    const productCounter = React.useCallback(order.map((item:IProduct) => (item._id === product._id) && item.counter),[order])
+    const productCounter = order.map((item:IProduct) => (item._id === product._id) && item.counter)
   
     return (
       <div className={styles.wrapper}>
@@ -47,11 +48,11 @@ const CardProductCatalog: React.FC<ICardProductCatalogProps> = React.memo(
                 </div>
               )}
               <div className={styles.price}>
-                {formatterRub.format(product.price)}
+                {formatterRub.format(Number(product.price))}
               </div>
 
               <div className={styles.oldprice}>
-                {formatterRub.format(product.oldPrice)}
+                {formatterRub.format(Number(product.oldPrice))}
               </div>
             </div>
             <div className={styles.name}>{product.title}</div>
@@ -62,18 +63,18 @@ const CardProductCatalog: React.FC<ICardProductCatalogProps> = React.memo(
                 <ButtonMain
                   onClick={() => dispatch(prodSlice.removeToOrder({ _id }))}
                   bgColor="secondary"
-                >
-                  В Корзине: {productCounter}
+                >          
+                <>В Корзине: {productCounter}</>                
                 </ButtonMain>
               ) : (
                 <ButtonMain onClick={()=> dispatch(prodSlice.addToOrders( product ))}>В Корзину</ButtonMain>
               )}
               {findIdInOrder && (
                 <>
-                  <ButtonMain onClick={() => dispatch(prodSlice.addCountGoods({ _id }))} bgColor="green">
+                  <ButtonMain onClick={() => dispatch(prodSlice.addCountGoods({  _id }))} bgColor="green">
                     +
                   </ButtonMain>
-                  <ButtonMain onClick={() => dispatch(prodSlice.removeCountGoods({ _id }))} bgColor="green">
+                  <ButtonMain onClick={() => dispatch(prodSlice.removeCountGoods({  _id }))} bgColor="green">
                     -
                   </ButtonMain>
                 </>
@@ -89,7 +90,7 @@ const CardProductCatalog: React.FC<ICardProductCatalogProps> = React.memo(
               {modalActive && (
                 <Modal active={modalActive} setActive={setModalActive}>
                   <ModalRemoveItem
-                    confirm={() => removeProduct(product)}
+                    confirm={() => removeProduct(_id)}
                     cancel={() => setModalActive(!modalActive)}
                   />
                 </Modal>

@@ -48,7 +48,7 @@ const BasketGoods: React.FC = React.memo(() => {
                 <>
                   <span className={styles.mediaPrice}>
                     {" "}
-                    Цена: {formatterRub.format(product.price)}
+                    Цена: {formatterRub.format(Number(product.price))}
                   </span>
                   <img
                     onClick={() => removeGoodsOrder(product._id)}
@@ -77,10 +77,10 @@ const BasketGoods: React.FC = React.memo(() => {
             </div>
             <div className={styles.tailPrice}>
               <span className={styles.price}>
-                {formatterRub.format(product.price)}
+                {formatterRub.format(Number(product.price))}
               </span>
               <span className={styles.oldPrice}>
-                {formatterRub.format(product.oldPrice)}
+                {formatterRub.format(Number(product.oldPrice))}
               </span>
               <img
                 onClick={() => removeGoodsOrder(product._id)}
