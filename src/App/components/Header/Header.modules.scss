@@ -43,8 +43,17 @@
         }
     }
      .links{
+        display: flex;
+        align-items: center;
         font-family: var.$ff-BebasNeue-Regular;
         margin-left: 50px;
+
+        & img {
+            width: 35px;
+            height: 35px;
+            margin-left: 20px;
+        }
+
         .links-default {
             font-size: var.$font-size-header-link;
             margin-left: 20px;

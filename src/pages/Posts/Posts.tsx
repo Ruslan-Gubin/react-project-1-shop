@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ModalActive, PostItemsRender } from "../../App/components";
-import { CustomPagination, SearchInput } from "../../App/components/Ui";
+import { CustomPagination, InputMain } from "../../App/components/Ui";
 import * as slice from "../../store/slice";
 import { useGetPostsQuery } from "../../store/rtkQuery";
 import { paginationCalculatorPage } from "../../utils";
@@ -11,7 +11,7 @@ import { IPost } from "../../models/products";
 const Posts: React.FC = React.memo(() => {
   const { isLoading, isError, data = [] } = useGetPostsQuery(5);
   const { perPage, page } = useSelector(slice.selectPaginationPost);
-  const { post, searchValue } = useSelector(slice.selectPosts);
+  const { posts, searchValue } = useSelector(slice.selectPosts);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -19,19 +19,13 @@ const Posts: React.FC = React.memo(() => {
     if (searchValue) dispatch(slice.resetPagePost());
   }, [data, searchValue]);
 
-  let pagination = paginationCalculatorPage(post, page, perPage) as IPost[];
+  let pagination = paginationCalculatorPage(posts, page, perPage) as IPost[];
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.post}>
         <div className={styles.forms}>
-          <SearchInput
-            register={searchValue}
-            onChange={(value: string) =>
-              dispatch(slice.setsearchValuePost({ value }))
-            }
-            placeholder="Найти пост"
-          />
+          <InputMain  placeholder="Найти пост"  type="search" value={searchValue} onChange={(value) => dispatch(slice.setsearchValuePost({ value }))} />
           <ModalActive />
         </div>
         <div className={styles.items}>
@@ -43,7 +37,7 @@ const Posts: React.FC = React.memo(() => {
         </div>
         <div>
           <CustomPagination
-            totalCountries={post.length}
+            totalCountries={posts.length}
             counterPerPage={perPage}
             currentPage={page}
             clickNumber={(pageNumber: number) =>

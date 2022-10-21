@@ -5,15 +5,16 @@ import styles from './ModalRemoveItem.module.scss';
 interface IModalRemoveItemProps {
   confirm: () => void
   cancel: () => void
+  text: string
 }
 
-const ModalRemoveItem: React.FC<IModalRemoveItemProps> = ({confirm, cancel}) => {
+const ModalRemoveItem: React.FC<IModalRemoveItemProps> = ({confirm, cancel, text}) => {
 
   return (
     <div className={styles.root}>
-      <p>Вы действительно хотите удалить этот товар?</p>
+      <p className={styles.text}>{text}</p>
       <div className={styles.footer}>
-      <ButtonMain onClick={confirm} bgColor="red">Удалить</ButtonMain>
+      <ButtonMain onClick={confirm} bgColor="red">Подтвердить</ButtonMain>
       <ButtonMain onClick={cancel} bgColor="info">Отмена</ButtonMain>
       </div>
     </div>

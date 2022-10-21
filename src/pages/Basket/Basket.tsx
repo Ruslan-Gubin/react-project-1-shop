@@ -7,23 +7,28 @@ import { clearOrder, selectOrder } from "../../store/slice";
 import styles from "./Basket.module.scss";
 
 const Basket = React.memo(() => {
-  const {order} = useSelector(selectOrder);
-  const dispatch = useDispatch()
+  const { order } = useSelector(selectOrder);
+  const dispatch = useDispatch();
 
   return (
     <div className={styles.root}>
       {order.length ? (
         <>
           <div className={styles.button}>
-          <ButtonGoBack className={styles.goBack} text={" "}>
-          <img src={arrowLeft} alt="arrow left" />
-        </ButtonGoBack>
-            {/* <ButtonGoBack text="Назад" /> */}
-          <ButtonMain onClick={() => dispatch(clearOrder())} bgColor='black'>Очистить корзину</ButtonMain>
+            <ButtonGoBack className={styles.goBack} text={" "}>
+              <img src={arrowLeft} alt="arrow left" />
+            </ButtonGoBack>
+            <ButtonMain onClick={() => dispatch(clearOrder())} bgColor="black">
+              Очистить корзину
+            </ButtonMain>
           </div>
           <div className={styles.basket}>
-            <div className={styles.goods}><BasketGoods /> </div>
-            <div><BasketInfo /> </div>      
+            <div className={styles.goods}>
+              <BasketGoods />
+            </div>
+            <div>
+              <BasketInfo />
+            </div>
           </div>
         </>
       ) : (

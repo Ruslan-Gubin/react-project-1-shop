@@ -3,7 +3,7 @@ import styles from './FormSearch.module.scss';
 
 const FormSearch = React.memo(({ children, submitImput }: any) => {
   return (
-    <div className={styles.search}>
+    <div >
       <form autoComplete="off" onSubmit={submitImput}>       
         {children}
       </form>

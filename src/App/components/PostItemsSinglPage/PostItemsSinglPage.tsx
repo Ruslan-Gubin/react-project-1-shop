@@ -1,15 +1,15 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDeletePostMutation, useGetOnePostQuery } from "../../../store/rtkQuery";
-import { ButtonGoBack } from "../Ui";
 import { ButtonMain } from "../Ui";
 
 import styles from './PostItemsSinglPage.module.scss';
 
 const PostItemsSinglPage: React.FC = React.memo(() => {
   const [deletePost, {}] = useDeletePostMutation();
-  const {id} = useParams<{id?: string}>()
+  const {id} = useParams<string>()
   const{ data = [],isError,isLoading} = useGetOnePostQuery({id})
+
 
     return (
       <div className={styles.post} >
@@ -47,7 +47,7 @@ const PostItemsSinglPage: React.FC = React.memo(() => {
           </div>
           <div className={styles["footer-buttons"]}>
             <div>
-<ButtonGoBack />
+{data.viewsCount}
           </div>
             <div>
               <Link to="/post">

@@ -1,0 +1,41 @@
+@use "../../../scss/common/var";
+
+.root {
+  
+
+  padding: var.$spasing-big-medium;
+  font-family: var.$ff-Gilroy-Medium;
+  color: var.$box-shadow;
+  .title {
+    margin-bottom: var.$spasing-big-medium;
+    font-size: var.$font-size-title-normal;
+  }
+  
+  .item {
+    margin-bottom: var.$spasing-small;
+    font-size: var.$font-size-card-text;
+  }
+  
+  .comentContainer {
+    .items {
+      display: flex;
+      margin-bottom: var.$spasing-big-medium;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.145);
+
+      .userImage {
+        width: 35px;
+        height: 35px;
+        border-radius: var.$border-radius-circle;
+      }
+      .userInfo {
+        margin-left: var.$spasing-small;
+        .userName {
+          margin-bottom: 5px;
+        }
+        .userText {
+          margin-bottom: var.$spasing-small;
+        }
+      }
+    }
+  }
+}

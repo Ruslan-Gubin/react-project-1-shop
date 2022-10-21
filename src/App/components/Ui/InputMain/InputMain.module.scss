@@ -1,15 +1,44 @@
-@use '../../../../scss/common/var';
+@use '../../../../scss/common/exented';
+@use "../../../../scss/common/var";
 
-.input {
-    font-family: var.$ff-cormorantgaramond-bold;
-    border: 1px solid var.$color-dark-grey;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: var.$font-size-button;
-    color: var.$color-header-bg-dark;
-    margin: 10px;
-    &:focus {
-        border: 1px solid var.$color-green;
-        box-shadow: var.$box-shadow;
+.root {
+  position: relative; 
+
+  .icons {
+    position: absolute;
+    top: 13px;
+    left: -30px;
+    opacity: 0.3;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.6;
     }
+  }
+  
+  .search {
+    @extend %input;
+    margin-left: -30px;
+    padding: 7px 0px 7px 35px;
+  }
+  
+  
+  .input {
+    @extend %input;
+    width: 100%;
+  }
+  .close {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    opacity: 0.4;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+  
 }

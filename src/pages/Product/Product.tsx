@@ -25,19 +25,28 @@ const Product = React.memo(() => {
 
   React.useEffect(() => {
     dispatch(slice.setSearchTextForMenu());
-    if (sliceState.textSearch.length) dispatch(slice.resetPageProduct());
     if (!isLoading) dispatch(slice.setFilterPagination());
-  }, [sliceState.dataDepartments, sliceState.textSearch, sliceState.menuValue, sliceState.page]);
+  }, [
+    sliceState.dataDepartments,
+    sliceState.textSearch,
+    sliceState.menuValue,
+    sliceState.page,
+  ]);
+
+  const handlerClickCategory = (item: string) => {
+    dispatch(slice.setCategoryValue({ item }));
+  };
 
   return (
     <div className={styles.catalog}>
       {isLoading && <div>Loading...</div>}
       {isError && <p>Error</p>}
       <div className={styles.search}>
-        <ui.SearchInput
+        <ui.InputMain
           placeholder="Поиск товара"
-          register={sliceState.textSearch}
-          onChange={(value: string) => dispatch(slice.setTextSearch({ value }))}
+          type="search"
+          value={sliceState.textSearch}
+          onChange={(value) => dispatch(slice.setTextSearch({ value }))}
         />
         <Link to={"/products"}>
           <ui.ButtonMain>Вернуться к каталогу</ui.ButtonMain>
@@ -59,8 +68,9 @@ const Product = React.memo(() => {
         <div className={styles.info}>
           <div className={styles["container-info"]}>
             <component.Categories
-              data={sliceState.dataDepartments}
-              isLoading={isLoading}
+              data={utils.categoryFilterName(sliceState.dataDepartments, true)}
+              menuValue={sliceState.menuValue}
+              handlerClick={(item) => handlerClickCategory(item)}
             />
             <component.CustomSelect
               options={productSortingArray}

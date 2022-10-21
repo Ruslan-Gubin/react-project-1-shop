@@ -1,68 +1,66 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { MultiplaySelect } from "../../App/components/CustomSelect";
-import Test from "../../App/components/Test";
-import { ButtonMain, InputMain } from "../../App/components/Ui";
-import { useMatchMedia, useToggle } from "../../hooks";
-import { addTodo } from "../../store/slice/todoSlice/todoSlice";
-import { formatter } from "../../utils/intl-Number-Format";
-import { RUDate } from "../../utils/intlDateTimeFormat";
+import * as components from "../../App/components";
+import { commentsArray, sortCategoryName } from "../../data";
+import { useGetPostsQuery } from "../../store/rtkQuery";
+import { useGetTagsQuery } from "../../store/rtkQuery/postApi/postApi";
+import styles from "./Home.module.scss";
 
-import InputField from "./InputField";
-import TodosList from "./TodosList";
+interface IuseGetTagsQuery {
+  data: string[]
+  isLoading: boolean
+  isError: boolean
+}
 
 const Home = React.memo(() => {
-  const { isMobile, isTablet, isDesktop } = useMatchMedia();
-  const [text, setText] = useState("");
+  const [menuValue, setMenuValue] = React.useState(sortCategoryName[0]);
+  const { data = [], isLoading, isError } = useGetPostsQuery(5);
+  const { data: tags, isLoading:isLoadingTags, isError:isErrorTags } = useGetTagsQuery<IuseGetTagsQuery>('');
   const dispatch = useDispatch();
-  const [date, setDate] = useState(RUDate.format(new Date()));
-  const [isVisible, toggleVisible] = useToggle(false);
-  const enterRef = React.useRef();
-
-  const handlerKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
-    if (e.key === "Enter") {
-      dispatch(addTodo({ text })), setText("");
+  
+  React.useEffect(() => {
+    if (!isLoading) {
     }
-  };
+  },[data,tags])
 
   return (
-    <div>
-      {!isVisible ? (
-        <ButtonMain onClick={() => toggleVisible(true)}> Show Todo</ButtonMain>
-      ) : (
-        <ButtonMain onClick={() => toggleVisible(false)}> Hide Todo</ButtonMain>
-      )}
-
-      {isMobile && <ButtonMain bgColor="green">Это Мобилка</ButtonMain>}
-      {isTablet && <ButtonMain bgColor="info">Это Планшет</ButtonMain>}
-      {isDesktop && <ButtonMain bgColor="orange">Это Desktop</ButtonMain>}
-      <InputMain 
-      value={text} 
-      onChange={(value) => setText(value)}
-       onKeyDown={handlerKeyDown} 
-       />
-      <ButtonMain
-        onClick={() => {
-          dispatch(addTodo({ text })), setText("");
-        }}
-        bgColor="black"
-      >
-        Push
-      </ButtonMain>
-      {isVisible && (
-        <>
-          <TodosList />
-          <MultiplaySelect />
-          <Test />
-        </>
-      )}
-
-      {formatter.format(100)}
-      {formatter.format(101)}
-      {formatter.format(102)}
-      {formatter.format(105)}
-      {formatter.format(108)}
-      {formatter.format(111)}
+    <div className={styles.root}>
+      {isError && <div>Error...</div>}
+      <div className={styles.sort}>
+        <components.Categories
+          horizontally={true}
+          menuValue={menuValue}
+          data={sortCategoryName}
+          handlerClick={(item) => setMenuValue(item)}
+        />
+      </div>
+      <div className={styles.container}>
+        <ul className={styles.blogs}>
+          {!isLoading &&
+            data.map((obj) => (
+              <li key={obj._id}>
+                <components.BlogsItemsCard 
+                item={obj} 
+                />
+              </li>
+            ))}
+        </ul>
+        <div className={styles.blockForSticky}>
+          <div className={styles.info}>
+            <div className={styles.tegs}>
+              {!isLoadingTags && 
+              <components.CardPostInfo tags={tags} title="Теги" />
+              }
+            </div>
+            <div className={styles.comments}>
+              <components.CardPostInfo
+                comments={commentsArray}
+                title="Комментарии"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 });

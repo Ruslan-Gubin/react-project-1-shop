@@ -1,0 +1,1 @@
+export {CardPostInfo} from './CardPostInfo';

@@ -11,9 +11,11 @@ const rootReducer = combineReducers({
   order: slice.orderSlice,
   todos: slice.todoSlice,
   filters: slice.filterSlice,
+  auth: slice.authSlice,
   paginationPost: slice.paginationPostSlice,
   [rtkQuery.postApi.reducerPath]: rtkQuery.postApi.reducer,
   [rtkQuery.productsApi.reducerPath]: rtkQuery.productsApi.reducer,
+  [rtkQuery.authApi.reducerPath]: rtkQuery.authApi.reducer,
 });
 
 const config = getPersistConfig({
@@ -25,10 +27,11 @@ const config = getPersistConfig({
     "filters.dataDepartments",
     "filters.textMenuFilter",
     "filters.filterPagination",
+    "auth.password",
     rtkQuery.productsApi.reducerPath,
     rtkQuery.postApi.reducerPath,
+    rtkQuery.authApi.reducerPath,
   ],
-  // whitelist: [],
   rootReducer,
 });
 
@@ -49,7 +52,11 @@ const store = configureStore({
           persist.REGISTER,
         ],
       },
-    }).concat([rtkQuery.postApi.middleware, rtkQuery.productsApi.middleware]),
+    }).concat([
+      rtkQuery.postApi.middleware,
+      rtkQuery.productsApi.middleware,
+      rtkQuery.authApi.middleware,
+    ]),
 });
 
 const persistor = persist.persistStore(store);

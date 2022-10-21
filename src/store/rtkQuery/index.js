@@ -1,15 +1,25 @@
 export {
-  postApi,
-  useGetPostsQuery,
-  useGetOnePostQuery,
-  useCreatePostMutation,
-  useDeletePostMutation,
   useUpdatePostMutation,
+  useDeletePostMutation,
+  useCreatePostMutation,
+  useGetOnePostQuery,
+  useGetPostsQuery,
+  postApi,
 } from "./postApi";
+
 export {
-  productsApi ,
-  useGetProductsQuery,
-  useGetOneProductQuery,
-  useRemoveProductMutation,
   useCreateProductsMutation,
+  useRemoveProductMutation,
+  useGetOneProductQuery,
+  useGetProductsQuery,
+  productsApi ,
 } from "./productApi";
+
+export {
+  useCreateAuthMutation,
+  useDeleteAuthMutation,
+  useUpdateAuthMutation,
+  useGetOneAuthQuery,
+  useGetAuthsQuery,
+  authApi,
+} from "./authApi";

@@ -1,7 +1,7 @@
 @use '../../../scss/common/var';
 
 .wrapper{
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   flex-direction: column;
   min-height: 100vh;

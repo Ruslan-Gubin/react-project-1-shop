@@ -6,11 +6,13 @@ const Products = lazy(() => import('./Products'))
 const SingelPagePost = lazy(() => import('./SingelPagePost'))
 const SingelPageProduct = lazy(() => import('./SingelPageProduct'))
 const LoginPage = lazy(() => import('./LoginPage'))
+const registrationPage = lazy(() => import('./registrationPage'))
 const Home = lazy(() => import('./Home'))
 const NotfoundPage = lazy(() => import('./NotfoundPage'))
 const Basket = lazy(() => import('./Basket'))
 
 export {
+  registrationPage,
   Product,
   Posts,
   SingelPagePost,

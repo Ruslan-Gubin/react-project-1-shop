@@ -1,5 +1,6 @@
 
 interface InputMainType {
+  handlerSearchClick?: () => void;
   children?: JSX.Element | React.ReactNode | null;
   placeholder?: string;
   autoComplete?: string;

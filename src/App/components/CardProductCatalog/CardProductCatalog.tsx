@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as prodSlice from "../../../store/slice";
 import { useRemoveProductMutation } from "../../../store/rtkQuery";
-import { Link, } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { formatterRub, sumDiscount } from "../../../utils";
 import styles from "./CardProductCatalog.module.scss";
 import { ModalRemoveItem } from "../ModalRemoveItem";
@@ -10,24 +10,27 @@ import { IProduct } from "../../../models/products";
 import { ButtonMain } from "../Ui";
 import { Modal } from "../Modal";
 
-
 interface ICardProductCatalogProps {
   product: IProduct;
 }
 
 const CardProductCatalog: React.FC<ICardProductCatalogProps> = React.memo(
-  (  {product} ) => {
-    const {order} = useSelector(prodSlice.selectOrder);
+  ({ product }) => {
+    const { order } = useSelector(prodSlice.selectOrder);
     const [removeProduct, {}] = useRemoveProductMutation();
-    const [modalActive, setModalActive] = React.useState(false);
+    const [modalActive, setModalActive] = React.useState<boolean>(false);
     const dispatch = useDispatch();
-    let _id:string = ""
-    if (product._id ) _id = product._id 
-    
-    const findIdInOrder = order.find((item:IProduct) => item._id === product._id)
+    let _id: string = "";
+    if (product._id) _id = product._id;
 
-    const productCounter = order.map((item:IProduct) => (item._id === product._id) && item.counter)
-  
+    const findIdInOrder = order.find(
+      (item: IProduct) => item._id === product._id
+    );
+
+    const productCounter = order.map(
+      (item: IProduct) => item._id === product._id && item.counter
+    );
+
     return (
       <div className={styles.wrapper}>
         <div className={styles.product}>
@@ -63,18 +66,30 @@ const CardProductCatalog: React.FC<ICardProductCatalogProps> = React.memo(
                 <ButtonMain
                   onClick={() => dispatch(prodSlice.removeToOrder({ _id }))}
                   bgColor="secondary"
-                >          
-                <>В Корзине: {productCounter}</>                
+                >
+                  <>В Корзине: {productCounter}</>
                 </ButtonMain>
               ) : (
-                <ButtonMain onClick={()=> dispatch(prodSlice.addToOrders( product ))}>В Корзину</ButtonMain>
+                <ButtonMain
+                  onClick={() => dispatch(prodSlice.addToOrders(product))}
+                >
+                  В Корзину
+                </ButtonMain>
               )}
               {findIdInOrder && (
                 <>
-                  <ButtonMain onClick={() => dispatch(prodSlice.addCountGoods({  _id }))} bgColor="green">
+                  <ButtonMain
+                    onClick={() => dispatch(prodSlice.addCountGoods({ _id }))}
+                    bgColor="green"
+                  >
                     +
                   </ButtonMain>
-                  <ButtonMain onClick={() => dispatch(prodSlice.removeCountGoods({  _id }))} bgColor="green">
+                  <ButtonMain
+                    onClick={() =>
+                      dispatch(prodSlice.removeCountGoods({ _id }))
+                    }
+                    bgColor="green"
+                  >
                     -
                   </ButtonMain>
                 </>
@@ -87,14 +102,13 @@ const CardProductCatalog: React.FC<ICardProductCatalogProps> = React.memo(
                   Удалить
                 </ButtonMain>
               )}
-              {modalActive && (
-                <Modal active={modalActive} setActive={setModalActive}>
-                  <ModalRemoveItem
-                    confirm={() => removeProduct(_id)}
-                    cancel={() => setModalActive(!modalActive)}
-                  />
-                </Modal>
-              )}
+              <Modal active={modalActive} setActive={setModalActive}>
+                <ModalRemoveItem
+                  text="Вы действительно хотите удалить этот товар?"
+                  confirm={() => removeProduct(_id)}
+                  cancel={() => setModalActive(!modalActive)}
+                />
+              </Modal>
             </div>
           </div>
         </div>

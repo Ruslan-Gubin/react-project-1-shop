@@ -1,0 +1,1 @@
+export {BlogsItemsCard} from './BlogsItemsCard';

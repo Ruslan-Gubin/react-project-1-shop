@@ -5,7 +5,7 @@ import { productsCategoriLink } from "../../data";
 import { useGetProductsQuery } from "../../store/rtkQuery";
 import { getImgForSlider } from "../../utils";
 import styles from "./Products.module.scss";
-import { resetPageProduct, resetMenuId } from "../../store/slice";
+import {  resetMenuId } from "../../store/slice";
 import { Link } from "react-router-dom";
 
 const Products: React.FC = React.memo(() => {
@@ -14,7 +14,6 @@ const Products: React.FC = React.memo(() => {
 
   const handlerLinkClick = () => {
     dispatch(resetMenuId());
-    dispatch(resetPageProduct());
   };
 
   return (

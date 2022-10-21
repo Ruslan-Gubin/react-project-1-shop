@@ -1,18 +1,12 @@
 const express = require("express");
-const {
-  getProducts,
-  getOneProduct,
-  addProduct,
-  editProduct,
-  deleteProduct,
-} = require("../controllers/api-products-controlers");
+const { apiProductsControllers: AC } = require("../controllers");
 const router = express.Router();
 
 
-router.get("/api/products", getProducts);
-router.get("/api/products/:id", getOneProduct);
-router.post("/api/products", addProduct);
-router.put("/api/products", editProduct);
-router.delete("/api/products/:id", deleteProduct);
+router.get("/api/products", AC.getProducts);
+router.get("/api/products/:id", AC.getOneProduct);
+router.post("/api/products", AC.addProduct);
+router.put("/api/products", AC.editProduct);
+router.delete("/api/products/:id", AC.deleteProduct);
 
 module.exports = router;

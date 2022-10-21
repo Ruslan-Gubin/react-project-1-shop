@@ -1,0 +1,12 @@
+@use '../../scss/common/exented';
+
+.root {
+  @extend %loginRegisterPageCard;
+
+  .img {
+    margin: 0 auto;
+    height: 100px;
+    width: 100px;
+  }
+
+}

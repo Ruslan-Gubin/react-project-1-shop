@@ -10,10 +10,21 @@ export {
 } from './imagesUrl.ts';
 
 export {
+  eyeIcon,
+  commentsIcon,
+  userLogin,
   cartPng,
   removeGoodsPng,
   checkIcon,
   search,
   close,
   arrowLeft,
+  userRegistedPng,
+  outIcon,
 } from "./icons";
+
+export {
+  tegsArray,
+  sortCategoryName,
+  commentsArray,
+} from './tegsAndComments';

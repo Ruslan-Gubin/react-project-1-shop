@@ -3,7 +3,8 @@
 .root {
   font-family: var.$ff-Gilroy-Bold;
 
-  p {
+  .text {
+    text-align: center;
     font-size: var.$font-size-average;
     color: var.$color-black-hover;
     margin-bottom: 30px;
@@ -11,7 +12,6 @@
   .footer {
     display: flex;
     justify-content: space-around;
-   padding-left: 280px;
   }
 
 }

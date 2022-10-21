@@ -3,6 +3,7 @@
 interface CssExports {
   'footer': string;
   'root': string;
+  'text': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

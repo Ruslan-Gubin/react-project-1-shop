@@ -12,7 +12,6 @@ export {
   setPrevPageProduct,
   setNextPageProduct,
   setPaginateProduct,
-  resetPageProduct,
   setSearchTextForMenu,
   selectFilters,
   filterSlice,
@@ -47,3 +46,15 @@ export {
   postSlice,
   setStatePost,
 } from "./postSlice";
+
+
+export {
+  addAuth,
+  resetAuth,
+  selectAuth,
+  authSlice,
+  getAutchEmail,
+  getAutchPassword,
+} from "./authSlice";
+
+

@@ -60,9 +60,3 @@ const productsSchema = new Schema(
 );
 
 module.exports = mongoose.model("Products", productsSchema);
-
-//  const Stationery = mongoose.model("Stationery", productsSchema);
-
-// module.exports = {
-//   Stationery
-// };

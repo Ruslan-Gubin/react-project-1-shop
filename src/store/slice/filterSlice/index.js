@@ -7,7 +7,6 @@ export {
   setPrevPageProduct,
   setNextPageProduct,
   setPaginateProduct,
-  resetPageProduct,
   setSearchTextForMenu,
   selectFilters,
   setDataDepartment,

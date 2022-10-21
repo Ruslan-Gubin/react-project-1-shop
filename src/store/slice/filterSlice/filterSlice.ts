@@ -23,11 +23,13 @@ const filterSlice = createSlice({
   reducers: {
     setCategoryValue(state, action: PayloadAction<{ item: string }>) {
       state.menuValue = action.payload.item;
+      state.page = 1;
     },
 
     resetMenuId(state) {
       state.menuValue = "Все";
       state.textSearch = "";
+      state.page = 1;
     },
 
     setDataDepartment(
@@ -41,6 +43,7 @@ const filterSlice = createSlice({
 
     setTextSearch(state, action: PayloadAction<{ value: string }>) {
       state.textSearch = action.payload.value;
+      state.page = 1;
     },
 
     setSelectId(
@@ -82,10 +85,6 @@ const filterSlice = createSlice({
       state.page = action.payload.pageNumber;
     },
 
-    resetPageProduct(state) {
-      state.page = 1;
-    },
-
     setFilterPagination(state) {
       const lastPostsIndex = state.page * state.perPage;
       const firstPostsIndex = lastPostsIndex - state.perPage;
@@ -105,7 +104,6 @@ export const {
   setPrevPageProduct,
   setNextPageProduct,
   setPaginateProduct,
-  resetPageProduct,
   setSearchTextForMenu,
   setDataDepartment,
   setCategoryValue,

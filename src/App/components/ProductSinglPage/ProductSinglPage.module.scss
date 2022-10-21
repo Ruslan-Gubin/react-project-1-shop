@@ -16,7 +16,7 @@
    
     .swiper {
       border-radius: var.$border-radius-average;
-      width: 50%;
+      width: var.$border-radius-circle;
       height: 650px;
       height: 550px;
      
@@ -27,7 +27,7 @@
     }
 
     .details {
-      width: 50%;
+      width: var.$border-radius-circle;
       display: flex;
       flex-direction: column;
       .priceBlock {

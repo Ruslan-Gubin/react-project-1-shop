@@ -1,9 +1,8 @@
 import React from "react";
 import { Link, useMatch } from "react-router-dom";
-import { PropsClildren } from "../../../../models/children";
-import styles from './CustomLink.module.scss';
+import styles, { ICustonLink } from './CustomLink.module.scss';
 
-const CustomLink:React.FC<PropsClildren> = React.memo(({onClick, children, to, ...props}) => {
+const CustomLink:React.FC<ICustonLink> = React.memo(({onClick, children, to, text, activeCl,noActive}) => {
     const math = useMatch({
         path: to,
         end: to.length === 1,
@@ -13,9 +12,9 @@ const CustomLink:React.FC<PropsClildren> = React.memo(({onClick, children, to, .
             <Link 
             onClick={() => onClick}
             to={to} 
-            className= {math ? (props.activeCl || styles.active) : (props.noActive || styles.link)}
+            className= {math ? (activeCl || styles.active) : (noActive || styles.link)}
             >
-            {props.text}
+            {text}
             {children}
             </Link>
     

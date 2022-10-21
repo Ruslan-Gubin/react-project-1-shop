@@ -48,7 +48,7 @@
         gap: var.$spasing-one-rem;
         
         &-image {
-          border-radius: 50%;
+          border-radius: var.$border-radius-circle;
         }
         & p{
           color: var.$color-header-bg-dark;

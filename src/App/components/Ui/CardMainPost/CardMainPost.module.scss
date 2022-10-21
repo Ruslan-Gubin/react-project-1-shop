@@ -27,22 +27,22 @@
       bottom: 0px;
       left: 0;
       display: flex;
-      padding: 10px;
-      font-size: 15px;
+      padding: var.$spasing-small;
+      font-size: var.$spasing-medium;
       justify-content: space-around;
       align-items: center;
       margin-top: auto;
       width: 100%;
-      border-top-left-radius: 30px;
+      border-top-left-radius: var.$spasing-large;
       overflow: hidden;
       
       .info {
-        padding-left: 10px;
+        padding-left: var.$spasing-small;
 
         .img {
 
           & img {
-            border-radius: 50%;
+            border-radius: var.$border-radius-circle;
           }
         }
         

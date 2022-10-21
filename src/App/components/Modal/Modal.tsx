@@ -1,9 +1,9 @@
-import React, { JSXElementConstructor, useEffect, useState } from "react";
+import React, { JSXElementConstructor, useState } from "react";
 
 import styles from './Modal.module.scss';
 
 const Modal: JSXElementConstructor<any> = React.memo(({children, ...props}) => {
-const [date,setDate] = useState(new Date().toLocaleTimeString())
+const [date,setDate] = useState<string>(new Date().toLocaleTimeString())
 
     return (
         <div 

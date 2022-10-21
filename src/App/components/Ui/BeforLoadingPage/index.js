@@ -1,0 +1,1 @@
+export {BeforLoadingPage} from './BeforLoadingPage';

@@ -1,6 +1,4 @@
-import {
-  useCreateProductsMutation,
-} from "../../../store/rtkQuery";
+import { useCreateProductsMutation } from "../../../store/rtkQuery";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { selectAddProduct, sumDiscount } from "../../../utils";
@@ -13,7 +11,7 @@ import { useSelector } from "react-redux";
 import { selectFilters } from "../../../store/slice";
 
 const FormAddProduct: React.FC = React.memo(() => {
-  const {dataDepartments} = useSelector(selectFilters)
+  const { dataDepartments } = useSelector(selectFilters);
   const { id } = useParams();
   const [activeModal, setActiveModal] = useState(false);
   const [createProducts, {}] = useCreateProductsMutation();
@@ -32,7 +30,7 @@ const FormAddProduct: React.FC = React.memo(() => {
   const [img3, setImg3] = useState("");
   const [img4, setImg4] = useState("");
   const [img5, setImg5] = useState("");
-  
+
   const removeTextInput = () => {
     return (
       setTitle(""),
@@ -51,31 +49,28 @@ const FormAddProduct: React.FC = React.memo(() => {
   };
 
   const habdlerAddProduct: React.FormEventHandler<HTMLFormElement> = async (
-    event
   ) => {
-    event.preventDefault();
-      await createProducts({
-        category: newCategory ? newCategory : selectCategory.value,
-        images: [img, img2, img3, img4, img5],
-        title,
-        description,
-        price,
-        oldPrice,
-        quantity,
-        department: id,
-        types: {
-          color: [],
-          size: [],
-        },
-        counter: 0,
-        selected: false,
-        discount: sumDiscount(price, oldPrice),
-      }).unwrap();
+    await createProducts({
+      category: newCategory ? newCategory : selectCategory.value,
+      images: [img, img2, img3, img4, img5],
+      title,
+      description,
+      price,
+      oldPrice,
+      quantity,
+      department: id,
+      types: {
+        color: [],
+        size: [],
+      },
+      counter: 0,
+      selected: false,
+      discount: sumDiscount(price, oldPrice),
+    }).unwrap();
     removeTextInput();
   };
 
   const closeModal: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    e.preventDefault();
     setActiveModal(false);
     removeTextInput();
   };
@@ -95,12 +90,12 @@ const FormAddProduct: React.FC = React.memo(() => {
           titleText={"Добавить новый товар:"}
           closeForm={(e) => closeModal(e)}
         >
-          <div className={styles.category}>           
-              <CustomSelect
-                defaultValue={selectCategory}
-                onChange={(value) => setSelectCategory(value)}
-                options={selectAddProduct(dataDepartments)}
-              />
+          <div className={styles.category}>
+            <CustomSelect
+              defaultValue={selectCategory}
+              onChange={(value) => setSelectCategory(value)}
+              options={selectAddProduct(dataDepartments)}
+            />
             <InputMain
               value={newCategory}
               onChange={(value) => setNewCategory(value)}

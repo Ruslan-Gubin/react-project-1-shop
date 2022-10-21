@@ -1,0 +1,79 @@
+@use "../../../scss/common/var";
+
+%commentsAndViews {
+  display: flex;
+  align-items: center;
+  margin-left: var.$spasing-small;
+  & img {
+    border-radius: 0;
+    width: 20px;
+    height: 20px;
+  }
+  & span {
+    margin-left: 5px;
+  }
+}
+
+.card {
+  overflow: hidden;
+  box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: var.$border-radius-average;
+  background: var.$liner-gradient-post-card;
+  margin: var.$spasing-small;
+
+     .imageUrl {
+      height: 500px;
+      width: 100%;
+    }
+  
+
+  .body {
+    padding: var.$spasing-one-rem;
+
+    .title {
+      color: var.$color-header-bg-dark;
+      font-size: var.$font-size-average;
+      text-transform: capitalize;
+    }
+    & span {
+      display: block;
+      margin-top: var.$spasing-small;
+    }
+  }
+
+  .footer {
+    padding: var.$spasing-one-rem;
+
+    .user {
+      color: var.$color-secondary-hover;
+      display: flex;
+      align-items: center;
+      gap: var.$spasing-one-rem;
+
+      .imageUser {
+        border-radius: var.$border-radius-circle;
+        width: 50px;
+        height: 50px;
+      }
+      & p {
+        color: var.$color-header-bg-dark;
+        font-size: var.$font-size-button;
+      }
+
+      .info {      
+        & small {}
+        
+      }
+
+      .views {
+        @extend %commentsAndViews;
+      }
+
+      .commentsCount {
+        @extend %commentsAndViews;
+      }
+    }
+  }
+}
+
+
