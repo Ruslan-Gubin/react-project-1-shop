@@ -18,10 +18,7 @@ const Home = React.memo(() => {
   const { data: tags, isLoading:isLoadingTags, isError:isErrorTags } = useGetTagsQuery<IuseGetTagsQuery>('');
   const dispatch = useDispatch();
   
-  React.useEffect(() => {
-    if (!isLoading) {
-    }
-  },[data,tags])
+
 
   return (
     <div className={styles.root}>
@@ -40,6 +37,7 @@ const Home = React.memo(() => {
             data.map((obj) => (
               <li key={obj._id}>
                 <components.BlogsItemsCard 
+                id={obj._id}
                 item={obj} 
                 />
               </li>

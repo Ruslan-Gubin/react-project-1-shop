@@ -3,26 +3,40 @@ import { IPost } from "../../../models/products";
 
 export const postApi = createApi({
   reducerPath: "postApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4444/api" }),
-  tagTypes: ["Auth"],
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4444/api",
+  prepareHeaders: (headers, {getState}) => {
+    const token = window.localStorage.getItem('token')
+    if (token) headers.set('authorization', token)  
+    return headers
+  }
+}),
+  tagTypes: ["Post"],
   endpoints: (build) => ({
+
     getPosts: build.query<IPost[], number>({
       query: () => "post",
       providesTags: (result) =>
         result
-          ? [
-              ...result.map(({ _id }) => ({ type: "Auth" as const, _id })),
-              { type: "Auth", id: "LIST" },
+            ? [...result.map(({ _id }) => ({ type: "Post" as const, _id })),
+              { type: "Post", id: "LIST" },
             ]
-          : [{ type: "Auth", id: "LIST" }],
+          : [{ type: "Post", id: "LIST" }],
     }),
 
     getTags: build.query({
       query: () => 'tags',
+      // providesTags: (result) =>
+      //   result
+      //     ? [
+      //         ...result.map(({ _id }) => ({ type: "Post" as const, _id })),
+      //         { type: "Post", id: "LIST" },
+      //       ]
+      //     : [{ type: "Post", id: "LIST" }],
     }),
-
-    getOnePost: build.query<IPost, IPost>({
+    
+    getOnePost: build.query<IPost, number>({
       query: (post) => `post/${post.id}`,
+      providesTags: (result, error, id) => [{ type: 'Post', id: "LIST"  }],
     }),
 
     createPost: build.mutation<IPost, IPost>({
@@ -31,27 +45,40 @@ export const postApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: [{ type: "Auth", id: "LIST" }],
+      invalidatesTags: [{ type: "Post", id: "LIST" }],
     }),
+
     updatePost: build.mutation<IPost, IPost>({
       query: (post) => ({
-        url: `post/${post._id}`,
-        method: "PUT",
+        url: `post/${post._id}/edit`,
+        method: "PATCH",
         body: post,
       }),
-      invalidatesTags: [{ type: "Auth", id: "LIST" }],
+      invalidatesTags: [{ type: "Post", id: "LIST" }],
     }),
+
     deletePost: build.mutation<IPost, IPost>({
-      query: (post) => ({
-        url: `post/${post._id}`,
+      query: (id) => ({
+        url: `post/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: [{ type: "Auth", id: "LIST" }],
+      invalidatesTags: [{ type: "Post", id: "LIST" }],
     }),
+
+    setImagUpload: build.mutation<File, any>({
+      query: (body) => ({
+        url: 'upload',
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: [{ type: "Post", id: "LIST" }],
+    }),
+
   }),
 });
 
 export const {
+  useSetImagUploadMutation,
   useGetPostsQuery,
   useGetOnePostQuery,
   useCreatePostMutation,

@@ -10,14 +10,14 @@ import styles from "./LoginPage.module.scss";
 
 const LoginPage = React.memo(() => {
   const [authorization, { data, isSuccess }] = useAuthorizationMutation();
-  const {email, password} = useSelector(selectAuth);
+  const {email, password , status} = useSelector(selectAuth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
- 
+  
   React.useEffect(() => {
     data ? dispatch(addAuth(data)) : false;
-    if (isSuccess) navigate(- 1);
-  }, [data]);
+    if (status) navigate(- 1);
+  }, [data, status]);
 
   return (
     <div className={styles.root}>

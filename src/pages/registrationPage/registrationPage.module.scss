@@ -1,12 +1,41 @@
+@use '../../scss/common/var';
 @use '../../scss/common/exented';
 
 .root {
   @extend %loginRegisterPageCard;
-
+  font-family: var.$ff-Gilroy-Medium;
+  .title {
+    font-family: var.$ff-Gilroy-Bold;
+    color: var.$color-header-bg-dark;
+    text-align: center;
+    font-size: var.$font-size-title-normal;
+  }
   .img {
+    display: flex;
+    align-items: center;
     margin: 0 auto;
     height: 100px;
     width: 100px;
+    margin-top: var.$spasing-big-medium;
   }
 
+  .input {
+    font-size: var.$font-size-average;
+    color: var.$color-black-hover;
+    width: 100%;
+    padding: var.$spasing-big-medium;
+    margin: var.$spasing-big-medium 0;
+    border-radius: 20px;
+  }
+  .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: var.$spasing-big-medium;
+  }
+
+  .error {
+    color: var.$color-error-dark;
+    font-size: var.$font-size-button;
+  }
 }

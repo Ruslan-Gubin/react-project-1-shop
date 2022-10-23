@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 import './ButtonMain.scss';
 
 interface IButtonMain {
@@ -6,16 +6,19 @@ interface IButtonMain {
   onClick?: (event:React.MouseEvent<HTMLButtonElement>) => void;
   bgColor?: string;
   disabled?: boolean
+  type?: "button" | "submit" | "reset"
 }
 
 const ButtonMain: React.FC<IButtonMain> = React.memo(({
   children,
   onClick,
   bgColor = "primary",
-  disabled=false
+  disabled,
+  type,
 }) => {
   return (
     <button
+    type={type}
     disabled={disabled}
     className={`button-main__${bgColor}`} 
     onClick={(event) => onClick?.(event)}>

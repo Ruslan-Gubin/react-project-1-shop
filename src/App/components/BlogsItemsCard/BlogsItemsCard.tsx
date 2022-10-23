@@ -1,23 +1,42 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {  useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { commentsIcon, eyeIcon } from "../../../data/icons";
 import { IPost } from "../../../models/products";
+import { selectAuth } from "../../../store/slice";
+import { ButtonMain } from "../Ui";
 import styles from "./BlogsItemsCard.module.scss";
+import ReactMarkdown from 'react-markdown';
+import { useDeletePostMutation } from "../../../store/rtkQuery";
 
 interface IBlogsItemsCard {
   item: IPost;
   singelPage?: boolean
 }
 
-const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({  item , singelPage = false }) => {
-
-
+const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({ id,  item , singelPage = false }) => {
+  const {auth} = useSelector(selectAuth)
+  const [removePost, {}] = useDeletePostMutation()
+  const navigate = useNavigate()
+  
+ const  handlerRemovePost = React.useCallback (async  (id) => {
+  try {
+    if (id) {
+      await removePost(id)
+    }
+  navigate('/')
+  } catch (error) {
+    console.log('Пост не удалось удалить', error)
+  }
+  
+  },[item])
+  
   return (
     <div className={styles.card}>
       <Link to={`/post/${item._id}`}>
         <img
           className={styles.imageUrl}
-          src={item.user ? item.imageUrl : item.img}
+          src={item.imageUrl && `http://localhost:4444${item.imageUrl}`}
           alt="post.title"
         />
       </Link>
@@ -26,8 +45,8 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({  item , singelPage = false 
         <Link to={`/post/${item._id}`}>
           <div className={styles.title}>{item.title}</div>
         </Link>
-      {!singelPage && <span>{item.tegs}</span>}
-      <p>{item.text}</p> 
+      <span>{item.tags}</span>
+      <ReactMarkdown children={item.text}  />
       </div>
 
       
@@ -36,11 +55,7 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({  item , singelPage = false 
         <div className={styles.user}>
           <img
             className={styles.imageUser}
-            src={
-              item.user
-                ? item.user.avatarUrl
-                : "https://i.pravatar.cc/40?img=1"
-            }
+            src={item?.user?.avatarUrl}
             alt="user__image"
           />
           <div>
@@ -55,6 +70,15 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({  item , singelPage = false 
             <img src={commentsIcon} alt="comments Count" />
             <span>123</span>
           </div>
+        {item.user && item.user._id === auth._id && 
+          <>
+          <Link to={`/post/${id}/edit`}>
+           <ButtonMain>Update</ButtonMain>
+          </Link>
+           <ButtonMain onClick={() => handlerRemovePost(id)}>Delete</ButtonMain>
+          </>
+        }  
+
         </div>
       </div>
     </div>

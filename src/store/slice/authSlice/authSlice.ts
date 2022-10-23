@@ -22,12 +22,14 @@ const authSlice = createSlice({
 
     addAuth(state, action: PayloadAction<any>) {
       state.auth = action.payload
+      window.localStorage.setItem('token', state.auth.token)
       state.status = true
       
     },
     
     resetAuth(state) {
       state.auth = []
+      window.localStorage.removeItem('token')
       state.status = false
     },
 

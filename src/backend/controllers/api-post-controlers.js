@@ -5,7 +5,7 @@ const handleError = (res, error, text) => res.status(500).send({ error, text });
 const createPost = async (req, res) => {
   const { title, text, imageUrl, tags } = req.body;
   const user = req.userId; //get user _id
-  const newPost = new Post({ title, text, imageUrl, tags, user });
+  const newPost = new Post({ title, text, imageUrl, tags: tags.split(','), user });
 
   await newPost
     .save()
@@ -17,9 +17,8 @@ const getAllPosts = async (req, res) => {
   await Post.find()
     .populate("user")
     .exec()
-    // .sort({ createdAt: -1 })
     .then((posts) => res.status(200).json(posts))
-    .catch((error) => handleError(res, error, "Не удалось найти статьи"));
+    .catch((error) => handleError(res, error, "Не удалось найти статьи"))
 };
 
 const getOnePost = async (req, res) => {
@@ -35,7 +34,7 @@ const getOnePost = async (req, res) => {
 
       res.json(doc);
     }
-  );
+  ).populate('user');
 };
 
 const deletePost = async (req, res) => {

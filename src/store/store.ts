@@ -23,7 +23,7 @@ const config = getPersistConfig({
   version: 1,
   storage,
   blacklist: [
-    "posts.post",
+    "posts.posts",
     "filters.dataDepartments",
     "filters.textMenuFilter",
     "filters.filterPagination",

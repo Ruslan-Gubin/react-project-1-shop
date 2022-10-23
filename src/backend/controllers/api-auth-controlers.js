@@ -6,8 +6,9 @@ const createUser = async (req, res) => {
   try {
     const { fullName, email, avatarUrl, password } = req.body;
 
+    const pas = password;
     const salt = await bcrypt.genSalt(10);
-    const passwordBcrypt = await bcrypt.hash(password, salt);
+    const passwordBcrypt = await bcrypt.hash(pas, salt);
 
     const newUser = new User({
       fullName,

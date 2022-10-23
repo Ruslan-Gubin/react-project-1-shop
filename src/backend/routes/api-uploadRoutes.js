@@ -15,10 +15,8 @@ const storage = multer.diskStorage({
 const upload = multer({storage})
 
 const createUpload = (req, res) => {
-  res.json({url: '/uploads/${req.file.originalname}',});
-}
+  res.json({url: `/uploads/${req.file.originalname}`,});}
     
 router.post('/api/upload', checkAuth, upload.single('image'), createUpload);
- 
 
 module.exports = router;

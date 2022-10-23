@@ -1,1 +1,0 @@
-export {ModalActive} from './ModalActive';

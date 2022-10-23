@@ -1,11 +1,19 @@
+import { RootState } from "@reduxjs/toolkit/dist/query/core/apiState";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Iauth } from "../../../models";
 
 export const authApi = createApi({
   reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4444/api" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4444/api",
+  prepareHeaders: (headers, {getState}) => {
+    const token = window.localStorage.getItem('token')
+    if (token) headers.set('authorization', token)  
+    return headers
+  }
+}),
   tagTypes: ["Auth"],
   endpoints: (build) => ({
+    
     getAuths: build.query<Iauth[], null>({
       query: () => "auth",
       providesTags: (result) =>
@@ -21,7 +29,7 @@ export const authApi = createApi({
     }),
 
     getOneAuth: build.query<Iauth, Iauth>({
-      query: (params) => `auth/${params._id}`,
+      query: () => `auth`,
     }),
 
     createAuth: build.mutation<Iauth, Iauth>({

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ModalActive, PostItemsRender } from "../../App/components";
-import { CustomPagination, InputMain } from "../../App/components/Ui";
+import { CreatePost, PostItemsRender } from "../../App/components";
+import * as ui from "../../App/components/Ui";
 import * as slice from "../../store/slice";
 import { useGetPostsQuery } from "../../store/rtkQuery";
 import { paginationCalculatorPage } from "../../utils";
@@ -25,8 +25,13 @@ const Posts: React.FC = React.memo(() => {
     <div className={styles.wrapper}>
       <div className={styles.post}>
         <div className={styles.forms}>
-          <InputMain  placeholder="Найти пост"  type="search" value={searchValue} onChange={(value) => dispatch(slice.setsearchValuePost({ value }))} />
-          <ModalActive />
+          <ui.InputMain
+            placeholder="Найти пост"
+            type="search"
+            value={searchValue}
+            onChange={(value) => dispatch(slice.setsearchValuePost({ value }))}
+          />
+          <CreatePost />
         </div>
         <div className={styles.items}>
           <PostItemsRender
@@ -36,7 +41,7 @@ const Posts: React.FC = React.memo(() => {
           />
         </div>
         <div>
-          <CustomPagination
+          <ui.CustomPagination
             totalCountries={posts.length}
             counterPerPage={perPage}
             currentPage={page}

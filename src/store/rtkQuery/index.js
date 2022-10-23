@@ -4,6 +4,7 @@ export {
   useCreatePostMutation,
   useGetOnePostQuery,
   useGetPostsQuery,
+  useSetImagUploadMutation,
   postApi,
 } from "./postApi";
 

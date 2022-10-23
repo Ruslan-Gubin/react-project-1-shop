@@ -18,8 +18,9 @@ const App = React.memo(() => {
           <Route path="login" element={<page.LoginPage />} />
           <Route path="register" element={<page.registrationPage />} />
           <Route path="post" element={<page.Posts />} />
-          <Route path="cart" element={<page.Basket />} />
           <Route path="post/:id" element={<page.SingelPagePost />} />
+          <Route path="post/:id/edit" element={<page.Posts />} />
+          <Route path="cart" element={<page.Basket />} />
           <Route path="*" element={<page.NotfoundPage />} />
         </Route>
       </Routes>
