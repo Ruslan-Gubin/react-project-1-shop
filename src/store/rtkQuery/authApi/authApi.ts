@@ -4,7 +4,7 @@ import { Iauth } from "../../../models";
 
 export const authApi = createApi({
   reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4444/api",
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_URL,
   prepareHeaders: (headers, {getState}) => {
     const token = window.localStorage.getItem('token')
     if (token) headers.set('authorization', token)  

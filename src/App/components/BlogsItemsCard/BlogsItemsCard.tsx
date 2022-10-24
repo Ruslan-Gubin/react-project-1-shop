@@ -36,7 +36,7 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({ id,  item , singelPage = fa
       <Link to={`/post/${item._id}`}>
         <img
           className={styles.imageUrl}
-          src={item.imageUrl && `http://localhost:4444${item.imageUrl}`}
+          src={item.imageUrl && `${process.env.REACT_APP_API_URL}${item.imageUrl}`}
           alt="post.title"
         />
       </Link>

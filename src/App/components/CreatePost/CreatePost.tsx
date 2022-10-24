@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { IPost } from "../../../models/products";
 import {
   useCreatePostMutation,
   useGetOnePostQuery,
@@ -132,7 +131,7 @@ const CreatePost: React.FC = React.memo(() => {
               </ButtonMain>
               <img
                 className={styles.previewImage}
-                src={`http://localhost:4444${imageUrl}`}
+                src={`${process.env.REACT_APP_API_URL}${imageUrl}`}
                 alt="uploaded"
               />
             </>
