@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack serve",
-    "server": "nodemon src/backend/server/app.js",
     "build-dev": "webpack",
     "build:prod": "set NODE_ENV=production&&webpack",
     "clear": "rd /s /q dist"
