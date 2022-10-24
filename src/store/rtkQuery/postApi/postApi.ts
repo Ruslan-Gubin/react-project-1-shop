@@ -49,10 +49,10 @@ export const postApi = createApi({
     }),
 
     updatePost: build.mutation<IPost, IPost>({
-      query: (post) => ({
-        url: `post/${post._id}/edit`,
+      query: (body) => ({
+        url: `post/${body.id}`,
         method: "PATCH",
-        body: post,
+        body,
       }),
       invalidatesTags: [{ type: "Post", id: "LIST" }],
     }),

@@ -4,6 +4,7 @@ import {
   useCreatePostMutation,
   useGetOnePostQuery,
   useSetImagUploadMutation,
+  useUpdatePostMutation,
 } from "../../../store/rtkQuery/postApi/postApi";
 import Form from "../Form";
 import { ButtonMain, InputMain } from "../Ui";
@@ -17,10 +18,11 @@ import styles from "./CreatePost.module.scss";
 const CreatePost: React.FC = React.memo(() => {
   const {id} = useParams()
   const {data,isLoading,isError} = useGetOnePostQuery({id})
+  const [updatePost, {}] = useUpdatePostMutation()
   const [createPost, {}] = useCreatePostMutation();
   const [setImageUpload, {}] = useSetImagUploadMutation();
   const { status } = useSelector(selectAuth);
-  const [modalActive, setModalActive] = useState(true);
+  const [modalActive, setModalActive] = useState(false);
 
   const [text, setText] = React.useState("");
   const [title, setTitle] = useState("");
@@ -42,7 +44,7 @@ const CreatePost: React.FC = React.memo(() => {
       const file = event.target.files ? event.target.files[0] : false;
       file &&  formData.append("image", file);
      const {data} =  await setImageUpload(formData)
-      setImageUrl(data.url)
+    await  setImageUrl(data.url)
     } catch (error) {
       console.log(error, "Ошибка при загрузке файла!");
     }
@@ -61,13 +63,16 @@ const CreatePost: React.FC = React.memo(() => {
   const onSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
     try {
-      // if (id && !isLoading && !isError) {
+      if (id && !isLoading && !isError) {
+        await  updatePost({ text, title, tags, imageUrl ,id})
+        imageUrl &&  navigate(`/post/${id}`);
+      } else {
 
-      // }
-      const data = await createPost({ text, title, tags, imageUrl }).unwrap();
-
-      const track = data._id;
-      navigate(`/post/${track}`);
+        const data = await createPost({ text, title, tags, imageUrl }).unwrap();
+        
+        const track = data._id;
+        navigate(`/post/${track}`);
+      }
     } catch (error) {
       console.log("Ошибка при создании статьи", error);
     }
@@ -81,9 +86,8 @@ const CreatePost: React.FC = React.memo(() => {
     setTitle(title)
     setTags(tags.join(','))
     setImageUrl(imageUrl)
-      console.log(data);
     }
-  },[])
+  },[id,isLoading])
 
   const options = React.useMemo(
     () => ({
