@@ -131,7 +131,7 @@ const CreatePost: React.FC = React.memo(() => {
               </ButtonMain>
               <img
                 className={styles.previewImage}
-                src={`${process.env.REACT_APP_API_URL}${imageUrl}`}
+                src={`https://pr1-backend.herokuapp.com${imageUrl}`}
                 alt="uploaded"
               />
             </>
