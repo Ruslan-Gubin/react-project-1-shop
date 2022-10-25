@@ -34,11 +34,11 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({ id,  item , singelPage = fa
   return (
     <div className={styles.card}>
       <Link to={`/post/${item._id}`}>
-        <img
+        {/* <img
           className={styles.imageUrl}
           src={item.imageUrl && `${process.env.REACT_APP_API_URL}${item.imageUrl}`}
           alt="post.title"
-        />
+        /> */}
       </Link>
 
       <div className={styles.body}>

@@ -3,7 +3,7 @@ import { IProduct } from "../../../models/products";
 
 export const productsApi = createApi({
     reducerPath: "productsApi",
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://react-project-1-backend.herokuapp.com/api'}),
+    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:4444/api'}),
     tagTypes: ['Products'],
     endpoints: (build) => ({
         
