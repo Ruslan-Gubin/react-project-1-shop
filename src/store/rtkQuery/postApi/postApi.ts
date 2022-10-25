@@ -3,7 +3,7 @@ import { IPost } from "../../../models/products";
 
 export const postApi = createApi({
   reducerPath: "postApi",
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_URL,
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://react-project-1-backend.herokuapp.com/api',
   prepareHeaders: (headers, {getState}) => {
     const token = window.localStorage.getItem('token')
     if (token) headers.set('authorization', token)  
