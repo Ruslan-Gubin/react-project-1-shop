@@ -45,7 +45,7 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({
       <Link to={`/post/${item._id}`}>
         <img
           className={!singelPage ? styles.imageUrl : styles.imageUrlSingl}
-          src={`https://pr1-backend.herokuapp.com${item.imageUrl}` || ""}
+          src={item.imageUrl ? `https://pr1-backend.herokuapp.com${item.imageUrl}` : ""}
           alt="imageUrl"
         />
       </Link>
