@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IAuth } from "../../../models/auth";
 import { TypeRootState } from "../../store";
 
 interface IinitState {
-  auth: Object
+  auth: IAuth
   status: boolean
   email: string
   password: string
@@ -20,15 +21,15 @@ const authSlice = createSlice({
   initialState,
   reducers: {
 
-    addAuth(state, action: PayloadAction<any>) {
+    addAuth(state, action: PayloadAction<IAuth>) {
       state.auth = action.payload
-      window.localStorage.setItem('token', state.auth.token)
+      state.auth.token &&  window.localStorage.setItem('token', state.auth.token)
       state.status = true
       
     },
     
     resetAuth(state) {
-      state.auth = []
+      state.auth = {}
       window.localStorage.removeItem('token')
       state.status = false
     },

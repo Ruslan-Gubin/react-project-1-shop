@@ -25,6 +25,11 @@
       height: 500px;
       width: 100%;
     }
+
+    .imageUrlSingl {
+      height: 100%;
+      width: 100%;
+    }
   
 
   .body {
@@ -43,6 +48,7 @@
 
   .footer {
     padding: var.$spasing-one-rem;
+    position: relative;
 
     .user {
       color: var.$color-secondary-hover;
@@ -72,6 +78,21 @@
       .commentsCount {
         @extend %commentsAndViews;
       }
+    }
+    .update {
+      width: 35px;
+      height: 35px;
+      position: absolute;
+      top: 20px;
+      right:80px;
+    }
+    .delete {
+      width: 35px;
+      height: 35px;
+      position: absolute;
+      top: 20px;
+      right:20px;
+      cursor: pointer;
     }
   }
 }

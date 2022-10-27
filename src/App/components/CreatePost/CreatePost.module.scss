@@ -1,11 +1,19 @@
-
+@use '../../../scss/common/var';
 
 .root {
 
-  .previewImage {
-    width: 35px;
-    height: 35px;
+  .buttonImage {
+    display: block;
   }
+  
+
+  .previewImage {
+    width: 100%;
+    height: 500px;
+    border-radius: var.$border-radius-small;
+  }
+
+  
 
 
 }

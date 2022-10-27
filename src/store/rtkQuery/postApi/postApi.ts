@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IPost } from "../../../models/products";
+import { IPost } from "../../../models";
+
 
 export const postApi = createApi({
   reducerPath: "postApi",
@@ -20,21 +21,14 @@ export const postApi = createApi({
             ? [...result.map(({ _id }) => ({ type: "Post" as const, _id })),
               { type: "Post", id: "LIST" },
             ]
-          : [{ type: "Post", id: "LIST" }],
+          : [{ type: "Post", id: "LIST" }],  
     }),
 
     getTags: build.query({
       query: () => 'tags',
-      // providesTags: (result) =>
-      //   result
-      //     ? [
-      //         ...result.map(({ _id }) => ({ type: "Post" as const, _id })),
-      //         { type: "Post", id: "LIST" },
-      //       ]
-      //     : [{ type: "Post", id: "LIST" }],
     }),
     
-    getOnePost: build.query<IPost, number>({
+    getOnePost: build.query<IPost, {id:number}>({
       query: (post) => `post/${post.id}`,
       providesTags: (result, error, id) => [{ type: 'Post', id: "LIST"  }],
     }),

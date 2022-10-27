@@ -1,9 +1,17 @@
-import { IPost } from "../products"
+import { IPost } from "../IPost";
 
-interface IinitialStatePosts {
-  posts: IPost[]
-  tags: string[] 
-  searchValue: string
+
+interface IgreatePost {
+  text: string;
+  title: string;
+  imageUrl: string;
+  tags: string;
 }
 
-export type {IinitialStatePosts}
+interface IinitialStatePosts {
+  createPost: IgreatePost;
+  posts: IPost[];
+  searchValue: string;
+}
+
+export type { IinitialStatePosts };

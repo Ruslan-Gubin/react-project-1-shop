@@ -1,12 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CreatePost, PostItemsRender } from "../../App/components";
+import {  PostItemsRender } from "../../App/components";
 import * as ui from "../../App/components/Ui";
 import * as slice from "../../store/slice";
 import { useGetPostsQuery } from "../../store/rtkQuery";
 import { paginationCalculatorPage } from "../../utils";
 import styles from "./Posts.module.scss";
-import { IPost } from "../../models/products";
+import { IPost } from "../../models";
 
 const Posts: React.FC = React.memo(() => {
   const { isLoading, isError, data = [] } = useGetPostsQuery(5);
@@ -31,7 +31,6 @@ const Posts: React.FC = React.memo(() => {
             value={searchValue}
             onChange={(value) => dispatch(slice.setsearchValuePost({ value }))}
           />
-          <CreatePost />
         </div>
         <div className={styles.items}>
           <PostItemsRender

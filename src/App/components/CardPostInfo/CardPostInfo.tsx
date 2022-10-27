@@ -23,8 +23,8 @@ const CardPostInfo: React.FC<ITegsCardItem> = ({
       <div className={styles.title}>{title}</div>
 
       {tags &&
-        tags.map((item: string) => (
-          <div className={styles.item} key={item}>
+        tags.map((item: string,index) => (
+          <div className={styles.item} key={index}>
             {item}
           </div>
         ))}

@@ -1,5 +1,5 @@
 import {  createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IPost } from "../../../models/products";
+import { IPost } from "../../../models";
 import { IinitialStatePosts } from "../../../models/typesSlice";
 import { sortArrayforDatePost } from "../../../utils";
 import { TypeRootState } from "../../store";
@@ -26,7 +26,7 @@ const postSlice = createSlice({
       state.searchValue = action.payload.value;
     },
 
-    setse(state, action: PayloadAction<{ value: string }>) {},
+   
   },
 
 });

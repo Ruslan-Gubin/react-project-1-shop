@@ -9,8 +9,12 @@ import userLogin from "../assets/img/icons/login-23432.png";
 import eyeIcon from "../assets/img/icons/eye-3223.png";
 import commentsIcon from "../assets/img/icons/comments_3979.png";
 import outIcon from "../assets/img/icons/out-323525.png";
+import deleteIcon from "../assets/img/icons/delete-52897.png";
+import updateIcon from "../assets/img/icons/update-35221.png";
 
 export {
+  deleteIcon,
+  updateIcon,
   eyeIcon,
   commentsIcon,
   userLogin,

@@ -10,8 +10,10 @@ const registrationPage = lazy(() => import('./registrationPage'))
 const Home = lazy(() => import('./Home'))
 const NotfoundPage = lazy(() => import('./NotfoundPage'))
 const Basket = lazy(() => import('./Basket'))
+const AddPost = lazy(() => import('./AddPost'))
 
 export {
+  AddPost,
   registrationPage,
   Product,
   Posts,

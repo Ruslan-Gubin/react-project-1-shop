@@ -19,7 +19,7 @@ const TextareaMain: JSXElementConstructor <TexteriaType> = React.memo(({
     required = false,
     cols = 20,
     rows = 2,
-    autoFocus = true,
+    autoFocus = false,
     disabled = false,
     minLength,
     text,

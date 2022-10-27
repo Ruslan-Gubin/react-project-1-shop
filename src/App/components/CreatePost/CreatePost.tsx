@@ -1,27 +1,18 @@
 import React, { useState } from "react";
-import {
-  useCreatePostMutation,
-  useGetOnePostQuery,
-  useSetImagUploadMutation,
-  useUpdatePostMutation,
-} from "../../../store/rtkQuery/postApi/postApi";
-import Form from "../Form";
-import { ButtonMain, InputMain } from "../Ui";
-import SimpleMDE from "react-simplemde-editor";
+import * as postSlice from "../../../store/rtkQuery";
+import { ButtonMain, Editor, InputMain } from "../Ui";
 import { useSelector } from "react-redux";
 import { selectAuth } from "../../../store/slice";
-import { Modal } from "../Modal";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./CreatePost.module.scss";
 
 const CreatePost: React.FC = React.memo(() => {
-  const {id} = useParams()
-  const {data,isLoading,isError} = useGetOnePostQuery({id})
-  const [updatePost, {}] = useUpdatePostMutation()
-  const [createPost, {}] = useCreatePostMutation();
-  const [setImageUpload, {}] = useSetImagUploadMutation();
+  const { id } = useParams();
+  const { data, isLoading, isError } = postSlice.useGetOnePostQuery({ id });
+  const [updatePost, {}] = postSlice.useUpdatePostMutation();
+  const [createPost, {}] = postSlice.useCreatePostMutation();
+  const [setImageUpload, {}] = postSlice.useSetImagUploadMutation();
   const { status } = useSelector(selectAuth);
-  const [modalActive, setModalActive] = useState(false);
 
   const [text, setText] = React.useState("");
   const [title, setTitle] = useState("");
@@ -30,10 +21,6 @@ const CreatePost: React.FC = React.memo(() => {
   const navigate = useNavigate();
   const inputFileRef = React.useRef<HTMLInputElement>(null);
 
-  const handlerClickModal = () => {
-    status ? setModalActive(true) : navigate("/login");
-  };
-
   const handlerChangeFile = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -41,34 +28,25 @@ const CreatePost: React.FC = React.memo(() => {
     try {
       const formData = new FormData();
       const file = event.target.files ? event.target.files[0] : false;
-      file &&  formData.append("image", file);
-     const {data} =  await setImageUpload(formData)
-    await  setImageUrl(data.url)
+      file && formData.append("image", file);
+      const { data } = await setImageUpload(formData);
+      await setImageUrl(data.url);
     } catch (error) {
       console.log(error, "Ошибка при загрузке файла!");
     }
   };
 
-  const closeModal: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    e.preventDefault();
-    setModalActive(false);
-    setTitle("");
-  };
-
-  const onChange = React.useCallback((value: string) => {
-    setText(value);
-  }, []);
-
-  const onSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
+  const onSubmitAddPost = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
     event.preventDefault();
     try {
       if (id && !isLoading && !isError) {
-        await  updatePost({ text, title, tags, imageUrl ,id})
-        imageUrl &&  navigate(`/post/${id}`);
+        await updatePost({ text, title, tags, imageUrl, id });
+        imageUrl && navigate(`/post/${id}`);
       } else {
-
         const data = await createPost({ text, title, tags, imageUrl }).unwrap();
-        
+
         const track = data._id;
         navigate(`/post/${track}`);
       }
@@ -79,80 +57,68 @@ const CreatePost: React.FC = React.memo(() => {
 
   React.useEffect(() => {
     if (id && !isLoading && !isError) {
-      setModalActive(true)
-    const {text,title,imageUrl,tags} = data
-    setText(text)
-    setTitle(title)
-    setTags(tags.join(','))
-    setImageUrl(imageUrl)
+      const { text, title, imageUrl, tags } = data;
+      setText(text);
+      setTitle(title);
+      setTags(tags.join(","));
+      setImageUrl(imageUrl);
     }
-  },[id,isLoading])
+  }, [id, isLoading]);
 
-  const options = React.useMemo(
-    () => ({
-      spellChecker: false,
-      maxHeight: "100px",
-      autofocus: true,
-      placeholder: "Введите текст...",
-      status: false,
-      autosave: {
-        enabled: true,
-        deley: 1000,
-        uniqueId: "mde-autosave-demo",
-      },
-    }),
-    []
-  );
+  const handlerClear = () => {
+    if (text) setText("");
+    if (title) setTitle("");
+    if (tags) setTags("");
+    if (imageUrl) setImageUrl("");
+  };
 
   return (
     <div className={styles.root}>
-      <ButtonMain bgColor="info" onClick={() => handlerClickModal()}>
-        Создать пост
-      </ButtonMain>
-      <Modal active={modalActive} setActive={setModalActive}>
-        <Form
-          titleText={"Форма заполнение поста:"}
-          handlerSubmit={onSubmit}
-          closeForm={(e) => closeModal(e)}
-        >
+      <div className={styles.buttonImage}>
+        {imageUrl ? (
+          <ButtonMain onClick={() => setImageUrl("")} bgColor="red">
+            Удалить фото
+          </ButtonMain>
+        ) : (
           <ButtonMain onClick={() => inputFileRef.current?.click()}>
             Добавить фото
           </ButtonMain>
-          <input
-            ref={inputFileRef}
-            type="file"
-            onChange={handlerChangeFile}
-            hidden
-          />
-          {imageUrl && (
-            <>
-              <ButtonMain onClick={() => setImageUrl("")} bgColor="red">
-                Удалить
-              </ButtonMain>
-              <img
-                className={styles.previewImage}
-                src={`https://pr1-backend.herokuapp.com${imageUrl}`}
-                alt="uploaded"
-              />
-            </>
-          )}
+        )}
+      </div>
+      <input
+        ref={inputFileRef}
+        type="file"
+        onChange={handlerChangeFile}
+        hidden
+      />
+      {imageUrl && (
+        <img
+          className={styles.previewImage}
+          src={`https://pr1-backend.herokuapp.com${imageUrl}`}
+          alt="uploaded"
+        />
+      )}
 
-          <InputMain
-            required={true}
-            value={title}
-            onChange={(value) => setTitle(value)}
-            placeholder="Заголовок"
-          />
-          <InputMain
-            required={true}
-            value={tags}
-            onChange={(value) => setTags(value)}
-            placeholder="Теги"
-          />
+      <InputMain
+        required={true}
+        value={title}
+        onChange={(value) => setTitle(value)}
+        placeholder="Заголовок..."
+      />
+      <InputMain
+        required={true}
+        value={tags}
+        onChange={(value) => setTags(value)}
+        placeholder="Теги..."
+      />
+      <Editor value={text} onChange={(value) => setText(value)} />
 
-          <SimpleMDE onChange={onChange} options={options} value={text} />
-        </Form>
-      </Modal>
+      <ButtonMain onClick={(event) => onSubmitAddPost(event)}>
+        Опубликовать
+      </ButtonMain>
+      <ButtonMain onClick={() => handlerClear()} bgColor="nobg">
+        Очистить
+      </ButtonMain>
     </div>
   );
 });

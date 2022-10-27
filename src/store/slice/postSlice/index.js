@@ -2,4 +2,4 @@ import postSlice from './postSlice';
 
 export {postSlice};
 
-export {selectPosts, setsearchValuePost, setStatePost,} from './postSlice';
+export { selectPosts, setsearchValuePost, setStatePost,} from './postSlice';

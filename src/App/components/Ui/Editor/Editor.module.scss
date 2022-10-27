@@ -1,0 +1,38 @@
+@use '../../../../scss/common/var';
+
+.editor {
+  margin-top: 10px;
+  background-color: var.$color-white;
+  overflow: hidden;
+  border-radius: var.$border-radius-button;
+
+  & p {
+    font-size: 16px;
+  }
+
+  & button {
+    font: inherit;
+  }
+
+  & h1 {
+    font-size: 32px;
+  }
+  & h2 {
+    font-size: 28px;
+  }
+  & h3 {
+    font-size: 22px;
+  }
+  & h4 {
+    font-size: 18px;
+  }
+  & h5 {
+    font-size: 14px;
+  }
+
+  & a {
+    text-decoration: none;
+  color: hsl(140, 51%, 36%);
+  }
+}
+

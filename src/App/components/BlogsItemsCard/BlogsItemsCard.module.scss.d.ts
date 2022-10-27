@@ -4,10 +4,13 @@ interface CssExports {
   'body': string;
   'card': string;
   'commentsCount': string;
+  'delete': string;
   'footer': string;
   'imageUrl': string;
+  'imageUrlSingl': string;
   'imageUser': string;
   'title': string;
+  'update': string;
   'user': string;
   'views': string;
 }
