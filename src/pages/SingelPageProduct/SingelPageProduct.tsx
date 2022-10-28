@@ -4,12 +4,12 @@ import { ProductSinglPage } from "../../App/components";
 import { ButtonGoBack } from "../../App/components/Ui";
 import { arrowLeft, productsCategoriLink } from "../../data";
 import { IproductsCategoriLink } from "../../data/productsCategoriLink";
-import { useGetOneProductQuery } from "../../store/rtkQuery";
+import { productsApi } from "../../store/rtkQuery";
 import styles from "./SingelPageProduct.module.scss";
 
 const SingelPageProduct: React.FC = () => {
   const { id } = useParams<string>();
-  const { isLoading, isError, data } = useGetOneProductQuery( id ? id : 'undefined' );
+  const { isLoading, isError, data } = productsApi.useGetOneProductQuery( id ? id : 'undefined' );
   let map: { name?: string } = {};
   
   productsCategoriLink.map((item: IproductsCategoriLink) => {

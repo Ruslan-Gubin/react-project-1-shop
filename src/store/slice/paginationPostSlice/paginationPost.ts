@@ -8,7 +8,7 @@ interface IpaginationProduct {
 
 const paginationPostSlice = createSlice({
   name: "paginationPost",
-  initialState:<IpaginationProduct> {
+  initialState: <IpaginationProduct>{
     page: 1,
     perPage: 12,
   },
@@ -22,7 +22,7 @@ const paginationPostSlice = createSlice({
       action.payload !== state.page ? (state.page = state.page + 1) : false;
     },
 
-    setPaginatePost(state, action: PayloadAction<{pageNumber: number}>) {
+    setPaginatePost(state, action: PayloadAction<{ pageNumber: number }>) {
       state.page = action.payload.pageNumber;
     },
 
@@ -32,9 +32,8 @@ const paginationPostSlice = createSlice({
   },
 });
 
-export const selectPaginationPost = (state: TypeRootState) => state.paginationPost
+export const selectPaginationPost = (state: TypeRootState) => state.paginationPost;
+  
+export const paginPostAction = paginationPostSlice.actions;
 
-export const { resetPagePost, setPrevPagePost, setNextPagePost, setPaginatePost } =
-paginationPostSlice.actions;
-
-export default paginationPostSlice.reducer;
+export const paginPostReducer = paginationPostSlice.reducer;

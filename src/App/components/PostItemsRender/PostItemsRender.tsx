@@ -1,6 +1,6 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
-import { IPost } from "../../../models/products";
+import { IPost } from "../../../models";
 import { CardMainPost, CustomLink } from "../Ui";
 import styles from './PostItemsRender.module.scss';
 

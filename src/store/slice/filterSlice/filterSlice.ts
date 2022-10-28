@@ -99,17 +99,6 @@ const filterSlice = createSlice({
 
 export const selectFilters = (state: TypeRootState) => state.filters;
 
-export const {
-  setFilterPagination,
-  setPrevPageProduct,
-  setNextPageProduct,
-  setPaginateProduct,
-  setSearchTextForMenu,
-  setDataDepartment,
-  setCategoryValue,
-  resetMenuId,
-  setSelectId,
-  setTextSearch,
-} = filterSlice.actions;
+export const filterAction = filterSlice.actions;
 
-export default filterSlice.reducer;
+export const filterReducer = filterSlice.reducer;

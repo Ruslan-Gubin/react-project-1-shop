@@ -11,8 +11,12 @@ import commentsIcon from "../assets/img/icons/comments_3979.png";
 import outIcon from "../assets/img/icons/out-323525.png";
 import deleteIcon from "../assets/img/icons/delete-52897.png";
 import updateIcon from "../assets/img/icons/update-35221.png";
+import showMoreTagsIcon from "../assets/img/icons/show-more-325323.png";
+import hideTagsIcon from "../assets/img/icons/show-prev-148701.png";
 
 export {
+  showMoreTagsIcon,
+  hideTagsIcon,
   deleteIcon,
   updateIcon,
   eyeIcon,

@@ -7,13 +7,29 @@
   font-family: var.$ff-Gilroy-Medium;
   color: var.$box-shadow;
   .title {
+    text-align: center;
     margin-bottom: var.$spasing-big-medium;
     font-size: var.$font-size-title-normal;
+  }
+  .moreTags {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
   }
   
   .item {
     margin-bottom: var.$spasing-small;
     font-size: var.$font-size-card-text;
+    cursor: pointer;
+    &:hover{
+      color: var.$color-blue;
+    }
+  }
+  .itemActive {
+    margin-bottom: var.$spasing-small;
+    font-size: var.$font-size-card-text;
+    cursor: pointer;
+    color: var.$color-blue;
   }
   
   .comentContainer {

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BasketInfo, BasketGoods, EmptyBasket } from "../../App/components";
 import { ButtonGoBack, ButtonMain } from "../../App/components/Ui";
 import { arrowLeft } from "../../data";
-import { clearOrder, selectOrder } from "../../store/slice";
+import { orderAction, selectOrder } from "../../store/slice";
 import styles from "./Basket.module.scss";
 
 const Basket = React.memo(() => {
@@ -18,7 +18,7 @@ const Basket = React.memo(() => {
             <ButtonGoBack className={styles.goBack} text={" "}>
               <img src={arrowLeft} alt="arrow left" />
             </ButtonGoBack>
-            <ButtonMain onClick={() => dispatch(clearOrder())} bgColor="black">
+            <ButtonMain onClick={() => dispatch(orderAction.clearOrder())} bgColor="black">
               Очистить корзину
             </ButtonMain>
           </div>

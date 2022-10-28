@@ -1,20 +1,20 @@
-import { useCreateProductsMutation } from "../../../store/rtkQuery";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import { selectFilters } from "../../../store/slice";
+import { productsApi } from "../../../store/rtkQuery";
 import { selectAddProduct, sumDiscount } from "../../../utils";
 import { ButtonMain, InputMain, TextareaMain } from "../Ui";
-import styles from "./FormAddProduct.module.scss";
 import { CustomSelect } from "../CustomSelect";
 import { Modal } from "../Modal";
 import Form from "../Form";
 import { useSelector } from "react-redux";
-import { selectFilters } from "../../../store/slice";
+import styles from "./FormAddProduct.module.scss";
 
 const FormAddProduct: React.FC = React.memo(() => {
   const { dataDepartments } = useSelector(selectFilters);
   const { id } = useParams();
   const [activeModal, setActiveModal] = useState(false);
-  const [createProducts, {}] = useCreateProductsMutation();
+  const [createProducts, {}] = productsApi.useCreateProductsMutation();
   const [title, setTitle] = useState<string>("");
   const [description, setDescreption] = useState<string>("");
   const [quantity, setQuantity] = useState<string>("");

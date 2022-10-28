@@ -1,12 +1,1 @@
-import authSlice from './authSlice';
-
-export {authSlice} 
-
-export {
-  selectAuth,
-  addAuth,
-  resetAuth,
-  getAutchEmail,
-  getAutchPassword,
- 
-} from "./authSlice";
+export { authAction, authReducer, selectAuth } from "./authSlice";

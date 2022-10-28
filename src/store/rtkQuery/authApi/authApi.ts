@@ -2,7 +2,7 @@ import { RootState } from "@reduxjs/toolkit/dist/query/core/apiState";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Iauth } from "../../../models";
 
-export const authApi = createApi({
+const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({ baseUrl: 'https://pr1-backend.herokuapp.com/api',
   prepareHeaders: (headers, {getState}) => {
@@ -32,7 +32,7 @@ export const authApi = createApi({
       query: () => `auth`,
     }),
 
-    createAuth: build.mutation<Iauth, Iauth>({
+    createAuth: build.mutation<Iauth, string>({
       query: (body) => ({
         url: "register",
         method: "POST",
@@ -69,12 +69,4 @@ export const authApi = createApi({
   }),
 });
 
-
-export const {
-  useAuthorizationMutation,
-  useCreateAuthMutation,
-  useDeleteAuthMutation,
-  useGetOneAuthQuery,
-  useUpdateAuthMutation,
-  useGetAuthsQuery,
-} = authApi;
+export {authApi}

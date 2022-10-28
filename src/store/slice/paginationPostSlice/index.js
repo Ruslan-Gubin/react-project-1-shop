@@ -1,11 +1,5 @@
-import paginationPostSlice from "./paginationPost";
+export { selectPaginationPost, paginPostAction, paginPostReducer } from "./paginationPost";
+  
+  
+  
 
-export { paginationPostSlice };
-
-export {
-  selectPaginationPost,
-  resetPagePost,
-  setPrevPagePost,
-  setNextPagePost,
-  setPaginatePost,
-} from "./paginationPost";

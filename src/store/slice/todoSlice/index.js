@@ -1,5 +1,1 @@
-import todoSlice from './todoSlice';
-
-export {todoSlice}
-
-export {selectTodos, addTodo, removeTodo, toggleTodoComplete} from './todoSlice';
+export {selectTodos, todoAction, todoReducer } from './todoSlice';

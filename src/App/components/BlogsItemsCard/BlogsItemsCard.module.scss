@@ -34,11 +34,11 @@
 
   .body {
     padding: var.$spasing-one-rem;
-
     .title {
       color: var.$color-header-bg-dark;
       font-size: var.$font-size-average;
       text-transform: capitalize;
+      text-align: center;
     }
     & span {
       display: block;

@@ -3,19 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Form from "../../App/components/Form";
 import { InputMain } from "../../App/components/Ui";
-import { useAuthorizationMutation } from "../../store/rtkQuery/authApi/authApi";
-import { addAuth, getAutchEmail, getAutchPassword, resetAuth, selectAuth } from "../../store/slice";
+import { authApi } from "../../store/rtkQuery";
+import { authAction, selectAuth } from "../../store/slice";
 import styles from "./LoginPage.module.scss";
 
 
 const LoginPage = React.memo(() => {
-  const [authorization, { data, isSuccess }] = useAuthorizationMutation();
+  const [authorization, { data }] = authApi.useAuthorizationMutation();
   const {email, password , status} = useSelector(selectAuth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
   React.useEffect(() => {
-    data ? dispatch(addAuth(data)) : false;
+    data ? dispatch(authAction.addAuth(data)) : false;
     if (status) navigate(- 1);
   }, [data, status]);
 
@@ -32,14 +32,14 @@ const LoginPage = React.memo(() => {
           autofocus={true}
           type="email"
           value={email}
-          onChange={(value) => dispatch(getAutchEmail({value}))}
+          onChange={(value) => dispatch(authAction.getAutchEmail({value}))}
         />
         <InputMain
           required={true}
           placeholder="Введите пароль"
           type="password"
           value={password}
-          onChange={(value) => dispatch(getAutchPassword({value}))}
+          onChange={(value) => dispatch(authAction.getAutchPassword({value}))}
         />
       </Form>
     </div>

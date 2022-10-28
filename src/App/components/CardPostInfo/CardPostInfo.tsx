@@ -1,4 +1,6 @@
 import React from "react";
+import { showMoreTagsIcon } from "../../../data/icons";
+import { filterTags } from "../../../utils";
 import styles from "./CardPostInfo.module.scss";
 
 export interface IComments {
@@ -11,21 +13,44 @@ interface ITegsCardItem {
   title: string;
   tags?: string[];
   comments?: IComments[];
+  handelClickTag?: (value: string) => void
+  tagValue?: string
 }
 
 const CardPostInfo: React.FC<ITegsCardItem> = ({
   title,
   tags = [],
   comments = [],
+  handelClickTag,
+  tagValue,
 }) => {
+  const [showAllTags, setShowAllTags] = React.useState(false)
+  const [tagsArr, setTagsArr] = React.useState<string[]>([])
+
+  React.useEffect(() => {
+      if (tags) {
+      if (showAllTags) {
+        setTagsArr(filterTags.filterAllTags(tags))
+      } else {
+        setTagsArr(filterTags.getFirstFiveTags(tags))
+      }
+    }
+  },[showAllTags])
+
+
   return (
-    <div className={styles.root}>
+    <div className={styles.root}>   
+    <img className={styles.moreTags} onClick={()=> setShowAllTags(!showAllTags)} src={showMoreTagsIcon} alt="show More Tags Icon" />
       <div className={styles.title}>{title}</div>
 
       {tags &&
-        tags.map((item: string,index) => (
-          <div className={styles.item} key={index}>
-            {item}
+        tagsArr.map((value: string) => (
+          <div 
+          onClick={()=> handelClickTag(value)}
+          key={value}
+          className={tagValue === value ? styles.itemActive : styles.item  } 
+          >
+           <p># {value}</p> 
           </div>
         ))}
 

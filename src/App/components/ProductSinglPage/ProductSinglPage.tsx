@@ -1,16 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { useGetOneProductQuery } from "../../../store/rtkQuery";
-import { addToOrders, selectOrder } from "../../../store/slice";
+import { productsApi } from "../../../store/rtkQuery";
+import {  orderAction, selectOrder } from "../../../store/slice";
 import { formatterRub } from "../../../utils";
 import { ImagesSlider } from "../ImagesSlider";
 import { ButtonMain } from "../Ui";
+
 import styles from "./ProductSinglPage.module.scss";
 
 const ProductSinglPage: React.FC = () => {
   const { id } = useParams<string>();
-  const { isLoading, isError, data } = useGetOneProductQuery(
+  const { isLoading, isError, data } = productsApi.useGetOneProductQuery(
     id ? id : "undefined"
   );
   const { order } = useSelector(selectOrder);
@@ -47,7 +48,7 @@ const ProductSinglPage: React.FC = () => {
                     </Link>
                   ) : (
                     <ButtonMain
-                      onClick={() => dispatch(addToOrders(data))}
+                      onClick={() => dispatch(orderAction.addToOrders(data))}
                       bgColor="info"
                     >
                       Добавить в корзину

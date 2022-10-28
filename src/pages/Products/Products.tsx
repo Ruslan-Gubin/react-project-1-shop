@@ -1,19 +1,19 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { productsApi } from "../../store/rtkQuery";
+import {  filterAction } from "../../store/slice";
 import { CardProducts, ImagesSlider } from "../../App/components";
 import { productsCategoriLink } from "../../data";
-import { useGetProductsQuery } from "../../store/rtkQuery";
 import { getImgForSlider } from "../../utils";
 import styles from "./Products.module.scss";
-import {  resetMenuId } from "../../store/slice";
-import { Link } from "react-router-dom";
 
 const Products: React.FC = React.memo(() => {
-  const { isLoading, data = [] } = useGetProductsQuery(null);
+  const { isLoading, data = [] } = productsApi.useGetProductsQuery(null);
   const dispatch = useDispatch();
 
   const handlerLinkClick = () => {
-    dispatch(resetMenuId());
+    dispatch(filterAction.resetMenuId());
   };
 
   return (

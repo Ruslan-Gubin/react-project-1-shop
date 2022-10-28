@@ -1,25 +1,30 @@
-import React, { useState } from "react";
-import * as postSlice from "../../../store/rtkQuery";
-import { ButtonMain, Editor, InputMain } from "../Ui";
-import { useSelector } from "react-redux";
-import { selectAuth } from "../../../store/slice";
+import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { postApi } from "../../../store/rtkQuery";
+import { selectAuth } from "../../../store/slice";
+import { ButtonMain, Editor, InputMain } from "../Ui";
 import styles from "./CreatePost.module.scss";
 
 const CreatePost: React.FC = React.memo(() => {
-  const { id } = useParams();
-  const { data, isLoading, isError } = postSlice.useGetOnePostQuery({ id });
-  const [updatePost, {}] = postSlice.useUpdatePostMutation();
-  const [createPost, {}] = postSlice.useCreatePostMutation();
-  const [setImageUpload, {}] = postSlice.useSetImagUploadMutation();
-  const { status } = useSelector(selectAuth);
+  const { id } = useParams<string>();
+  const { data, isLoading, isError } = postApi.useGetOnePostQuery({ id });
+  const [updatePost, {}] = postApi.useUpdatePostMutation();
+  const [createPost, {}] = postApi.useCreatePostMutation();
+  const [setImageUpload, {}] = postApi.useSetImagUploadMutation();
 
   const [text, setText] = React.useState("");
-  const [title, setTitle] = useState("");
-  const [tags, setTags] = useState("");
-  const [imageUrl, setImageUrl] = useState<string>("");
+  const [title, setTitle] = React.useState("");
+  const [tags, setTags] = React.useState("");
+  const [imageUrl, setImageUrl] = React.useState<string>("");
+
   const navigate = useNavigate();
   const inputFileRef = React.useRef<HTMLInputElement>(null);
+  const { status } = useSelector(selectAuth);
+  
+  React.useEffect(() => {
+    if (!status) navigate("/login");
+  }, [status]);
 
   const handlerChangeFile = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -29,8 +34,8 @@ const CreatePost: React.FC = React.memo(() => {
       const formData = new FormData();
       const file = event.target.files ? event.target.files[0] : false;
       file && formData.append("image", file);
-      const { data } = await setImageUpload(formData);
-      await setImageUrl(data.url);
+      const { data } =  await setImageUpload(formData);
+      setImageUrl(data.url);
     } catch (error) {
       console.log(error, "Ошибка при загрузке файла!");
     }
@@ -98,7 +103,6 @@ const CreatePost: React.FC = React.memo(() => {
           alt="uploaded"
         />
       )}
-
       <InputMain
         required={true}
         value={title}
@@ -112,7 +116,6 @@ const CreatePost: React.FC = React.memo(() => {
         placeholder="Теги..."
       />
       <Editor value={text} onChange={(value) => setText(value)} />
-
       <ButtonMain onClick={(event) => onSubmitAddPost(event)}>
         Опубликовать
       </ButtonMain>

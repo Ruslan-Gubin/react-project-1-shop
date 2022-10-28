@@ -1,39 +1,35 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { postApi } from "../../store/rtkQuery";
+import * as slice from "../../store/slice";
 import * as components from "../../App/components";
+import { IPost } from "../../models/iPost";
 import { ButtonMain, CustomPagination, InputMain } from "../../App/components/Ui";
+import {  paginationCalculatorPage } from "../../utils";
 import { commentsArray, sortCategoryName } from "../../data";
-import { IPost } from "../../models";
-import { useGetPostsQuery } from "../../store/rtkQuery";
-import { useGetTagsQuery } from "../../store/rtkQuery/postApi/postApi";
-import { resetPagePost, selectPaginationPost, selectPosts, setNextPagePost, setPaginatePost, setPrevPagePost, setsearchValuePost, setStatePost } from "../../store/slice";
-import { paginationCalculatorPage } from "../../utils";
 import styles from "./Home.module.scss";
 
-interface IuseGetTagsQuery {
-  data: string[]
-  isLoading: boolean
-  isError: boolean
-}
 
-const Home = React.memo(() => {
-  const [menuValue, setMenuValue] = React.useState(sortCategoryName[0]);
-  const { data = [], isLoading, isError } = useGetPostsQuery(5);
-  const { perPage, page } = useSelector(selectPaginationPost);
-  const { data: tags, isLoading:isLoadingTags, isError:isErrorTags } = useGetTagsQuery<IuseGetTagsQuery>('');
-  const { posts, searchValue } = useSelector(selectPosts);
+const Home:React.FC = React.memo(() => {
+  const { data = [], isLoading, isError } = postApi.useGetPostsQuery('');
+  const { perPage, page } = useSelector(slice.selectPaginationPost);
+  const { posts, searchValue , menuValue, tagsSearchValue} = useSelector(slice.selectPosts);
+  const { status } = useSelector(slice.selectAuth);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   React.useEffect(() => {
     if (!isLoading && !isError) {
-      dispatch(setStatePost({ data }))
-      if (searchValue) dispatch(resetPagePost());
+      dispatch(slice.postAction.setStatePost({ data }))
+      if (searchValue || tagsSearchValue) dispatch(slice.paginPostAction.resetPagePost());    
     }
-  },[isLoading, searchValue])
-  
-  let pagination = paginationCalculatorPage(posts, page, perPage) as IPost[];
-  
+  },[isLoading, searchValue, menuValue, tagsSearchValue])
+ 
+  let pagination = React.useMemo(()=> {
+      return  paginationCalculatorPage(posts, page, perPage) as IPost[]
+  },[posts,page,posts]) 
+
   return (
     <div className={styles.root}>
       {isError && <div>Error...</div>}
@@ -42,18 +38,16 @@ const Home = React.memo(() => {
           horizontally={true}
           menuValue={menuValue}
           data={sortCategoryName}
-          handlerClick={(item) => setMenuValue(item)}
+          handlerClick={(item) => dispatch(slice.postAction.setCategoryPost({item}))}
         />
         <InputMain
             placeholder="Найти пост"
             type="search"
             value={searchValue}
-            onChange={(value) => dispatch(setsearchValuePost({ value }))}
+            onChange={(value) => dispatch(slice.postAction.setsearchValuePost({ value }))}
           />
         <div>
-         <Link to={'/add-post'}>
-      <ButtonMain>Создать пост</ButtonMain>
-         </Link>
+      <ButtonMain onClick={()=> navigate(status ? '/add-post' : '/login')}>Создать пост</ButtonMain>
         </div>
       </div>
       <div className={styles.container}>
@@ -71,9 +65,15 @@ const Home = React.memo(() => {
         <div className={styles.blockForSticky}>
           <div className={styles.info}>
             <div className={styles.tegs}>
-              {!isLoadingTags && 
-              <components.CardPostInfo  tags={tags} title="Теги" />
-              }
+               {!isLoading && data &&
+              <components.CardPostInfo 
+              handelClickTag={(value)=> dispatch(slice.postAction.setTagsSearchValue({value}))}
+              tagValue={tagsSearchValue} 
+              tags={ data} 
+              title="Теги" 
+              />
+            }
+              
             </div>
             <div className={styles.comments}>
               <components.CardPostInfo
@@ -89,10 +89,10 @@ const Home = React.memo(() => {
             counterPerPage={perPage}
             currentPage={page}
             clickNumber={(pageNumber: number) =>
-              dispatch(setPaginatePost({ pageNumber }))
+              dispatch(slice.paginPostAction.setPaginatePost({ pageNumber }))
             }
-            prevPage={() => dispatch(setPrevPagePost())}
-            nextPage={(page: number) => dispatch(setNextPagePost(page))}
+            prevPage={() => dispatch(slice.paginPostAction.setPrevPagePost())}
+            nextPage={(page: number) => dispatch(slice.paginPostAction.setNextPagePost(page))}
           />
     </div>
   );

@@ -1,5 +1,1 @@
-import postSlice from './postSlice';
-
-export {postSlice};
-
-export { selectPosts, setsearchValuePost, setStatePost,} from './postSlice';
+export {postReducer, selectPosts, postAction} from './postSlice';

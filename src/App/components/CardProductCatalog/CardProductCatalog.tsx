@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as prodSlice from "../../../store/slice";
-import { useRemoveProductMutation } from "../../../store/rtkQuery";
+import * as slice from "../../../store/slice";
 import { Link } from "react-router-dom";
 import { formatterRub, sumDiscount } from "../../../utils";
 import styles from "./CardProductCatalog.module.scss";
@@ -9,6 +8,7 @@ import { ModalRemoveItem } from "../ModalRemoveItem";
 import { IProduct } from "../../../models/products";
 import { ButtonMain } from "../Ui";
 import { Modal } from "../Modal";
+import { productsApi } from "../../../store/rtkQuery";
 
 interface ICardProductCatalogProps {
   product: IProduct;
@@ -16,8 +16,8 @@ interface ICardProductCatalogProps {
 
 const CardProductCatalog: React.FC<ICardProductCatalogProps> = React.memo(
   ({ product }) => {
-    const { order } = useSelector(prodSlice.selectOrder);
-    const [removeProduct, {}] = useRemoveProductMutation();
+    const { order } = useSelector(slice.selectOrder);
+    const [removeProduct, {}] = productsApi.useRemoveProductMutation();
     const [modalActive, setModalActive] = React.useState<boolean>(false);
     const dispatch = useDispatch();
     let _id: string = "";
@@ -64,14 +64,14 @@ const CardProductCatalog: React.FC<ICardProductCatalogProps> = React.memo(
             <div className={styles.buttons}>
               {findIdInOrder ? (
                 <ButtonMain
-                  onClick={() => dispatch(prodSlice.removeToOrder({ _id }))}
+                  onClick={() => dispatch(slice.orderAction.removeToOrder({ _id }))}
                   bgColor="secondary"
                 >
                   <>В Корзине: {productCounter}</>
                 </ButtonMain>
               ) : (
                 <ButtonMain
-                  onClick={() => dispatch(prodSlice.addToOrders(product))}
+                  onClick={() => dispatch(slice.orderAction.addToOrders(product))}
                 >
                   В Корзину
                 </ButtonMain>
@@ -79,14 +79,14 @@ const CardProductCatalog: React.FC<ICardProductCatalogProps> = React.memo(
               {findIdInOrder && (
                 <>
                   <ButtonMain
-                    onClick={() => dispatch(prodSlice.addCountGoods({ _id }))}
+                    onClick={() => dispatch(slice.orderAction.addCountGoods({ _id }))}
                     bgColor="green"
                   >
                     +
                   </ButtonMain>
                   <ButtonMain
                     onClick={() =>
-                      dispatch(prodSlice.removeCountGoods({ _id }))
+                      dispatch(slice.orderAction.removeCountGoods({ _id }))
                     }
                     bgColor="green"
                   >

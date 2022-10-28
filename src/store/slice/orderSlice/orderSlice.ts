@@ -50,12 +50,6 @@ const orderSlice = createSlice({
 
 export const selectOrder = (state: TypeRootState) => state.order
 
-export const {
-  removeCountGoods,
-  removeToOrder,
-  addCountGoods,
-  addToOrders,
-  clearOrder,
-} = orderSlice.actions;
+export const orderAction = orderSlice.actions;
 
-export default orderSlice.reducer;
+export const orderReducer = orderSlice.reducer;

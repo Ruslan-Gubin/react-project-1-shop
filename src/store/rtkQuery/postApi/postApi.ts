@@ -1,36 +1,36 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IPost } from "../../../models";
 
-
-export const postApi = createApi({
+const postApi = createApi({
   reducerPath: "postApi",
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://pr1-backend.herokuapp.com/api',
-  prepareHeaders: (headers, {getState}) => {
-    const token = window.localStorage.getItem('token')
-    if (token) headers.set('authorization', token)  
-    return headers
-  }
-}),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://pr1-backend.herokuapp.com/api",
+    prepareHeaders: (headers, { getState }) => {
+      const token = window.localStorage.getItem("token");
+      if (token) headers.set("authorization", token);
+      return headers;
+    },
+  }),
   tagTypes: ["Post"],
   endpoints: (build) => ({
-
-    getPosts: build.query<IPost[], number>({
+    getPosts: build.query<IPost[], string>({
       query: () => "post",
       providesTags: (result) =>
         result
-            ? [...result.map(({ _id }) => ({ type: "Post" as const, _id })),
+          ? [
+              ...result.map(({ _id }) => ({ type: "Post" as const, _id })),
               { type: "Post", id: "LIST" },
             ]
-          : [{ type: "Post", id: "LIST" }],  
+          : [{ type: "Post", id: "LIST" }],
     }),
 
     getTags: build.query({
-      query: () => 'tags',
+      query: () => "tags",
     }),
-    
-    getOnePost: build.query<IPost, {id:number}>({
+
+    getOnePost: build.query<IPost, { id: string }>({
       query: (post) => `post/${post.id}`,
-      providesTags: (result, error, id) => [{ type: 'Post', id: "LIST"  }],
+      providesTags: (result, error, id) => [{ type: "Post", id: "LIST" }],
     }),
 
     createPost: build.mutation<IPost, IPost>({
@@ -59,24 +59,15 @@ export const postApi = createApi({
       invalidatesTags: [{ type: "Post", id: "LIST" }],
     }),
 
-    setImagUpload: build.mutation<File, any>({
+    setImagUpload: build.mutation<any, any>({
       query: (body) => ({
-        url: 'upload',
+        url: "upload",
         method: "POST",
         body,
       }),
       invalidatesTags: [{ type: "Post", id: "LIST" }],
     }),
-
   }),
 });
 
-export const {
-  useSetImagUploadMutation,
-  useGetPostsQuery,
-  useGetOnePostQuery,
-  useCreatePostMutation,
-  useDeletePostMutation,
-  useUpdatePostMutation,
-  useGetTagsQuery,
-} = postApi;
+export { postApi };

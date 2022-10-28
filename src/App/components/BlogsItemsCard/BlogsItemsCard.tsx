@@ -5,10 +5,10 @@ import * as icon from "../../../data/icons";
 import { selectAuth } from "../../../store/slice";
 import styles from "./BlogsItemsCard.module.scss";
 import ReactMarkdown from "react-markdown";
-import { useDeletePostMutation } from "../../../store/rtkQuery";
 import { IPost } from "../../../models";
 import { Modal } from "../Modal";
 import { ModalRemoveItem } from "../ModalRemoveItem";
+import { postApi } from "../../../store/rtkQuery";
 
 interface IBlogsItemsCard {
   item: IPost;
@@ -22,23 +22,24 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({
   singelPage = false,
 }) => {
   const { auth } = useSelector(selectAuth);
-  const [removePost, {}] = useDeletePostMutation();
+  const [removePost, {}] = postApi.useDeletePostMutation();
   const [modalActive, setModalActive] = React.useState<boolean>(false);
   const navigate = useNavigate();
-
-  const handlerRemovePost = React.useCallback(
+ 
+  const handlerRemovePost = 
     async (id: string) => {
       try {
         if (id) {
-          await removePost(id);
+          await removePost(id).unwrap();
         }
+        setModalActive(false)
+        console.log(navigate)
         navigate("/");
       } catch (error) {
         console.log("Пост не удалось удалить", error);
       }
-    },
-    [item]
-  );
+    }
+  
 
   return (
     <div className={styles.card}>
@@ -86,12 +87,14 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({
                   alt="updateIcon"
                 />
               </Link>
+              {singelPage &&
               <img
-                className={styles.delete}
-                onClick={() => setModalActive(true)}
-                src={icon.deleteIcon}
-                alt="deleteIcon"
+              className={styles.delete}
+              onClick={() => setModalActive(true)}
+              src={icon.deleteIcon}
+              alt="deleteIcon"
               />
+            }
             </>
           )}
           <Modal active={modalActive} setActive={setModalActive}>

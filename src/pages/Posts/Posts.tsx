@@ -3,20 +3,20 @@ import { useDispatch, useSelector } from "react-redux";
 import {  PostItemsRender } from "../../App/components";
 import * as ui from "../../App/components/Ui";
 import * as slice from "../../store/slice";
-import { useGetPostsQuery } from "../../store/rtkQuery";
 import { paginationCalculatorPage } from "../../utils";
 import styles from "./Posts.module.scss";
 import { IPost } from "../../models";
+import { postApi } from "../../store/rtkQuery";
 
 const Posts: React.FC = React.memo(() => {
-  const { isLoading, isError, data = [] } = useGetPostsQuery(5);
+  const { isLoading, isError, data = [] } = postApi.useGetPostsQuery(5);
   const { perPage, page } = useSelector(slice.selectPaginationPost);
   const { posts, searchValue } = useSelector(slice.selectPosts);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    !isLoading ? dispatch(slice.setStatePost({ data })) : false;
-    if (searchValue) dispatch(slice.resetPagePost());
+    !isLoading ? dispatch(slice.postAction.setStatePost({ data })) : false;
+    if (searchValue) dispatch(slice.paginPostAction.resetPagePost());
   }, [data, searchValue]);
 
   let pagination = paginationCalculatorPage(posts, page, perPage) as IPost[];
@@ -29,7 +29,7 @@ const Posts: React.FC = React.memo(() => {
             placeholder="Найти пост"
             type="search"
             value={searchValue}
-            onChange={(value) => dispatch(slice.setsearchValuePost({ value }))}
+            onChange={(value) => dispatch(slice.postAction.setsearchValuePost({ value }))}
           />
         </div>
         <div className={styles.items}>
@@ -45,10 +45,10 @@ const Posts: React.FC = React.memo(() => {
             counterPerPage={perPage}
             currentPage={page}
             clickNumber={(pageNumber: number) =>
-              dispatch(slice.setPaginatePost({ pageNumber }))
+              dispatch(slice.paginPostAction.setPaginatePost({ pageNumber }))
             }
-            prevPage={() => dispatch(slice.setPrevPagePost())}
-            nextPage={(page: number) => dispatch(slice.setNextPagePost(page))}
+            prevPage={() => dispatch(slice.paginPostAction.setPrevPagePost())}
+            nextPage={(page: number) => dispatch(slice.paginPostAction.setNextPagePost(page))}
           />
         </div>
       </div>

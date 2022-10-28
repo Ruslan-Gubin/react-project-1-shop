@@ -1,60 +1,6 @@
-export {
-  selectPaginationPost,
-  resetPagePost,
-  paginationPostSlice,
-  setPrevPagePost,
-  setNextPagePost,
-  setPaginatePost,
-} from "./paginationPostSlice";
-
-export {
-  setFilterPagination,
-  setPrevPageProduct,
-  setNextPageProduct,
-  setPaginateProduct,
-  setSearchTextForMenu,
-  selectFilters,
-  filterSlice,
-  setDataDepartment,
-  setCategoryValue,
-  resetMenuId,
-  setSelectId,
-  setTextSearch,
-} from "./filterSlice";
-
-export {
-  selectOrder,
-  orderSlice,
-  clearOrder,
-  addToOrders,
-  removeToOrder,
-  addCountGoods,
-  removeCountGoods,
-} from "./orderSlice";
-
-export {
-  selectTodos,
-  todoSlice,
-  addTodo,
-  removeTodo,
-  toggleTodoComplete,
-} from "./todoSlice";
-
-export {
-  selectPosts,
-  setsearchValuePost,
-  postSlice,
-  setStatePost,
-} from "./postSlice";
-
-
-export {
-  addAuth,
-  resetAuth,
-  selectAuth,
-  authSlice,
-  getAutchEmail,
-  getAutchPassword,
-} from "./authSlice";
-
-
+export { selectPaginationPost, paginPostAction, paginPostReducer} from "./paginationPostSlice";
+export { selectFilters, filterAction, filterReducer } from "./filterSlice";
+export { orderReducer, selectOrder, orderAction } from "./orderSlice";
+export {selectTodos, todoAction, todoReducer} from "./todoSlice";
+export { postReducer, selectPosts, postAction } from "./postSlice";
+export { authAction, authReducer, selectAuth } from "./authSlice";

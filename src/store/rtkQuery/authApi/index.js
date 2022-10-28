@@ -1,8 +1,1 @@
-export {
-  useCreateAuthMutation,
-  useDeleteAuthMutation,
-  useGetOneAuthQuery,
-  useUpdateAuthMutation,
-  useGetAuthsQuery,
-  authApi,
-} from "./authApi";
+export { authApi } from "./authApi";

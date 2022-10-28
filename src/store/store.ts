@@ -3,16 +3,17 @@ import { getPersistConfig } from "redux-deep-persist";
 import storage from "redux-persist/lib/storage";
 import * as persist from "redux-persist";
 import * as rtkQuery from "./rtkQuery";
-import * as slice from "./slice";
+import * as reducer from "./slice";
 import { useDispatch } from "react-redux";
 
+
 const rootReducer = combineReducers({
-  posts: slice.postSlice,
-  order: slice.orderSlice,
-  todos: slice.todoSlice,
-  filters: slice.filterSlice,
-  auth: slice.authSlice,
-  paginationPost: slice.paginationPostSlice,
+  posts: reducer.postReducer,
+  order: reducer.orderReducer,
+  todos: reducer.todoReducer,
+  filters: reducer.filterReducer,
+  auth: reducer.authReducer,
+  paginationPost: reducer.paginPostReducer,
   [rtkQuery.postApi.reducerPath]: rtkQuery.postApi.reducer,
   [rtkQuery.productsApi.reducerPath]: rtkQuery.productsApi.reducer,
   [rtkQuery.authApi.reducerPath]: rtkQuery.authApi.reducer,

@@ -2,8 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { outIcon, userLogin, userRegistedPng } from "../../../data/icons";
-import { useAuthorizationMutation } from "../../../store/rtkQuery/authApi/authApi";
-import { resetAuth, selectAuth } from "../../../store/slice";
+import { authApi } from "../../../store/rtkQuery";
+import {  authAction, selectAuth } from "../../../store/slice";
 import { Modal } from "../Modal";
 import { ModalRemoveItem } from "../ModalRemoveItem";
 import { CustomLink } from "../Ui";
@@ -11,7 +11,7 @@ import { CustomLink } from "../Ui";
 import styles from "./Header.modules.scss";
 
 const Header = React.memo(() => {
-  const [_, { reset }] = useAuthorizationMutation();
+  const [_, { reset }] = authApi.useAuthorizationMutation();
   const { status } = useSelector(selectAuth);
   const [modalAsk, setModalAsk] = React.useState<boolean>(false);
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const Header = React.memo(() => {
   const linkCl = styles["links-active"];
 
   const handlerClickAutLogin = () => {
-    dispatch(resetAuth());
+    dispatch(authAction.resetAuth());
     reset();
     setModalAsk(false);
   };

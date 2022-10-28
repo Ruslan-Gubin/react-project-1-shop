@@ -1,19 +1,13 @@
-@use '../../../scss/common/var';
+@use "../../../scss/common/var";
 
 .root {
-
   .buttonImage {
     display: block;
   }
-  
 
   .previewImage {
     width: 100%;
     height: 500px;
     border-radius: var.$border-radius-small;
   }
-
-  
-
-
 }

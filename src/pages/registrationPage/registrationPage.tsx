@@ -1,15 +1,15 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { authApi } from "../../store/rtkQuery";
+import { authAction, selectAuth } from "../../store/slice";
+import { ButtonMain } from "../../App/components/Ui";
 import { userRegistedPng } from "../../data/icons";
 import styles from "./registrationPage.module.scss";
-import { ButtonMain } from "../../App/components/Ui";
-import { useCreateAuthMutation } from "../../store/rtkQuery";
-import { addAuth, getAutchEmail, selectAuth } from "../../store/slice";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 const registrationPage = () => {
-  const [createAuth, { data }] = useCreateAuthMutation();
+  const [createAuth, { data }] = authApi.useCreateAuthMutation();
   const { status } = useSelector(selectAuth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,12 +29,12 @@ const registrationPage = () => {
 
   React.useEffect(() => {
     const value = data?.email;
-    data ? dispatch(addAuth(data)) : false;
-    if (value) dispatch(getAutchEmail({ value }));
+    data ? dispatch(authAction.addAuth(data)) : false;
+    if (value) dispatch(authAction.getAutchEmail({ value }));
     if (status) navigate(-1);
   }, [data, status]);
 
-  const onSubmit = (values) => {
+  const onSubmit = (values:string) => {
     createAuth(values);
     reset();
   };

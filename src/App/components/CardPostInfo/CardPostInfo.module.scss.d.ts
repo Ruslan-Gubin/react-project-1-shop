@@ -3,7 +3,9 @@
 interface CssExports {
   'comentContainer': string;
   'item': string;
+  'itemActive': string;
   'items': string;
+  'moreTags': string;
   'root': string;
   'title': string;
   'userImage': string;

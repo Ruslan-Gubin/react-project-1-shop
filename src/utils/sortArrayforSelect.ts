@@ -1,32 +1,39 @@
 import { SingleValue } from "react-select";
 import { Ioptions } from "../App/components/CustomSelect/CustomSelect";
 import { IProductSortingArray } from "../data/productSortingArray";
-import { IPost, IProduct } from "../models/products";
+import { IPost } from "../models/iPost";
+import { IProduct } from "../models/products";
 
-const sortArrayforSelect = (array: IProduct[]) => {
-  return array.sort(
-    (a, b) => parseFloat(String(a.price)) - parseFloat(String(b.price))
-  );
-};
+class SortArray {
+  price(array: IProduct[]) {
+    return array.sort(
+      (a, b) => parseFloat(String(a.price)) - parseFloat(String(b.price))
+    );
+  }
 
-const sortArrayforSelectDate = (array: IProduct[]) => {
-  return array.sort(
-    (a, b) =>
-      new Date(String(a.updatedAt)).getTime() - new Date(String(b.updatedAt)).getTime() 
-  );
-};
+  date(array: IProduct[] | IPost[]) {
+    return array.sort(
+      (a, b) =>
+        new Date(String(b.updatedAt)).getTime() -
+        new Date(String(a.updatedAt)).getTime()
+    );
+  }
 
-const sortArrayforDatePost = (array: IPost[]) => {
-  return array.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
-};
+  discount(array: IProduct[]) {
+    return array.sort(
+      (a, b) => parseFloat(String(a.discount)) - parseFloat(String(b.discount))
+    );
+  }
 
-const sortArrayforSelectDiscount = (array: IProduct[]) => {
-  return array.sort(
-    (a, b) => parseFloat(String(a.discount)) - parseFloat(String(b.discount))
-  );
-};
+  viewsCount(array: IPost[]) {
+    return array.sort(
+      (a, b) =>
+        parseFloat(String(b.viewsCount)) - parseFloat(String(a.viewsCount))
+    );
+  }
+}
+
+const sortArray = new SortArray();
 
 const selectOptionsSort = (
   select: SingleValue<Ioptions>,
@@ -34,20 +41,14 @@ const selectOptionsSort = (
   data: IProduct[]
 ) => {
   if (select === array[0]) {
-    sortArrayforSelectDate(data);
+    sortArray.date(data);
   } else if (select === array[1]) {
-    sortArrayforSelect(data);
+    sortArray.price(data);
   } else if (select === array[2]) {
-    sortArrayforSelect(data).reverse();
+    sortArray.price(data).reverse();
   } else if (select === array[3]) {
-    sortArrayforSelectDiscount(data);
+    sortArray.discount(data);
   }
 };
 
-export {
-  sortArrayforDatePost,
-  sortArrayforSelect,
-  sortArrayforSelectDate,
-  sortArrayforSelectDiscount,
-  selectOptionsSort,
-};
+export { sortArray, selectOptionsSort };

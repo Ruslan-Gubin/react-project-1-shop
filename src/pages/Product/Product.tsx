@@ -1,5 +1,4 @@
 import React from "react";
-import { useGetProductsQuery } from "../../store/rtkQuery";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import * as utils from "../../utils";
@@ -9,23 +8,24 @@ import * as slice from "../../store/slice";
 import { cartPng, productSortingArray } from "../../data";
 import styles from "./Product.module.scss";
 import { useAppDispatch } from "../../store/store";
+import { productsApi } from "../../store/rtkQuery";
 
 const Product = React.memo(() => {
   const { order } = useSelector(slice.selectOrder);
   const sliceState = useSelector(slice.selectFilters);
-  const { isLoading, isError, data = [] } = useGetProductsQuery(null);
+  const { isLoading, isError, data = [] } = productsApi.useGetProductsQuery(null);
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
     if (!isLoading && !isError && id && data) {
-      dispatch(slice.setDataDepartment({ id, data }));
+      dispatch(slice.filterAction.setDataDepartment({ id, data }));
     }
   }, [data]);
 
   React.useEffect(() => {
-    dispatch(slice.setSearchTextForMenu());
-    if (!isLoading) dispatch(slice.setFilterPagination());
+    dispatch(slice.filterAction.setSearchTextForMenu());
+    if (!isLoading) dispatch(slice.filterAction.setFilterPagination());
   }, [
     sliceState.dataDepartments,
     sliceState.textSearch,
@@ -34,7 +34,7 @@ const Product = React.memo(() => {
   ]);
 
   const handlerClickCategory = (item: string) => {
-    dispatch(slice.setCategoryValue({ item }));
+    dispatch(slice.filterAction.setCategoryValue({ item }));
   };
 
   return (
@@ -46,7 +46,7 @@ const Product = React.memo(() => {
           placeholder="Поиск товара"
           type="search"
           value={sliceState.textSearch}
-          onChange={(value) => dispatch(slice.setTextSearch({ value }))}
+          onChange={(value) => dispatch(slice.filterAction.setTextSearch({ value }))}
         />
         <Link to={"/products"}>
           <ui.ButtonMain>Вернуться к каталогу</ui.ButtonMain>
@@ -74,7 +74,7 @@ const Product = React.memo(() => {
             />
             <component.CustomSelect
               options={productSortingArray}
-              onChange={(value) => dispatch(slice.setSelectId({ value }))}
+              onChange={(value) => dispatch(slice.filterAction.setSelectId({ value }))}
               defaultValue={sliceState.filterSelect}
             />
           </div>
@@ -94,10 +94,10 @@ const Product = React.memo(() => {
         counterPerPage={sliceState.perPage}
         currentPage={sliceState.page}
         clickNumber={(pageNumber: number) =>
-          dispatch(slice.setPaginateProduct({ pageNumber }))
+          dispatch(slice.filterAction.setPaginateProduct({ pageNumber }))
         }
-        prevPage={() => dispatch(slice.setPrevPageProduct())}
-        nextPage={(page: number) => dispatch(slice.setNextPageProduct(page))}
+        prevPage={() => dispatch(slice.filterAction.setPrevPageProduct())}
+        nextPage={(page: number) => dispatch(slice.filterAction.setNextPageProduct(page))}
       />
     </div>
   );

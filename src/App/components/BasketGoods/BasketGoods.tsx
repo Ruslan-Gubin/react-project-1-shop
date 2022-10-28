@@ -1,31 +1,28 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addCountGoods,
-  removeCountGoods,
-  removeToOrder,
-  selectOrder,
-} from "../../../store/slice";
+import { orderAction, selectOrder } from "../../../store/slice";
 import { formatterRub } from "../../../utils";
 import { useMatchMedia } from "../../../hooks";
 import { removeGoodsPng } from "../../../data";
+
 import styles from "./BasketGoods.module.scss";
-import { Link } from "react-router-dom";
 
 const BasketGoods: React.FC = React.memo(() => {
   const { order } = useSelector(selectOrder);
-  const  isMobile  = useMatchMedia();
+  const isMobile = useMatchMedia();
   const dispatch = useDispatch();
 
-  const removeGoodsOrder = (_id: string) => dispatch(removeToOrder({ _id }));
+  const removeGoodsOrder = (_id: string) =>
+    dispatch(orderAction.removeToOrder({ _id }));
 
   const addCount = React.useCallback(
-    (_id: string) => dispatch(addCountGoods({ _id })),
+    (_id: string) => dispatch(orderAction.addCountGoods({ _id })),
     []
   );
 
   const removeCount = React.useCallback(
-    (_id: string) => dispatch(removeCountGoods({ _id })),
+    (_id: string) => dispatch(orderAction.removeCountGoods({ _id })),
     []
   );
 
