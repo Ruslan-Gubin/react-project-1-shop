@@ -1,6 +1,5 @@
 export {CardProductCatalog} from './CardProductCatalog';
 export {ProductSinglPage} from './ProductSinglPage';
-export {PostItemsRender} from './PostItemsRender';
 export {FooterContainer} from './FooterContainer';
 export {ModalRemoveItem} from './ModalRemoveItem';
 export {BlogsItemsCard} from './BlogsItemsCard';
@@ -19,5 +18,4 @@ export {PostSearch} from './PostSearch';
 export {FooterMenu} from './FooterMenu';
 export {BasketInfo} from './BasketInfo';
 export {Categories} from './Categories';
-export {CreatePost} from './CreatePost';
 export {Modal} from './Modal';

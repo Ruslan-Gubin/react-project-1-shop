@@ -6,17 +6,16 @@ import * as rtkQuery from "./rtkQuery";
 import * as reducer from "./slice";
 import { useDispatch } from "react-redux";
 
-
 const rootReducer = combineReducers({
   posts: reducer.postReducer,
   order: reducer.orderReducer,
   todos: reducer.todoReducer,
   filters: reducer.filterReducer,
   auth: reducer.authReducer,
-  paginationPost: reducer.paginPostReducer,
   [rtkQuery.postApi.reducerPath]: rtkQuery.postApi.reducer,
   [rtkQuery.productsApi.reducerPath]: rtkQuery.productsApi.reducer,
   [rtkQuery.authApi.reducerPath]: rtkQuery.authApi.reducer,
+  [rtkQuery.commentsApi.reducerPath]: rtkQuery.commentsApi.reducer,
 });
 
 const config = getPersistConfig({
@@ -24,7 +23,6 @@ const config = getPersistConfig({
   version: 1,
   storage,
   blacklist: [
-    "posts.posts",
     "filters.dataDepartments",
     "filters.textMenuFilter",
     "filters.filterPagination",
@@ -32,6 +30,7 @@ const config = getPersistConfig({
     rtkQuery.productsApi.reducerPath,
     rtkQuery.postApi.reducerPath,
     rtkQuery.authApi.reducerPath,
+    rtkQuery.commentsApi.reducerPath,
   ],
   rootReducer,
 });
@@ -57,6 +56,7 @@ const store = configureStore({
       rtkQuery.postApi.middleware,
       rtkQuery.productsApi.middleware,
       rtkQuery.authApi.middleware,
+      rtkQuery.commentsApi.middleware,
     ]),
 });
 

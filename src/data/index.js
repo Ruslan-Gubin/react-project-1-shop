@@ -24,6 +24,7 @@ export {
 } from "./icons";
 
 export {
+  categoryPosts,
   tegsArray,
   sortCategoryName,
   commentsArray,

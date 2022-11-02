@@ -1,8 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as icon from "../../../data/icons";
-import { selectAuth } from "../../../store/slice";
+import { postAction, selectAuth } from "../../../store/slice";
 import styles from "./BlogsItemsCard.module.scss";
 import ReactMarkdown from "react-markdown";
 import { IPost } from "../../../models";
@@ -25,6 +25,7 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({
   const [removePost, {}] = postApi.useDeletePostMutation();
   const [modalActive, setModalActive] = React.useState<boolean>(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
  
   const handlerRemovePost = 
     async (id: string) => {
@@ -33,21 +34,19 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({
           await removePost(id).unwrap();
         }
         setModalActive(false)
-        console.log(navigate)
-        navigate("/");
+        navigate("/post");
       } catch (error) {
         console.log("Пост не удалось удалить", error);
       }
     }
-  
 
   return (
     <div className={styles.card}>
-      <Link to={`/post/${item._id}`}>
+      <Link to={`/post/${id}`}>
         <img
           className={!singelPage ? styles.imageUrl : styles.imageUrlSingl}
-          src={item.imageUrl ? `https://pr1-backend.herokuapp.com${item.imageUrl}` : ""}
-          alt="imageUrl"
+          src={item.image ? item.image.url : ""}
+          alt="image url"
         />
       </Link>
 
@@ -61,7 +60,7 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({
         <div className={styles.user}>
           <img
             className={styles.imageUser}
-            src={item?.user.avatarUrl}
+            src={item.user.image.url ? item?.user.image.url : ''}
             alt="user-image"
           />
           <div>
@@ -82,19 +81,18 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({
             <>
               <Link to={`/add-post/${id}/edit`}>
                 <img
+                  onClick={()=> dispatch(postAction.setUpdatePost(item))}
                   className={styles.update}
                   src={icon.updateIcon}
                   alt="updateIcon"
                 />
               </Link>
-              {singelPage &&
               <img
               className={styles.delete}
               onClick={() => setModalActive(true)}
               src={icon.deleteIcon}
               alt="deleteIcon"
               />
-            }
             </>
           )}
           <Modal active={modalActive} setActive={setModalActive}>

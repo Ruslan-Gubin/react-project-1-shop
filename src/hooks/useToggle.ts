@@ -1,14 +1,24 @@
-import { useState } from "react";
+import React, { useState } from "react";
+
+interface IuseToggle {
+  prevState:  number
+  nextState:  number
+}
 
 
-export function useToggle(initialValue:boolean) {
-  const [value, setValue] = useState(initialValue)
+ const useToggle = (prevState: number | string, nextState: number | string)  => {
+  const [value, setValue] = useState(prevState)
 
-  const toggle = () => {
-    setValue(!value)
+  const toggle:React.MouseEventHandler<HTMLImageElement> = () => {
+    const prev = prevState
+    if (value == prev) {
+      setValue(nextState)
+    } else {
+      setValue(prev)
+    }
   }
 
   return [value, toggle]
 }
 
-// export {useToggle}
+export {useToggle}

@@ -6,9 +6,9 @@ import { postApi } from "../../store/rtkQuery";
 
 const SingelPagePost = React.memo(() => {
   const {id} = useParams<string>()
-  const{ data = [],isError,isLoading} = postApi.useGetOnePostQuery({id})
+  const{ data = [],isLoading} = postApi.useGetOnePostQuery({id})
 
-  
+
   return (
     <div>
       <ButtonGoBack />

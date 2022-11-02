@@ -1,43 +1,7 @@
 @use "../../scss/common/var";
 
-%tegsAndComments {
-  background-color: var.$color-card-bg;
-  border-radius: var.$border-radius-average;
-  margin-top: var.$spasing-small;
-}
-
 .root {
-  .sort {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .container {
-    display: flex;
-   
-    
-    .blogs {
-      width: 100%;
-      
-    }
-    .blockForSticky{
-      width: 30%;
+  font-family: var.$ff-montserrat-regular;
 
-      .info {
-        position: sticky;
-        top: 0;
-        
-        // width: 100%;
-        .tegs {
-          
-          @extend %tegsAndComments;
-        }
-        .comments {
-          @extend %tegsAndComments;
-        }
-      }
-    }
 
-  }
 }

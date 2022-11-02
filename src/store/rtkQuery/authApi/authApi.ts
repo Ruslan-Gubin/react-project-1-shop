@@ -1,10 +1,11 @@
-import { RootState } from "@reduxjs/toolkit/dist/query/core/apiState";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Iauth } from "../../../models";
 
 const authApi = createApi({
   reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://pr1-backend.herokuapp.com/api',
+  baseQuery: fetchBaseQuery({ 
+    baseUrl: "http://localhost:4444/api",
+    // baseUrl: 'https://pr1-backend.herokuapp.com/api',
   prepareHeaders: (headers, {getState}) => {
     const token = window.localStorage.getItem('token')
     if (token) headers.set('authorization', token)  

@@ -1,23 +1,43 @@
-@use '../../scss/common/exented';
+@use "../../scss/common/var";
 
-.wrapper {
-  .post {
+%tegsAndComments {
+  background-color: var.$color-card-bg;
+  border-radius: var.$border-radius-average;
+  margin-top: var.$spasing-small;
+}
+
+.root {
+  .sort {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   
+  .container {
+    display: flex;
+   
     
-    .forms {
-      align-self: stretch;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      padding: 5px;
+    .blogs {
+      width: 100%;
+      
     }
-    
-    .items{
-      @extend %gridMainPost;
+    .blockForSticky{
+      width: 30%;
+
+      .info {
+        position: sticky;
+        top: 0;
+        
+        // width: 100%;
+        .tegs {
+          
+          @extend %tegsAndComments;
+        }
+        .comments {
+          @extend %tegsAndComments;
+        }
+      }
     }
-    
-    
-    
-  }  
-  
+
+  }
 }

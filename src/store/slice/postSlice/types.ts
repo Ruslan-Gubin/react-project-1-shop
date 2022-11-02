@@ -1,12 +1,12 @@
-import { IPost } from "../../../models/iPost";
-
+import type { IPost } from "../../../models/iPost";
 
 interface IinitialStatePosts {
-  menuValue: string
-  posts: IPost[];
-  searchValue: string;
-  tags: string[];
-  tagsSearchValue: string
+  page: number
+  perpage: number
+  tags: string
+  search: string
+  category: string
+  postUpdate: IPost | string
 }
 
 export type {IinitialStatePosts}

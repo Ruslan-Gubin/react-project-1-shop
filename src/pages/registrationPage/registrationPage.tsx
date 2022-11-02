@@ -10,6 +10,7 @@ import styles from "./registrationPage.module.scss";
 
 const registrationPage = () => {
   const [createAuth, { data }] = authApi.useCreateAuthMutation();
+  const [image, setImage] = React.useState("");
   const { status } = useSelector(selectAuth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,6 +28,27 @@ const registrationPage = () => {
     },
   });
 
+  const inputFileRef = React.useRef(null)
+
+  const handlerChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0];
+    file && setFileToBase(file);
+  };
+
+  const setFileToBase = (file: File) => {
+    try {
+      const render = new FileReader();
+      render.readAsDataURL(file);
+      render.onloadend = () => {
+        if (render.result) {
+          setImage(render.result);
+        }
+      };
+    } catch (error) {
+      console.log(error, "Ошибка при загрузке файла!");
+    }
+  };
+
   React.useEffect(() => {
     const value = data?.email;
     data ? dispatch(authAction.addAuth(data)) : false;
@@ -34,15 +56,27 @@ const registrationPage = () => {
     if (status) navigate(-1);
   }, [data, status]);
 
-  const onSubmit = (values:string) => {
-    createAuth(values);
+  const onSubmit = (values: string) => {
+    createAuth({...values, image});
     reset();
   };
 
   return (
     <div className={styles.root}>
       <h2 className={styles.title}>Создание аккаунта</h2>
-      <img className={styles.img} src={userRegistedPng} alt="userRegistedPng" />
+      {image ?
+      <>
+      <img onClick={() => setImage('')} src={image} alt='image user' className={styles.img} style={{borderRadius: 50}}/>
+      </>
+      :<img onClick={() => inputFileRef.current?.click() } className={styles.img} src={userRegistedPng} alt="userRegistedPng" />
+      }
+
+      <input
+      ref={inputFileRef}
+      type="file"
+      onChange={handlerChangeFile}
+      hidden
+    />
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <input

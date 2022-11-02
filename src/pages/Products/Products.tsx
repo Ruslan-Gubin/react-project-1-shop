@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { productsApi } from "../../store/rtkQuery";
+import { postApi, productsApi } from "../../store/rtkQuery";
 import {  filterAction } from "../../store/slice";
 import { CardProducts, ImagesSlider } from "../../App/components";
 import { productsCategoriLink } from "../../data";
@@ -11,7 +11,7 @@ import styles from "./Products.module.scss";
 const Products: React.FC = React.memo(() => {
   const { isLoading, data = [] } = productsApi.useGetProductsQuery(null);
   const dispatch = useDispatch();
-
+  
   const handlerLinkClick = () => {
     dispatch(filterAction.resetMenuId());
   };

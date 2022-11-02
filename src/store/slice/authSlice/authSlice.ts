@@ -12,8 +12,8 @@ interface IinitState {
 const initialState:IinitState = {
   auth: {},
   status: false,
-  email: '',
-  password: '1234qwer',
+  email: 'gubin_ruslan@rambler.ru',
+  password: '12345',
 }
 
 const authSlice = createSlice({

@@ -9,11 +9,16 @@ interface IPost {
   title: string;
   text: string;
   img: string;
-  imageUrl: string
+  image: {
+    public_id: string
+    url: string
+  }
   user: IUser;
   viewsCount?: number
   updatedAt?: string
   tags: string[]
 }
+
+
 
 export type {IPost}

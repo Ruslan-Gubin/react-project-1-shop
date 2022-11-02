@@ -1,11 +1,14 @@
+
+
 const paginationCalculatorPage = (
-  data: object[],
+  data: Object[],
   currentPage: number,
   perPage: number
 ) => {
-  const lastPostsIndex = currentPage * perPage;
-  const firstPostsIndex = lastPostsIndex - perPage;
-  const currentPosts = data.slice(firstPostsIndex, lastPostsIndex);
+
+  const lastIndex = currentPage * perPage;  //10
+  const firstIndex = lastIndex - perPage; // 0
+  const currentPosts = data.slice(firstIndex, lastIndex);
   return currentPosts;
 };
 export { paginationCalculatorPage };

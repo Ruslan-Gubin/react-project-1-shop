@@ -3,11 +3,11 @@ import { ButtonMain } from "..";
 import styles from "./CustomPagination.module.scss";
 
 interface IPagination {
-  totalCountries: number;
+  totalCountries: number | undefined | false;
   counterPerPage: number;
   currentPage: number;
-  clickNumber: Function;
-  prevPage: Function;
+  clickNumber: (value: number) => void;
+  prevPage: (value: number) => void;
   nextPage: Function;
 }
 
@@ -52,7 +52,7 @@ const CustomPagination: React.FC<IPagination> = React.memo(
           </div>
         ))}
         {currentPage! < pageNumbers.length ? (
-          <ButtonMain bgColor="info" onClick={() => nextPage()}>
+          <ButtonMain bgColor="info" onClick={(page) => nextPage(page)}>
             Next
           </ButtonMain>
         ) : (

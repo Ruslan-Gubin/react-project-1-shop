@@ -1,16 +1,16 @@
 import {  createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { sortCategoryName } from "../../../data";
-import { IPost } from "../../../models";
-import {sortArray} from "../../../utils/sortArrayforSelect";
+import { categoryPosts } from "../../../data";
+import { IPost } from "../../../models/iPost";
 import { TypeRootState } from "../../store";
 import { IinitialStatePosts } from "./types";
 
 const initialState: IinitialStatePosts = {
-  menuValue: sortCategoryName[0],
-  posts: [],
-  tags: [],
-  tagsSearchValue: '',
-  searchValue: "",
+    page: 1,
+    perpage: 10,
+    tags: '',
+    search: '',
+    category: categoryPosts[0].value,
+    postUpdate:  {} as IPost
 } 
 
 
@@ -19,51 +19,60 @@ const postSlice = createSlice({
   initialState,
   reducers: {
 
-    setCategoryPost(state, action: PayloadAction<{ item: string }>) {
-      if (action.payload.item) {
-        state.menuValue = action.payload.item;
-      } 
-    },
-
-    setStatePost(state, action: PayloadAction<{ data: IPost[] }>) {
+    setCategoryPost(state, action: PayloadAction<{ value: string }>) {
       try {
-        const initialArray = action.payload.data.map((item: IPost) => item);
-      let filterMenu: IPost[] = []
-      if (state.menuValue === sortCategoryName[0]) {
-        filterMenu = sortArray.date(initialArray);
-      } else {
-        filterMenu = sortArray.viewsCount(initialArray)
-      }
-        state.posts = filterMenu.filter((item: IPost) =>
-        item.title.toLowerCase().includes(state.searchValue.toLowerCase())
-        )
-
-        if (state.tagsSearchValue) {
-          state.posts = state.posts.filter((item) => {
-            return  item.tags[0].includes(state.tagsSearchValue)
-          })
-        }
+        if (action.payload.value) {
+          state.category = action.payload.value
+        } 
       } catch (error) {
-        console.log('Не удалось найти посты', error)
+        throw new Error('Ошибка категории')
       }
-      
     },
 
     setsearchValuePost(state, action: PayloadAction<{ value: string }>) {
-      state.searchValue = action.payload.value;
+      try {
+        state.search = action.payload.value
+        state.page = 1
+      } catch (error) {
+        throw new Error('Не заполнена строка поиска')
+      }
     },
     
-    setTagsSearchValue(state, action: PayloadAction<{ value: string }>) {
+    setTagshValue(state, action: PayloadAction<{ value: string }>) {
       try {
-        if (state.tagsSearchValue === action.payload.value) {
-        state.tagsSearchValue = ''
+        if (state.tags === action.payload.value) {
+          state.tags = ''
       } else {
-        state.tagsSearchValue = action.payload.value;
+        state.tags = action.payload.value;
+        state.page = 1
       }
       } catch (error) {
         console.log('Ошибка Тега',error)
       }
-      
+    },
+
+    setUpdatePost(state, action: PayloadAction<IPost>) {
+      state.postUpdate = action.payload
+    },
+
+    setUpdatePostRemove(state) {
+      state.postUpdate = ''
+    },
+
+    setPrevPage(state) {
+      state.page !== 1 ? (state.page = state.page - 1) : false;
+    },
+
+    setNextPage(state, action: PayloadAction<number>) {
+      action.payload !== state.page ? (state.page = state.page + 1) : false;
+    },
+
+    setPaginate(state, action: PayloadAction<{ pageNumber: number }>) {
+      state.page = action.payload.pageNumber;
+    },
+
+    resetPage(state) {
+      state.page = 1;
     },
    
 

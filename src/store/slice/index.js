@@ -1,4 +1,3 @@
-export { selectPaginationPost, paginPostAction, paginPostReducer} from "./paginationPostSlice";
 export { selectFilters, filterAction, filterReducer } from "./filterSlice";
 export { orderReducer, selectOrder, orderAction } from "./orderSlice";
 export {selectTodos, todoAction, todoReducer} from "./todoSlice";
