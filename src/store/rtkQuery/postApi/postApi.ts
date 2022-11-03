@@ -16,6 +16,7 @@ const postApi = createApi({
   }),
   tagTypes: ["Posts", "Tags", "Length"],
   endpoints: (build) => ({
+
     getPosts: build.query<IPost[], IinitialStatePosts>({
       query: (options) => ({
         url: "post",
@@ -32,6 +33,11 @@ const postApi = createApi({
           : [{ type: "Posts", id: "LIST" }],
     }),
 
+    getOnePost: build.query<IPost, { id: string | undefined}>({
+      query: ({ id }) => `post/${id}`,
+      providesTags: (result) => [{ type: "Posts", id: "LIST" }],
+    }),
+
     getlength: build.query<number, null>({
       query: () => `lenght`,
       providesTags: (result) => ["Length"],
@@ -45,11 +51,6 @@ const postApi = createApi({
         },
       }),
       providesTags: (result) => ["Tags"],
-    }),
-
-    getOnePost: build.query<IPost, { id: string | undefined}>({
-      query: ({ id }) => `post/${id}`,
-      providesTags: (result) => [{ type: "Posts", id: "LIST" }],
     }),
 
     createPost: build.mutation<IPost, Partial<IPost>>({

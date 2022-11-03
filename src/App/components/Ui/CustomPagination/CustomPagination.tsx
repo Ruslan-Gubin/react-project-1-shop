@@ -52,7 +52,7 @@ const CustomPagination: React.FC<IPagination> = React.memo(
           </div>
         ))}
         {currentPage! < pageNumbers.length ? (
-          <ButtonMain bgColor="info" onClick={(page) => nextPage(page)}>
+          <ButtonMain bgColor="info" onClick={() => nextPage()}>
             Next
           </ButtonMain>
         ) : (

@@ -1,0 +1,40 @@
+@use '../../../scss/common/var';
+
+
+.root {
+  font-family: var.$ff-Gilroy-Bold;
+  border-radius: var.$border-radius-average;
+  background-color: var.$color-white;
+  box-shadow: var.$box-shadow;
+  margin: var.$spasing-small;
+  .container {
+    padding: var.$spasing-big-medium;
+
+    .body {
+      color: var.$color-black-hover;
+      color: rgb(92, 89, 33);
+
+      .fullName {
+        font-size: var.$font-size-title-normal;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.188);
+        margin-bottom: 10px;
+      }
+      .emailUser {
+
+      }
+
+      .date {
+
+      }
+
+
+    }
+
+    
+
+  }
+
+
+
+
+}

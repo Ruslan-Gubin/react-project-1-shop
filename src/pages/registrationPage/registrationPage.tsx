@@ -6,12 +6,14 @@ import { authApi } from "../../store/rtkQuery";
 import { authAction, selectAuth } from "../../store/slice";
 import { ButtonMain } from "../../App/components/Ui";
 import { userRegistedPng } from "../../data/icons";
+import { IUser } from "../../models";
 import styles from "./registrationPage.module.scss";
 
 const registrationPage = () => {
-  const [createAuth, { data }] = authApi.useCreateAuthMutation();
-  const [image, setImage] = React.useState("");
-  const { status } = useSelector(selectAuth);
+  const { status, auth } = useSelector(selectAuth);
+  const [createAuth, {}] = authApi.useCreateAuthMutation();
+  const [updateAuth, {}] = authApi.useUpdateAuthMutation()
+  const [image, setImage] = React.useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -22,13 +24,13 @@ const registrationPage = () => {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      fullName: "Ruslan",
-      email: "test@test.ru",
-      password: "1234qwer",
+      fullName: auth ? auth.fullName : '',
+      email: auth ? auth.email : '',
+      password: 'asdf235235',
     },
   });
-
-  const inputFileRef = React.useRef(null)
+console.log(auth._id);
+  const inputFileRef = React.useRef(null);
 
   const handlerChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
@@ -49,34 +51,65 @@ const registrationPage = () => {
     }
   };
 
-  React.useEffect(() => {
-    const value = data?.email;
-    data ? dispatch(authAction.addAuth(data)) : false;
-    if (value) dispatch(authAction.getAutchEmail({ value }));
-    if (status) navigate(-1);
-  }, [data, status]);
+  // React.useEffect(() => {
+  // const value = data?.email;
+  // data ? dispatch(authAction.addAuth(data)) : false;
+  // if (value) dispatch(authAction.getAutchEmail({ value }));
+  // if (user) {
+  //   setImage(user.image.url)
+  // }
+  // }, [status]);
 
-  const onSubmit = (values: string) => {
-    createAuth({...values, image});
-    reset();
+  const onSubmit = async (values: React.FormEventHandler<HTMLFormElement>) => {
+    if (auth) {
+      const id: string = auth._id
+      const prevImage = auth.image.url
+      await updateAuth({...values, prevImage, image, id})
+
+    } else {
+      await createAuth({ ...values, image })
+      .then((res) => {
+        const data: IUser = res.data;
+        dispatch(authAction.addAuth(data));
+      })
+      .then(() => {
+        reset();
+        navigate("/post");
+      })
+      .catch((error) =>
+      console.log("Не удалось зарегестрироватся", error.message)
+      );
+    }
   };
 
   return (
     <div className={styles.root}>
       <h2 className={styles.title}>Создание аккаунта</h2>
-      {image ?
-      <>
-      <img onClick={() => setImage('')} src={image} alt='image user' className={styles.img} style={{borderRadius: 50}}/>
-      </>
-      :<img onClick={() => inputFileRef.current?.click() } className={styles.img} src={userRegistedPng} alt="userRegistedPng" />
-      }
+      {auth ? (
+        <>
+          <img
+            onClick={() => setImage("")}
+            src={auth ? auth.image.url : ''}
+            alt="image user"
+            className={styles.img}
+            style={{ borderRadius: 50 }}
+          />
+        </>
+      ) : (
+        <img
+          onClick={() => inputFileRef.current?.click()}
+          className={styles.img}
+          src={userRegistedPng}
+          alt="userRegistedPng"
+        />
+      )}
 
       <input
-      ref={inputFileRef}
-      type="file"
-      onChange={handlerChangeFile}
-      hidden
-    />
+        ref={inputFileRef}
+        type="file"
+        onChange={handlerChangeFile}
+        hidden
+      />
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <input

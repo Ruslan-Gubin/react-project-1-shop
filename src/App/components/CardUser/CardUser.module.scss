@@ -1,0 +1,29 @@
+@use '../../../scss/common/var';
+
+.root {
+border-radius: var.$border-radius-average;
+background-color: var.$color-white;
+box-shadow: var.$box-shadow;
+margin: var.$spasing-small 0;
+&:hover {
+  
+}
+.container {
+  padding: var.$spasing-small;
+  
+  
+  .image {
+    width: 100%;
+      border-radius: var.$border-radius-button;
+    }
+    
+    .body {
+      color: var.$color-black-hover;
+    .button {
+      margin-top: var.$spasing-button;
+    }
+
+    }
+    
+  }
+}

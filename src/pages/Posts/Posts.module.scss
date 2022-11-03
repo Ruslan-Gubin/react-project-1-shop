@@ -15,6 +15,16 @@
   
   .container {
     display: flex;
+
+    .userContainer {
+      // width: 30%;
+      
+      .userInfo {
+        position: sticky;
+        top: 20px;
+      }
+      
+    }
    
     
     .blogs {
@@ -26,9 +36,9 @@
 
       .info {
         position: sticky;
-        top: 0;
+        top: 20px;
         
-        // width: 100%;
+        
         .tegs {
           
           @extend %tegsAndComments;

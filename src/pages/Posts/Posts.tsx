@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { commentsApi, postApi } from "../../store/rtkQuery";
 import * as slice from "../../store/slice";
@@ -7,18 +6,18 @@ import * as components from "../../App/components";
 import * as ui from "../../App/components/Ui";
 import { categoryPosts, commentsArray } from "../../data";
 import styles from "./Posts.module.scss";
-
+import { useNavigate } from "react-router-dom";
 
 const Posts: React.FC = React.memo(() => {
   const postState = useSelector(slice.selectPosts);
-  const { data = [], isLoading, isError, refetch:refPosts } = postApi.useGetPostsQuery(postState);
-  const { data: totalLength, isLoading: isLength, refetch:refLength } = postApi.useGetlengthQuery(null);
-  const { data: comments, isLoading: isLComments,refetch: refComment } = postApi.useFetchGetCommentsQuery(2);
+  const {data = [],isLoading,isError,refetch: refPosts,} = postApi.useGetPostsQuery(postState);
+  const {data: totalLength,isLoading: isLength,refetch: refLength,} = postApi.useGetlengthQuery(null);
+  const {data: comments,isLoading: isLComments,refetch: refComment,} = postApi.useFetchGetCommentsQuery(2);
   // const {data: comment, isLoasding: islCom} = commentsApi.
   const { status } = useSelector(slice.selectAuth);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
- 
+
+
   return (
     <div className={styles.root}>
       {isError && <div>Error...</div>}
@@ -39,17 +38,19 @@ const Posts: React.FC = React.memo(() => {
             dispatch(slice.postAction.setsearchValuePost({ value }))
           }
         />
-        <div>
-          <ui.ButtonMain
-            onClick={() => navigate(status ? "/add-post" : "/login")}
-          >
-            Создать пост
-          </ui.ButtonMain>
-        </div>
       </div>
       <div className={styles.container}>
+        <div className={styles.userContainer}>
+          <div className={styles.userInfo}>
+            {status && <components.CardUser />}
+          </div>
+        </div>
+
         <ul className={styles.blogs}>
-          {!isLoading && data && !isError &&
+          {status && <components.CardUserInfo />}
+          {!isLoading &&
+            data &&
+            !isError &&
             data.map((obj) => (
               <li key={obj._id}>
                 <components.BlogsItemsCard id={obj._id} item={obj} />

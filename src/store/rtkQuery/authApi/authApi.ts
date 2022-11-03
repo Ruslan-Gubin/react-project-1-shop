@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Iauth } from "../../../models";
+import {  IUser } from "../../../models";
 
 const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({ 
     baseUrl: "http://localhost:4444/api",
     // baseUrl: 'https://pr1-backend.herokuapp.com/api',
-  prepareHeaders: (headers, {getState}) => {
+  prepareHeaders: (headers) => {
     const token = window.localStorage.getItem('token')
     if (token) headers.set('authorization', token)  
     return headers
@@ -15,59 +15,65 @@ const authApi = createApi({
   tagTypes: ["Auth"],
   endpoints: (build) => ({
     
-    getAuths: build.query<Iauth[], null>({
-      query: () => "auth",
+    getAuths: build.query<IUser[], null>({
+      query: () => ({
+        url: `auth-all`,
+      }),
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ password }) => ({
-                type: "Auth" as const,
-                password,
-              })),
-              { type: "Auth", id: "LIST" },
+              ...result.map(({ id }) => ({ type: "Auth" as const, id })),
+              { type: "Auth", id: "LIST" }, 
             ]
           : [{ type: "Auth", id: "LIST" }],
     }),
 
-    getOneAuth: build.query<Iauth, Iauth>({
-      query: () => `auth`,
-    }),
-
-    createAuth: build.mutation<Iauth, string>({
-      query: (body) => ({
-        url: "register",
-        method: "POST",
-        body,
+    getOneAuth: build.query<IUser, null>({
+      query: () => ({
+        url: `auth`,
       }),
-      invalidatesTags: [{ type: "Auth", id: "LIST" }],
+      providesTags: (result) =>  [{ type: "Auth", id: "LIST" }],
     }),
 
-    authorization: build.mutation<Iauth, Iauth>({
+    createAuth: build.mutation<IUser, string>({
+      query: (body) => {
+        return {
+          url: `register`,
+          method: "POST",
+          body,
+        };
+      },
+      invalidatesTags: (result) => [{ type: "Auth", id: "LIST" }],
+    }),
+
+    authorization: build.mutation<IUser, IUser>({
       query: (body) => ({
         url: `login`,
         method: "POST",
         body,
       }),
-      invalidatesTags: [{ type: "Auth", id: "LIST" }],
+      invalidatesTags: (result) => [{ type: "Auth", id: "LIST" }],
     }),
 
-    updateAuth: build.mutation<Iauth, Iauth>({
-      query: (auth) => ({
-        url: `auth/${auth._id}`,
-        method: "PUT",
-        body: auth,
+    updateAuth: build.mutation<IUser, IUser>({
+      query: (body) => ({
+        url: `auth-update`,
+        method: "PATCH",
+        body,
       }),
-      invalidatesTags: [{ type: "Auth", id: "LIST" }],
+      invalidatesTags: (result) => [{ type: "Auth", id: "LIST" }],
     }),
 
-    deleteAuth: build.mutation<Iauth, Iauth>({
+    deleteAuth: build.mutation<IUser, IUser>({
       query: (auth) => ({
         url: `auth/${auth._id}`,
         method: "DELETE",
       }),
-      invalidatesTags: [{ type: "Auth", id: "LIST" }],
+      invalidatesTags: (result) => [{ type: "Auth", id: "LIST" }],
     }),
   }),
 });
+
+export const  {useGetOneAuthQuery} = authApi
 
 export {authApi}

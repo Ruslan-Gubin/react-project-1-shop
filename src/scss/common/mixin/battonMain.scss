@@ -1,6 +1,7 @@
 @use '../var';
 
 @mixin button-main($bgColor, $hoverBgColor) {
+    width: 100%;
     background-color: $bgColor;
     box-shadow: var.$box-shadow;
     padding: var.$spasing-button;

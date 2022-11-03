@@ -1,16 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IAuth } from "../../../models/auth";
+import { IUser } from "../../../models";
+
 import { TypeRootState } from "../../store";
 
 interface IinitState {
-  auth: IAuth
+  auth: IUser
   status: boolean
   email: string
   password: string
 }
 
 const initialState:IinitState = {
-  auth: {},
+  auth: {} as IUser,
   status: false,
   email: 'gubin_ruslan@rambler.ru',
   password: '12345',
@@ -21,15 +22,15 @@ const authSlice = createSlice({
   initialState,
   reducers: {
 
-    addAuth(state, action: PayloadAction<IAuth>) {
+    addAuth(state, action: PayloadAction<IUser>) {
       state.auth = action.payload
-      state.auth.token &&  window.localStorage.setItem('token', state.auth.token)
+    state.auth.token &&   window.localStorage.setItem('token', state.auth.token)
       state.status = true
       
     },
     
     resetAuth(state) {
-      state.auth = {}
+      state.auth = {} as IUser
       window.localStorage.removeItem('token')
       state.status = false
     },
