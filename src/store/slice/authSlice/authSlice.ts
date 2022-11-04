@@ -14,7 +14,7 @@ const initialState:IinitState = {
   auth: {} as IUser,
   status: false,
   email: 'gubin_ruslan@rambler.ru',
-  password: '12345',
+  password: '1234qwer',
 }
 
 const authSlice = createSlice({
@@ -25,8 +25,12 @@ const authSlice = createSlice({
     addAuth(state, action: PayloadAction<IUser>) {
       state.auth = action.payload
     state.auth.token &&   window.localStorage.setItem('token', state.auth.token)
-      state.status = true
-      
+      state.status = true 
+    },
+
+    update(state, action) {
+      state.auth = action.payload
+      state.email= action.payload.email
     },
     
     resetAuth(state) {

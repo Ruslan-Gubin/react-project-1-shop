@@ -77,7 +77,7 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({
             <img src={icon.commentsIcon} alt="comments Count" />
             <span>123</span>
           </div>
-          {item.user && item.user._id === auth._id && (
+           {item.user && item.user._id === auth._id && (
             <>
               <Link to={`/add-post/${id}/edit`}>
                 <img

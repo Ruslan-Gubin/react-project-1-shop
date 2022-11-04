@@ -8,12 +8,18 @@ import { ButtonMain } from "../../App/components/Ui";
 import { userRegistedPng } from "../../data/icons";
 import { IUser } from "../../models";
 import styles from "./registrationPage.module.scss";
+import { Modal, ModalRemoveItem } from "../../App/components";
 
 const registrationPage = () => {
-  const { status, auth } = useSelector(selectAuth);
+  const { auth } = useSelector(selectAuth);
+  const { data: emails, isLoading } = authApi.useGetEmailsQuery(null);
   const [createAuth, {}] = authApi.useCreateAuthMutation();
-  const [updateAuth, {}] = authApi.useUpdateAuthMutation()
-  const [image, setImage] = React.useState('');
+  const [updateAuth, {}] = authApi.useUpdateAuthMutation();
+  const [removeAuth,{}] = authApi.useDeleteAuthMutation()
+  const [image, setImage] = React.useState("");
+  const [disabled, setDisables] = React.useState(false);
+  const [errorEmail, setErrorEmail] = React.useState("");
+  const [modalActive, setModalActive] = React.useState<boolean>(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -24,12 +30,12 @@ const registrationPage = () => {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      fullName: auth ? auth.fullName : '',
-      email: auth ? auth.email : '',
-      password: 'asdf235235',
+      fullName: auth.fullName ? auth.fullName : "",
+      email: auth.email ? auth.email : "",
+      password: "",
     },
   });
-console.log(auth._id);
+
   const inputFileRef = React.useRef(null);
 
   const handlerChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,45 +57,74 @@ console.log(auth._id);
     }
   };
 
-  // React.useEffect(() => {
-  // const value = data?.email;
-  // data ? dispatch(authAction.addAuth(data)) : false;
-  // if (value) dispatch(authAction.getAutchEmail({ value }));
-  // if (user) {
-  //   setImage(user.image.url)
-  // }
-  // }, [status]);
+  React.useEffect(() => {
+    if (auth.image) {
+      setImage(auth.image.url);
+    }
+  }, []);
 
   const onSubmit = async (values: React.FormEventHandler<HTMLFormElement>) => {
-    if (auth) {
-      const id: string = auth._id
-      const prevImage = auth.image.url
-      await updateAuth({...values, prevImage, image, id})
-
+    const emailValue = emails?.find((email) => email === values.email);
+    if (emailValue) {
+      setErrorEmail(`${emailValue}  уже занят`);
     } else {
+      setErrorEmail("");
+    }
+    
+    if (auth.image && (!emailValue || auth.email)) {
+      const id: string = auth._id;
+      const prevImage = auth.image.url;
+      setDisables(true);
+      await updateAuth({ ...values, prevImage, image, id })
+        .then((res) => {
+          if (res.data.success) {
+            navigate("/post");
+          }
+        })
+        .catch((error) =>
+          console.log("Не удалось поменять данные", error.message)
+        )
+        .finally(() => {
+          setDisables(false);
+        });
+    } else if (!auth.image && !emailValue && image) {
+      setDisables(true);
       await createAuth({ ...values, image })
-      .then((res) => {
-        const data: IUser = res.data;
-        dispatch(authAction.addAuth(data));
-      })
-      .then(() => {
-        reset();
-        navigate("/post");
-      })
-      .catch((error) =>
-      console.log("Не удалось зарегестрироватся", error.message)
-      );
+        .then((res) => {
+          const data: IUser = res.data;
+          dispatch(authAction.addAuth(data));
+        })
+        .then(() => {
+          reset();
+          navigate("/post");
+        })
+        .catch((error) =>
+          console.log("Не удалось зарегестрироватся", error.message)
+        )
+        .finally(() => {
+          setDisables(false);
+        });
     }
   };
+
+  const handlerRemoveUser = async () => {
+    if (auth) {
+      const idAuth =  auth?._id
+      await removeAuth(idAuth)
+      dispatch(authAction.resetAuth())
+      setImage('')
+      setModalActive(false)
+    }
+  }
 
   return (
     <div className={styles.root}>
       <h2 className={styles.title}>Создание аккаунта</h2>
-      {auth ? (
+      {image ? (
         <>
           <img
             onClick={() => setImage("")}
-            src={auth ? auth.image.url : ''}
+            src={image}
             alt="image user"
             className={styles.img}
             style={{ borderRadius: 50 }}
@@ -103,7 +138,6 @@ console.log(auth._id);
           alt="userRegistedPng"
         />
       )}
-
       <input
         ref={inputFileRef}
         type="file"
@@ -129,7 +163,6 @@ console.log(auth._id);
         ) : (
           <p></p>
         )}
-
         <input
           className={styles.input}
           placeholder="email"
@@ -145,7 +178,7 @@ console.log(auth._id);
         {errors?.email ? (
           <p className={styles.error}>{errors?.email?.message}</p>
         ) : (
-          <p></p>
+          <p style={{ color: "red" }}>{errorEmail}</p>
         )}
 
         <input
@@ -167,11 +200,29 @@ console.log(auth._id);
         )}
 
         <div className={styles.button}>
-          <ButtonMain bgColor={!isValid ? "black" : "primary"}>
+          {!image ? 
+          <ButtonMain bgColor="black">Обязательно добавте фото</ButtonMain>
+         : <ButtonMain
+            disabled={disabled}
+            bgColor={!isValid  ? "black" : "primary"}
+            >
             Подтвердить
           </ButtonMain>
+          }
         </div>
       </form>
+        <div className={styles.buttonRemove}>
+          {auth.email &&
+          <ButtonMain bgColor="red" onClick={()=> setModalActive(true)}>Удалить</ButtonMain>
+          }
+        </div>
+        <Modal active={modalActive} setActive={setModalActive}>
+        <ModalRemoveItem
+              text={`Вы действительно хотите удалить ${auth.fullName}?`}
+              confirm={() => handlerRemoveUser()}
+              cancel={() => setModalActive(false)}
+            />
+        </Modal>
     </div>
   );
 };

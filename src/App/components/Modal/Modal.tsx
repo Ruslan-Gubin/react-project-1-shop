@@ -1,8 +1,14 @@
-import React, { JSXElementConstructor, useState } from "react";
+import React, { JSXElementConstructor, ReactElement, useState } from "react";
 
 import styles from './Modal.module.scss';
 
-const Modal: JSXElementConstructor<any> = React.memo(({children, ...props}) => {
+interface IModal {
+    active: boolean
+    setActive: Function
+    children: ReactElement
+}
+
+const Modal: JSXElementConstructor<IModal> = React.memo(({children, ...props}) => {
 const [date,setDate] = useState<string>(new Date().toLocaleTimeString())
 
     return (

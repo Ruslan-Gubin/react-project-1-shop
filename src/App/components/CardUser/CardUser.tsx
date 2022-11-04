@@ -1,6 +1,8 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authApi } from "../../../store/rtkQuery/authApi/authApi";
+import { authAction } from "../../../store/slice";
 import { ButtonMain } from "../Ui";
 
 import styles from "./CardUser.module.scss";
@@ -8,7 +10,11 @@ import styles from "./CardUser.module.scss";
 const CardUser = () => {
   const { data: user, isLoading  } = authApi.useGetOneAuthQuery(null);
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
+  React.useEffect(() => {
+  !isLoading && dispatch(authAction.update(user))
+  },[isLoading]) 
 
   return (
     <>

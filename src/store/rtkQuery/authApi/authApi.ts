@@ -64,10 +64,18 @@ const authApi = createApi({
       invalidatesTags: (result) => [{ type: "Auth", id: "LIST" }],
     }),
 
-    deleteAuth: build.mutation<IUser, IUser>({
-      query: (auth) => ({
-        url: `auth/${auth._id}`,
+    getEmails: build.query<string[], null>({
+      query: () => `auths-email`,
+      providesTags: (result) =>  [{ type: "Auth", id: "LIST" }],
+    }),
+
+    deleteAuth: build.mutation<Object[], string | undefined>({
+      query: (id) => ({
+        url: `auth-remove`,
         method: "DELETE",
+        params: {
+          id,
+        }
       }),
       invalidatesTags: (result) => [{ type: "Auth", id: "LIST" }],
     }),
