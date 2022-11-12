@@ -1,4 +1,4 @@
-import type { IPost } from "../../../models/iPost";
+import type { IPost } from "models/iPost";
 
 interface IinitialStatePosts {
   page: number
@@ -6,7 +6,7 @@ interface IinitialStatePosts {
   tags: string
   search: string
   category: string
-  postUpdate: IPost | string
+  postUpdate: IPost 
 }
 
 export type {IinitialStatePosts}

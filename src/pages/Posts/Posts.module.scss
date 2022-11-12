@@ -1,4 +1,4 @@
-@use "../../scss/common/var";
+@use "scss/common/var";
 
 %tegsAndComments {
   background-color: var.$color-card-bg;
@@ -25,7 +25,6 @@
       }
       
     }
-   
     
     .blogs {
       width: 100%;
@@ -35,10 +34,9 @@
       width: 30%;
 
       .info {
+        color: var.$color-input-search;
         position: sticky;
         top: 20px;
-        
-        
         .tegs {
           
           @extend %tegsAndComments;

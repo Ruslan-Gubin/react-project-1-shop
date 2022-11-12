@@ -4,4 +4,4 @@ export { productsApi } from "./productApi";
 
 export { authApi } from "./authApi";
 
-export { commentsApi } from "./commentsApi";
+export { commentApi } from "./commentApi";

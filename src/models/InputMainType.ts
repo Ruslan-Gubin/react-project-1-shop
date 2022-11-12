@@ -11,6 +11,7 @@ interface InputMainType {
   onChange: (value: string) => void;
   className?: string;
   autofocus?: boolean;
+  minLength?: number
 }
 
 export type {InputMainType} 

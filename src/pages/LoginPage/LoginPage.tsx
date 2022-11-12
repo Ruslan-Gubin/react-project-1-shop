@@ -1,11 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Form from "../../App/components/Form";
-import { InputMain } from "../../App/components/Ui";
-import { authApi } from "../../store/rtkQuery";
-import { authAction, selectAuth } from "../../store/slice";
+import { InputMain } from "ui";
+import { authApi } from "store/rtkQuery";
+import { authAction, selectAuth } from "store/slice";
 import styles from "./LoginPage.module.scss";
+import { Form } from "components";
+
 
 
 const LoginPage = React.memo(() => {

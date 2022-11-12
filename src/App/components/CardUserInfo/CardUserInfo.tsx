@@ -1,5 +1,4 @@
-import React from 'react';
-import { authApi } from '../../../store/rtkQuery';
+import { authApi } from 'store/rtkQuery';
 import styles from './CardUserInfo.module.scss';
 
 const CardUserInfo = () => {

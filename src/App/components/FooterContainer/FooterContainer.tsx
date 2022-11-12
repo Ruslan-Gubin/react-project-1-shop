@@ -1,5 +1,5 @@
 import React from "react";
-import { FooterMenu, FooterIcons } from "../";
+import { FooterMenu, FooterIcons } from "components";
 import styles from './FooterContainer.module.scss';
 
 const FooterContainer = React.memo(() => {

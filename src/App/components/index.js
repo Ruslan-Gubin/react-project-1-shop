@@ -20,4 +20,6 @@ export {FooterMenu} from './FooterMenu';
 export {BasketInfo} from './BasketInfo';
 export {Categories} from './Categories';
 export {CardUser} from './CardUser';
+export {Header} from './Header';
 export {Modal} from './Modal';
+export {Form} from './Form';

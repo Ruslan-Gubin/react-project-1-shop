@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { orderAction, selectOrder } from "../../../store/slice";
-import { formatterRub } from "../../../utils";
-import { useMatchMedia } from "../../../hooks";
-import { removeGoodsPng } from "../../../data";
+import { orderAction, selectOrder } from "store/slice";
+import { useMatchMedia } from "hooks";
+import { formatterRub } from "utils";
+import { removeGoodsPng } from "data";
 
 import styles from "./BasketGoods.module.scss";
 

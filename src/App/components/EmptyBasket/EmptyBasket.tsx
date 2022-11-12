@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ButtonMain } from '../Ui';
+import { ButtonMain } from 'ui';
 import styles from './EmptyBasket.module.scss';
 
 const EmptyBasket = React.memo(() => {

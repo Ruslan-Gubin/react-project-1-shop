@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonMain } from "../Ui";
+import { ButtonMain } from "ui";
 import styles from './ModalRemoveItem.module.scss';
 
 interface IModalRemoveItemProps {

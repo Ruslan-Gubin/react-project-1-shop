@@ -1,14 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import * as utils from "../../utils";
-import * as component from "../../App/components";
-import * as ui from "../../App/components/Ui";
-import * as slice from "../../store/slice";
-import { cartPng, productSortingArray } from "../../data";
+import { productsApi } from "store/rtkQuery";
+import { useAppDispatch } from "store/store";
+import * as slice from "store/slice";
+import * as component from "components";
+import * as ui from "ui";
+import { cartPng, productSortingArray } from "data";
+import * as utils from "utils";
 import styles from "./Product.module.scss";
-import { useAppDispatch } from "../../store/store";
-import { productsApi } from "../../store/rtkQuery";
 
 const Product = React.memo(() => {
   const { order } = useSelector(slice.selectOrder);

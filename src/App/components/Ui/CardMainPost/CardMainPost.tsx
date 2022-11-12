@@ -1,8 +1,9 @@
+import { IPost } from "models";
 import React, { FC, useState } from "react";
-import { PostItemProps } from "../../../../models/PostsItemProps";
 import styles from './CardMainPost.module.scss';
 
-const CardMainPost: FC<PostItemProps> = React.memo(({ post }) => {
+
+const CardMainPost: FC<IPost> = React.memo(({ post }) => {
   const [status, setStatus] = useState(false);
 
   const handlerOpen = (event: React.MouseEvent) => {

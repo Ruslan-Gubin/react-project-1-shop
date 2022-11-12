@@ -1,8 +1,17 @@
 import React from "react";
 import { Link, useMatch } from "react-router-dom";
-import styles, { ICustonLink } from './CustomLink.module.scss';
+import styles from './CustomLink.module.scss';
 
-const CustomLink:React.FC<ICustonLink> = React.memo(({onClick, children, to, text, activeCl,noActive}) => {
+interface ICustomLink {
+    onClick: () => void
+    children: React.ReactNode
+    to: string
+    text: string
+    activeCl: string
+    noActive: string
+}
+
+const CustomLink:React.FC<ICustomLink> = React.memo(({onClick, children, to, text, activeCl,noActive}) => {
     const math = useMatch({
         path: to,
         end: to.length === 1,

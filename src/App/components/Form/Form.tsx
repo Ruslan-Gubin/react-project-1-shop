@@ -1,5 +1,5 @@
 import React, { JSXElementConstructor } from "react";
-import { ButtonMain, Watch } from "../Ui";
+import { ButtonMain, Watch } from "ui";
 
 import styles from "./Form.module.scss";
 
@@ -9,10 +9,11 @@ interface FormType {
   closeForm?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   watch?: boolean;
   titleText: string;
+  disabled?: boolean;
 }
 
 const Form: JSXElementConstructor<FormType> = React.memo(
-  ({ watch = false, children, handlerSubmit, closeForm, titleText }) => {
+  ({ watch = false, children, handlerSubmit, closeForm, titleText, disabled }) => {
     const handlerCloseForm = (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
       if (closeForm) closeForm(e);
@@ -49,7 +50,7 @@ const Form: JSXElementConstructor<FormType> = React.memo(
                 )}
               </div>
               <div className={styles.ready}>
-                <ButtonMain>Подтвердить</ButtonMain>
+                <ButtonMain disabled={disabled}>Подтвердить</ButtonMain>
               </div>
             </div>
           </div>
@@ -59,4 +60,4 @@ const Form: JSXElementConstructor<FormType> = React.memo(
   }
 );
 
-export default Form;
+export {Form};

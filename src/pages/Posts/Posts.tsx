@@ -1,22 +1,20 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { commentsApi, postApi } from "../../store/rtkQuery";
-import * as slice from "../../store/slice";
-import * as components from "../../App/components";
-import * as ui from "../../App/components/Ui";
-import { categoryPosts, commentsArray } from "../../data";
-import styles from "./Posts.module.scss";
-import { useNavigate } from "react-router-dom";
+import { postApi } from "store/rtkQuery";
+import * as slice from "store/slice";    
+import * as components from "components"; 
+import * as ui from "ui";    
+import { categoryPosts, commentsArray } from "data";
+import styles from "./Posts.module.scss";     
 
-const Posts: React.FC = React.memo(() => {
+          
+const FPosts: React.FC = () => {
   const postState = useSelector(slice.selectPosts);
-  const {data = [],isLoading,isError,refetch: refPosts,} = postApi.useGetPostsQuery(postState);
-  const {data: totalLength,isLoading: isLength,refetch: refLength,} = postApi.useGetlengthQuery(null);
-  const {data: comments,isLoading: isLComments,refetch: refComment,} = postApi.useFetchGetCommentsQuery(2);
-  // const {data: comment, isLoasding: islCom} = commentsApi.
+  const {data = [],isLoading,isError} = postApi.useGetPostsQuery(postState);
+  const {data: totalLength,isLoading: isLength} = postApi.useGetlengthQuery(null);
   const { status } = useSelector(slice.selectAuth);
   const dispatch = useDispatch();
-
+ 
 
   return (
     <div className={styles.root}>
@@ -30,7 +28,7 @@ const Posts: React.FC = React.memo(() => {
             dispatch(slice.postAction.setCategoryPost({ value }))
           }
         />
-        <ui.InputMain
+         <ui.InputMain
           placeholder="Найти пост"
           type="search"
           value={postState.search}
@@ -45,8 +43,8 @@ const Posts: React.FC = React.memo(() => {
             {status && <components.CardUser />}
           </div>
         </div>
-
-        <ul className={styles.blogs}>
+ 
+        <ul className={styles['blogs']}>
           {status && <components.CardUserInfo />}
           {!isLoading &&
             data &&
@@ -57,7 +55,7 @@ const Posts: React.FC = React.memo(() => {
               </li>
             ))}
         </ul>
-        <div className={styles.blockForSticky}>
+        <div className={styles["blockForSticky"]}>
           <div className={styles.info}>
             <div className={styles.tegs}>
               {!isLoading && data && (
@@ -93,6 +91,6 @@ const Posts: React.FC = React.memo(() => {
       />
     </div>
   );
-});
+};
 
-export { Posts };
+export const  Posts  = React.memo(FPosts);

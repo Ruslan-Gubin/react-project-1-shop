@@ -1,5 +1,5 @@
 import React, { useRef, useState} from 'react';
-import { useScroll } from '../../../hooks';
+import { useScroll } from 'hooks';
 
 const ScrollingList: React.FC = React.memo(() => {
     const [todos, setTodos] = useState([])

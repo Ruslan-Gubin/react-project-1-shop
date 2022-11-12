@@ -1,7 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { FooterContainer } from "../FooterContainer";
-import Header from "../Header";
+import { FooterContainer, Header } from "components";
 import styles from "./Layout.module.scss";
 
 const Layout = React.memo(() => {

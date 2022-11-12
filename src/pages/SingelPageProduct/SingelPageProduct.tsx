@@ -1,10 +1,10 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { ProductSinglPage } from "../../App/components";
-import { ButtonGoBack } from "../../App/components/Ui";
-import { arrowLeft, productsCategoriLink } from "../../data";
-import { IproductsCategoriLink } from "../../data/productsCategoriLink";
-import { productsApi } from "../../store/rtkQuery";
+import { ProductSinglPage } from "components";
+import { ButtonGoBack } from "ui";
+import { arrowLeft, productsCategoriLink } from "data";
+import { IproductsCategoriLink } from "data/productsCategoriLink";
+import { productsApi } from "store/rtkQuery";
 import styles from "./SingelPageProduct.module.scss";
 
 const SingelPageProduct: React.FC = () => {

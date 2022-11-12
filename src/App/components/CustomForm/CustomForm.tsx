@@ -1,7 +1,7 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
-import { close } from '../../../data';
-import { ButtonMain, InputMain } from '../Ui';
+import { close } from 'data';
+import { ButtonMain, InputMain } from 'ui';
 import styles from './CustomForm.module.scss';
 
 interface IregisterUser{

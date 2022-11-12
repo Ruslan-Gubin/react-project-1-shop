@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ButtonMain } from '..';
+import { ButtonMain } from 'ui';
+
 
 
 const Watch = React.memo(() => {

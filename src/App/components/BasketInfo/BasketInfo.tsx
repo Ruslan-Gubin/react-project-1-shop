@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { checkIcon } from '../../../data';
-import { selectOrder } from '../../../store/slice';
-import { formatterRub, totalSum, totalSumOldPrice } from '../../../utils';
-import { ButtonMain } from '../Ui';
+import { checkIcon } from 'data';
+import { selectOrder } from 'store/slice';
+import { formatterRub, totalSum, totalSumOldPrice } from 'utils';
+import { ButtonMain } from 'ui';
 import styles from './BasketInfo.module.scss';
 
 const BasketInfo = React.memo(() => {

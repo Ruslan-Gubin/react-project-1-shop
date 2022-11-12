@@ -1,14 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as slice from "../../../store/slice";
+import * as slice from "store/slice";
 import { Link } from "react-router-dom";
-import { formatterRub, sumDiscount } from "../../../utils";
+import { formatterRub, sumDiscount } from "utils";
 import styles from "./CardProductCatalog.module.scss";
-import { ModalRemoveItem } from "../ModalRemoveItem";
-import { IProduct } from "../../../models/products";
-import { ButtonMain } from "../Ui";
+import { ModalRemoveItem } from "components";
+import { IProduct } from "models/products";
+import { ButtonMain } from "ui";
 import { Modal } from "../Modal";
-import { productsApi } from "../../../store/rtkQuery";
+import { productsApi } from "store/rtkQuery";
 
 interface ICardProductCatalogProps {
   product: IProduct;

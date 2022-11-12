@@ -1,6 +1,6 @@
 import React from "react";
-import { close, search } from "../../../../data";
-import { InputMainType } from "../../../../models";
+import { close, search } from "data";
+import { InputMainType } from "models";
 import styles from "./InputMain.module.scss";
 
 const InputMain: React.FC<InputMainType> = React.memo(
@@ -15,6 +15,7 @@ const InputMain: React.FC<InputMainType> = React.memo(
     autoComplete = "off",
     required = false,
     type = "text",
+    minLength = 0,
   }) => {
     const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -49,7 +50,7 @@ const InputMain: React.FC<InputMainType> = React.memo(
           className={type === 'search' ? styles.search : styles.input}
           onKeyDown={onKeyDown}
           ref={inputRef}
-          minLength={3}
+          minLength={minLength}
           required={required}
           type={type}
           autoComplete={autoComplete}

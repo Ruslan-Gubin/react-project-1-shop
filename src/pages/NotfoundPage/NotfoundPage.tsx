@@ -1,5 +1,5 @@
 import React from "react";
-import { NotFoundBlock } from "../../App/components";
+import { NotFoundBlock } from "components";
 
 
 const NotfoundPage = React.memo(() => {

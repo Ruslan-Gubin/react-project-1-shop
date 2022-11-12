@@ -1,11 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { productsApi } from "../../../store/rtkQuery";
-import {  orderAction, selectOrder } from "../../../store/slice";
-import { formatterRub } from "../../../utils";
-import { ImagesSlider } from "../ImagesSlider";
-import { ButtonMain } from "../Ui";
+import { productsApi } from "store/rtkQuery";
+import {  orderAction, selectOrder } from "store/slice";
+import { formatterRub } from "utils";
+import { ImagesSlider } from "components";
+import { ButtonMain } from "ui";
 
 import styles from "./ProductSinglPage.module.scss";
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { ButtonMain, InputMain, FormSearch } from "../Ui";
+import { ButtonMain, InputMain, FormSearch } from "ui";
 
 const PostSearch = React.memo(() => {
   const [title, setTitle] = useState("");

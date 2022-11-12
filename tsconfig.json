@@ -1,28 +1,74 @@
 {
   "compilerOptions": {
-    "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "target": "es5",
+    "module": "ESNext",
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "exactOptionalPropertyTypes": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strict": true,
+
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
     "downlevelIteration": true,
+    "allowSyntheticDefaultImports": true, //
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "paths": {
+      "store": ["store"],
+      "utils": ["utils"],
+      "pages": ["pages"],
+      "modules": ["modules"],
+      "hooks": ["hooks"],
+      "data": ["data"],
+      "constants": ["constants"],
+      "assets": ["assets"],
+      "components": ["App/components"],
+      "ui": ["App/components/Ui"], 
+      "scss": ["scss"] 
+    }
   },
-  "include": [
-    "src",
-    "src/**/*.tsx",
-    "src/**/*.ts",
-    "src/store/pagination",
-    "src/models/assets"
-  ]
+
+  "include": ["src/**/*.tsx", "src/**/*.ts"]
 }
+
+// "noImplicitThis": true  нет неявного htis, если this будет указывать на функцию не ()=>
+// "noImplicitAny": true указывает на неявные тип any например в параметрах функции
+// "alwaysStrict": true  тс файлы компилируются в режиме use strict
+//strictBindCallApply: true  коректная проверка агрумента
+//strictFunctionTypes проверяет коректную передацу аргументов
+//strictNullChecks проверка если поиск елемента === undefined то ображение к его ключам невозможно
+//strictPropertyInitialization продекларированные свойства не указаны в конструкторе class
+//useUnknownInCatchVariables заменяет any на unknown
+//allowUnreachableCode подсвечивает если кода при условии не когда не вернет true || false
+//allowUnusedLabels указывает при неиспользуемых лейблах в циклах
+//exactOptionalPropertyTypes если при указании конткреттных значения не выполняется условие подвсветка
+//noFallthroughCasesInSwitch если не указать return || break будет проваливание в следующий цикл
+//noImplicitOverride для классов при перезаписывании свойства от родителя добав. override
+//noImplicitReturns нет неявных возвратов, проверяет функции на возврат значения
+//noPropertyAccessFromIndexSignature if - [key:string]:string; тогда к свойством обращаемся options['color'];
+//noUncheckedIndexedAccess будет добавлятся undefined каждому недекларируемому полю
+//noUnusedLocals указывает на неиспользуемые переменные
+//noUnusedParameters подсветка если параметр функции указан но используется
+//strict alwaysStrict,strictNullChecks,strictBindCallApply,strictFunctionTypes,strictPropertyInitialization,noImplicitAny,noImplicitThis,useUnknownInCatchVariables
+//skipLibCheck скрывает ошибки в anibudi.d.ts
+//esModuleInterop позволяет импортировать CommonJS пакеты как ES6
+//downlevelIteration  Если код проекта преобразовывается в ES5, то конструкция с циклом for / of будет преобразована в обычный for
+//forceConsistentCasingInFileNames Включает режим чувствительности к регистру (case-sensitive) для импорта файлов. ошибка=(import FileManager from './FileManager.ts')
+//resolveJsonModule Флаг позволяет включить возможность импортировать *.json файлы (import config from './config.json')
+//moduleResolution выяснения того, на что ссылается команда импорта
+//isolatedModules   для выдачи ошибок на фичах, которым требуется нелокальная информация. С этим флагом вы сможете безопасно применять инструменты, использующие API TypeScript вроде transpileModule
+//baseUrl ./src коректно будут работать вложенности

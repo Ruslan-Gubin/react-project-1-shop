@@ -12,7 +12,7 @@ export  function useDebounce(callback:()=> void, delay:number) {
         callback(...args);
       }, delay);
     },
-    [callback, delay]
+    [args]
   );
 
   return debouncedCallback;

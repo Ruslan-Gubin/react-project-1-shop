@@ -1,5 +1,5 @@
 import React from "react";
-import { IcategotyPosts } from "../../../data/tegsAndComments";
+import { IcategotyPosts } from "data/tegsAndComments";
 import styles from "./Categories.module.scss";
 
 interface ICategories {

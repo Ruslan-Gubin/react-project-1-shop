@@ -1,14 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import * as icon from "../../../data/icons";
-import { postAction, selectAuth } from "../../../store/slice";
-import styles from "./BlogsItemsCard.module.scss";
 import ReactMarkdown from "react-markdown";
-import { IPost } from "../../../models";
-import { Modal } from "../Modal";
-import { ModalRemoveItem } from "../ModalRemoveItem";
-import { postApi } from "../../../store/rtkQuery";
+import { Link, useNavigate } from "react-router-dom";
+import { postApi } from "store/rtkQuery";
+import { postAction, selectAuth } from "store/slice";
+import { IPost } from "models";
+import { Modal, ModalRemoveItem } from "components";
+import * as icon from "data/icons";
+import styles from "./BlogsItemsCard.module.scss";
 
 interface IBlogsItemsCard {
   item: IPost;

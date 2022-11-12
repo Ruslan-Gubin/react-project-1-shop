@@ -4,7 +4,7 @@ interface Icomments {
   text: string
   user: IUser
   likes: number
-  _id: number
+  _id: string
   createdAt:string
   updatedAt: string
   __v: number

@@ -28,7 +28,7 @@ const authApi = createApi({
           : [{ type: "Auth", id: "LIST" }],
     }),
 
-    getOneAuth: build.query<IUser, null>({
+    getOneAuth: build.query<IUser, string>({
       query: () => ({
         url: `auth`,
       }),

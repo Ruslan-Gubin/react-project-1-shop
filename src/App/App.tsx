@@ -1,10 +1,10 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout";
+import * as page from "pages";
+import { BeforLoadingPage } from "ui";
 import "../scss/style.scss";
-import * as page from "../pages";
-import { BeforLoadingPage } from "./components/Ui";
-  
+
 const App = React.memo(() => {
   
   return (

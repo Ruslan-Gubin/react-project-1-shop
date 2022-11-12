@@ -1,12 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { outIcon, userLogin, userRegistedPng } from "../../../data/icons";
-import { authApi } from "../../../store/rtkQuery";
-import {  authAction, selectAuth } from "../../../store/slice";
-import { Modal } from "../Modal";
-import { ModalRemoveItem } from "../ModalRemoveItem";
-import { CustomLink } from "../Ui";
+import { outIcon, userLogin, userRegistedPng } from "data/icons";
+import { authApi } from "store/rtkQuery";
+import { authAction, selectAuth } from "store/slice";
+import { Modal, ModalRemoveItem} from "components";
+import { CustomLink } from "ui";
 
 import styles from "./Header.modules.scss";
 
@@ -81,4 +80,4 @@ const Header = React.memo(() => {
   );
 });
 
-export default Header;
+export {Header};

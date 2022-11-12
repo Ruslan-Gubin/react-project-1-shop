@@ -4,7 +4,6 @@ import { IUser } from "./user";
 interface IPost {
   valueTitile: string;
   valueText: string;
-  id: string;
   _id: string;
   title: string;
   text: string;

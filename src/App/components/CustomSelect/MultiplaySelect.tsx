@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Select, {OnChangeValue} from "react-select";
-import { IOption } from "../../../models";
+import { IOption } from "models";
 import makeAnimated from 'react-select/animated';
 
 import './MultiplaySelect.scss'

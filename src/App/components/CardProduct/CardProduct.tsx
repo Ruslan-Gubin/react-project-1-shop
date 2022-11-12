@@ -1,5 +1,5 @@
 import React from 'react';
-import { IproductsCategoriLink } from '../../../data/productsCategoriLink';
+import { IproductsCategoriLink } from 'data/productsCategoriLink';
 
 import styles from './CardProduct.module.scss';
 

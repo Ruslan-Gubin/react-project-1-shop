@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { useDeletePostMutation, useGetOnePostQuery } from "../../../store/rtkQuery";
-import { ButtonMain } from "../Ui";
+import { useDeletePostMutation, useGetOnePostQuery } from "store/rtkQuery";
+import { ButtonMain } from "ui";
 
 import styles from './PostItemsSinglPage.module.scss';
 

@@ -2,8 +2,8 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { getPersistConfig } from "redux-deep-persist";
 import storage from "redux-persist/lib/storage";
 import * as persist from "redux-persist";
-import * as rtkQuery from "./rtkQuery";
-import * as reducer from "./slice";
+import * as rtkQuery from "store/rtkQuery";
+import * as reducer from "store/slice";
 import { useDispatch } from "react-redux";
 
 const rootReducer = combineReducers({
@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
   [rtkQuery.postApi.reducerPath]: rtkQuery.postApi.reducer,
   [rtkQuery.productsApi.reducerPath]: rtkQuery.productsApi.reducer,
   [rtkQuery.authApi.reducerPath]: rtkQuery.authApi.reducer,
-  [rtkQuery.commentsApi.reducerPath]: rtkQuery.commentsApi.reducer,
+  [rtkQuery.commentApi.reducerPath]: rtkQuery.commentApi.reducer
 });
 
 const config = getPersistConfig({
@@ -30,7 +30,7 @@ const config = getPersistConfig({
     rtkQuery.productsApi.reducerPath,
     rtkQuery.postApi.reducerPath,
     rtkQuery.authApi.reducerPath,
-    rtkQuery.commentsApi.reducerPath,
+    rtkQuery.commentApi.reducerPath
   ],
   rootReducer,
 });
@@ -56,7 +56,7 @@ const store = configureStore({
       rtkQuery.postApi.middleware,
       rtkQuery.productsApi.middleware,
       rtkQuery.authApi.middleware,
-      rtkQuery.commentsApi.middleware,
+      rtkQuery.commentApi.middleware 
     ]),
 });
 

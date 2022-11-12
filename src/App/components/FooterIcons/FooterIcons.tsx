@@ -4,7 +4,7 @@ import {
   imagesUrlFacebook,
   imagesUrlTwitter,
   imagesUrlInstagram,
-} from "../../../data/imagesUrl";
+} from "data/imagesUrl";
 import styles from "./FooterIcons.module.scss";
 
 const FooterIcons: React.FC = React.memo(() => {

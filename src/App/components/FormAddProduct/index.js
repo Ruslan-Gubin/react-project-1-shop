@@ -1,1 +1,1 @@
-export {FormAddProduct} from './FormAddProduct'
+export {FormAddProduct} from './FormAddProduct';

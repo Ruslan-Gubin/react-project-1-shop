@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Icomments } from "../../../models/comments";
-import { IinitialStatePosts } from "../../slice/postSlice/types";
-import type { IPost } from "../../../models";
+import { IinitialStatePosts } from "store/slice/postSlice/types";
+import type { IPost } from "models";
+
 
 const postApi = createApi({
   reducerPath: "postApi",
@@ -27,7 +27,7 @@ const postApi = createApi({
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ id }) => ({ type: "Posts" as const, id })),
+              ...result.map(({ _id }) => ({ type: "Posts" as const, _id })),
               { type: "Posts", id: "LIST" },
             ]
           : [{ type: "Posts", id: "LIST" }],
@@ -35,12 +35,12 @@ const postApi = createApi({
 
     getOnePost: build.query<IPost, { id: string | undefined}>({
       query: ({ id }) => `post/${id}`,
-      providesTags: (result) => [{ type: "Posts", id: "LIST" }],
+      providesTags: () => [{ type: "Posts", id: "LIST" }],
     }),
 
     getlength: build.query<number, null>({
       query: () => `lenght`,
-      providesTags: (result) => ["Length"],
+      providesTags: () => ["Length"],
     }),
 
     getTags: build.query({
@@ -50,7 +50,7 @@ const postApi = createApi({
           limit,
         },
       }),
-      providesTags: (result) => ["Tags"],
+      providesTags: () => ["Tags"],
     }),
 
     createPost: build.mutation<IPost, Partial<IPost>>({
@@ -70,7 +70,7 @@ const postApi = createApi({
 
     updatePost: build.mutation<IPost, IPost>({
       query: (body) => ({
-        url: `post/${body.id}`,
+        url: `post/${body._id}`,
         method: "PATCH",
         body,
       }),
@@ -92,14 +92,6 @@ const postApi = createApi({
       ],
     }),
 
-    fetchGetComments: build.query<Icomments[], number>({
-      query: (limit: number = 5) => ({
-        url: "comments",
-        params: {
-          limit,
-        },
-      }),
-    }),
   }),
 });
 

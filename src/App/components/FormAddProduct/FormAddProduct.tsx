@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { selectFilters } from "../../../store/slice";
-import { productsApi } from "../../../store/rtkQuery";
-import { selectAddProduct, sumDiscount } from "../../../utils";
-import { ButtonMain, InputMain, TextareaMain } from "../Ui";
-import { CustomSelect } from "../CustomSelect";
-import { Modal } from "../Modal";
-import Form from "../Form";
+import { selectFilters } from "store/slice";
+import { productsApi } from "store/rtkQuery";
+import { selectAddProduct, sumDiscount } from "utils";
+import { ButtonMain, InputMain, TextareaMain } from "ui";
+import { CustomSelect } from "components";
+import { Modal } from "components";
 import { useSelector } from "react-redux";
+import { Form } from "components";
 import styles from "./FormAddProduct.module.scss";
 
 const FormAddProduct: React.FC = React.memo(() => {

@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BasketInfo, BasketGoods, EmptyBasket } from "../../App/components";
-import { ButtonGoBack, ButtonMain } from "../../App/components/Ui";
-import { arrowLeft } from "../../data";
-import { orderAction, selectOrder } from "../../store/slice";
+import { BasketInfo, BasketGoods, EmptyBasket } from "components";
+import { ButtonGoBack, ButtonMain } from "ui";
+import { arrowLeft } from "data";
+import { orderAction, selectOrder } from "store/slice";
 import styles from "./Basket.module.scss";
 
 const Basket = React.memo(() => {

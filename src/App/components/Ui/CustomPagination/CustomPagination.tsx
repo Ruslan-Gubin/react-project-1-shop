@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonMain } from "..";
+import { ButtonMain } from "../ButtonMain";
 import styles from "./CustomPagination.module.scss";
 
 interface IPagination {

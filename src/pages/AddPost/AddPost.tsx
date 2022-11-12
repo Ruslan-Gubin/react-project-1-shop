@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {  useLocation, useNavigate, useParams } from 'react-router-dom';
-import * as ui from '../../App/components/Ui';
-import { postApi } from '../../store/rtkQuery';
-import { postAction, selectAuth, selectPosts } from '../../store/slice';
+import * as ui from 'ui';
+import { postApi } from 'store/rtkQuery';
+import { postAction, selectAuth, selectPosts } from 'store/slice';
 import styles from './AddPost.module.scss';
 
 const AddPost = () => {
@@ -11,11 +11,12 @@ const AddPost = () => {
   const {postUpdate} = useSelector(selectPosts) 
   const [updatePost, {}] = postApi.useUpdatePostMutation();
   const [createPost, {}] = postApi.useCreatePostMutation();
+  const [disabled, setDisabled] = React.useState(false);
   
   const [text, setText] = React.useState("");
   const [title, setTitle] = React.useState("");
   const [tags, setTags] = React.useState("");
-  const [image, setImage] = React.useState<string | ArrayBuffer>("");
+  const [image, setImage] = React.useState("");
   
   const {pathname} = useLocation()
   const navigate = useNavigate();
@@ -49,6 +50,7 @@ const AddPost = () => {
   const onSubmitAddPost = async (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
+    setDisabled(true)
     event.preventDefault();
     try {
       if (id ) {
@@ -125,7 +127,7 @@ const AddPost = () => {
     />
     <ui.Editor value={text} onChange={(value) => setText(value)} />
     {title !== "" && image !== "" && text !== "" && tags !== "" ? 
-      <ui.ButtonMain onClick={(event) => onSubmitAddPost(event)}>
+      <ui.ButtonMain disabled={disabled} onClick={(event) => onSubmitAddPost(event)}>
         Опубликовать
       </ui.ButtonMain>
       : <ui.ButtonMain bgColor="black">Заполните все поля !!!</ui.ButtonMain>

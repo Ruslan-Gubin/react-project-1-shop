@@ -2,17 +2,17 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { authApi } from "../../store/rtkQuery";
-import { authAction, selectAuth } from "../../store/slice";
-import { ButtonMain } from "../../App/components/Ui";
-import { userRegistedPng } from "../../data/icons";
-import { IUser } from "../../models";
+import { authApi } from "store/rtkQuery";
+import { authAction, selectAuth } from "store/slice";
+import { ButtonMain } from "ui";
+import { userRegistedPng } from "data/icons";
+import { IUser } from "models";
+import { Modal, ModalRemoveItem } from "components";
 import styles from "./registrationPage.module.scss";
-import { Modal, ModalRemoveItem } from "../../App/components";
 
 const registrationPage = () => {
   const { auth } = useSelector(selectAuth);
-  const { data: emails, isLoading } = authApi.useGetEmailsQuery(null);
+  const { data: emails } = authApi.useGetEmailsQuery(null);
   const [createAuth, {}] = authApi.useCreateAuthMutation();
   const [updateAuth, {}] = authApi.useUpdateAuthMutation();
   const [removeAuth,{}] = authApi.useDeleteAuthMutation()
