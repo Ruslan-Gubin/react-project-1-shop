@@ -15,7 +15,7 @@ const authApi = createApi({
   tagTypes: ["Auth"],
   endpoints: (build) => ({
     
-    getAuths: build.query<IUser[], null>({
+    getAuths: build.query<IUser[], string[]>({
       query: () => ({
         url: `auth-all`,
       }),
@@ -28,11 +28,20 @@ const authApi = createApi({
           : [{ type: "Auth", id: "LIST" }],
     }),
 
+    getUsersLikes: build.query<IUser[], string[]>({
+      query: (usersIdArr) => ({
+        url: `auth-likes`,
+        params: {
+          usersIdArr,
+        },
+      }),
+    }),
+
     getOneAuth: build.query<IUser, string>({
       query: () => ({
         url: `auth`,
       }),
-      providesTags: (result) =>  [{ type: "Auth", id: "LIST" }],
+      providesTags: () =>  [{ type: "Auth", id: "LIST" }],
     }),
 
     createAuth: build.mutation<IUser, string>({
@@ -43,7 +52,7 @@ const authApi = createApi({
           body,
         };
       },
-      invalidatesTags: (result) => [{ type: "Auth", id: "LIST" }],
+      invalidatesTags: () => [{ type: "Auth", id: "LIST" }],
     }),
 
     authorization: build.mutation<IUser, IUser>({
@@ -52,7 +61,7 @@ const authApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: (result) => [{ type: "Auth", id: "LIST" }],
+      invalidatesTags: () => [{ type: "Auth", id: "LIST" }],
     }),
 
     updateAuth: build.mutation<IUser, IUser>({

@@ -13,8 +13,12 @@ import deleteIcon from "../assets/img/icons/delete-52897.png";
 import updateIcon from "../assets/img/icons/update-35221.png";
 import showMoreTagsIcon from "../assets/img/icons/show-more-325323.png";
 import hideTagsIcon from "../assets/img/icons/show-prev-148701.png";
+import like from "../assets/img/icons/like_125468.png";
+import dislike from "../assets/img/icons/dislike_325792384.png";
 
 export {
+  dislike,
+  like,
   showMoreTagsIcon,
   hideTagsIcon,
   deleteIcon,

@@ -1,6 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { Icomments } from "models/comments";
-import { IUpdateComments } from "pages/Home/Home";
+import { IComments } from "models";
+
+interface IUpdateComments extends IComments {
+  updateId: string;
+}
 
 const commentApi = createApi({
   reducerPath: "commentApi",
@@ -16,7 +19,7 @@ const commentApi = createApi({
   tagTypes: ["Comments"],
   endpoints: (build) => ({
 
-    getComments: build.query<Icomments[], string>({
+    getComments: build.query<IComments[], string>({
       query: () => "comments",
       providesTags: (result) =>
         result
@@ -27,12 +30,12 @@ const commentApi = createApi({
           : [{ type: "Comments", id: "LIST" }],
     }),
 
-    // getOneComment: build.query<Icomments, {id: string}>({
+    // getOneComment: build.query<IComments, {id: string}>({
     //   query: (post) => `comment/${post.id}`,
     //   providesTags: () => [{ type: "Comments", id: "LIST" }],
     // }),
 
-    createComment: build.mutation<Icomments, Partial<Icomments>>({
+    createComment: build.mutation<IComments, Partial<IComments>>({
       query: (body) => ({
         url: "comments",
         method: "POST",
@@ -53,6 +56,24 @@ const commentApi = createApi({
       invalidatesTags: [{ type: "Comments", id: "LIST" }],
     }),
 
+    setAddLike: build.mutation<{success: boolean}, IComments> ({
+      query: (body) => ({
+        url: `comment-like`,
+        method: "PATCH",
+        body,
+      }),
+      invalidatesTags: [{ type: "Comments", id: "LIST" }],
+    }),
+
+    setAddDislike: build.mutation<{success: boolean}, IComments> ({
+      query: (body) => ({
+        url: `comment-dislike`,
+        method: "PATCH",
+        body,
+      }),
+      invalidatesTags: [{ type: "Comments", id: "LIST" }],
+    }),
+
     deleteComment: build.mutation<{success: boolean}, string>({
       query: (id) => ({
         url: `comments-remove`,
@@ -63,7 +84,6 @@ const commentApi = createApi({
       }),
       invalidatesTags: [{ type: "Comments", id: "LIST" }],
     }),
-
     
   }),
 });

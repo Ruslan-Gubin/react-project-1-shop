@@ -9,3 +9,4 @@ export {totalSum, totalSumOldPrice} from './totalSum';
 export {initSelect} from './initSelect';
 export {filterImageInObject} from './filterImageInObject';
 export { filterTags} from './getFirstTags';
+export { helperLikesFunction} from './helperLikesFunction';

@@ -1,0 +1,87 @@
+@use "scss/common/var";
+@use "scss/common/exented";
+
+.root {
+  
+  .card {
+    position: relative;
+    padding: var.$spasing-big-medium;
+    border-radius: var.$border-radius-average;
+    margin: var.$spasing-small 0;
+    display: flex;
+    box-shadow: var.$box-shadow;
+    background-color: var.$color-card-bg;
+    .imgContainer {
+      .image {
+        width: 60px;
+        height: 60px;
+        border-radius: var.$border-radius-circle;
+        margin-right: var.$spasing-big-medium;
+      }
+    }
+
+    .cardInfo {
+      width: 100%;
+      .header {
+        margin-bottom: var.$spasing-big-medium;
+        display: flex;
+        align-items: center;
+        .name {
+          font-size: var.$font-size-button;
+          text-decoration: underline rgba(0, 0, 0, 0.35);
+          margin-right: 10px;
+        }
+        .date {
+          color: var.$color-black-hover;
+        }
+      }
+
+      .body {
+        margin-bottom: var.$spasing-big-medium;
+        .text {
+          color: var.$color-black-hover;
+          font-size: var.$font-size-average;
+        }
+      }
+
+      
+
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        height: 50px;
+        .likes {
+          display: flex;
+          align-items: center;
+          color: var.$color-black-hover;
+          .like {
+            @extend %iconsFooterComments;
+          }
+          .likeCoutn {
+            cursor: pointer;
+            font-size: var.$font-size-average;
+            margin-right: var.$spasing-button;
+          }
+          .dislike {
+            @extend %iconsFooterComments;
+          }
+          .dislikeCoutn {
+            cursor: pointer;
+            font-size: var.$font-size-average;
+          }
+        }
+
+        .buttons {
+          display: flex;
+          align-items: center;
+          .updateBtn {
+            @extend %iconsFooterComments;
+          }
+          .removeBtn {
+            @extend %iconsFooterComments;
+          }
+        }
+      }
+    }
+  }
+}

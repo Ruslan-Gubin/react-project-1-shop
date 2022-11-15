@@ -7,9 +7,13 @@ export {
   imagesUrlFacebook,
   imagesUrlTwitter,
   imagesUrlInstagram,
-} from './imagesUrl.ts';
+} from './imagesUrl';
 
 export {
+  deleteIcon,
+  updateIcon,
+  dislike,
+  like,
   eyeIcon,
   commentsIcon,
   userLogin,

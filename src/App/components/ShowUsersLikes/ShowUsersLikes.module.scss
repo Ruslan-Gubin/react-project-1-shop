@@ -1,0 +1,25 @@
+@use "scss/common/var";
+
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: var.$border-radius-average;
+  padding: var.$spasing-button;
+  transition: all 0.5s ease-in;
+
+    .item {
+      margin-right: 3px;
+      margin-bottom: 3px;
+      .image {
+        width: 10px;
+        height: 10px;
+      }
+    }
+
+
+  .usersImage {
+    width: 25px;
+    height: 25px;
+    border-radius: var.$border-radius-circle;
+  }
+}

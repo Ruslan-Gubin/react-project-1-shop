@@ -1,19 +1,11 @@
 import React from "react";
 import { postApi } from "store/rtkQuery";
 import { showMoreTagsIcon } from "data/icons";
+import { useToggle } from "hooks";
+import { IComments } from "models";
 
 import styles from "./CardPostInfo.module.scss";
-import { useToggle } from "hooks";
-import { IUser } from "models";
 
-export interface IComments {
-  imageUser?: string;
-  userName?: string;
-  text: string;
-  _id: string
-  user: IUser
-
-}
 
 interface ITegsCardItem {
   title: string;
