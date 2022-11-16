@@ -3,13 +3,13 @@ import React, { JSXElementConstructor, ReactElement, useState } from "react";
 import styles from './Modal.module.scss';
 
 interface IModal {
-    active: boolean
+    active: boolean | string
     setActive: Function
     children: ReactElement
 }
 
 const Modal: JSXElementConstructor<IModal> = React.memo(({children, ...props}) => {
-const [date,setDate] = useState<string>(new Date().toLocaleTimeString())
+const [date] = useState<string>(new Date().toLocaleTimeString())
 
     return (
         <div 

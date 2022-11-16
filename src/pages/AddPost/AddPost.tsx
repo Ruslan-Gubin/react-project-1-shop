@@ -15,9 +15,10 @@ const AddPost = () => {
   
   const [text, setText] = React.useState("");
   const [title, setTitle] = React.useState("");
-  const [tags, setTags] = React.useState("");
-  const [image, setImage] = React.useState("");
-  
+  const [tags, setTags] = React.useState('');
+  const [image, setImage] = React.useState<string>('');
+ 
+ 
   const {pathname} = useLocation()
   const navigate = useNavigate();
   const inputFileRef = React.useRef<HTMLInputElement>(null);
@@ -53,16 +54,19 @@ const AddPost = () => {
     setDisabled(true)
     event.preventDefault();
     try {
-      if (id ) {
-        await updatePost({ text, title, tags, image, id });
+      if (id  ) {
+        await updatePost({ text, title, tags, image, id })
+        .unwrap()
+        .catch(error => console.log(error))
         image && navigate(`/post/${id}`);
-      } else if (!id) {
-        const data = await createPost({ text, title, tags, image }).unwrap();
-
-        if (data._id) {
+      } else if (!id && image) {
+         await createPost({ text, title, tags, image })
+        .unwrap()
+        .then(data => {
           const track = data._id;
           navigate(`/post/${track}`);
-        }
+        })
+        .catch(error => console.log(error))
       }
       dispatch(postAction.setUpdatePostRemove())
     } catch (error) {
@@ -83,7 +87,7 @@ const AddPost = () => {
   const handlerClear = () => {
     if (text) setText("");
     if (title) setTitle("");
-    if (tags) setTags("");
+    if (tags) setTags('');
     if (image) setImage("");
   };
   

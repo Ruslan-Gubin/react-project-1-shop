@@ -11,7 +11,7 @@ placeholder?: string
 required?: boolean
 minLength?: number
 text: string
-setText: any
+setText: (value: string) => void
 }
 
 const TextareaMain: JSXElementConstructor <TexteriaType> = React.memo(({

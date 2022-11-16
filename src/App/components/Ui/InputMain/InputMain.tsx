@@ -20,7 +20,7 @@ const InputMain: React.FC<InputMainType> = React.memo(
     const inputRef = React.useRef<HTMLInputElement>(null);
 
     const handlerChange = React.useCallback(
-      (value: string ) => {
+      (value: string  ) => {
         onChange(value);
       },
       [value]

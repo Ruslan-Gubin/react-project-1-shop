@@ -33,7 +33,7 @@ const postApi = createApi({
           : [{ type: "Posts", id: "LIST" }],
     }),
 
-    getOnePost: build.query<IPost, { id: string | undefined}>({
+    getOnePost: build.query< IPost , { id: string | undefined}>({
       query: ({ id }) => `post/${id}`,
       providesTags: () => [{ type: "Posts", id: "LIST" }],
     }),
@@ -53,7 +53,7 @@ const postApi = createApi({
       providesTags: () => ["Tags"],
     }),
 
-    createPost: build.mutation<IPost, Partial<IPost>>({
+    createPost: build.mutation<IPost, IPost | {image:string, tags: string}>({
       query(body) {
         return {
           url: `post`,
@@ -68,9 +68,9 @@ const postApi = createApi({
       ],
     }),
 
-    updatePost: build.mutation<IPost, IPost>({
+    updatePost: build.mutation<IPost, IPost | {image:string, id: string, tags: string}>({
       query: (body) => ({
-        url: `post/${body._id}`,
+        url: `post/${body.id}`,
         method: "PATCH",
         body,
       }),
@@ -80,7 +80,29 @@ const postApi = createApi({
       ],
     }),
 
-    deletePost: build.mutation<IPost, IPost>({
+    addCommentUpdate: build.mutation<IPost, {postId:string, commentId:string}>({
+      query: (body) => ({
+        url: `post-add-comment`,
+        method: "PATCH",
+        body,
+      }),
+      invalidatesTags: [
+        { type: "Posts", id: "LIST" },
+      ],
+    }),
+
+    removeCommentUpdate: build.mutation<IPost, {postId:string, commentId:string}>({
+      query: (body) => ({
+        url: `post-remove-comment`,
+        method: "PATCH",
+        body,
+      }),
+      invalidatesTags: [
+        { type: "Posts", id: "LIST" },
+      ],
+    }),
+
+    deletePost: build.mutation<IPost, string>({
       query: (id) => ({
         url: `post/${id}`,
         method: "DELETE",

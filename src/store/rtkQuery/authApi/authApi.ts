@@ -70,12 +70,12 @@ const authApi = createApi({
         method: "PATCH",
         body,
       }),
-      invalidatesTags: (result) => [{ type: "Auth", id: "LIST" }],
+      invalidatesTags: () => [{ type: "Auth", id: "LIST" }],
     }),
 
     getEmails: build.query<string[], null>({
       query: () => `auths-email`,
-      providesTags: (result) =>  [{ type: "Auth", id: "LIST" }],
+      providesTags: () =>  [{ type: "Auth", id: "LIST" }],
     }),
 
     deleteAuth: build.mutation<Object[], string | undefined>({
@@ -86,7 +86,7 @@ const authApi = createApi({
           id,
         }
       }),
-      invalidatesTags: (result) => [{ type: "Auth", id: "LIST" }],
+      invalidatesTags: () => [{ type: "Auth", id: "LIST" }],
     }),
   }),
 });

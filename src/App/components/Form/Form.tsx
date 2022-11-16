@@ -8,7 +8,7 @@ interface FormType {
   handlerSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   closeForm?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   watch?: boolean;
-  titleText: string;
+  titleText?: string;
   disabled?: boolean;
 }
 

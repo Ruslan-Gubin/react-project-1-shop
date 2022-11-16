@@ -30,7 +30,9 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({
     async (id: string) => {
       try {
         if (id) {
-          await removePost(id).unwrap();
+          await removePost(id)
+          .unwrap()
+          .catch(error => console.log(error))
         }
         setModalActive(false)
         navigate("/post");
@@ -74,7 +76,7 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({
           </div>
           <div className={styles.commentsCount}>
             <img src={icon.commentsIcon} alt="comments Count" />
-            <span>123</span>
+            <span>{item.comments.length}</span>
           </div>
            {item.user && item.user._id === auth._id && (
             <>

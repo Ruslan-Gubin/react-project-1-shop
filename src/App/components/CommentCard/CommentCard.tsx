@@ -2,79 +2,24 @@ import React from "react";
 import { commentApi } from "store/rtkQuery";
 import { IComments, IUser } from "models";
 import { dislike, like, deleteIcon, updateIcon } from "data";
-import { helperLikesFunction } from "utils";
 import { ShowUsersLikes } from "../ShowUsersLikes";
 import styles from "./CommentCard.module.scss";
+import { useAddLikes, useShowLikes } from "hooks";
 
 interface ICommentCard {
   updateComment: (item: IComments) => void;
-  handlerRemoveComment: (id: string) => void;
+  setRemoveCommentModal: (id: string) => void;
   auth: IUser;
+  arrComments: string[];
 }
 
-const FCommentCard: React.FC<ICommentCard> = ({
-  updateComment,
-  handlerRemoveComment,
-  auth,
-}) => {
-  const { data: comments, isLoading: isLoadingComments } =
-    commentApi.useGetCommentsQuery("");
+const FCommentCard: React.FC<ICommentCard> = ({arrComments, updateComment,setRemoveCommentModal, auth,}) => {
+  const { data: comments = [], isLoading: isLoadingComments } = commentApi.useGetCommentsQuery(arrComments);  
   const [addLikeApi, {}] = commentApi.useSetAddLikeMutation();
   const [addDislikeApi, {}] = commentApi.useSetAddDislikeMutation();
-  const [showInfoLikes, setShowInfoLikes] = React.useState("");
-  const [showInfoDislikes, setShowInfoDislikes] = React.useState("");
+  const { handlerShowLikes, likesArr, showInfoLikes, handlerRemoveShowInfo } = useShowLikes();
+  const { handlerAddLike, handlerAddDislike } = useAddLikes(handlerRemoveShowInfo,addLikeApi,addDislikeApi,auth);
 
-  const handlerShowLikes = (item: IComments) => {
-    setShowInfoDislikes("");
-    if (item.likes.length <= 0) {
-      return;
-    }
-    const id = item._id;
-    if (id === showInfoLikes) {
-      setShowInfoLikes("");
-    } else {
-      setShowInfoLikes(id);
-    }
-  };
-
-  const handlerShowDislikes = (item: IComments) => {
-    setShowInfoLikes("");
-    if (item.dislikes.length <= 0) {
-      return;
-    }
-    const id = item._id;
-    if (id === showInfoDislikes) {
-      setShowInfoDislikes("");
-    } else {
-      setShowInfoDislikes(id);
-    }
-  };
-
-  const handlerAddLike = async (item: IComments) => {
-    setShowInfoLikes("");
-    setShowInfoDislikes("");
-    const userId: string = auth._id ? auth._id : "";
-    const dislikeArr = item.dislikes;
-
-    helperLikesFunction(dislikeArr, userId, addDislikeApi, item);
-
-    await addLikeApi(item)
-      .unwrap()
-      .catch((error) => console.log(error));
-  };
-
-  const handlerAddDislike = async (item: IComments) => {
-    setShowInfoLikes("");
-    setShowInfoDislikes("");
-    const userId: string = auth._id ? auth._id : "";
-    const likesArr = item.likes;
-
-    helperLikesFunction(likesArr, userId, addLikeApi, item);
-
-    await addDislikeApi(item)
-      .unwrap()
-      .catch((error) => console.log(error));
-  };
 
   return (
     <div className={styles.root}>
@@ -112,7 +57,7 @@ const FCommentCard: React.FC<ICommentCard> = ({
                         alt="like"
                       />
                       <div /** отображение лайков */
-                        onClick={() => handlerShowLikes(item)}
+                        onClick={() => handlerShowLikes(item.likes, item._id)}
                         className={styles.likeCoutn}
                       >
                         {item.likes.length}
@@ -124,18 +69,18 @@ const FCommentCard: React.FC<ICommentCard> = ({
                         alt="dislike"
                       />
                       <div
-                        onClick={() => handlerShowDislikes(item)}
+                        onClick={() =>
+                          handlerShowLikes(item.dislikes, item._id)
+                        }
                         className={styles.dislikeCoutn}
                       >
                         {item.dislikes.length}
                       </div>
-                      {/* отображение пользователелей которые лайкнули или дизлайкнули  */}
-                      {showInfoLikes === item._id && (
-                        <ShowUsersLikes userId={item.likes} />
-                      )}
-                      {showInfoDislikes === item._id && (
-                        <ShowUsersLikes userId={item.dislikes} />
-                      )}
+                      {
+                        showInfoLikes === item._id && (
+                          <ShowUsersLikes userId={likesArr} />
+                        ) /** отображение пользователелей которые лайкнули или дизлайкнули */
+                      }
                     </div>
                     {auth?._id === item.user._id && (
                       <div className={styles.buttons}>
@@ -146,9 +91,10 @@ const FCommentCard: React.FC<ICommentCard> = ({
                             alt="removeGoodsPng"
                           />
                         </div>
+
                         <div className={styles.removeBtn}>
                           <img
-                            onClick={() => handlerRemoveComment(item._id)}
+                            onClick={() => setRemoveCommentModal(item._id)}
                             src={deleteIcon}
                             alt="removeGoodsPng"
                           />

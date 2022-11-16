@@ -5,6 +5,7 @@ interface IPost {
   valueTitile: string;
   valueText: string;
   _id: string;
+  id?: string;
   title: string;
   text: string;
   img: string;
@@ -15,7 +16,8 @@ interface IPost {
   user: IUser;
   viewsCount?: number
   updatedAt?: string
-  tags: string[]
+  tags: string[] 
+  comments: string[] | []
 }
 
 

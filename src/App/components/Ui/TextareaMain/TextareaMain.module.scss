@@ -1,14 +1,14 @@
-@use '../../../../scss/common/var';
+@use 'scss/common/var';
 
 .textarea {
     resize: none;
     font-family: var.$ff-Gilroy-Regular;
     border: 1px solid var.$color-dark-grey;
-    border-radius: 10px;
-    padding: 10px;
+    border-radius: var.$spasing-small;
+    padding: var.$spasing-small;
     font-size: var.$font-size-button;
     color: var.$color-header-bg-dark;
-    margin: 10px;
+    margin: var.$spasing-small 0;
     &:focus {
         border: 1px solid var.$color-green;
         box-shadow: var.$box-shadow;

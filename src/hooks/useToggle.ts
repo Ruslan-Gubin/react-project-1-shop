@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 
-interface IuseToggle {
-  prevState:  number
-  nextState:  number
-}
 
 
- const useToggle = (prevState: number | string, nextState: number | string)  => {
-  const [value, setValue] = useState(prevState)
+ const useToggle = (prevState: number | string | boolean, nextState: number | string | boolean)  => {
+  const [value, setValue] = useState<number | string | boolean>(prevState)
 
   const toggle:React.MouseEventHandler<HTMLImageElement> = () => {
     const prev = prevState

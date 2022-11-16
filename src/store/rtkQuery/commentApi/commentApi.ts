@@ -19,8 +19,13 @@ const commentApi = createApi({
   tagTypes: ["Comments"],
   endpoints: (build) => ({
 
-    getComments: build.query<IComments[], string>({
-      query: () => "comments",
+    getComments: build.query<IComments[], string[]>({
+      query: (body) => ({
+        url: "comments",
+        params: {
+          body,
+        }
+      }),
       providesTags: (result) =>
         result
           ? [
@@ -30,10 +35,10 @@ const commentApi = createApi({
           : [{ type: "Comments", id: "LIST" }],
     }),
 
-    // getOneComment: build.query<IComments, {id: string}>({
-    //   query: (post) => `comment/${post.id}`,
-    //   providesTags: () => [{ type: "Comments", id: "LIST" }],
-    // }),
+    getOneComment: build.query<IComments, {id: string}>({
+      query: (post) => `comment/${post.id}`,
+      providesTags: () => [{ type: "Comments", id: "LIST" }],
+    }),
 
     createComment: build.mutation<IComments, Partial<IComments>>({
       query: (body) => ({

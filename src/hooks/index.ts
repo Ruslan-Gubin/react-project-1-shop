@@ -2,6 +2,8 @@ export {useWhyDidYouUpdate} from './useWhyDidYouUpdate';
 export {useLocationParams} from './useLocationParams';
 export {useLocaleStorage} from './useLocaleStorage';
 export {useMatchMedia} from './use-match-media';
+export {useShowLikes} from './useShowLikes';
+export {useAddLikes} from './useAddLikes';
 export {useDebounce} from './useDebounce';
 export {useCounter} from './useCounter';
 export {useRequest} from './useRequest';

@@ -1,17 +1,23 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { commentApi } from 'store/rtkQuery';
-import { selectAuth } from 'store/slice';
-import * as ui from 'ui';
-import { Form } from 'components';
-import { IComments } from 'models';
+import React from "react";
+import { useSelector } from "react-redux";
+import { commentApi } from "store/rtkQuery";
+import { selectAuth } from "store/slice";
+import * as ui from "ui";
+import { Form, Modal, ModalRemoveItem } from "components";
+import { IComments } from "models";
+import { CommentCard } from "../CommentCard";
 
-import styles from './Comments.module.scss';
-import { CommentCard } from '../CommentCard';
+import styles from "./Comments.module.scss";
 
+interface IFComments {
+  arrComments: string[];
+  addComment: any;
+  removeCommentTarget: any;
+  idTarget: string;
+}
 
-const FComments = () => {
-  
+const FComments: React.FC<IFComments> = ({addComment, removeCommentTarget, idTarget, arrComments}) => {
+
   const [updateCommentApi, {}] = commentApi.useUpdateCommentMutation();
   const [commentText, setCommentText] = React.useState("");
   const [commentError, setCommentError] = React.useState(false);
@@ -19,8 +25,9 @@ const FComments = () => {
   const [updateId, setUpdateId] = React.useState("");
   const [createdComment, {}] = commentApi.useCreateCommentMutation();
   const [removeComment, {}] = commentApi.useDeleteCommentMutation();
-  
-  const {auth} = useSelector(selectAuth)
+  const [addCommentActive, setAddCommentActive] = React.useState(false);
+  const [removeCommentModal, setRemoveCommentModal] = React.useState("");
+  const { auth } = useSelector(selectAuth);
 
   const handlerAddComment = async () => {
     commentText.length < 3 ? setCommentError(true) : setCommentError(false);
@@ -34,11 +41,12 @@ const FComments = () => {
         setUpdateText(false);
         setCommentText("");
       } else {
-        const {token, ...args} = auth
-        const user = {...args}
-        const comment = { text: commentText, user }as IComments;
-        await createdComment(comment) 
+        const { token, ...args } = auth;
+        const user = { ...args };
+        const comment = { text: commentText, user } as IComments;
+        await createdComment(comment)
           .unwrap()
+          .then((data) => addComment({ postId: idTarget, commentId: data._id }))
           .catch((error) => console.error("rejected", error));
         setCommentText("");
       }
@@ -48,8 +56,12 @@ const FComments = () => {
   const handlerRemoveComment = async (id: string) => {
     await removeComment(id)
       .unwrap()
-      .then(() => {})
+      .then(() => {
+        const newArrComments = arrComments.filter((item) => item !== id);
+        removeCommentTarget({ postId: idTarget, newArrComments });
+      })
       .catch((error) => console.error("rejected", error));
+    setRemoveCommentModal("");
   };
 
   const updateComment = (item: IComments): void => {
@@ -58,33 +70,53 @@ const FComments = () => {
     setUpdateId(item._id);
   };
 
- const handlerCancelUpdate = () => {
-  setUpdateText(false);
-  setCommentText("");
- }
+  const handlerCancelUpdate = () => {
+    setUpdateText(false);
+    setCommentText("");
+  };
 
   return (
     <div className={styles.root}>
-      <Form disabled={!auth.fullName} handlerSubmit={() => handlerAddComment()} titleText="Comments">
-        <ui.InputMain
-          required={true}
-          value={commentText}
-          placeholder="Комментарии..."
-          onChange={(value) => setCommentText(value)}
+      <ui.ButtonMain
+        onClick={() => setAddCommentActive(!addCommentActive)}
+        bgColor="black"
+      >
+        {!addCommentActive ? "Добавить комментарий" : "Скрыть"}
+      </ui.ButtonMain>
+      {addCommentActive && (
+        <Form
+          closeForm={() => handlerCancelUpdate()}
+          disabled={!auth.fullName}
+          handlerSubmit={() => handlerAddComment()}
+        >
+          <ui.TextareaMain
+            placeholder="Добавьте комментарий..."
+            text={commentText}
+            setText={(value) => setCommentText(value)}
+            rows={5}
+          />
+          {commentError && (
+            <p style={{ color: "orange" }}>Введите не менее 3 символов</p>
+          )}
+        </Form>
+      )}
+      {arrComments && arrComments.length > 0 && (
+        <CommentCard
+          arrComments={arrComments}
+          updateComment={updateComment}
+          setRemoveCommentModal={setRemoveCommentModal}
+          auth={auth}
         />
-        {commentError && (
-          <p style={{ color: "orange" }}>Введите не менее 3 символов</p>
-        )}
-      </Form>
-      {updateText && 
-      <ui.ButtonMain bgColor="black" onClick={() => handlerCancelUpdate()}>Cancel</ui.ButtonMain>
-      }
-  <CommentCard updateComment={updateComment} handlerRemoveComment={handlerRemoveComment} auth={auth}/>
-
-       
-      
+      )}
+      <Modal active={removeCommentModal} setActive={setRemoveCommentModal}>
+        <ModalRemoveItem
+          text="Вы действительно хотите удалить этот комментарий?"
+          confirm={() => handlerRemoveComment(removeCommentModal)}
+          cancel={() => setRemoveCommentModal("")}
+        />
+      </Modal>
     </div>
   );
 };
 
-export const Comments = React.memo(FComments)
+export const Comments = React.memo(FComments);
