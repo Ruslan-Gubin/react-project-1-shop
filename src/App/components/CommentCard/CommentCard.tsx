@@ -1,10 +1,9 @@
 import React from "react";
 import { commentApi } from "store/rtkQuery";
 import { IComments, IUser } from "models";
-import { dislike, like, deleteIcon, updateIcon } from "data";
-import { ShowUsersLikes } from "../ShowUsersLikes";
+import { deleteIcon, updateIcon } from "data";
 import styles from "./CommentCard.module.scss";
-import { useAddLikes, useShowLikes } from "hooks";
+import { LilesDislikes } from "../LilesDislikes";
 
 interface ICommentCard {
   updateComment: (item: IComments) => void;
@@ -13,13 +12,10 @@ interface ICommentCard {
   arrComments: string[];
 }
 
-const FCommentCard: React.FC<ICommentCard> = ({arrComments, updateComment,setRemoveCommentModal, auth,}) => {
-  const { data: comments = [], isLoading: isLoadingComments } = commentApi.useGetCommentsQuery(arrComments);  
+const FCommentCard: React.FC<ICommentCard> = ({ arrComments, updateComment,setRemoveCommentModal, auth,}) => {
+  const { data: comments = [], isLoading: isLoadingComments } = commentApi.useGetCommentsQuery(arrComments);
   const [addLikeApi, {}] = commentApi.useSetAddLikeMutation();
   const [addDislikeApi, {}] = commentApi.useSetAddDislikeMutation();
-  const { handlerShowLikes, likesArr, showInfoLikes, handlerRemoveShowInfo } = useShowLikes();
-  const { handlerAddLike, handlerAddDislike } = useAddLikes(handlerRemoveShowInfo,addLikeApi,addDislikeApi,auth);
-
 
   return (
     <div className={styles.root}>
@@ -49,39 +45,12 @@ const FCommentCard: React.FC<ICommentCard> = ({arrComments, updateComment,setRem
 
                 {auth.fullName && (
                   <div className={styles.footer}>
-                    <div className={styles.likes}>
-                      <img /** Добавляем лайки */
-                        onClick={() => handlerAddLike(item)}
-                        className={styles.like}
-                        src={like}
-                        alt="like"
-                      />
-                      <div /** отображение лайков */
-                        onClick={() => handlerShowLikes(item.likes, item._id)}
-                        className={styles.likeCoutn}
-                      >
-                        {item.likes.length}
-                      </div>
-                      <img /** Добавляем дизлайк */
-                        onClick={() => handlerAddDislike(item)}
-                        className={styles.dislike}
-                        src={dislike}
-                        alt="dislike"
-                      />
-                      <div
-                        onClick={() =>
-                          handlerShowLikes(item.dislikes, item._id)
-                        }
-                        className={styles.dislikeCoutn}
-                      >
-                        {item.dislikes.length}
-                      </div>
-                      {
-                        showInfoLikes === item._id && (
-                          <ShowUsersLikes userId={likesArr} />
-                        ) /** отображение пользователелей которые лайкнули или дизлайкнули */
-                      }
-                    </div>
+                    <LilesDislikes 
+                    auth={auth} 
+                    target={item}
+                    addDislikeApi={addDislikeApi}
+                    addLikeApi={addLikeApi}
+                    />
                     {auth?._id === item.user._id && (
                       <div className={styles.buttons}>
                         <div className={styles.updateBtn}>

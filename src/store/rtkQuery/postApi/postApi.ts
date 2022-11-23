@@ -33,21 +33,49 @@ const postApi = createApi({
           : [{ type: "Posts", id: "LIST" }],
     }),
 
+    getUserPost: build.query<IPost[], IinitialStatePosts>({
+      query: (options) => ({
+        url: "user-posts",
+        params: {
+          ...options,
+        },
+      }),
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ _id }) => ({ type: "Posts" as const, _id })),
+              { type: "Posts", id: "LIST" },
+            ]
+          : [{ type: "Posts", id: "LIST" }],
+    }),
+
     getOnePost: build.query< IPost , { id: string | undefined}>({
       query: ({ id }) => `post/${id}`,
       providesTags: () => [{ type: "Posts", id: "LIST" }],
     }),
 
-    getlength: build.query<number, null>({
-      query: () => `lenght`,
+    getUserPostLength: build.query<number, IinitialStatePosts>({
+      query: (id) => ({
+        url: `user-post-length`,
+        params: {
+           ...id,
+        }
+      }),
+      providesTags: () => ["Length"],
+    }),
+
+    getlength: build.query<number, IinitialStatePosts>({
+      query: () => ({
+        url: `lenght`,
+      }),
       providesTags: () => ["Length"],
     }),
 
     getTags: build.query({
-      query: (limit) => ({
+      query: (params) => ({
         url: `tags`,
         params: {
-          limit,
+          ...params,
         },
       }),
       providesTags: () => ["Tags"],
@@ -80,7 +108,31 @@ const postApi = createApi({
       ],
     }),
 
-    addCommentUpdate: build.mutation<IPost, {postId:string, commentId:string}>({
+    setAddLike: build.mutation<{success: boolean}, IPost>({
+      query: (body) => ({
+        url: `post-set-like`,
+        method: "PATCH",
+        body,
+      }),
+      invalidatesTags: [
+        { type: "Posts", id: "LIST" },
+        { type: "Tags" },
+      ],
+    }),
+
+    setAddDislike: build.mutation<{success: boolean}, IPost>({
+      query: (body) => ({
+        url: `post-set-dislike`,
+        method: "PATCH",
+        body,
+      }),
+      invalidatesTags: [
+        { type: "Posts", id: "LIST" },
+        { type: "Tags" },
+      ],
+    }),
+
+    addCommentUpdate: build.mutation<IPost, {targetId: string, commentId:string}>({
       query: (body) => ({
         url: `post-add-comment`,
         method: "PATCH",
@@ -91,7 +143,7 @@ const postApi = createApi({
       ],
     }),
 
-    removeCommentUpdate: build.mutation<IPost, {postId:string, commentId:string}>({
+    removeCommentUpdate: build.mutation<IPost, {targetId: string, commentId:string}>({
       query: (body) => ({
         url: `post-remove-comment`,
         method: "PATCH",

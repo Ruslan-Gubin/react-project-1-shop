@@ -18,6 +18,9 @@ interface IPost {
   updatedAt?: string
   tags: string[] 
   comments: string[] | []
+  likes: string[]
+  dislikes: string[]
+  __v: number
 }
 
 

@@ -54,7 +54,7 @@ const sectionObserver = new IntersectionObserver(cb, {
   threshold: [0.2, 0.5, 0.8],
 });
 sections.forEach((s) => sectionObserver.observe(s));
-
+//-------------------------------------------------------------------------------
 let nextPage = 2;
 
 const infinteObserver = new IntersectionObserver(

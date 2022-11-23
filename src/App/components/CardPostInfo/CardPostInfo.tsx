@@ -1,57 +1,62 @@
 import React from "react";
-import { postApi } from "store/rtkQuery";
+import { commentApi, postApi } from "store/rtkQuery";
 import { showMoreTagsIcon } from "data/icons";
 import { useToggle } from "hooks";
-import { IComments } from "models";
 
 import styles from "./CardPostInfo.module.scss";
-
+import { Link } from "react-router-dom";
 
 interface ITegsCardItem {
   title: string;
   tags?: string[];
-  comments?: IComments[];
-  handelClickTag?: (value: string) => void 
-  tagValue?: string
+  handelClickTag?: (value: string) => void;
+  tagValue?: string;
+  userTarget: string | undefined
 }
 
 const CardPostInfo: React.FC<ITegsCardItem> = ({
   title,
-  comments = [],
   handelClickTag,
   tagValue,
+  userTarget,
 }) => {
-  const [value, toggle] = useToggle(5, '')
-  const {data: tags, isLoading: isLoadingTags} = postApi.useGetTagsQuery(value)
-
+  const [limitTags, toggleTags] = useToggle(10, '');
+  const [limitComments, toggleComments] = useToggle(5, '');
+  const { data: tags, isLoading: isLoadingTags } =  postApi.useGetTagsQuery({limit: limitTags,userId: userTarget});
+  const {data: commentsArr, isLoading: isLoadingComments} =  commentApi.useGetCommenstUsersQuery({limit: limitComments,userId: userTarget})
+ 
 
   return (
-    <div className={styles.root}>   
-    <img className={styles.moreTags} onClick={toggle} src={showMoreTagsIcon} alt="show More Tags Icon" />
+    <div className={styles.root}>
       <div className={styles.title}>{title}</div>
-      { !isLoadingTags && tags &&
-        tags.map((value: string, index: number) => (
-          <div 
-          onClick={()=> (handelClickTag && handelClickTag(value))}
-          key={index}
-          className={tagValue === value ? styles.itemActive : styles.item  }  
-          >
-           <p># {value}</p> 
-          </div>
-        ))}
+      {title === 'Теги' ?
+      <img className={styles.moreTags}  onClick={() => toggleTags()} src={showMoreTagsIcon} alt="show More Tags Icon" />
+      :  
+      <img className={styles.moreTags}  onClick={() => toggleComments()} src={showMoreTagsIcon} alt="show More Tags Icon" />
+    }
+   
+
+   <ul className={styles.tagsContainer}>
+        {!isLoadingTags && tags && title === 'Теги' &&
+          tags.map((value: string, index: number) => (
+            <li key={index}
+            onClick={() => handelClickTag && handelClickTag(value)}
+            className={tagValue === value ? styles.itemActive : styles.item}
+            >
+                <p># {value}</p>
+            </li>
+          ))}
+          </ul>
 
       <ul className={styles.comentContainer}>
-        {comments &&
-          comments.map((item: IComments, index: number) => (
-            <li className={styles.items} key={index}>
-              <img
-                className={styles.userImage}
-                src={item.imageUser}
-                alt="imageUser"
-              />
+        {!isLoadingComments && commentsArr && title === 'Комментарии' &&
+          commentsArr.map((item) => (
+            <li className={styles.items} key={item._id}>
               <div className={styles.userInfo}>
-                <div className={styles.userName}>{item.userName}</div>
+                  <Link to={`/${item.target?.category}/${item.target?._id}`}>
                 <div className={styles.userText}>{item.text}</div>
+                </Link>
+                
               </div>
             </li>
           ))}

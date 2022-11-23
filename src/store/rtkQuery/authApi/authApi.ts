@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { IuseToggle } from "hooks/useToggle";
 import {  IUser } from "../../../models";
 
 const authApi = createApi({
@@ -42,6 +43,87 @@ const authApi = createApi({
         url: `auth`,
       }),
       providesTags: () =>  [{ type: "Auth", id: "LIST" }],
+    }),
+
+    getUserSinglPage: build.query<IUser, string | undefined>({
+      query: (id) => ({
+        url: `auth/${id}`,
+      }),
+      providesTags: () =>  [{ type: "Auth", id: "LIST" }],    
+    }),
+
+    getFriendRequest: build.mutation<IUser, {user: IUser, guest: string | undefined}>({
+      query: (body) => ({
+        url: `auth-friend-request`,
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: () => [{ type: "Auth", id: "LIST" }],
+    }),
+
+    setRemoveUserFriendRequest: build.mutation<{success: boolean}, {removeId: string, userId: string, usersArrId: string[]} >({
+      query: (body) => ({
+        url: `auth-remove-friend-request`,
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: () => [{ type: "Auth", id: "LIST" }],
+    }),
+
+    setAddFriend: build.mutation<{success: boolean}, {userId: string, targetId: string} >({
+      query: (body) => ({
+        url: `auth-add-friend`,
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: () => [{ type: "Auth", id: "LIST" }],
+    }),
+
+    setDeleteFriend: build.mutation<{success: boolean}, {userId: string , guest: string } >({ 
+      query: (body) => ({
+        url: `auth-delete-friend`,
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: () => [{ type: "Auth", id: "LIST" }],
+    }),
+
+    setAddDialog: build.mutation<{success: boolean}, {userOneId: string , userTwoId: string , dialogId: string} >({ 
+      query: (body) => ({
+        url: `auth-add-dialog`,
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: () => [{ type: "Auth", id: "LIST" }],
+    }),
+
+    setOnline: build.mutation<{success: boolean}, {status: boolean}>({ 
+      query: (body) => ({
+        url: `auth-online`,
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: () => [{ type: "Auth", id: "LIST" }],
+    }),
+
+    setOfline: build.mutation<{success: boolean}, unknown>({ 
+      query: () => ({
+        url: `auth-ofline`,
+        method: 'PATCH',
+      }),
+      invalidatesTags: () => [{ type: "Auth", id: "LIST" }],
+    }),
+
+    getUsersArray: build.query<IUser[], {arr: string[], limit: IuseToggle}>({
+      query: (params) => ({
+        url: `auth-users-array`,
+        method: 'GET',
+        params: {
+          arr: params.arr,
+          limit: params.limit
+        }
+      }),
+      providesTags: () => [{ type: "Auth", id: "LIST" }]
     }),
 
     createAuth: build.mutation<IUser, string>({

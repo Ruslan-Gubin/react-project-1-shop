@@ -1,12 +1,8 @@
 import { IComments, IUser } from "models";
 import { helperLikesFunction } from "utils";
 
-const useAddLikes = (
-  handlerCancelInfo: () => void,
-  likeApi: (value: IComments) => any,
-  dislikeApi: (value: IComments) => any,
-  auth: IUser
-) => {
+const useAddLikes = (handlerCancelInfo: () => void,likeApi: (value: IComments) => any,dislikeApi: (value: IComments) => any, auth: IUser) => {
+
   const handlerAddLike = async (item: IComments) => {
     handlerCancelInfo();
     const userId: string = auth._id ? auth._id : "";

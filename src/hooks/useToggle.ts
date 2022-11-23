@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 
+type IuseToggle = number | string | boolean
 
-
- const useToggle = (prevState: number | string | boolean, nextState: number | string | boolean)  => {
+ const useToggle = (prevState: IuseToggle, nextState: IuseToggle):[IuseToggle, () => void]  => {
   const [value, setValue] = useState<number | string | boolean>(prevState)
 
-  const toggle:React.MouseEventHandler<HTMLImageElement> = () => {
+  const toggle = () => {
     const prev = prevState
     if (value == prev) {
       setValue(nextState)
@@ -18,3 +18,5 @@ import React, { useState } from "react";
 }
 
 export {useToggle}
+
+export type {IuseToggle}

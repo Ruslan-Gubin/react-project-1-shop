@@ -1,0 +1,81 @@
+@use "scss/common/var";
+
+%_icons {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 20px;
+  height: 20px;
+}
+
+.root {
+  border-radius: var.$border-radius-average;
+  background-color: var.$color-white;
+  box-shadow: var.$box-shadow;
+  margin: var.$spasing-small 0;
+  position: relative;
+
+  .showIcon {
+    @extend %_icons;
+  }
+
+  .hideIcon {
+    @extend %_icons;
+  }
+
+  .container {
+    padding: var.$spasing-small;
+    max-height: 249px;
+    overflow: auto;
+
+    .title {
+      text-align: center;
+      font-family: var.$ff-Gilroy-Bold;
+      font-size: var.$font-size-header-link;
+      color: var.$color-orange-dark;
+      @media (max-width: 1200px) {
+        font-size: var.$font-size-card-text;
+      }
+    }
+
+    .user {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: var.$spasing-small;
+
+      .userInfo {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .userImg {
+          height: 35px;
+          width: 35px;
+          border-radius: var.$border-radius-circle;
+          margin-right: var.$spasing-small;
+        }
+        .userName {
+          font-size: var.$font-size-button;
+          color: var.$color-black-hover;
+          @media (max-width: 1200px) {
+            font-size: 11px;
+          }
+        }
+      }
+
+      .buttons {
+        .ok {
+          height: 30px;
+          width: 30px;
+          margin-right: 5px;
+          cursor: pointer;
+        }
+        .cancel {
+          height: 30px;
+          width: 30px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

@@ -1,2 +1,14 @@
+@use 'scss/common/var';
+
+.root {
+
+  .likes {
+    width: 70%;
+    margin-top: var.$spasing-big-medium;
+    margin: var.$spasing-big-medium auto;
+  }
+
+}
+
 
 

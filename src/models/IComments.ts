@@ -10,6 +10,10 @@ interface IComments {
   dislikes: string[]
   __v: number
   updatedAt:string
+  target?: {
+    category: string
+    _id: string 
+  }
 }
 
 export type {IComments}

@@ -1,6 +1,5 @@
 import { lazy } from 'react';
 
-const Posts = lazy(() => import('./Posts'))
 const Product = lazy(() => import('./Product'))
 const Products = lazy(() => import('./Products'))
 const SingelPagePost = lazy(() => import('./SingelPagePost'))
@@ -11,12 +10,15 @@ const Home = lazy(() => import('./Home'))
 const NotfoundPage = lazy(() => import('./NotfoundPage'))
 const Basket = lazy(() => import('./Basket'))
 const AddPost = lazy(() => import('./AddPost'))
+const UserSinglPage = lazy(() => import('./UserSinglPage'))
+const DialogSinglPage = lazy(() => import('./DialogSinglPage'))
 
 export {
+  DialogSinglPage,
+  UserSinglPage,
   AddPost,
   registrationPage,
   Product,
-  Posts,
   SingelPagePost,
   Products,
   LoginPage,

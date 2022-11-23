@@ -1,5 +1,10 @@
 @use "../../../scss/common/var";
 
+%buttonsUpdate {
+  width: 35px;
+  height: 35px;
+}
+
 %commentsAndViews {
   display: flex;
   align-items: center;
@@ -14,20 +19,23 @@
   }
 }
 
-.card {
+%card {
+  font-family: var.$ff-Gilroy-Regular;
   overflow: hidden;
   box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1);
   border-radius: var.$border-radius-average;
   background: var.$liner-gradient-post-card;
   margin: var.$spasing-small;
 
+
      .imageUrl {
-      height: 500px;
+      max-height: 800px;
       width: 100%;
     }
 
     .imageUrlSingl {
-      height: 100%;
+      max-height: 1000px;
+      // height: 100%;
       width: 100%;
     }
   
@@ -35,10 +43,16 @@
   .body {
     padding: var.$spasing-one-rem;
     .title {
+      font-family: var.$ff-Gilroy-Medium;
       color: var.$color-header-bg-dark;
-      font-size: var.$font-size-average;
+      font-size: var.$font-size-header-link;
       text-transform: capitalize;
       text-align: center;
+    }
+    .text {
+      
+      font-size: var.$font-size-button;
+      color: var.$color-black-hover;
     }
     & span {
       display: block;
@@ -79,22 +93,39 @@
         @extend %commentsAndViews;
       }
     }
-    .update {
-      width: 35px;
-      height: 35px;
-      position: absolute;
-      top: 20px;
-      right:80px;
+
+    .buttons {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      .likes {
+        
+      }
+
+      .buttonUpdate {
+        .update {
+          @extend %buttonsUpdate;
+          margin-right: var.$spasing-big-medium;
+        }
+        .delete {
+          @extend %buttonsUpdate;
+          cursor: pointer;
+        }
+      }
     }
-    .delete {
-      width: 35px;
-      height: 35px;
-      position: absolute;
-      top: 20px;
-      right:20px;
-      cursor: pointer;
-    }
+
   }
+}
+
+.card {
+  @extend %card;
+}
+
+.cardSinglPage {
+  @extend %card;
+  width: 70%;
+  margin: 10px auto;
 }
 
 

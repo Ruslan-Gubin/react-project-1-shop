@@ -1,0 +1,1 @@
+export {UserSinglPage as default} from './UserSinglPage';

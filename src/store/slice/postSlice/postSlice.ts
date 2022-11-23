@@ -80,7 +80,7 @@ const postSlice = createSlice({
 
 });
 
-export const selectPosts = (state: TypeRootState) => state.posts;
+export const selectPosts = (state: TypeRootState) => state.posts; 
 
 export const postAction = postSlice.actions;
 

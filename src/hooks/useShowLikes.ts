@@ -1,6 +1,5 @@
 import React from "react";
 
-
 const useShowLikes = () => {
   const [showInfoLikes, setShowInfoLikes] = React.useState<string>("");
   const [likesArr, setLikesArr] = React.useState<string[]>([]);
@@ -18,13 +17,13 @@ const useShowLikes = () => {
     } else {
       setShowInfoLikes(id);
     }
-  }
+  };
 
-const  handlerRemoveShowInfo:() => void = () => {
-  setShowInfoLikes('')
-  }
+  const handlerRemoveShowInfo: () => void = () => {
+    setShowInfoLikes("");
+  };
 
-  return {handlerShowLikes, likesArr, showInfoLikes, handlerRemoveShowInfo};
+  return { handlerShowLikes, likesArr, showInfoLikes, handlerRemoveShowInfo};
 };
 
 export { useShowLikes };

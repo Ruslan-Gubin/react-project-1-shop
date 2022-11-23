@@ -15,8 +15,12 @@ import showMoreTagsIcon from "../assets/img/icons/show-more-325323.png";
 import hideTagsIcon from "../assets/img/icons/show-prev-148701.png";
 import like from "../assets/img/icons/like_125468.png";
 import dislike from "../assets/img/icons/dislike_325792384.png";
+import okGreen from "../assets/img/icons/ok-green-23523672.png";
+import cancelStop from "../assets/img/icons/cancel_stop_exit_1583.png";
 
 export {
+  cancelStop,
+  okGreen,
   dislike,
   like,
   showMoreTagsIcon,

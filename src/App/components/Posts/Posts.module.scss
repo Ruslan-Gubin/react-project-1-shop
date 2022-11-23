@@ -15,14 +15,20 @@
   
   .container {
     display: flex;
-
+    
     .userContainer {
-      // width: 30%;
-      
-      .userInfo {
+      width: 40%;
+      .sticky{
         position: sticky;
         top: 20px;
+
+        
+        .userInfo {
       }
+      .userRequestFriend{
+
+      }
+    }
       
     }
     
@@ -30,11 +36,12 @@
       width: 100%;
       
     }
+
     .blockForSticky{
       width: 30%;
+      color: var.$color-input-search;
 
       .info {
-        color: var.$color-input-search;
         position: sticky;
         top: 20px;
         .tegs {
@@ -42,10 +49,12 @@
           @extend %tegsAndComments;
         }
         .comments {
+          
           @extend %tegsAndComments;
         }
       }
     }
+
 
   }
 }

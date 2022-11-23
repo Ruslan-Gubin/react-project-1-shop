@@ -10,6 +10,8 @@ export {
 } from './imagesUrl';
 
 export {
+  cancelStop,
+  okGreen,
   deleteIcon,
   updateIcon,
   dislike,
@@ -31,5 +33,4 @@ export {
   categoryPosts,
   tegsArray,
   sortCategoryName,
-  commentsArray,
 } from './tegsAndComments';

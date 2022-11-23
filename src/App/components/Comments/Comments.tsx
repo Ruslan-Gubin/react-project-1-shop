@@ -8,15 +8,19 @@ import { IComments } from "models";
 import { CommentCard } from "../CommentCard";
 
 import styles from "./Comments.module.scss";
+import { useCoordinates } from "hooks";
 
 interface IFComments {
   arrComments: string[];
   addComment: any;
   removeCommentTarget: any;
-  idTarget: string;
+  target: {
+    _id: string
+    category: string 
+  }
 }
 
-const FComments: React.FC<IFComments> = ({addComment, removeCommentTarget, idTarget, arrComments}) => {
+const FComments: React.FC<IFComments> = ({addComment, removeCommentTarget, target, arrComments}) => {
 
   const [updateCommentApi, {}] = commentApi.useUpdateCommentMutation();
   const [commentText, setCommentText] = React.useState("");
@@ -25,10 +29,11 @@ const FComments: React.FC<IFComments> = ({addComment, removeCommentTarget, idTar
   const [updateId, setUpdateId] = React.useState("");
   const [createdComment, {}] = commentApi.useCreateCommentMutation();
   const [removeComment, {}] = commentApi.useDeleteCommentMutation();
-  const [addCommentActive, setAddCommentActive] = React.useState(false);
+  const [commentActiveModal, setCommentActive] = React.useState<boolean>(false)
   const [removeCommentModal, setRemoveCommentModal] = React.useState("");
   const { auth } = useSelector(selectAuth);
-
+  const [myRef, x, y] = useCoordinates();
+  
   const handlerAddComment = async () => {
     commentText.length < 3 ? setCommentError(true) : setCommentError(false);
     if (auth && commentText.length >= 3) {
@@ -43,10 +48,10 @@ const FComments: React.FC<IFComments> = ({addComment, removeCommentTarget, idTar
       } else {
         const { token, ...args } = auth;
         const user = { ...args };
-        const comment = { text: commentText, user } as IComments;
+        const comment = { text: commentText, user, target: target } as IComments;
         await createdComment(comment)
           .unwrap()
-          .then((data) => addComment({ postId: idTarget, commentId: data._id }))
+          .then(async(data) => await addComment({ targetId: target._id, commentId: data._id }))
           .catch((error) => console.error("rejected", error));
         setCommentText("");
       }
@@ -58,16 +63,18 @@ const FComments: React.FC<IFComments> = ({addComment, removeCommentTarget, idTar
       .unwrap()
       .then(() => {
         const newArrComments = arrComments.filter((item) => item !== id);
-        removeCommentTarget({ postId: idTarget, newArrComments });
+        removeCommentTarget({ targetId: target._id, newArrComments });
       })
       .catch((error) => console.error("rejected", error));
     setRemoveCommentModal("");
   };
 
   const updateComment = (item: IComments): void => {
-    setCommentText(item.text);
+    window.scrollTo(x,y)
+    setCommentActive(true) 
+    setCommentText(item.text); 
     setUpdateText(true);
-    setUpdateId(item._id);
+    setUpdateId(item._id); 
   };
 
   const handlerCancelUpdate = () => {
@@ -77,15 +84,16 @@ const FComments: React.FC<IFComments> = ({addComment, removeCommentTarget, idTar
 
   return (
     <div className={styles.root}>
+      <div ref={myRef }></div>
       <ui.ButtonMain
-        onClick={() => setAddCommentActive(!addCommentActive)}
+        onClick={() => setCommentActive(!commentActiveModal)} 
         bgColor="black"
       >
-        {!addCommentActive ? "Добавить комментарий" : "Скрыть"}
+        {!commentActiveModal ? "Добавить комментарий" : "Скрыть"}
       </ui.ButtonMain>
-      {addCommentActive && (
+      {commentActiveModal && (
         <Form
-          closeForm={() => handlerCancelUpdate()}
+          closeForm={() =>commentText.length &&  handlerCancelUpdate()}
           disabled={!auth.fullName}
           handlerSubmit={() => handlerAddComment()}
         >

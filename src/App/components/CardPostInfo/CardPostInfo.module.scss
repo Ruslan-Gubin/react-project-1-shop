@@ -1,42 +1,57 @@
 @use "../../../scss/common/var";
 
 .root {
-  
-
   padding: var.$spasing-big-medium;
   font-family: var.$ff-Gilroy-Medium;
   color: var.$box-shadow;
+
   .title {
     text-align: center;
-    margin-bottom: var.$spasing-big-medium;
+    margin-bottom: var.$spasing-small;
     font-size: var.$font-size-title-normal;
+    font-family: var.$ff-Gilroy-Bold;
+    color: var.$color-orange-dark;
   }
+  
   .moreTags {
     width: 25px;
     height: 25px;
     cursor: pointer;
-  }
-  
-  .item {
     margin-bottom: var.$spasing-small;
-    font-size: var.$font-size-card-text;
-    cursor: pointer;
-    &:hover{
-      color: var.$color-blue;
+  }
+
+  .tagsContainer {
+    max-height: 254px;
+    overflow: auto;
+
+     
+    .item  {
+      margin-right: 22px;
+      margin-bottom: var.$spasing-small;
+      font-size: var.$font-size-card-text;
+      cursor: pointer;
+      &:hover{
+        color: var.$color-blue;
+      }
     }
-  }
-  .itemActive {
-    margin-bottom: var.$spasing-small;
+    .itemActive  {
+      margin-right: 22px;
+      margin-bottom: var.$spasing-small;
     font-size: var.$font-size-card-text;
     cursor: pointer;
     color: var.$color-blue;
   }
   
+}
+  
   .comentContainer {
+    max-height: 295px;
+    overflow: auto;
     .items {
       display: flex;
       margin-bottom: var.$spasing-big-medium;
       border-bottom: 1px solid rgba(0, 0, 0, 0.145);
+      margin-right: 35px;
 
       .userImage {
         width: 35px;
@@ -49,7 +64,11 @@
           margin-bottom: 5px;
         }
         .userText {
+          color: var.$color-black-hover;
           margin-bottom: var.$spasing-small;
+          &:hover{
+            color: var.$color-blue;
+          }
         }
       }
     }

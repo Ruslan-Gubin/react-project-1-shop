@@ -1,0 +1,1 @@
+export {DialogSinglPage as default} from './DialogSinglPage';

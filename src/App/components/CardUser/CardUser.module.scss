@@ -10,11 +10,36 @@ margin: var.$spasing-small 0;
 }
 .container {
   padding: var.$spasing-small;
+
+  .online {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: rgb(18, 136, 18);
+  }
+
+  .ofline {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: rgb(176, 22, 22);
+  }
   
   
   .image {
+    width: 245px;
+    height: 245px;
+    border-radius: var.$border-radius-button;
+    @media (max-width: 1200px) {
     width: 100%;
-      border-radius: var.$border-radius-button;
+    height: 180px;
+    }
     }
     
     .body {

@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
+import { IuseToggle } from "hooks/useToggle";
 import { IComments } from "models";
 
 interface IUpdateComments extends IComments {
@@ -33,6 +34,16 @@ const commentApi = createApi({
               { type: "Comments", id: "LIST" },
             ]
           : [{ type: "Comments", id: "LIST" }],
+    }),
+
+    getCommenstUsers: build.query<IComments[], {limit: IuseToggle,userId: string | undefined }>({
+      query: (body) => ({
+        url: 'comments-user',
+        params: {
+          ...body,
+        }
+      }),
+      providesTags: () => [{ type: "Comments", id: "LIST" }],
     }),
 
     getOneComment: build.query<IComments, {id: string}>({

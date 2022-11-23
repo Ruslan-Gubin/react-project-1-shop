@@ -1,0 +1,23 @@
+@use 'scss/common/var';
+@use "scss/common/exented";
+
+.likes {
+  display: flex;
+  align-items: center;
+  color: var.$color-black-hover;
+  .like {
+    @extend %iconsFooterComments;
+  }
+  .likeCoutn {
+    cursor: pointer;
+    font-size: var.$font-size-average;
+    margin-right: var.$spasing-button;
+  }
+  .dislike {
+    @extend %iconsFooterComments;
+  }
+  .dislikeCoutn {
+    cursor: pointer;
+    font-size: var.$font-size-average;
+  }
+}

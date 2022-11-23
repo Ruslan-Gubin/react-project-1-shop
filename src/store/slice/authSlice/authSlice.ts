@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IUser } from "../../../models";
+import { IUser } from "models";
 
 import { TypeRootState } from "../../store";
 
@@ -8,13 +8,21 @@ interface IinitState {
   status: boolean
   email: string
   password: string
+  requestFriends: string[]
+  friends: string[]
+  dialogs: string[]
+  online: boolean
 }
 
-const initialState:IinitState = {
+const initialState:IinitState = { 
   auth: {} as IUser,
   status: false,
   email: 'gubin_ruslan@rambler.ru',
   password: '1234qwer',
+  requestFriends: [],
+  friends: [],
+  dialogs: [],
+  online: false,
 }
 
 const authSlice = createSlice({
@@ -24,7 +32,7 @@ const authSlice = createSlice({
 
     addAuth(state, action: PayloadAction<IUser>) {
       state.auth = action.payload
-    state.auth.token &&   window.localStorage.setItem('token', state.auth.token)
+      state.auth.token &&   window.localStorage.setItem('token', state.auth.token)
       state.status = true 
     },
 
@@ -46,6 +54,21 @@ const authSlice = createSlice({
     getAutchPassword(state, action:PayloadAction<{value: string}>) {
       state.password = action.payload.value
     },
+
+    getAutchRequestFriends(state, action:PayloadAction<IUser>) {
+      state.requestFriends = action.payload.requestFriends
+      state.friends = action.payload.friends
+    },
+
+    getAutchOnline(state,) {
+      state.online = true
+    },
+
+    getAutchOfline(state,) {
+      state.online = false
+    },
+
+    
 
   },
 });

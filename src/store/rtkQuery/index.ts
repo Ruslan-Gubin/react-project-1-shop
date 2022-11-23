@@ -5,3 +5,5 @@ export { productsApi } from "./productApi";
 export { authApi } from "./authApi";
 
 export { commentApi } from "./commentApi";
+
+export { dialogApi } from "./dialogApi";

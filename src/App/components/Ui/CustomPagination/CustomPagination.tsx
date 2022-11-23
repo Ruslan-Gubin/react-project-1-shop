@@ -3,7 +3,7 @@ import { ButtonMain } from "../ButtonMain";
 import styles from "./CustomPagination.module.scss";
 
 interface IPagination {
-  totalCountries: number | undefined | false;
+  totalCountries: number ;
   counterPerPage: number;
   currentPage: number;
   clickNumber: (value: number) => void;
@@ -20,13 +20,15 @@ const CustomPagination: React.FC<IPagination> = React.memo(
     prevPage,
     nextPage,
   }) => {
+  
     const pageNumbers = [];
 
-    if (totalCountries && counterPerPage) {
+      if (totalCountries && counterPerPage) {
       for (let i = 1; i <= Math.ceil(totalCountries / counterPerPage); i++) {
         pageNumbers.push(i);
       }
     }
+
 
     return (
       <div className={styles.pagination}>

@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { postApi } from "store/rtkQuery";
 import { postAction, selectAuth } from "store/slice";
 import { IPost } from "models";
-import { Modal, ModalRemoveItem } from "components";
+import { Modal, ModalRemoveItem, LilesDislikes } from "components";
 import * as icon from "data/icons";
 import styles from "./BlogsItemsCard.module.scss";
 
@@ -15,11 +15,9 @@ interface IBlogsItemsCard {
   id: string;
 }
 
-const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({
-  id,
-  item,
-  singelPage = false,
-}) => {
+const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({id, item, singelPage = false,}) => {
+  const [updateAddLike, {}] = postApi.useSetAddLikeMutation()
+  const [updateAddDislike, {}] = postApi.useSetAddDislikeMutation()
   const { auth } = useSelector(selectAuth);
   const [removePost, {}] = postApi.useDeletePostMutation();
   const [modalActive, setModalActive] = React.useState<boolean>(false);
@@ -42,7 +40,7 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({
     }
 
   return (
-    <div className={styles.card}>
+    <div className={!singelPage ? styles.card : styles.cardSinglPage}>
       <Link to={`/post/${id}`}>
         <img
           className={!singelPage ? styles.imageUrl : styles.imageUrlSingl}
@@ -53,17 +51,23 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({
 
       <div className={styles.body}>
         <div className={styles.title}>{item.title}</div>
-        <span>{item.tags}</span>
+        {/* <span>{item.tags}</span> */}
+        <div className={styles.text}>
         {singelPage && <ReactMarkdown children={item.text} />}
+        </div>
+
       </div>
 
       <div className={styles.footer}>
         <div className={styles.user}>
+    <Link to={`/user/${item.user._id}`}>
           <img
             className={styles.imageUser}
             src={item.user.image.url ? item?.user.image.url : ''}
             alt="user-image"
-          />
+            />
+            </Link>
+
           <div>
             <p>{item?.user.fullName}</p>
             <small>
@@ -78,15 +82,21 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({
             <img src={icon.commentsIcon} alt="comments Count" />
             <span>{item.comments.length}</span>
           </div>
+          </div>
+             <div className={styles.buttons}>
+              
+        <div className={styles.likes}>
+          <LilesDislikes target={item} auth={auth} addLikeApi={updateAddLike} addDislikeApi={updateAddDislike}/>
+        </div>
            {item.user && item.user._id === auth._id && (
-            <>
+        <div className={styles.buttonUpdate}>
               <Link to={`/add-post/${id}/edit`}>
                 <img
                   onClick={()=> dispatch(postAction.setUpdatePost(item))}
                   className={styles.update}
                   src={icon.updateIcon}
                   alt="updateIcon"
-                />
+                  />
               </Link>
               <img
               className={styles.delete}
@@ -94,8 +104,10 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({
               src={icon.deleteIcon}
               alt="deleteIcon"
               />
-            </>
-          )}
+            </div>
+              
+              )}
+              </div>
           <Modal active={modalActive} setActive={setModalActive}>
             <ModalRemoveItem
               text="Вы действительно хотите удалить этот пост?"
@@ -103,7 +115,6 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({
               cancel={() => setModalActive(false)}
             />
           </Modal>
-        </div>
       </div>
     </div>
   );

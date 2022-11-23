@@ -1,0 +1,68 @@
+@use 'scss/common/var';
+
+%_icons {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 20px;
+  height: 20px;
+}
+
+.root {
+  padding: var.$spasing-small;
+  border-radius: var.$border-radius-average;
+  background-color: var.$color-white;
+  box-shadow: var.$box-shadow;
+  margin: var.$spasing-small 0;
+  position: relative;
+
+  .showIcon {
+    @extend %_icons;
+  }
+
+  .hideIcon {
+    @extend %_icons;
+  }
+
+  .title {
+    text-align: center;
+    font-family: var.$ff-Gilroy-Bold;
+    font-size: var.$font-size-header-link;
+    color: var.$color-orange-dark;
+  }
+
+  .container {
+    max-height: 249px;
+    overflow: auto;
+
+    .user {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: var.$spasing-small;
+      cursor: pointer;
+
+      .userInfo {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+        .userImg {
+          height: 35px;
+          width: 35px;
+          border-radius: var.$border-radius-circle;
+          margin-right: var.$spasing-small;
+        }
+    .userName {
+      font-size: var.$font-size-button;
+      color: var.$color-black-hover;
+    }
+  }
+}
+
+    
+      
+    
+   
+      
+    }
+}

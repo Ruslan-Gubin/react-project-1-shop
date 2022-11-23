@@ -50,26 +50,6 @@
         display: flex;
         justify-content: space-between;
         height: 50px;
-        .likes {
-          display: flex;
-          align-items: center;
-          color: var.$color-black-hover;
-          .like {
-            @extend %iconsFooterComments;
-          }
-          .likeCoutn {
-            cursor: pointer;
-            font-size: var.$font-size-average;
-            margin-right: var.$spasing-button;
-          }
-          .dislike {
-            @extend %iconsFooterComments;
-          }
-          .dislikeCoutn {
-            cursor: pointer;
-            font-size: var.$font-size-average;
-          }
-        }
 
         .buttons {
           display: flex;
