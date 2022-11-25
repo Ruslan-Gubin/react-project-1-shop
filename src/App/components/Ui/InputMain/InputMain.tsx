@@ -1,5 +1,5 @@
 import React from "react";
-import { close, search } from "data";
+import { icons } from "data";
 import { InputMainType } from "models";
 import styles from "./InputMain.module.scss";
 
@@ -41,7 +41,7 @@ const InputMain: React.FC<InputMainType> = React.memo(
       <img
       onClick={() => handlerSearchClick}
       className={styles.icons}
-      src={search}
+      src={icons.search}
       alt="search"
       />
     }
@@ -63,7 +63,7 @@ const InputMain: React.FC<InputMainType> = React.memo(
           <img
           className={styles.close}
           onClick={() => resetValue()}
-          src={close}
+          src={icons.close}
           alt="close"
           />
         }

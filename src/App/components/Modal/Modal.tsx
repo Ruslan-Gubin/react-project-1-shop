@@ -4,7 +4,7 @@ import styles from './Modal.module.scss';
 
 interface IModal {
     active: boolean | string
-    setActive: Function
+    setActive: (value: boolean) => void
     children: ReactElement
 }
 

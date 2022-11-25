@@ -17,8 +17,10 @@ import like from "../assets/img/icons/like_125468.png";
 import dislike from "../assets/img/icons/dislike_325792384.png";
 import okGreen from "../assets/img/icons/ok-green-23523672.png";
 import cancelStop from "../assets/img/icons/cancel_stop_exit_1583.png";
+import chatMessage from "../assets/img/icons/chat_message_conversation_bubble_icon_181523.png";
 
-export {
+export const icons = {
+  chatMessage,
   cancelStop,
   okGreen,
   dislike,

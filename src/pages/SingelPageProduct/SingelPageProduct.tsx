@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { ProductSinglPage } from "components";
 import { ButtonGoBack } from "ui";
-import { arrowLeft, productsCategoriLink } from "data";
+import { icons, productsCategoriLink } from "data";
 import { IproductsCategoriLink } from "data/productsCategoriLink";
 import { productsApi } from "store/rtkQuery";
 import styles from "./SingelPageProduct.module.scss";
@@ -24,7 +24,7 @@ const SingelPageProduct: React.FC = () => {
       {isError && <div>isError...</div>}
       <div className={styles.menuLinks}>
         <ButtonGoBack className={styles.goBack} text={" "}>
-          <img src={arrowLeft} alt="arrow left" />
+          <img src={icons.arrowLeft} alt="arrow left" />
         </ButtonGoBack>
         <Link to={"/products"}>
           <span>Каталог / </span>

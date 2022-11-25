@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authApi } from "store/rtkQuery";
 import { authAction, selectAuth } from "store/slice";
 import { ButtonMain } from "ui";
-import { userRegistedPng } from "data/icons";
+import { icons } from "data";
 import { IUser } from "models";
 import { Modal, ModalRemoveItem } from "components";
 import styles from "./registrationPage.module.scss";
@@ -72,7 +72,7 @@ const registrationPage = () => {
     }
     
     if (auth.image && (!emailValue || auth.email)) {
-      const id: string = auth._id;
+      const id: string =  auth._id;
       const prevImage = auth.image.url;
       setDisables(true);
       await updateAuth({ ...values, prevImage, image, id })
@@ -134,7 +134,7 @@ const registrationPage = () => {
         <img
           onClick={() => inputFileRef.current?.click()}
           className={styles.img}
-          src={userRegistedPng}
+          src={icons.userRegistedPng}
           alt="userRegistedPng"
         />
       )}

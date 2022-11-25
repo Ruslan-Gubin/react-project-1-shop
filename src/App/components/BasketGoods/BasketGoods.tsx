@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { orderAction, selectOrder } from "store/slice";
 import { useMatchMedia } from "hooks";
 import { formatterRub } from "utils";
-import { removeGoodsPng } from "data";
+import { icons } from "data";
 
 import styles from "./BasketGoods.module.scss";
 
@@ -50,7 +50,7 @@ const BasketGoods: React.FC = React.memo(() => {
                   <img
                     onClick={() => removeGoodsOrder(String(product._id))}
                     className={styles.mobileRemove}
-                    src={removeGoodsPng}
+                    src={icons.removeGoodsPng}
                     alt="delete"
                   />
                 </>
@@ -82,7 +82,7 @@ const BasketGoods: React.FC = React.memo(() => {
               <img
                 onClick={() => removeGoodsOrder(String(product._id))}
                 className={styles.delete}
-                src={removeGoodsPng}
+                src={icons.removeGoodsPng}
                 alt="delete"
               />
             </div>

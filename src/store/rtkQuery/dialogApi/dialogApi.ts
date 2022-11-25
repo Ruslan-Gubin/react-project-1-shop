@@ -5,8 +5,8 @@ import type {  IDialog, IUser } from "models";
 const dialogApi = createApi({
   reducerPath: "dialogApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:4444/api",
-    // baseUrl: "https://pr1-backend.herokuapp.com/api",
+    // baseUrl: "http://localhost:4444/api",
+    baseUrl: "https://pr1-backend.herokuapp.com/api",
     prepareHeaders: (headers) => {
       const token = window.localStorage.getItem("token");
       if (token) headers.set("authorization", token);
@@ -51,6 +51,16 @@ const dialogApi = createApi({
         }),
         invalidatesTags: [ { type: "Dialog", id: "LIST" }, ], 
       }),
+
+      deleteDialog: build.mutation<{success: true}, any>({
+        query: (body) => ({
+          url: `dialog-delete`,
+          method: "DELETE",
+          body,
+        }),
+        invalidatesTags: [ { type: "Dialog", id: "LIST" } ],
+      }),
+      
       
       
       // getUserPost: build.query<IPost[], IinitialStatePosts>({
@@ -137,17 +147,6 @@ const dialogApi = createApi({
     
 
 
-    // deletePost: build.mutation<IPost, string>({
-    //   query: (id) => ({
-    //     url: `post/${id}`,
-    //     method: "DELETE",
-    //   }),
-    //   invalidatesTags: [
-    //     { type: "Posts", id: "LIST" },
-    //     { type: "Tags" },
-    //     { type: "Length" },
-    //   ],
-    // }),
 
   }),
 });

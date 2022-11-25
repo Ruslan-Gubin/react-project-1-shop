@@ -11,7 +11,7 @@
 .root {
   padding: var.$spasing-small;
   border-radius: var.$border-radius-average;
-  background-color: var.$color-white;
+  background-color: var.$color-card-bg;
   box-shadow: var.$box-shadow;
   margin: var.$spasing-small 0;
   position: relative;
@@ -40,23 +40,33 @@
       align-items: center;
       justify-content: space-between;
       margin-top: var.$spasing-small;
-      cursor: pointer;
-
+      
       .userInfo {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         .userImg {
           height: 35px;
           width: 35px;
           border-radius: var.$border-radius-circle;
           margin-right: var.$spasing-small;
+          cursor: pointer;
         }
-    .userName {
-      font-size: var.$font-size-button;
-      color: var.$color-black-hover;
-    }
-  }
+        .userName {
+          font-size: var.$font-size-button;
+          color: var.$color-black-hover;
+        }
+      }
+
+      .message {
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+        @media (min-width: 1200px) {
+          width: 35px;
+        height: 35px;
+        }
+      }
 }
 
     

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { checkIcon } from 'data';
 import { selectOrder } from 'store/slice';
 import { formatterRub, totalSum, totalSumOldPrice } from 'utils';
 import { ButtonMain } from 'ui';
+import { icons } from 'data';
 import styles from './BasketInfo.module.scss';
 
 const BasketInfo = React.memo(() => {
@@ -29,7 +29,7 @@ const BasketInfo = React.memo(() => {
         </ButtonMain>
       </div>
       <div className={styles.rools}>
-        <img src={checkIcon} alt="" />
+        <img src={icons.checkIcon} alt="" />
         <p>Согласен с условиями Правил пользования торговой площадкой и правилами возврата</p>
       </div>
     </div>

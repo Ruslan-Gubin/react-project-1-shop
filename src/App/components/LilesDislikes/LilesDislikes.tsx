@@ -1,7 +1,7 @@
 import { useAddLikes, useShowLikes } from "hooks";
 import React from "react";
 import { ShowUsersLikes } from "components";
-import { dislike, like } from "data";
+import { icons } from "data";
 
 import styles from "./LilesDislikes.module.scss";
 import {  IUser } from "models";
@@ -24,7 +24,7 @@ const FLilesDislikes:React.FC<ILilesDislikes> = ({ target, auth, addLikeApi, add
       <img /** Добавляем лайки */
         onClick={() => handlerAddLike(target)}
         className={styles.like}
-        src={like}
+        src={icons.like}
         alt="like"
       />
       <div /** отображение лайков */
@@ -36,7 +36,7 @@ const FLilesDislikes:React.FC<ILilesDislikes> = ({ target, auth, addLikeApi, add
       <img /** Добавляем дизлайк */
         onClick={() => handlerAddDislike(target)}
         className={styles.dislike}
-        src={dislike}
+        src={icons.dislike}
         alt="dislike"
       />
       <div

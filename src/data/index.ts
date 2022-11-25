@@ -9,25 +9,7 @@ export {
   imagesUrlInstagram,
 } from './imagesUrl';
 
-export {
-  cancelStop,
-  okGreen,
-  deleteIcon,
-  updateIcon,
-  dislike,
-  like,
-  eyeIcon,
-  commentsIcon,
-  userLogin,
-  cartPng,
-  removeGoodsPng,
-  checkIcon,
-  search,
-  close,
-  arrowLeft,
-  userRegistedPng,
-  outIcon,
-} from "./icons";
+export {icons} from './icons';
 
 export {
   categoryPosts,

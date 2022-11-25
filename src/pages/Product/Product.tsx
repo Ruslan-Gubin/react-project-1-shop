@@ -6,7 +6,7 @@ import { useAppDispatch } from "store/store";
 import * as slice from "store/slice";
 import * as component from "components";
 import * as ui from "ui";
-import { cartPng, productSortingArray } from "data";
+import { icons, productSortingArray } from "data";
 import * as utils from "utils";
 import styles from "./Product.module.scss";
 
@@ -54,10 +54,10 @@ const Product = React.memo(() => {
         <component.FormAddProduct />
         <div className={styles.cart}>
           <>
-            <ui.CustomLink to="/cart">
+            <ui.CustomLink to="/cart"> 
               <ui.ButtonMain bgColor="green">
-                <img className={styles.cartPng} src={cartPng} alt="cartPng" />
-                {order.length > 0 && <span>{order.length}</span>}
+                <img className={styles.cartPng} src={icons.cartPng} alt="cartPng" />
+                {order.length > 0 && <span>{order.length}</span>} 
                 <div>{utils.formatterRub.format(utils.totalSum(order))}</div>
               </ui.ButtonMain>
             </ui.CustomLink>

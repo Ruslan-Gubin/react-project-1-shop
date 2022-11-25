@@ -5,8 +5,10 @@ interface IinitialStatePosts {
   perpage: number
   tags: string
   search: string
+  searchUSer: string
   category: string
   postUpdate: IPost 
+  searchValueActive: string
 }
 
 export type {IinitialStatePosts}

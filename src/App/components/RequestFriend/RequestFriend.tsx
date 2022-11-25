@@ -3,12 +3,12 @@ import { authApi } from "store/rtkQuery";
 import {  selectAuth } from "store/slice";
 import {  useSelector } from "react-redux";
 import { IUser } from "models";
-import { cancelStop, okGreen } from "data";
+import { icons } from "data";
 
 import styles from "./RequestFriend.module.scss";
 import { Link } from "react-router-dom";
 import { useToggle } from "hooks";
-import { hideTagsIcon, showMoreTagsIcon } from "data/icons";
+
 
 interface IRequestFriend {
   user: IUser
@@ -51,8 +51,8 @@ const FRequestFriend: React.FC<IRequestFriend> = ({ user }) => {
     {!isLoading && usersRequestFriend &&
     <div className={styles.root}>
       {limit > 0 ?
-       <img className={styles.showIcon} onClick={toggle} src={showMoreTagsIcon} alt="Показать больше" /> 
-      :<img className={styles.showIcon} onClick={toggle} src={hideTagsIcon} alt="Показать больше" />
+       <img className={styles.showIcon} onClick={toggle} src={icons.showMoreTagsIcon} alt="Показать больше" /> 
+      :<img className={styles.showIcon} onClick={toggle} src={icons.hideTagsIcon} alt="Показать больше" />
       }
         <ul className={styles.container}>
           <h2 className={styles.title}>Запрос в друзья</h2>
@@ -65,9 +65,9 @@ const FRequestFriend: React.FC<IRequestFriend> = ({ user }) => {
               <p className={styles.userName}>{item.fullName}</p>
               </div>
             <div className={styles.buttons}>
-              <img onClick={() => handlerAddFriend(item._id ? item._id : '')} className={styles.ok} src={okGreen} alt="Подтвердить" />
+              <img onClick={() => handlerAddFriend(item._id ? item._id : '')} className={styles.ok} src={icons.okGreen} alt="Подтвердить" />
              
-              <img onClick={() => handlerRemoveUserFriendRequest(item._id ? item._id : '')} className={styles.cancel} src={cancelStop} alt="Отмена" />
+              <img onClick={() => handlerRemoveUserFriendRequest(item._id ? item._id : '')} className={styles.cancel} src={icons.cancelStop} alt="Отмена" />
               
             </div>
               

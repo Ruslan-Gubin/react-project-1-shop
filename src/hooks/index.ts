@@ -1,6 +1,7 @@
 export {useWhyDidYouUpdate} from './useWhyDidYouUpdate';
 export {useLocationParams} from './useLocationParams';
 export {useLocaleStorage} from './useLocaleStorage';
+export {useCreateDialog} from './useCreateDialog';
 export {useCoordinates} from './useCoordinates';
 export {useMatchMedia} from './use-match-media';
 export {useShowLikes} from './useShowLikes';

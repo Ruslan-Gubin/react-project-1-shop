@@ -1,11 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { authApi, dialogApi } from "store/rtkQuery";
+import { authApi } from "store/rtkQuery";
 import { selectAuth } from "store/slice";
 import { ButtonMain } from "ui";
 import { IUser } from "models";
 import styles from "./CardUser.module.scss";
+import { useCreateDialog } from "hooks";
 
 interface ICardUserInfo {
   user: IUser;
@@ -13,37 +14,12 @@ interface ICardUserInfo {
 }
 
 const CardUser: React.FC<ICardUserInfo> = ({ setModalActive, user }) => {
-  const { auth, requestFriends } = useSelector(selectAuth);
-  const {data: authData,isLoading: isLoadAuth} = authApi.useGetUserSinglPageQuery(auth._id,{
-    pollingInterval: 10000
-  })
+  const { auth, requestFriends } = useSelector(selectAuth); 
   const [setRequestFriend, {}] = authApi.useGetFriendRequestMutation();
   const [setAddFriend, {}] = authApi.useSetAddFriendMutation();
-  const [createDialog, {}] = dialogApi.useCreateDialogMutation();
-  const [addDialog, {}] = authApi.useSetAddDialogMutation();
+  const [useCreateDialogFn] = useCreateDialog()
   const navigate = useNavigate();
 
-
-  const handlerCreateDialog = async (user: IUser) => {
-    if (!isLoadAuth && authData) {
-      const findDialogId = authData.dialogs.find(item => user.dialogs.includes(item))
-      if (findDialogId) {
-        navigate(`/dialog/${findDialogId}`)
-      } else {
-        await createDialog({ userOne: authData, userTwo: user })
-        .unwrap()
-        .then(async (data) => {
-          try {
-            await addDialog({userOneId: authData._id, userTwoId: user._id, dialogId: data._id,}),
-            navigate(`/dialog/${data._id}`);
-          } catch (error) {
-            return console.log(error);
-          }
-        })
-        .catch((error) => console.log(error));
-      }
-    }
-  };
 
   return (
     <>
@@ -79,7 +55,7 @@ const CardUser: React.FC<ICardUserInfo> = ({ setModalActive, user }) => {
               ) : (
                 <>
                   <div className={styles.button}>
-                    <ButtonMain onClick={() => handlerCreateDialog(user)}>
+                    <ButtonMain onClick={() => useCreateDialogFn(user)}>
                       Написать сообщение
                     </ButtonMain>
                   </div>

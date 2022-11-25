@@ -1,7 +1,7 @@
 import React from "react";
 import { commentApi } from "store/rtkQuery";
 import { IComments, IUser } from "models";
-import { deleteIcon, updateIcon } from "data";
+import { icons } from "data";
 import styles from "./CommentCard.module.scss";
 import { LilesDislikes } from "../LilesDislikes";
 
@@ -56,7 +56,7 @@ const FCommentCard: React.FC<ICommentCard> = ({ arrComments, updateComment,setRe
                         <div className={styles.updateBtn}>
                           <img
                             onClick={() => updateComment(item)}
-                            src={updateIcon}
+                            src={icons.updateIcon}
                             alt="removeGoodsPng"
                           />
                         </div>
@@ -64,7 +64,7 @@ const FCommentCard: React.FC<ICommentCard> = ({ arrComments, updateComment,setRe
                         <div className={styles.removeBtn}>
                           <img
                             onClick={() => setRemoveCommentModal(item._id)}
-                            src={deleteIcon}
+                            src={icons.deleteIcon}
                             alt="removeGoodsPng"
                           />
                         </div>

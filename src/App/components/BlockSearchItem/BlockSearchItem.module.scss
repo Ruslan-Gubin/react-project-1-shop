@@ -1,0 +1,26 @@
+@use 'scss/common/var';
+
+
+  
+  .root {
+    padding: var.$spasing-small;
+    border-radius: var.$border-radius-average;
+    background-color: var.$color-card-bg;
+    box-shadow: var.$box-shadow;
+    opacity: 0;
+    transition: 0.8s;
+    
+    
+    .container {
+      overflow: auto;
+      
+    }
+    
+    
+  }
+  
+  .active {
+    opacity: 1;
+    pointer-events: all;
+  }
+

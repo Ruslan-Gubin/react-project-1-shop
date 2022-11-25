@@ -1,10 +1,11 @@
 import React from "react";
 import { commentApi, postApi } from "store/rtkQuery";
-import { showMoreTagsIcon } from "data/icons";
+
 import { useToggle } from "hooks";
 
 import styles from "./CardPostInfo.module.scss";
 import { Link } from "react-router-dom";
+import { icons } from "data";
 
 interface ITegsCardItem {
   title: string;
@@ -30,9 +31,9 @@ const CardPostInfo: React.FC<ITegsCardItem> = ({
     <div className={styles.root}>
       <div className={styles.title}>{title}</div>
       {title === 'Теги' ?
-      <img className={styles.moreTags}  onClick={() => toggleTags()} src={showMoreTagsIcon} alt="show More Tags Icon" />
+      <img className={styles.moreTags}  onClick={() => toggleTags()} src={icons.showMoreTagsIcon} alt="show More Tags Icon" />
       :  
-      <img className={styles.moreTags}  onClick={() => toggleComments()} src={showMoreTagsIcon} alt="show More Tags Icon" />
+      <img className={styles.moreTags}  onClick={() => toggleComments()} src={icons.showMoreTagsIcon} alt="show More Tags Icon" />
     }
    
 

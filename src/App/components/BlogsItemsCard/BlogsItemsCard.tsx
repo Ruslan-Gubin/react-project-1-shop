@@ -6,7 +6,8 @@ import { postApi } from "store/rtkQuery";
 import { postAction, selectAuth } from "store/slice";
 import { IPost } from "models";
 import { Modal, ModalRemoveItem, LilesDislikes } from "components";
-import * as icon from "data/icons";
+import { icons } from "data";
+
 import styles from "./BlogsItemsCard.module.scss";
 
 interface IBlogsItemsCard {
@@ -75,11 +76,11 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({id, item, singelPage = false
             </small>
           </div>
           <div className={styles.views}>
-            <img src={icon.eyeIcon} alt="views Count" />
+            <img src={icons.eyeIcon} alt="views Count" />
             <span>{item.viewsCount}</span>
           </div>
           <div className={styles.commentsCount}>
-            <img src={icon.commentsIcon} alt="comments Count" />
+            <img src={icons.commentsIcon} alt="comments Count" />
             <span>{item.comments.length}</span>
           </div>
           </div>
@@ -94,14 +95,14 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({id, item, singelPage = false
                 <img
                   onClick={()=> dispatch(postAction.setUpdatePost(item))}
                   className={styles.update}
-                  src={icon.updateIcon}
+                  src={icons.updateIcon}
                   alt="updateIcon"
                   />
               </Link>
               <img
               className={styles.delete}
               onClick={() => setModalActive(true)}
-              src={icon.deleteIcon}
+              src={icons.deleteIcon}
               alt="deleteIcon"
               />
             </div>

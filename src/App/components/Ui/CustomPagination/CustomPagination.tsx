@@ -33,14 +33,18 @@ const CustomPagination: React.FC<IPagination> = React.memo(
     return (
       <div className={styles.pagination}>
         {currentPage > 1 ? (
+          <div className={styles.btnPrev}>
           <ButtonMain
             bgColor="info"
             onClick={() => prevPage(pageNumbers.length)}
-          >
+            >
             Prev
           </ButtonMain>
+            </div>
         ) : (
+          <div className={styles.btnPrev}>
           <ButtonMain bgColor="nobg">Prev</ButtonMain>
+            </div>
         )}
         {pageNumbers.map((page, index) => (
           <div
@@ -54,11 +58,15 @@ const CustomPagination: React.FC<IPagination> = React.memo(
           </div>
         ))}
         {currentPage! < pageNumbers.length ? (
+          <div className={styles.btnNext}>
           <ButtonMain bgColor="info" onClick={() => nextPage()}>
             Next
           </ButtonMain>
+          </div>
         ) : (
+          <div className={styles.btnNext}>
           <ButtonMain bgColor="nobg">Next</ButtonMain>
+            </div>
         )}
       </div>
     );

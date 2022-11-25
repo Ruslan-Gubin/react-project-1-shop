@@ -1,0 +1,25 @@
+@use 'scss/common/var';
+
+
+  .item {
+    cursor: pointer;
+    margin-bottom: var.$border-radius-small;
+    display: flex;
+    align-items: center;
+      
+      .image {
+        width: 35px;
+        height: 35px;
+        border-radius: var.$border-radius-circle;
+        margin-right: var.$spasing-small;
+    }
+    .fullname {
+      color: var.$color-black-hover;
+      font-size: var.$font-size-card-text;
+      margin-right: var.$spasing-small;
+    }
+  }
+
+
+
+  

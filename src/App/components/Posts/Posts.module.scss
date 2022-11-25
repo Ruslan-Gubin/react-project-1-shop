@@ -9,8 +9,37 @@
 .root {
   .sort {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+
+    .btnSearch {
+      display: flex;
+      width: 200px;
+      margin: 10px;
+      .btnsearchUser{
+        margin-right: 10px;
+      }
+    }
+
+    .searchInput{ 
+      position: relative;
+      top: -10px;
+      left: 0;
+
+      .blockSearchItem {
+        position: absolute;
+        top: 50px;
+        left: -29px;
+        width: 236px;
+      }
+
+      
+
+    }
+
+
+
+
   }
   
   .container {
@@ -23,11 +52,11 @@
         top: 20px;
 
         
-        .userInfo {
-      }
-      .userRequestFriend{
+      //   .userInfo {
+      // }
+      // .userRequestFriend{
 
-      }
+      // }
     }
       
     }

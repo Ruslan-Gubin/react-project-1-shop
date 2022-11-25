@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { outIcon, userLogin, userRegistedPng } from "data/icons";
 import { authApi } from "store/rtkQuery";
 import { authAction, selectAuth } from "store/slice";
 import { Modal, ModalRemoveItem} from "components";
+import { icons } from "data";
 import { CustomLink } from "ui";
 
 import styles from "./Header.modules.scss";
@@ -52,19 +52,19 @@ const Header = React.memo(() => {
 
           {!status ? (
             <Link to="/login">
-              <img src={userLogin} alt="userRegistedPng" />
+              <img src={icons.userLogin} alt="userRegistedPng" />
             </Link>
           ) : (
             <img
               style={{ cursor: "pointer" }}
               onClick={() => setModalAsk(true)}
-              src={outIcon}
+              src={icons.outIcon}
               alt="userRegistedPng"
             />
           )}
           {!status && (
             <Link to="/register">
-              <img src={userRegistedPng} alt="userRegistedPng" />
+              <img src={icons.userRegistedPng} alt="userRegistedPng" />
             </Link>
           )}
           <Modal active={modalAsk} setActive={setModalAsk}>
