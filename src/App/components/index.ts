@@ -1,5 +1,7 @@
 export {CardProductCatalog} from './CardProductCatalog';
+export {MenuMobileFriends} from './MenuMobileFriends';
 export {ProductSinglPage} from './ProductSinglPage';
+export {MenuMobileLink} from './MenuMobileLink';
 export {FooterContainer} from './FooterContainer';
 export {ModalRemoveItem} from './ModalRemoveItem';
 export {BlockSearchItem} from './BlockSearchItem';
@@ -10,6 +12,7 @@ export {LilesDislikes} from './LilesDislikes';
 export {ScrollingList} from './ScrollingList';
 export {NotFoundBlock} from './NotFoundBlock';
 export {RequestFriend} from './RequestFriend';
+export {MobileHeader} from './MobileHeader';
 export {ImagesSlider} from './ImagesSlider';
 export {CustomSelect} from './CustomSelect';
 export {CardPostInfo} from './CardPostInfo';

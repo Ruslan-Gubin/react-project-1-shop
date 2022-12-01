@@ -18,7 +18,7 @@ const Basket = React.memo(() => {
             <ButtonGoBack className={styles.goBack} text={" "}>
               <img src={icons.arrowLeft} alt="arrow left" />
             </ButtonGoBack>
-            <ButtonMain onClick={() => dispatch(orderAction.clearOrder())} bgColor="black">
+            <ButtonMain width={200} onClick={() => dispatch(orderAction.clearOrder())} bgColor="black">
               Очистить корзину
             </ButtonMain>
           </div>

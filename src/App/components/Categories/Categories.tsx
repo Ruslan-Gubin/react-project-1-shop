@@ -5,7 +5,7 @@ import styles from "./Categories.module.scss";
 interface ICategories {
   data: IcategotyPosts[];
   menuValue: string;
-  handlerClick: (item: string) => void;
+  handlerClick: (value: {label: string, value: string}) => void;
   horizontally?: boolean;
 }
 
@@ -18,7 +18,7 @@ const Categories: React.FC<ICategories> = React.memo(
       <div style={horizont} className={styles.links}>
         {data.map((item) => (
           <div
-            onClick={() => handlerClick(item.value)}
+            onClick={() => handlerClick(item)}
             key={item.value}
             className={menuValue === item.value ? styles.active : styles.item}
           >

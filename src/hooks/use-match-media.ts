@@ -1,12 +1,12 @@
-import React, { useLayoutEffect, useState } from "react";
+import  { useLayoutEffect, useState } from "react";
 
 const queries:string[] = [
-  '(max-width: 750px)',
-  '(min-width: 750px) and (max-width: 1070px)',
+  '(max-width: 576px)',
+  '(min-width: 576px) and (max-width: 1070px)',
   '(min-width: 1070px)',
 ]
 
-export const useMatchMedia = () => {
+export const useMatchMedia = (): {isMobile?: boolean, isTablet?: boolean, isDesktop?: boolean} => {
   if (typeof window === 'undefined') return {}
 
   const mediaQueryLists = queries.map(query => matchMedia(query))

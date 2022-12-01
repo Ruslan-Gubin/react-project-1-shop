@@ -1,0 +1,1 @@
+export {MenuMobileFriends} from './MenuMobileFriends';

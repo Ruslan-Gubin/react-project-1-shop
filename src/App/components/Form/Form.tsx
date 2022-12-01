@@ -14,6 +14,7 @@ interface FormType {
 
 const Form: JSXElementConstructor<FormType> = React.memo(
   ({ watch = false, children, handlerSubmit, closeForm, titleText, disabled }) => {
+    
     const handlerCloseForm = (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
       if (closeForm) closeForm(e);
@@ -50,7 +51,10 @@ const Form: JSXElementConstructor<FormType> = React.memo(
                 )}
               </div>
               <div className={styles.ready}>
-                <ButtonMain disabled={disabled}>Подтвердить</ButtonMain>
+                {!disabled ?
+                <ButtonMain type="submit" disabled={disabled}>Подтвердить</ButtonMain>
+                :<ButtonMain bgColor="black"  disabled={disabled}>Ожидайте</ButtonMain>
+                }
               </div>
             </div>
           </div>

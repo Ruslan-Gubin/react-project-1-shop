@@ -6,6 +6,10 @@
     margin-bottom: var.$border-radius-small;
     display: flex;
     align-items: center;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.124);
+      border-radius: var.$spasing-medium;
+    }
       
       .image {
         width: 35px;

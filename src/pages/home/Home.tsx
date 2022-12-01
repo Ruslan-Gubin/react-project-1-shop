@@ -5,9 +5,15 @@ import styles from "./Home.module.scss";
 
 const FHome: React.FC = React.memo(() => {
 
+  const history = window.history
+
+  const handlerCklick = () => {
+    history.back()
+  }
+
   return (
     <div className={styles.root}>
-    
+    <button onClick={() => handlerCklick()}>go back</button>
 
      
 

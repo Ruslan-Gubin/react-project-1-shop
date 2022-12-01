@@ -24,7 +24,7 @@ const BasketInfo = React.memo(() => {
         <span> - {formatterRub.format(totalSumOldPrice(order) - totalSum(order))}</span>
       </div>
       <div className={styles.button}>
-        <ButtonMain bgColor='info'>
+        <ButtonMain width={200} bgColor='info'>
           <p>Заказать</p>
         </ButtonMain>
       </div>

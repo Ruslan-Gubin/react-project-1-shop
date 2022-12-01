@@ -1,28 +1,27 @@
-interface IRating {
-  rate: number;
-  count: number;
+interface IImage {
+  public_id: string
+  url: string
 }
 
-export interface IProduct {
+
+interface IProduct {
   updatedAt?:string
+  comments: string[]
   discount: number
-  selected: boolean
   category?: string;
   _id?: string;
   title?: string;
   price: number | string ;
   oldPrice: number | string;
-  images: string[] | string;
-  reting?: IRating;
+  images: IImage[];
   department?: string;
-  counter: number;
   quantity: number | string;
   description?: string
-  types?: {
-    color?: string[]
-    size?: number[]
-  }
+  viewsCount?: number
+  counter: number
 }
+
+export type {IProduct}
 
 
 

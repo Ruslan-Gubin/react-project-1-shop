@@ -5,8 +5,8 @@ import type { IPost } from "models";
 const postApi = createApi({
   reducerPath: "postApi",
   baseQuery: fetchBaseQuery({
-    // baseUrl: "http://localhost:4444/api",
-    baseUrl: "https://pr1-backend.herokuapp.com/api",
+    baseUrl: "http://localhost:4444/api",
+    // baseUrl: "https://pr1-backend.herokuapp.com/api",
     prepareHeaders: (headers) => {
       const token = window.localStorage.getItem("token");
       if (token) headers.set("authorization", token);
@@ -36,6 +36,7 @@ const postApi = createApi({
       query: (options) => ({
         url: "user-posts",
         params: {
+          categor: options.category?.value,
           ...options,
         },
       }),

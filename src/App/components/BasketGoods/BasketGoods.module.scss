@@ -1,4 +1,5 @@
 @use '../../../scss/common/var';
+@use 'scss/common/mixin';
 
 .root {
   display: flex;
@@ -20,9 +21,10 @@
       }
       .img {   
         padding-left: var.$spasing-small; 
-        @media (max-width: 750px) {
-          display: none;
-        } 
+
+        @include mixin.respond(mobile) {
+            display: none;
+        }
        img {
           border-radius: var.$border-radius-average;
           overflow: hidden;  

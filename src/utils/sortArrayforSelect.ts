@@ -1,6 +1,3 @@
-import { SingleValue } from "react-select";
-import { Ioptions } from "../App/components/CustomSelect/CustomSelect";
-import { IProductSortingArray } from "../data/productSortingArray";
 import { IPost } from "../models/iPost";
 import { IProduct } from "../models/products";
 
@@ -35,20 +32,6 @@ class SortArray {
 
 const sortArray = new SortArray();
 
-const selectOptionsSort = (
-  select: SingleValue<Ioptions>,
-  array: IProductSortingArray[],
-  data: IProduct[]
-) => {
-  if (select === array[0]) {
-    sortArray.date(data);
-  } else if (select === array[1]) {
-    sortArray.price(data);
-  } else if (select === array[2]) {
-    sortArray.price(data).reverse();
-  } else if (select === array[3]) {
-    sortArray.discount(data);
-  }
-};
 
-export { sortArray, selectOptionsSort };
+
+export { sortArray };

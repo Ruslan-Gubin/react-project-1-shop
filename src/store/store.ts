@@ -12,6 +12,7 @@ const rootReducer = combineReducers({
   todos: reducer.todoReducer,
   filters: reducer.filterReducer,
   auth: reducer.authReducer,
+  addProduct: reducer.addProductReducer,
   [rtkQuery.postApi.reducerPath]: rtkQuery.postApi.reducer,
   [rtkQuery.productsApi.reducerPath]: rtkQuery.productsApi.reducer,
   [rtkQuery.authApi.reducerPath]: rtkQuery.authApi.reducer,
@@ -24,7 +25,6 @@ const config = getPersistConfig({
   version: 1,
   storage,
   blacklist: [
-    "filters.dataDepartments",
     "filters.textMenuFilter",
     "filters.filterPagination",
     "auth.password",

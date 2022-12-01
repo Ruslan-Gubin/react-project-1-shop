@@ -7,17 +7,20 @@ interface IButtonMain {
   bgColor?: string;
   disabled?: boolean
   type?: "button" | "submit" | "reset"
+  width?: number
 }
 
 const ButtonMain: React.FC<IButtonMain> = React.memo(({
+  width,
   children,
   onClick,
   bgColor = "primary",
   disabled,
-  type,
+  type='button',
 }) => {
   return (
     <button
+    style={{width: width}}
     type={type}
     disabled={disabled}
     className={`button-main__${bgColor}`} 

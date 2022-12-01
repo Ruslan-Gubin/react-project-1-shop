@@ -59,7 +59,7 @@ const InputMain: React.FC<InputMainType> = React.memo(
           onChange={(e) => handlerChange(e.target.value)}
         />
         {
-        value.length > 0 &&
+        String(value).length > 0 && Number(value) > 0 &&
           <img
           className={styles.close}
           onClick={() => resetValue()}

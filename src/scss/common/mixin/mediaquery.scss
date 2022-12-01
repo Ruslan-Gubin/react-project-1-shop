@@ -1,0 +1,28 @@
+
+
+
+
+@mixin respond ($breackpoint) {
+
+  @if $breackpoint==mobile {
+    @media  only screen and (max-width: 576px) {
+        @content;
+      }
+    }
+
+  @if $breackpoint==tablet {
+    @media   (min-width: 576px) and (max-width: 900px) {
+        @content;
+      }
+    }
+
+  @if $breackpoint==desktop {
+    @media  only screen and (min-width: 900px) {
+        @content;
+      }
+    }
+
+
+
+
+  }

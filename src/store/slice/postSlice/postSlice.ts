@@ -1,7 +1,6 @@
 import {  createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { categoryPosts } from "data";
 import { IPost } from "models";
-import { TypeRootState } from "../../store";
+import { TypeRootState } from "store/store";
 import { IinitialStatePosts } from "./types";
 
 const initialState: IinitialStatePosts = {
@@ -10,8 +9,8 @@ const initialState: IinitialStatePosts = {
     tags: '',
     search: '',
     searchUSer: '',
-    category: categoryPosts[0].value,
-    postUpdate:  {} as IPost,
+    category: {value: 'new', label: 'Новые'},
+    postUpdate:  {} as IPost ,
     searchValueActive: '',
 } 
 
@@ -21,10 +20,10 @@ const postSlice = createSlice({
   initialState,
   reducers: {
 
-    setCategoryPost(state, action: PayloadAction<{ value: string }>) {
+    setCategoryPost(state, action: PayloadAction<{ value: string, label: string }>) {
       try {
         if (action.payload.value) {
-          state.category = action.payload.value
+          state.category = action.payload
         } 
       } catch (error) {
         throw new Error('Ошибка категории')

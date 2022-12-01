@@ -6,7 +6,7 @@ interface IinitialStatePosts {
   tags: string
   search: string
   searchUSer: string
-  category: string
+  category: {label: string, value: string}
   postUpdate: IPost 
   searchValueActive: string
 }

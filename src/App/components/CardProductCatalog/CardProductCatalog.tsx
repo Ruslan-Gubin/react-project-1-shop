@@ -1,14 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as slice from "store/slice";
 import { Link } from "react-router-dom";
-import { formatterRub, sumDiscount } from "utils";
-import styles from "./CardProductCatalog.module.scss";
-import { ModalRemoveItem } from "components";
-import { IProduct } from "models/products";
-import { ButtonMain } from "ui";
-import { Modal } from "../Modal";
 import { productsApi } from "store/rtkQuery";
+import * as slice from "store/slice";
+import { ModalRemoveItem, Modal } from "components";
+import { ButtonMain } from "ui";
+import { formatterRub, sumDiscount } from "utils";
+import { IProduct } from "models/products";
+import styles from "./CardProductCatalog.module.scss";
+import { icons } from "data";
 
 interface ICardProductCatalogProps {
   product: IProduct;
@@ -60,10 +60,17 @@ const CardProductCatalog: React.FC<ICardProductCatalogProps> = React.memo(
             </div>
             <div className={styles.name}>{product.title}</div>
           </div>
+          <img 
+          onClick={() => dispatch(slice.addProductAction.configModalActive(product))}
+          className={styles.configIcon} 
+          src={icons.configIcon} 
+          alt="Config icons" 
+          />
           <div className={styles.footer}>
             <div className={styles.buttons}>
               {findIdInOrder ? (
                 <ButtonMain
+                width={140} 
                   onClick={() => dispatch(slice.orderAction.removeToOrder({ _id }))}
                   bgColor="secondary"
                 >
@@ -71,6 +78,7 @@ const CardProductCatalog: React.FC<ICardProductCatalogProps> = React.memo(
                 </ButtonMain>
               ) : (
                 <ButtonMain
+                width={140}
                   onClick={() => dispatch(slice.orderAction.addToOrders(product))}
                 >
                   В Корзину
@@ -79,12 +87,14 @@ const CardProductCatalog: React.FC<ICardProductCatalogProps> = React.memo(
               {findIdInOrder && (
                 <>
                   <ButtonMain
+                  width={25}
                     onClick={() => dispatch(slice.orderAction.addCountGoods({ _id }))}
                     bgColor="green"
                   >
                     +
                   </ButtonMain>
                   <ButtonMain
+                  width={25}
                     onClick={() =>
                       dispatch(slice.orderAction.removeCountGoods({ _id }))
                     }
@@ -96,6 +106,7 @@ const CardProductCatalog: React.FC<ICardProductCatalogProps> = React.memo(
               )}
               {!findIdInOrder && (
                 <ButtonMain
+                  width={100}
                   onClick={() => setModalActive(!modalActive)}
                   bgColor="red"
                 >
@@ -105,7 +116,7 @@ const CardProductCatalog: React.FC<ICardProductCatalogProps> = React.memo(
               <Modal active={modalActive} setActive={setModalActive}>
                 <ModalRemoveItem
                   text="Вы действительно хотите удалить этот товар?"
-                  confirm={() => removeProduct(_id)}
+                  confirm={() => removeProduct(product)}
                   cancel={() => setModalActive(!modalActive)}
                 />
               </Modal>

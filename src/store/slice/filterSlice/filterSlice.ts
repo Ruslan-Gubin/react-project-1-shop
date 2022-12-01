@@ -1,76 +1,41 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { SingleValue } from "react-select";
-import { Ioptions } from "../../../App/components/CustomSelect/CustomSelect";
-import { productSortingArray } from "../../../data";
-import { IfilterSlice } from "../../../models";
-import { IProduct } from "../../../models/products";
-import { selectOptionsSort } from "../../../utils";
-import { TypeRootState } from "../../store";
+import { productSortingArray } from "data";
+import { IfilterSlice } from "models";
+import { TypeRootState } from "store/store";
+import { Ioptions } from "App/components/CustomSelect/CustomSelect";
+
 
 const filterSlice = createSlice({
   name: "filters",
-  initialState: <IfilterSlice>{
-    menuValue: "Все",
-    paginationPage: 1,
+  initialState: <IfilterSlice> {
+    department: '',
+    menuValue: {label: 'Все', value: 'Все'},
     filterSelect: productSortingArray[0],
-    dataDepartments: [],
     textSearch: "",
-    textMenuFilter: [],
     page: 1,
     perPage: 12,
-    filterPagination: [],
   },
   reducers: {
-    setCategoryValue(state, action: PayloadAction<{ item: string }>) {
-      state.menuValue = action.payload.item;
+    
+    setCategoryValue(state, action: PayloadAction<{ label: string, value: string }>) {
+      state.menuValue = action.payload;
       state.page = 1;
     },
 
     resetMenuId(state) {
-      state.menuValue = "Все";
+      state.menuValue = {label: 'Все', value: 'Все'};
       state.textSearch = "";
       state.page = 1;
     },
 
-    setDataDepartment(
-      state,
-      action: PayloadAction<{ id: string; data: IProduct[] }>
-    ) {
-      state.dataDepartments = action.payload.data.filter(
-        (item: IProduct) => item.department == action.payload.id
-      );
-    },
-
-    setTextSearch(state, action: PayloadAction<{ value: string }>) {
-      state.textSearch = action.payload.value;
+    setTextSearch(state, action: PayloadAction<{ value: string | number}>) {
+      state.textSearch = String(action.payload.value);
       state.page = 1;
     },
 
-    setSelectId(
-      state,
-      action: PayloadAction<{ value: SingleValue<Ioptions> }>
-    ) {
+    setSelectId(  state,  action: PayloadAction<{ value: SingleValue<Ioptions> }> ) {
       state.filterSelect = action.payload.value;
-
-      selectOptionsSort(
-        state.filterSelect,
-        productSortingArray,
-        state.dataDepartments
-      );
-    },
-
-    setSearchTextForMenu(state) {
-      let res: IProduct[] = state.dataDepartments.filter((item) =>
-        item.title?.toLowerCase().includes(state.textSearch.toLowerCase())
-      );
-      state.textMenuFilter = res;
-      if (state.menuValue === "Все") {
-        state.textMenuFilter = res;
-      } else if (state.menuValue !== "Все") {
-        state.textMenuFilter = res.filter(
-          (item) => item.category === state.menuValue
-        );
-      }
     },
 
     setPrevPageProduct(state) {
@@ -85,19 +50,16 @@ const filterSlice = createSlice({
       state.page = action.payload.pageNumber;
     },
 
-    setFilterPagination(state) {
-      const lastPostsIndex = state.page * state.perPage;
-      const firstPostsIndex = lastPostsIndex - state.perPage;
-      let currentPosts = state.textMenuFilter.slice(
-        firstPostsIndex,
-        lastPostsIndex
-      );
-      state.filterPagination = currentPosts;
+    setDepartment(state, action: PayloadAction<{ value: string }>) {
+      state.department = action.payload.value;
+      filterSlice.caseReducers.resetMenuId(state)
     },
+
+    
   },
 });
 
-export const selectFilters = (state: TypeRootState) => state.filters;
+export const selectFilters = (state: TypeRootState) => state.filters; 
 
 export const filterAction = filterSlice.actions;
 

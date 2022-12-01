@@ -1,0 +1,36 @@
+@use 'scss/common/var';
+
+.mobileRoot {
+  height: 65px;
+
+  .mobileContainer {
+      height: 100%;
+      margin: 0 auto;
+      padding: 20px;
+
+      .menuIcons {
+          height: 50px;
+          width: 50px;
+      }
+      .userIcons {
+          margin-left: var.$spasing-medium;
+          height: 50px;
+          width: 50px;
+          border-radius: var.$border-radius-circle;
+      }
+
+      .menuActive {
+          background: linear-gradient(to top , var.$color-black-hover, var.$color-blue-black);
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          padding: 10px;
+          z-index: 3;
+          overflow: scroll;
+      }
+
+
+  }
+}

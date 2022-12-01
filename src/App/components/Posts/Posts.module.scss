@@ -1,4 +1,9 @@
 @use "scss/common/var";
+@use "scss/common/mixin";
+
+@include mixin.respond(mobile) {
+
+}
 
 %tegsAndComments {
   background-color: var.$color-card-bg;
@@ -11,6 +16,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include mixin.respond(mobile) {
+     display: none;
+    }
 
     .btnSearch {
       display: flex;
@@ -44,9 +52,16 @@
   
   .container {
     display: flex;
-    
+    @include mixin.respond(mobile) {
+      display: block;
+     }
     .userContainer {
       width: 40%;
+      @include mixin.respond(mobile) {
+        margin: 0 auto;
+        width: 90%;
+       }
+
       .sticky{
         position: sticky;
         top: 20px;
@@ -55,7 +70,7 @@
       //   .userInfo {
       // }
       // .userRequestFriend{
-
+        
       // }
     }
       
@@ -74,12 +89,16 @@
         position: sticky;
         top: 20px;
         .tegs {
-          
           @extend %tegsAndComments;
+          @include mixin.respond(mobile) {
+            display: none;
+           }
         }
         .comments {
-          
           @extend %tegsAndComments;
+          @include mixin.respond(mobile) {
+            display: none;
+           }
         }
       }
     }

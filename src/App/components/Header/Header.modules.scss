@@ -1,21 +1,32 @@
-@use '../../../scss/common/var';
+@use 'scss/common/var';
+@use 'scss/common/mixin';
 
-.header {
+
+.root {
+    display: flex;
+    margin: 0 auto;
     height: 65px;
     width: 100%;
-    .navbar {
+    @include mixin.respond(mobile) {
+        display: none;
+      }
+    
+
+    .container {
         width: 60%;
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin: 0 auto;
-        @media (max-width: 1400px) {
+        @media (max-width: 1200px) {
             width: 90%;
         }
-    }
-    .logo{
-        background-color: var.$color-white;
+
+        
+
+        .logo {
+            background-color: var.$color-white;
         height: 40px;
         width: 40px;
         display: flex;
@@ -31,29 +42,31 @@
             transition: all .3s ease;
             transform: rotate(-45deg);
         }
-
+        
         &-text{
             font-weight: bold;
             font-size: 20px;
             transition: all .3s ease;
             &:hover {
                 transition: all .3s ease;
-            transform: rotate(45deg);
+                transform: rotate(45deg);
             }
+            
         }
+        
     }
-     .links{
+    
+    .links{
         display: flex;
         align-items: center;
         font-family: var.$ff-BebasNeue-Regular;
         margin-left: 50px;
-
         & img {
             width: 35px;
             height: 35px;
             margin-left: 20px;
         }
-
+        
         .links-default {
             font-size: var.$font-size-header-link;
             margin-left: 20px;
@@ -61,15 +74,17 @@
             &:hover {
                 border-bottom: 0.3px solid var.$color-primary;
             }
-        }
-        .links-active {
-            font-size: var.$font-size-header-link;
-            margin-left: 20px;
-            color: rgb(246, 241, 241);
-            &:hover {
-                border-bottom: 0.3px solid rgb(183, 167, 167);
+              
+            }
+            .links-active {
+                font-size: var.$font-size-header-link;
+                margin-left: 20px;
+                color: rgb(246, 241, 241);
+                &:hover {
+                    border-bottom: 0.3px solid rgb(183, 167, 167);
             }
         }
     }
     
+}
 }

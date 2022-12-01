@@ -1,3 +1,4 @@
+export { selectAddProduct, addProductAction, addProductReducer } from "./addProductSlice";
 export { selectFilters, filterAction, filterReducer } from "./filterSlice";
 export { orderReducer, selectOrder, orderAction } from "./orderSlice";
 export {selectTodos, todoAction, todoReducer} from "./todoSlice";

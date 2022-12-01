@@ -35,6 +35,7 @@ const FPosts: React.FC<IFPosts> = ({
       .catch((error) => console.log(error));
     navigate("/post");
   };
+  
 
   return (
     <div
@@ -48,10 +49,10 @@ const FPosts: React.FC<IFPosts> = ({
       <div className={styles.sort}>
         <components.Categories
           horizontally={true}
-          menuValue={postState.category}
+          menuValue={postState.category.value}
           data={categoryPosts}
           handlerClick={(value) =>
-            dispatch(slice.postAction.setCategoryPost({ value }))
+            dispatch(slice.postAction.setCategoryPost(value))
           }
         />
         <div className={styles.searchInput}>

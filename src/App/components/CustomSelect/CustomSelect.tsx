@@ -3,7 +3,7 @@ import Select, {  SingleValue } from "react-select";
 
 import "./CustomSelect.scss";
 
-export interface Ioptions {
+interface Ioptions {
   label: string;
   value: string;
 }
@@ -32,3 +32,4 @@ const CustomSelect: React.FC<ICustomSelect> = React.memo(
 );
 
 export { CustomSelect };
+export type {Ioptions}

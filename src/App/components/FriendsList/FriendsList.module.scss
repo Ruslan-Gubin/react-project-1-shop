@@ -1,4 +1,5 @@
 @use 'scss/common/var';
+@use 'scss/common/mixin';
 
 %_icons {
   position: absolute;
@@ -15,6 +16,9 @@
   box-shadow: var.$box-shadow;
   margin: var.$spasing-small 0;
   position: relative;
+  @include mixin.respond(mobile) {
+    display: none;
+   }
 
   .showIcon {
     @extend %_icons;

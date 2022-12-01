@@ -18,8 +18,16 @@ import dislike from "../assets/img/icons/dislike_325792384.png";
 import okGreen from "../assets/img/icons/ok-green-23523672.png";
 import cancelStop from "../assets/img/icons/cancel_stop_exit_1583.png";
 import chatMessage from "../assets/img/icons/chat_message_conversation_bubble_icon_181523.png";
+import menu from "../assets/img/icons/menu-2135213.png";
+import findFriends from "../assets/img/icons/find-friends_102325.png";
+import findUser from "../assets/img/icons/finduser_1183.png";
+import configIcon from "../assets/img/icons/configuration_config_system_1540.png";
 
 export const icons = {
+  configIcon,
+  findUser,
+  findFriends,
+  menu,
   chatMessage,
   cancelStop,
   okGreen,

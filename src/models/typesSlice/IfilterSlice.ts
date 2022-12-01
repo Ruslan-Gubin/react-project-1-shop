@@ -1,17 +1,13 @@
 import { SingleValue } from "react-select";
-import { Ioptions } from "../../App/components/CustomSelect/CustomSelect";
-import { IProduct } from "../products";
+import { Ioptions } from "App/components/CustomSelect/CustomSelect";
 
 interface IfilterSlice {
-  menuValue: string;
-  paginationPage: number;
+  department: string;
+  menuValue: {value: string , label: string};
   filterSelect: SingleValue<Ioptions>;
-  dataDepartments: IProduct[];
   textSearch: string;
-  textMenuFilter: IProduct[];
   page: number;
   perPage: number;
-  filterPagination: IProduct[];
 }
 
 export type { IfilterSlice };

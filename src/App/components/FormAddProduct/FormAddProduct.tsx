@@ -1,208 +1,152 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import { selectFilters } from "store/slice";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { productsApi } from "store/rtkQuery";
-import { selectAddProduct, sumDiscount } from "utils";
-import { ButtonMain, InputMain, TextareaMain } from "ui";
-import { CustomSelect } from "components";
-import { Modal } from "components";
-import { useSelector } from "react-redux";
-import { Form } from "components";
+import { addProductAction, selectAddProduct } from "store/slice";
+import { CustomSelect, Modal, Form } from "components";
+import { ButtonMain, InputMain, ProgressBar, TextareaMain } from "ui";
 import styles from "./FormAddProduct.module.scss";
+import { useAddImage } from "hooks";
 
-const FormAddProduct: React.FC = React.memo(() => {
-  const { dataDepartments } = useSelector(selectFilters);
-  const { id } = useParams();
-  const [activeModal, setActiveModal] = useState(false);
-  const [createProducts, {}] = productsApi.useCreateProductsMutation();
-  const [title, setTitle] = useState<string>("");
-  const [description, setDescreption] = useState<string>("");
-  const [quantity, setQuantity] = useState<string>("");
-  const [price, setPrice] = useState<string>("");
-  const [oldPrice, setOldPrice] = useState<string>("");
-  const [category, setCategory] = useState<string>("");
-  const [selectCategory, setSelectCategory] = useState(
-    selectAddProduct(dataDepartments)[0]
-  );
-  const [newCategory, setNewCategory] = useState<string>("");
-  const [img, setImg] = useState("");
-  const [img2, setImg2] = useState("");
-  const [img3, setImg3] = useState("");
-  const [img4, setImg4] = useState("");
-  const [img5, setImg5] = useState("");
+interface IFormAddProduct {
+  categorys: { label: string; value: string }[];
+}
 
-  const removeTextInput = () => {
+const FormAddProduct: React.FC<IFormAddProduct> = 
+  ({ categorys }) => {
+    const addProductState = useSelector(selectAddProduct);
+    const [createProducts, {status}] = productsApi.useCreateProductsMutation();
+    const { fileRef, changeFile } = useAddImage(addProductAction.addImages);
+    const dispatch = useDispatch();
+ 
+    const checkConsole = () => {
+      console.log('на удаление :',addProductState.imageRemovesUpdate);
+      console.log('на добавление :',addProductState.imageAddUpdate);
+      console.log('остаток который не меняеися:',addProductState.remainsImages);
+      console.log('Итого фото :',addProductState.images.length);
+      console.log('----------------------------------------------------------');
+    }
+   
+    const handlerAddProduct = async () => {
+      if (!addProductState.updatedStatus) {
+        await createProducts(addProductState)
+        .unwrap()
+        .then(() =>  dispatch(addProductAction.cancelInputs()))
+        .catch((error) => console.log(error));
+      } else {
+        console.log('update Start!!!')
+      }
+    };
+
     return (
-      setTitle(""),
-      setDescreption(""),
-      setPrice(""),
-      setQuantity(""),
-      setOldPrice(""),
-      setImg(""),
-      setImg2(""),
-      setImg3(""),
-      setImg4(""),
-      setCategory(""),
-      setImg5(""),
-      setNewCategory("")
-    );
-  };
-
-  const habdlerAddProduct: React.FormEventHandler<HTMLFormElement> = async (
-  ) => {
-    await createProducts({
-      category: newCategory ? newCategory : selectCategory.value,
-      images: [img, img2, img3, img4, img5],
-      title,
-      description,
-      price,
-      oldPrice,
-      quantity,
-      department: id,
-      types: {
-        color: [],
-        size: [],
-      },
-      counter: 0,
-      selected: false,
-      discount: sumDiscount(price, oldPrice),
-    }).unwrap();
-    removeTextInput();
-  };
-
-  const closeModal: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    setActiveModal(false);
-    removeTextInput();
-  };
-
-  return (
-    <>
-      <ButtonMain onClick={() => setActiveModal(!activeModal)} bgColor="info">
-        Добавить
-      </ButtonMain>
-      <Modal
-        active={activeModal}
-        category={category}
-        setActive={setActiveModal}
-      >
-        <Form
-          handlerSubmit={(event) => habdlerAddProduct(event)}
-          titleText={"Добавить новый товар:"}
-          closeForm={(e) => closeModal(e)}
+      <>
+        <ButtonMain
+          width={100}
+          onClick={() => dispatch(addProductAction.setToggleModal())}
+          bgColor="info"
         >
-          <div className={styles.category}>
-            <CustomSelect
-              defaultValue={selectCategory}
-              onChange={(value) => setSelectCategory(value)}
-              options={selectAddProduct(dataDepartments)}
-            />
+          Добавить
+        </ButtonMain>
+        <Modal
+          active={addProductState.modal}
+          setActive={() => dispatch(addProductAction.setToggleModal())}
+        >
+          <Form
+            handlerSubmit={handlerAddProduct}
+            titleText={!addProductState.updatedStatus ?"Добавить новый товар:" : 'Редактировать товар:'}
+            closeForm={() => dispatch(addProductAction.setCloseModal())}
+            disabled={status === 'pending'}
+          >
+            <ButtonMain width={300} bgColor="black" onClick={()=> checkConsole()}>Check</ButtonMain>
+            <div className={styles.category}>
+              <CustomSelect
+                defaultValue={categorys[0]}
+                onChange={(value) =>
+                  dispatch(addProductAction.setSelectValue(value))
+                }
+                options={categorys}
+              />
+              <InputMain
+                value={addProductState.newCategory}
+                onChange={(value) =>
+                  dispatch(addProductAction.setnewCategoryValue({ value }))
+                }
+                placeholder="Новая категория"
+              />
+            </div>
+            <div className={styles.imagesContainer}>
+              <ButtonMain
+              type="button"
+                bgColor="green"
+                width={180}
+                onClick={() => fileRef.current?.click()}
+              >
+                Добавить фото
+              </ButtonMain>
+              <input ref={fileRef} type="file" onChange={(e) => changeFile(e)} hidden />
+              <div className={styles.imagesPreview}>
+                { addProductState.images.map((item, index, arr) => (
+                  <img
+                    onClick={() => dispatch(addProductAction.removeImage({item, arr}))}
+                    key={index}
+                    className={styles.image}
+                    src={item.url ? item.url: item}
+                    alt="image"
+                    />
+                ))}
+              </div>
+            </div>
+           <ProgressBar  value={addProductState.images.length} total={5}/>
             <InputMain
-              value={newCategory}
-              onChange={(value) => setNewCategory(value)}
-              placeholder="Новая категория"
+              value={addProductState.title}
+              onChange={(value) =>
+                dispatch(addProductAction.setTitleValue({ value }))
+              }
+              placeholder="Заголовок"
             />
-          </div>
-          <div className="input-sector">
-            <InputMain
+            <TextareaMain
+              rows={3}
+              cols={50}
               required={true}
-              value={img}
-              onChange={(value) => setImg(value)}
-              placeholder="Обязательное URL фото"
+              text={addProductState.description}
+              setText={(value) =>
+                dispatch(addProductAction.setTextValue({ value }))
+              }
+              placeholder="Описание"
             />
-            {img.length > 5 && (
-              <img style={{ height: 60, width: 60 }} src={img} alt="img" />
-            )}
-          </div>
-          <div className="input-sector">
-            {img.length > 5 && (
+            <div className={styles.prices}>
               <InputMain
-                value={img2}
-                onChange={(value) => setImg2(value)}
-                placeholder="Вставить URL фото 2 (необязательно)"
-              >
-                {img2.length > 5 && (
-                  <img style={{ height: 60, width: 60 }} src={img2} alt="img" />
-                )}
-              </InputMain>
-            )}
-          </div>
-          <div className="input-sector">
-            {img2.length > 5 && (
+                required={true}
+                type="number"
+                value={addProductState.price}
+                onChange={(value) =>
+                  dispatch(addProductAction.setPriceValue({ value }))
+                }
+                placeholder="Цена"
+              />
               <InputMain
-                value={img3}
-                onChange={(value) => setImg3(value)}
-                placeholder="Вставить URL фото 3 (необязательно)"
-              >
-                {img3.length > 5 && (
-                  <img style={{ height: 60, width: 60 }} src={img3} alt="img" />
-                )}
-              </InputMain>
-            )}
-          </div>
-          <div className="input-sector">
-            {img3.length > 5 && (
+                type="number"
+                value={addProductState.oldPrice}
+                onChange={(value) =>
+                  dispatch(addProductAction.setOldPriceValue({ value }))
+                }
+                placeholder="Старая цена"
+              />
               <InputMain
-                value={img4}
-                onChange={(value) => setImg4(value)}
-                placeholder="Вставить URL фото 4 (необязательно)"
-              >
-                {img4.length > 5 && (
-                  <img style={{ height: 60, width: 60 }} src={img4} alt="img" />
-                )}
-              </InputMain>
-            )}
-          </div>
-          <div className="input-sector">
-            {img4.length > 5 && (
-              <InputMain
-                value={img5}
-                onChange={(value) => setImg5(value)}
-                placeholder="Вставить URL фото 5 (необязательно)"
-              >
-                {img5.length > 5 && (
-                  <img style={{ height: 60, width: 60 }} src={img5} alt="img" />
-                )}
-              </InputMain>
-            )}
-          </div>
-          <InputMain
-            value={title}
-            onChange={(value) => setTitle(value)}
-            placeholder="Заголовок"
-          />
-          <TextareaMain
-            rows={3}
-            cols={50}
-            required={true}
-            text={description}
-            setText={setDescreption}
-            placeholder="Описание"
-          />
-          <div className={styles.prices}>
-            <InputMain
-              required={true}
-              type="number"
-              value={price}
-              onChange={(value) => setPrice(value)}
-              placeholder="Цена"
-            />
-            <InputMain
-              type="number"
-              value={oldPrice}
-              onChange={(value) => setOldPrice(value)}
-              placeholder="Старая цена"
-            />
-            <InputMain
-              type="number"
-              value={quantity}
-              onChange={(value) => setQuantity(value)}
-              placeholder="Количество"
-            />
-          </div>
-        </Form>
-      </Modal>
-    </>
-  );
-});
+                type="number"
+                value={addProductState.quantity}
+                onChange={(value) =>
+                  dispatch(addProductAction.setQuantityValue({ value }))
+                }
+                placeholder="Количество"
+              />
+            </div>
+          </Form>
+        </Modal>
+      </>
+    );
+  }
+
 
 export { FormAddProduct };
+
+
