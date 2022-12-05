@@ -10,7 +10,7 @@ import "swiper/css/thumbs";
 import "swiper/css/free-mode";
 
 interface IImagesSliderProps {
-  imagesSwiper: {};
+  imagesSwiper: string[];
   footer?: boolean
 }
 
@@ -35,8 +35,8 @@ const ImagesSlider: React.FC<IImagesSliderProps> = React.memo(
           effect="fade"
           className="images-slider"
         >
-          {imagesSwiper && imagesSwiper.map((img, index) => (
-            <SwiperSlide key={index}>
+          {imagesSwiper && imagesSwiper.map((img) => (
+            <SwiperSlide key={img}>
              {img && <img src={img} alt="Slider Images" />}
             </SwiperSlide>
           ))}
@@ -52,8 +52,8 @@ const ImagesSlider: React.FC<IImagesSliderProps> = React.memo(
         modules={[FreeMode, Navigation, Thumbs]}
         className="swiper-footer"
         >
-          { imagesSwiper.map((img, index) => (
-            <SwiperSlide key={index}>
+          { imagesSwiper.map((img) => (
+            <SwiperSlide key={img}>
               {img !== '' && <img src={img} alt="Slider Images" />}
             </SwiperSlide>
           ))}

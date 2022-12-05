@@ -11,14 +11,12 @@ import * as utils from "utils";
 import styles from "./Product.module.scss";
 
 const Product = React.memo(() => {
-  const { order } = useSelector(slice.selectOrder);
+  const { order } = useSelector(slice.selectOrder); 
   const sliceState = useSelector(slice.selectFilters);
   const {data: products, isLoading, isError,} = productsApi.useGetProductsQuery(sliceState); 
   const { data: category = [], isLoading: isCategory } = productsApi.useGetCategoryQuery( sliceState ); 
   const dispatch = useAppDispatch();
-
-  
-  
+ 
 
   return (
     <div className={styles.catalog}>
@@ -49,7 +47,7 @@ const Product = React.memo(() => {
                   alt="cartPng"
                 />
                 {order.length > 0 && <span>{order.length}</span>}
-                <div>{utils.formatterRub.format(utils.totalSum(order))}</div>
+                <div>{utils.formatterRub.format(utils.totalSum(order))}</div>  
               </ui.ButtonMain>
             </ui.CustomLink>
           </>
@@ -62,16 +60,12 @@ const Product = React.memo(() => {
               <component.Categories
                 data={category}
                 menuValue={sliceState.menuValue.value}
-                handlerClick={(item) => 
-                  dispatch(slice.filterAction.setCategoryValue(item))
-                }
+                handlerClick={(item) => dispatch(slice.filterAction.setCategoryValue(item))}
               />
             )}
             <component.CustomSelect
               options={productSortingArray}
-              onChange={(value) =>
-                dispatch(slice.filterAction.setSelectId({ value }))
-              }
+              onChange={(value) =>dispatch(slice.filterAction.setSelectId({ value }))}
               defaultValue={sliceState.filterSelect}
             />
           </div>

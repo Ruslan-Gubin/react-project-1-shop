@@ -9,8 +9,8 @@ interface IUpdateComments extends IComments {
 const commentApi = createApi({
   reducerPath: "commentApi",
   baseQuery: fetchBaseQuery({
-    // baseUrl: "http://localhost:4444/api",
-    baseUrl: "https://pr1-backend.herokuapp.com/api",
+    baseUrl: "http://localhost:4444/api",
+    // baseUrl: "https://pr1-backend.herokuapp.com/api",
     prepareHeaders: (headers) => {
       const token = window.localStorage.getItem("token");
       if (token) headers.set("authorization", token);
@@ -64,9 +64,6 @@ const commentApi = createApi({
       query: (body) => ({
         url: `comment-update`,
         method: "PATCH",
-        params: {
-        id: body.updateId,
-      },
       body,
       }),
       invalidatesTags: [{ type: "Comments", id: "LIST" }],
@@ -76,7 +73,10 @@ const commentApi = createApi({
       query: (body) => ({
         url: `comment-like`,
         method: "PATCH",
-        body,
+        body: {
+          _id: body._id,
+          likes: body.likes,
+        }
       }),
       invalidatesTags: [{ type: "Comments", id: "LIST" }],
     }),
@@ -85,7 +85,10 @@ const commentApi = createApi({
       query: (body) => ({
         url: `comment-dislike`,
         method: "PATCH",
-        body,
+        body: {
+          _id: body._id,
+          dislikes: body.dislikes,
+        }
       }),
       invalidatesTags: [{ type: "Comments", id: "LIST" }],
     }),

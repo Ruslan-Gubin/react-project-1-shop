@@ -33,7 +33,7 @@ const BasketGoods: React.FC = React.memo(() => {
           <li key={product._id} className={styles.item}>
             <div className={styles.img}>
               <Link to={`/products/${product.department}/${product._id}`}>
-                <img src={String(product.images)} alt="product img" />
+                <img src={product.images.url} alt="product img" />
               </Link>
             </div>
 

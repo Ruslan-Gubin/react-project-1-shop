@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IfilterSlice } from "models";
 import { IProduct } from "models/products";
-import { IaddProductSlice } from "store/slice/addProductSlice/type";
+import { IaddProductSlice, IOptionsBodyUpdate } from "store/slice/addProductSlice/type";
 
 
 const productsApi = createApi({
@@ -43,7 +43,7 @@ const productsApi = createApi({
       query: (body) => ({
        url: 'products-category',
         params: {
-          ...body,
+          department: body.department,
         }
       }),
       providesTags: (result) =>
@@ -71,6 +71,18 @@ const productsApi = createApi({
       query: (body) => ({
         url: 'product-remove',
         method: "DELETE",
+       body,
+      }),
+      invalidatesTags: [
+      { type: "Products", id: "LIST" },
+      { type: "Categories", id: "LIST" }
+      ],
+    }),
+
+    updateProduct: build.mutation<IProduct, IOptionsBodyUpdate>({
+      query: (body) => ({
+        url: 'product-update',
+        method: "PATCH",
        body,
       }),
       invalidatesTags: [

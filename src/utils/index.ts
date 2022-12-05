@@ -10,3 +10,4 @@ export {filterImageInObject} from './filterImageInObject';
 export { filterTags} from './getFirstTags';
 export { helperLikesFunction} from './helperLikesFunction';
 export { checkUserLoginForMenu} from './loginMenuArray';
+export { checkCustomValidator, checkImagesValidator, checkAddProductValidator} from './checkCustomValidator'; 

@@ -39,7 +39,7 @@ const CardProductCatalog: React.FC<ICardProductCatalogProps> = React.memo(
               <img
                 className={styles.img}
                 alt="img"
-                src={product.images[0] || product.images[1]}
+                src={product.images[0]?.url ? product.images[0]?.url : '' }
               />
             </div>
           </Link>
@@ -55,7 +55,9 @@ const CardProductCatalog: React.FC<ICardProductCatalogProps> = React.memo(
               </div>
 
               <div className={styles.oldprice}>
-                {formatterRub.format(Number(product.oldPrice))}
+                {product.oldPrice && 
+                formatterRub.format(Number(product.oldPrice))
+                }
               </div>
             </div>
             <div className={styles.name}>{product.title}</div>

@@ -1,34 +1,33 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import { productsApi } from "store/rtkQuery";
+import { Link } from "react-router-dom";
 import {  orderAction, selectOrder } from "store/slice";
 import { formatterRub } from "utils";
 import { ImagesSlider } from "components";
 import { ButtonMain } from "ui";
 
 import styles from "./ProductSinglPage.module.scss";
+import { IProduct } from "models/products";
 
-const ProductSinglPage: React.FC = () => {
-  const { id } = useParams<string>();
-  const { isLoading, isError, data } = productsApi.useGetOneProductQuery(
-    id ? id : "undefined"
-  );
+interface IProductSinglPage {
+  data: IProduct
+}
+
+const ProductSinglPage: React.FC<IProductSinglPage> = ({data}) => {
   const { order } = useSelector(selectOrder);
   const dispatch = useDispatch();
 
-  const findIdInOrder = order.find((item) => item._id === id);
+  const findIdInOrder = order.find((item) => item._id === data._id);
+  const filterImageForSwiper = data.images.map(item => item.url)
 
   return (
     <div className={styles.root}>
       {data && (
         <>
-          {isLoading && <div>Loading...</div>}
-          {isError && <div>Error...</div>}
           <div className={styles.title}>{data.title}</div>
           <div className={styles.container}>
             <div className={styles.swiper}>
-              <ImagesSlider footer={true} imagesSwiper={data.images} />
+              <ImagesSlider footer={true} imagesSwiper={filterImageForSwiper} />
             </div>
             <div className={styles.details}>
               <div className={styles.priceBlock}>

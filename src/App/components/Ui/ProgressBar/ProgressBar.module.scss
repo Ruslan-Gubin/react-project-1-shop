@@ -15,6 +15,7 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    
     .complete {
       position: absolute;
       left: 0;
@@ -23,6 +24,7 @@
       background-color: #5225bd;
       border-radius: 10px;
       animation: g 2500ms infinite ease-in-out;
+      transition: all .5s ease;
       // z-index: 2;
       .liquid {
         z-index: 1;

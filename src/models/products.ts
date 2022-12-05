@@ -1,4 +1,4 @@
-interface IImage {
+interface IProductImag {
   public_id: string
   url: string
 }
@@ -13,7 +13,7 @@ interface IProduct {
   title?: string;
   price: number | string ;
   oldPrice: number | string;
-  images: IImage[];
+  images: IProductImag[];
   department?: string;
   quantity: number | string;
   description?: string
@@ -21,7 +21,7 @@ interface IProduct {
   counter: number
 }
 
-export type {IProduct}
+export type {IProduct, IProductImag}
 
 
 

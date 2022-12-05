@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { ProductSinglPage } from "components";
+import { Comments, ProductSinglPage } from "components";
 import { ButtonGoBack } from "ui";
 import { icons, productsCategoriLink } from "data";
 import { IproductsCategoriLink } from "data/productsCategoriLink";
@@ -33,8 +33,11 @@ const SingelPageProduct: React.FC = () => {
           <span>{map.name}</span>
         </Link>
       </div>
-      <ProductSinglPage />
+      {data && !isLoading &&
+      <ProductSinglPage data={data}/>
+      }
       {/* <p>Рекламный блок</p> */}
+      {/* <Comments /> */}
     </div>
   );
 };

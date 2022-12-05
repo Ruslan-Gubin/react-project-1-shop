@@ -1,22 +1,23 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IProduct } from "../../../models/products";
-import { TypeRootState } from "../../store";
+import { IProduct } from "models/products";
+import { TypeRootState } from "store/store";
+import { IOrderObj } from "./types";
+
 
 const orderSlice = createSlice({
   name: "order",
   initialState: {
-    order:<IProduct[]> [],
+    order:<IOrderObj[]> [],
   },
   reducers: {
 
     addToOrders(state, action: PayloadAction<IProduct>) {
       const newItem:IProduct = action.payload;
-      const img = newItem.images[0]
  
         state.order.push({
           ...newItem,
           counter: + 1,
-          images: img,
+          images: newItem.images[0] ? newItem.images[0] : null,
           description: '',
         });      
     },

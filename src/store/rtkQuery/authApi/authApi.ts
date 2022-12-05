@@ -5,8 +5,8 @@ import {  IUser } from "../../../models";
 const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({ 
-    // baseUrl: "http://localhost:4444/api",
-    baseUrl: 'https://pr1-backend.herokuapp.com/api',
+    baseUrl: "http://localhost:4444/api",
+    // baseUrl: 'https://pr1-backend.herokuapp.com/api',
   prepareHeaders: (headers) => {
     const token = window.localStorage.getItem('token')
     if (token) headers.set('authorization', token)  

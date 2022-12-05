@@ -1,11 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { productsApi } from "store/rtkQuery";
-import { addProductAction, selectAddProduct } from "store/slice";
+import { addProductAction, selectAddProduct, selectFilters } from "store/slice";
 import { CustomSelect, Modal, Form } from "components";
 import { ButtonMain, InputMain, ProgressBar, TextareaMain } from "ui";
 import styles from "./FormAddProduct.module.scss";
 import { useAddImage } from "hooks";
+import { checkAddProductValidator } from "utils";
 
 interface IFormAddProduct {
   categorys: { label: string; value: string }[];
@@ -13,58 +14,69 @@ interface IFormAddProduct {
 
 const FormAddProduct: React.FC<IFormAddProduct> = 
   ({ categorys }) => {
-    const addProductState = useSelector(selectAddProduct);
-    const [createProducts, {status}] = productsApi.useCreateProductsMutation();
+    const addProductState = useSelector(selectAddProduct); 
+    const sliceState = useSelector(selectFilters);
+    const [createProducts, {status: statusCreate}] = productsApi.useCreateProductsMutation();
+    const [updateProducts, {status: statusUpdate}] = productsApi.useUpdateProductMutation();
     const { fileRef, changeFile } = useAddImage(addProductAction.addImages);
+    const [error, setError] = React.useState<string[]>([])
     const dispatch = useDispatch();
- 
-    const checkConsole = () => {
-      console.log('на удаление :',addProductState.imageRemovesUpdate);
-      console.log('на добавление :',addProductState.imageAddUpdate);
-      console.log('остаток который не меняеися:',addProductState.remainsImages);
-      console.log('Итого фото :',addProductState.images.length);
-      console.log('----------------------------------------------------------');
-    }
+
    
     const handlerAddProduct = async () => {
-      if (!addProductState.updatedStatus) {
+    const check = checkAddProductValidator(addProductState.error)
+    check.length ?  setError(check) : setError([])
+      
+        if (!addProductState.updatedStatus && !check.length) { 
         await createProducts(addProductState)
         .unwrap()
         .then(() =>  dispatch(addProductAction.cancelInputs()))
         .catch((error) => console.log(error));
-      } else {
-        console.log('update Start!!!')
+      } else if (addProductState.updatedStatus && !check.length) {
+        await updateProducts(addProductState.optionsBodyUpdate)
+        .unwrap()
+        .then(() =>  dispatch(addProductAction.cancelInputs()))
+        .catch((error) => console.log(error));
       }
+    
     };
-
+    
     return (
       <>
         <ButtonMain
           width={100}
           onClick={() => dispatch(addProductAction.setToggleModal())}
           bgColor="info"
-        >
+          >
           Добавить
-        </ButtonMain>
-        <Modal
+        </ButtonMain> 
+        <Modal  
           active={addProductState.modal}
           setActive={() => dispatch(addProductAction.setToggleModal())}
-        >
+          >
           <Form
             handlerSubmit={handlerAddProduct}
             titleText={!addProductState.updatedStatus ?"Добавить новый товар:" : 'Редактировать товар:'}
             closeForm={() => dispatch(addProductAction.setCloseModal())}
-            disabled={status === 'pending'}
+            disabled={statusCreate === 'pending' || statusUpdate === 'pending'}
           >
-            <ButtonMain width={300} bgColor="black" onClick={()=> checkConsole()}>Check</ButtonMain>
-            <div className={styles.category}>
-              <CustomSelect
-                defaultValue={categorys[0]}
+            <div className={styles.category}>     
+              {addProductState.updatedStatus &&
+                <CustomSelect
+                defaultValue={ addProductState.select }
                 onChange={(value) =>
                   dispatch(addProductAction.setSelectValue(value))
                 }
                 options={categorys}
-              />
+                />
+                }
+                {!addProductState.updatedStatus && 
+                <CustomSelect
+                defaultValue={ sliceState.menuValue.value !== 'Все' ?  sliceState.menuValue : categorys[0]}
+                onChange={(value) => dispatch(addProductAction.setSelectValue(value)) }
+                options={categorys}
+                />
+                }
               <InputMain
                 value={addProductState.newCategory}
                 onChange={(value) =>
@@ -89,7 +101,9 @@ const FormAddProduct: React.FC<IFormAddProduct> =
                     onClick={() => dispatch(addProductAction.removeImage({item, arr}))}
                     key={index}
                     className={styles.image}
-                    src={item.url ? item.url: item}
+                    // @ts-ignore-start
+                    src={ item.url ? item.url :  String(item)}
+                    // @ts-ignore-end  
                     alt="image"
                     />
                 ))}
@@ -97,6 +111,8 @@ const FormAddProduct: React.FC<IFormAddProduct> =
             </div>
            <ProgressBar  value={addProductState.images.length} total={5}/>
             <InputMain
+            required
+            minLength={3}
               value={addProductState.title}
               onChange={(value) =>
                 dispatch(addProductAction.setTitleValue({ value }))
@@ -137,8 +153,21 @@ const FormAddProduct: React.FC<IFormAddProduct> =
                 onChange={(value) =>
                   dispatch(addProductAction.setQuantityValue({ value }))
                 }
-                placeholder="Количество"
+                placeholder= {addProductState.updatedStatus ? 'Изменить количество'  : "Количество"}
               />
+            </div>
+            {error && error.map((item) =>( <div className={styles.erorText} key={item}>{item}</div>))}
+            <div className={styles.totalQuentity}>
+            {addProductState.updatedStatus && !addProductState.quantity &&
+            <ButtonMain bgColor="orange" width={300}>
+            <span> На складе: {addProductState.remains}</span>
+            </ButtonMain>
+          }
+          {addProductState.updatedStatus && addProductState.quantity && 
+            <ButtonMain bgColor="orange" width={300}>
+            <span> На складе после изменений: {addProductState.optionsBodyUpdate.newQantity}</span>
+            </ButtonMain>
+            }
             </div>
           </Form>
         </Modal>
