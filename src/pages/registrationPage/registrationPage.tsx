@@ -89,7 +89,7 @@ const registrationPage = () => {
         });
     } else if (!auth.image && !emailValue && image) {
       setDisables(true);
-      await createAuth({ ...values, image })
+        await createAuth({ ...values, image })
         .then((res) => {
           const data: IUser = res.data;
           dispatch(authAction.addAuth(data));
@@ -203,6 +203,7 @@ const registrationPage = () => {
           {!image ? 
           <ButtonMain bgColor="black">Обязательно добавте фото</ButtonMain>
          : <ButtonMain
+            type="submit"
             disabled={disabled}
             bgColor={!isValid  ? "black" : "primary"}
             >

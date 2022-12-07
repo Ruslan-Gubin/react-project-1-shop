@@ -112,7 +112,10 @@ const postApi = createApi({
       query: (body) => ({
         url: `post-set-like`,
         method: "PATCH",
-        body,
+        body: {
+          id: body._id,
+          likes: body.likes
+        }
       }),
       invalidatesTags: [{ type: "Posts", id: "LIST" }, { type: "Tags" }],
     }),
@@ -121,7 +124,10 @@ const postApi = createApi({
       query: (body) => ({
         url: `post-set-dislike`,
         method: "PATCH",
-        body,
+        body: {
+          id: body._id,
+          dislikes: body.dislikes
+        }
       }),
       invalidatesTags: [{ type: "Posts", id: "LIST" }, { type: "Tags" }],
     }),
