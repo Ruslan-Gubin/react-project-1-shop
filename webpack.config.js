@@ -18,7 +18,7 @@ module.exports = {
       directory: path.join(__dirname, "/"),
     },
     open: true,
-    hot: true,
+    hot: false,
   },
   entry: ["@babel/polyfill", path.resolve(__dirname, "src", "index.tsx")],
   output: {

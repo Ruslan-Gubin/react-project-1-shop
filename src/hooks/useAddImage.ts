@@ -2,7 +2,7 @@ import React from "react"
 import { useDispatch } from "react-redux"
 
 
-const useAddImage = (addImages?: any) => {
+const useAddImage = (addImages: any = null) => {
   const dispatch = useDispatch()
   const [imag, setImage] = React.useState<string>('')
   const fileRef = React.useRef<HTMLInputElement>(null)
@@ -22,7 +22,7 @@ const useAddImage = (addImages?: any) => {
 
         if (render.result && addImages) {
             dispatch(addImages({img: String(render.result)}))
-        } else {
+        } else if(render.result && !addImages) {
           setImage(String(render.result))
         }
       };
@@ -31,7 +31,15 @@ const useAddImage = (addImages?: any) => {
     }
   };
 
-  return {fileRef, changeFile, imag}
+  const cancelImage = () => {
+    setImage('')
+  }
+
+  const setImageAuth = (img: string) => {
+    setImage(img)
+  }
+
+  return {fileRef, changeFile, imag, cancelImage, setImageAuth}
 
 }
 

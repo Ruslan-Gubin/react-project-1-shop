@@ -14,16 +14,13 @@ const SingelPagePost = React.memo(() => {
   const [addPostComment, {}] = postApi.useAddCommentUpdateMutation()
   const [removePostComment, {}] = postApi.useRemoveCommentUpdateMutation()
   const {pathname} = useLocation()
-  const path = pathname.match(/\w+/i)
-  const categoryName = path && path[0]
-
 
   return (
     <div className={styles.root}>
       <ButtonGoBack />
       {id && data && !isLoading &&  <BlogsItemsCard item={data} id={id} singelPage={true}/>}
       <div className={styles.likes}>
-    {id && data && categoryName &&  <Comments target={{_id: id, category: categoryName}} removeCommentTarget={removePostComment} addComment={addPostComment} arrComments={data.comments}/> }  
+    {id && data &&   <Comments target={{_id: id, category: pathname}} removeCommentTarget={removePostComment} addComment={addPostComment} arrComments={data.comments}/> }  
       </div>
     </div>
   );

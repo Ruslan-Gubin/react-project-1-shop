@@ -8,7 +8,6 @@ import styles from "./LoginPage.module.scss";
 import { Form } from "components";
 
 
-
 const LoginPage = React.memo(() => {
   const [authorization, { data }] = authApi.useAuthorizationMutation();
   const {email, password , status} = useSelector(selectAuth);
@@ -17,7 +16,7 @@ const LoginPage = React.memo(() => {
   
   React.useEffect(() => {
     data ? dispatch(authAction.addAuth(data)) : false;
-    if (status) navigate(- 1);
+    if (status) navigate('/post');
   }, [data, status]);
 
   return (

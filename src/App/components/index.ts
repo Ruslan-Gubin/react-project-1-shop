@@ -1,6 +1,7 @@
 export {CardProductCatalog} from './CardProductCatalog';
 export {MenuMobileFriends} from './MenuMobileFriends';
 export {ProductSinglPage} from './ProductSinglPage';
+export {ChekoutDataUser} from './ChekoutDataUser';
 export {MenuMobileLink} from './MenuMobileLink';
 export {FooterContainer} from './FooterContainer';
 export {ModalRemoveItem} from './ModalRemoveItem';
@@ -30,6 +31,7 @@ export {FooterMenu} from './FooterMenu';
 export {BasketInfo} from './BasketInfo';
 export {Categories} from './Categories';
 export {ErrorPage} from './ErrorPage';
+export {Payment} from './Payment';
 export {Comments} from './Comments';
 export {CardUser} from './CardUser';
 export {Layout} from './Layout';

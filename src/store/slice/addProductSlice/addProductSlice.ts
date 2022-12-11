@@ -174,10 +174,7 @@ const addProductSlice = createSlice({
     },
 
     addImages(state, action: PayloadAction<{ img: string }>) {
-      if (
-        !state.images.includes(action.payload.img) &&
-        state.images.length < 5
-      ) {
+      if (!state.images.includes(action.payload.img) && state.images.length < 5) {
         state.images.push(action.payload.img);
       }
 

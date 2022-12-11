@@ -6,6 +6,12 @@ const formatter = new Intl.NumberFormat('ru', {
   unitDisplay: 'long' // short-км/c | long-километров в секунду
 })
 
+const commentFormat = new Intl.NumberFormat('ru', {
+  style: 'unit',
+  unit:'kilometer', // value | value-per-value
+  unitDisplay: 'long' // short-км/c | long-километров в секунду
+})
+
 {formatter.format(100)} //километров в секунду
 {formatter.format(101)} //километр в секунду
 {formatter.format(102)} //километра в секунду
@@ -22,6 +28,8 @@ const formatterRub = new Intl.NumberFormat('ru', {
   currency:'RUB',
   maximumFractionDigits: 0,
 })
+
+{formatterRub.format(150)} //150 P
 
 export {formatterRub,formatter}
 // https://metanit.com/web/javascript/18.4.php

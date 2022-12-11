@@ -1,0 +1,46 @@
+@use 'scss/common/var';
+
+
+
+  .card{
+    background-image: var.$liner-gradient-visa-card;
+    border-radius: var.$spasing-medium;
+    padding: var.$spasing-big-medium;
+    color: var.$color-card-bg;
+    box-shadow: var.$box-shadow;
+    width: 327px;
+    height: 195px;
+    .title{
+      text-transform: uppercase;
+      text-align: right;
+      font-style: italic;
+      font-size: var.$font-size-title-normal;
+      font-family: var.$ff-Gilroy-Bold;
+      color: rgba(255, 255, 255, 0.622);
+    }
+    .simCard{
+      margin:  var.$spasing-small 0px;
+      margin-left: var.$spasing-small;
+      width: 40px;
+      height: 40px;
+    }
+    .numberCard{
+      font-size: var.$font-size-title-normal;
+      text-align: center;
+      letter-spacing: 2px;
+      margin-bottom: var.$spasing-medium;
+    }
+
+    .footer{
+      display: flex;
+      justify-content: space-between;
+      font-size: var.$font-size-average;
+      .name{
+
+      }
+      .date{
+
+      }
+    }
+  }
+

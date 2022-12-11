@@ -140,7 +140,7 @@ const authApi = createApi({
       invalidatesTags: () => [{ type: "Auth", id: "LIST" }],
     }),
 
-    authorization: build.mutation<IUser, IUser>({
+    authorization: build.mutation<IUser, {email: string | number, password: string | number}>({
       query: (body) => ({
         url: `login`,
         method: "POST",
@@ -149,7 +149,7 @@ const authApi = createApi({
       invalidatesTags: () => [{ type: "Auth", id: "LIST" }],
     }),
 
-    updateAuth: build.mutation<IUser, IUser>({
+    updateAuth: build.mutation<{success: boolean}, IUser>({
       query: (body) => ({
         url: `auth-update`,
         method: "PATCH",

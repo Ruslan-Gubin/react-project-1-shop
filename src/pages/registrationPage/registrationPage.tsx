@@ -9,6 +9,7 @@ import { icons } from "data";
 import { IUser } from "models";
 import { Modal, ModalRemoveItem } from "components";
 import styles from "./registrationPage.module.scss";
+import { useAddImage } from "hooks";
 
 const registrationPage = () => {
   const { auth } = useSelector(selectAuth);
@@ -16,10 +17,10 @@ const registrationPage = () => {
   const [createAuth, {}] = authApi.useCreateAuthMutation();
   const [updateAuth, {}] = authApi.useUpdateAuthMutation();
   const [removeAuth,{}] = authApi.useDeleteAuthMutation()
-  const [image, setImage] = React.useState("");
   const [disabled, setDisables] = React.useState(false);
   const [errorEmail, setErrorEmail] = React.useState("");
   const [modalActive, setModalActive] = React.useState<boolean>(false);
+  const { fileRef, changeFile ,imag, cancelImage, setImageAuth} = useAddImage();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -36,30 +37,9 @@ const registrationPage = () => {
     },
   });
 
-  const inputFileRef = React.useRef(null);
-
-  const handlerChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files && e.target.files[0];
-    file && setFileToBase(file);
-  };
-
-  const setFileToBase = (file: File) => {
-    try {
-      const render = new FileReader();
-      render.readAsDataURL(file);
-      render.onloadend = () => {
-        if (render.result) {
-          setImage(render.result);
-        }
-      };
-    } catch (error) {
-      console.log(error, "Ошибка при загрузке файла!");
-    }
-  };
-
   React.useEffect(() => {
     if (auth.image) {
-      setImage(auth.image.url);
+      setImageAuth(auth.image.url);
     }
   }, []);
 
@@ -75,7 +55,7 @@ const registrationPage = () => {
       const id: string =  auth._id;
       const prevImage = auth.image.url;
       setDisables(true);
-      await updateAuth({ ...values, prevImage, image, id })
+      await updateAuth({ ...values, prevImage, imag, id })
         .then((res) => {
           if (res.data.success) {
             navigate("/post");
@@ -87,9 +67,9 @@ const registrationPage = () => {
         .finally(() => {
           setDisables(false);
         });
-    } else if (!auth.image && !emailValue && image) {
+    } else if (!auth.image && !emailValue && imag) {
       setDisables(true);
-        await createAuth({ ...values, image })
+      await createAuth({ ...values, imag })
         .then((res) => {
           const data: IUser = res.data;
           dispatch(authAction.addAuth(data));
@@ -112,7 +92,7 @@ const registrationPage = () => {
       const idAuth =  auth?._id
       await removeAuth(idAuth)
       dispatch(authAction.resetAuth())
-      setImage('')
+      cancelImage()
       setModalActive(false)
     }
   }
@@ -120,11 +100,11 @@ const registrationPage = () => {
   return (
     <div className={styles.root}>
       <h2 className={styles.title}>Создание аккаунта</h2>
-      {image ? (
+      {imag ? (
         <>
           <img
-            onClick={() => setImage("")}
-            src={image}
+            onClick={() => cancelImage()}
+            src={imag}
             alt="image user"
             className={styles.img}
             style={{ borderRadius: 50 }}
@@ -132,16 +112,16 @@ const registrationPage = () => {
         </>
       ) : (
         <img
-          onClick={() => inputFileRef.current?.click()}
+          onClick={() => fileRef.current?.click()}
           className={styles.img}
           src={icons.userRegistedPng}
           alt="userRegistedPng"
         />
       )}
       <input
-        ref={inputFileRef}
+        ref={fileRef}
         type="file"
-        onChange={handlerChangeFile}
+        onChange={changeFile}
         hidden
       />
 
@@ -200,7 +180,7 @@ const registrationPage = () => {
         )}
 
         <div className={styles.button}>
-          {!image ? 
+          {!imag ? 
           <ButtonMain bgColor="black">Обязательно добавте фото</ButtonMain>
          : <ButtonMain
             type="submit"

@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IfilterSlice } from "models";
 import { IProduct } from "models/products";
+import { userDataType } from "pages/Checkout/Checkout";
 import { IaddProductSlice, IOptionsBodyUpdate } from "store/slice/addProductSlice/type";
 
 
-const productsApi = createApi({
+const productsApi = createApi({ 
   reducerPath: "productsApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:4444/api",
@@ -15,7 +16,7 @@ const productsApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Products", 'Categories'],
+  tagTypes: ["Products", 'Categories', 'Images'],
   endpoints: (build) => ({
     getProducts: build.query<{data: IProduct[], length: number}, IfilterSlice>({
       query: (body) => ({
@@ -37,6 +38,7 @@ const productsApi = createApi({
 
     getOneProduct: build.query<IProduct, string>({
       query: (id) => `products/${id}`,
+      providesTags: () => [{ type: "Products", id: "LIST" }],
     }),
 
     getCategory: build.query<{label:string, value: string}[], {department: string | undefined}>({
@@ -53,6 +55,13 @@ const productsApi = createApi({
               { type: "Categories", id: "LIST" },
             ]
           : [{ type: "Categories", id: "LIST" }],
+    }),
+
+    getImagesForSwiper: build.query<string[], null>({
+      query: () => ({
+       url: 'products-images',
+      }),
+      providesTags: () => [{ type: "Images", id: "LIST" }],
     }),
 
     createProducts: build.mutation<IProduct, IaddProductSlice>({
@@ -90,6 +99,42 @@ const productsApi = createApi({
       { type: "Categories", id: "LIST" }
       ],
     }),
+
+    buyProduct: build.mutation<any,{product:{id: string | undefined, counter: number}[],buyer: userDataType}>({
+      query: (body) => ({
+        url: 'product-order-buy',
+        method: "PATCH",
+       body,
+      }),
+      invalidatesTags: [
+      { type: "Products", id: "LIST" },
+      { type: "Categories", id: "LIST" }
+      ],
+    }),
+
+    createdProductComment: build.mutation<{success: boolean}, { targetId: string; commentId: string }>({
+      query: (body) => ({
+        url: 'product-create-comment',
+        method: "PATCH",
+       body,
+      }),
+      invalidatesTags: [
+      { type: "Products", id: "LIST" },
+      ],
+    }),
+
+    removeProductComment: build.mutation<{success: boolean}, IOptionsBodyUpdate>({
+      query: (body) => ({
+        url: 'product-remove-comment',
+        method: "PATCH",
+       body,
+      }),
+      invalidatesTags: [
+      { type: "Products", id: "LIST" },
+      { type: "Categories", id: "LIST" }
+      ],
+    }),
+
   }),
 });
 

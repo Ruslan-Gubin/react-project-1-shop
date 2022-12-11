@@ -4,7 +4,7 @@ import { commentApi, postApi } from "store/rtkQuery";
 import { useToggle } from "hooks";
 
 import styles from "./CardPostInfo.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { icons } from "data";
 
 interface ITegsCardItem {
@@ -25,7 +25,7 @@ const CardPostInfo: React.FC<ITegsCardItem> = ({
   const [limitComments, toggleComments] = useToggle(5, '');
   const { data: tags, isLoading: isLoadingTags } =  postApi.useGetTagsQuery({limit: limitTags,userId: userTarget});
   const {data: commentsArr, isLoading: isLoadingComments} =  commentApi.useGetCommenstUsersQuery({limit: limitComments,userId: userTarget})
- 
+
 
   return (
     <div className={styles.root}>
@@ -54,7 +54,7 @@ const CardPostInfo: React.FC<ITegsCardItem> = ({
           commentsArr.map((item) => (
             <li className={styles.items} key={item._id}>
               <div className={styles.userInfo}>
-                  <Link to={`/${item.target?.category}/${item.target?._id}`}>
+                  <Link to={`${item.target?.category}`}>
                 <div className={styles.userText}>{item.text}</div>
                 </Link>
                 

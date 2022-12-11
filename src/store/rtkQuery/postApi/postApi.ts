@@ -132,10 +132,7 @@ const postApi = createApi({
       invalidatesTags: [{ type: "Posts", id: "LIST" }, { type: "Tags" }],
     }),
 
-    addCommentUpdate: build.mutation<
-      IPost,
-      { targetId: string; commentId: string }
-    >({
+    addCommentUpdate: build.mutation<IPost,{ targetId: string; commentId: string }>({
       query: (body) => ({
         url: `post-add-comment`,
         method: "PATCH",
@@ -144,10 +141,7 @@ const postApi = createApi({
       invalidatesTags: [{ type: "Posts", id: "LIST" }],
     }),
 
-    removeCommentUpdate: build.mutation<
-      IPost,
-      { targetId: string; commentId: string }
-    >({
+    removeCommentUpdate: build.mutation<IPost,{ targetId: string; commentId: string }>({
       query: (body) => ({
         url: `post-remove-comment`,
         method: "PATCH",

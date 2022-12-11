@@ -17,7 +17,7 @@ const BasketGoods: React.FC = React.memo(() => {
     dispatch(orderAction.removeToOrder({ _id }));
 
   const addCount = React.useCallback(
-    (_id: string) => dispatch(orderAction.addCountGoods({ _id })),
+    (_id: string, quentity: number) => dispatch(orderAction.addCountGoods({ _id, quentity })),
     []
   );
 
@@ -66,7 +66,7 @@ const BasketGoods: React.FC = React.memo(() => {
               </button>
               <span className={styles.count}>{product.counter}</span>
               <button
-                onClick={() => addCount(String(product._id))}
+                onClick={() => addCount(String(product._id), product.quantity)}
                 className={styles.increment}
               >
                 +

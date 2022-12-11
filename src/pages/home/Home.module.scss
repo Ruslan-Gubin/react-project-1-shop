@@ -3,4 +3,10 @@
 .root {
   font-family: var.$ff-Gilroy-Medium;
 
+  .technologies {
+    display: flex;
+    justify-content: space-between;
+    
+  }
+
 }

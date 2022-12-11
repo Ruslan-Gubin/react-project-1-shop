@@ -6,8 +6,8 @@ import { TypeRootState } from "../../store";
 interface IinitState {
   auth: IUser
   status: boolean
-  email: string
-  password: string
+  email: string | number
+  password: string | number
   requestFriends: string[]
   friends: string[]
   dialogs: string[]
@@ -17,8 +17,8 @@ interface IinitState {
 const initialState:IinitState = { 
   auth: {} as IUser,
   status: false,
-  email: 'gubin_ruslan@rambler.ru',
-  password: '1234qwer',
+  email: '',
+  password: '',
   requestFriends: [],
   friends: [],
   dialogs: [],
@@ -36,6 +36,13 @@ const authSlice = createSlice({
       state.status = true 
     },
 
+    updateAuth(state, action: PayloadAction<IUser>) {
+      state.auth.image = action.payload.image
+      state.auth.fullName = action.payload.fullName
+      state.auth.email = action.payload.email
+      state.status = true 
+    },
+
     update(state, action) {
       state.auth = action.payload
       state.email= action.payload.email
@@ -47,11 +54,11 @@ const authSlice = createSlice({
       state.status = false
     },
 
-    getAutchEmail(state, action:PayloadAction<{value: string}>) {
+    getAutchEmail(state, action:PayloadAction<{value: string | number}>) {
       state.email = action.payload.value
     },
 
-    getAutchPassword(state, action:PayloadAction<{value: string}>) {
+    getAutchPassword(state, action:PayloadAction<{value: string | number}>) {
       state.password = action.payload.value
     },
 

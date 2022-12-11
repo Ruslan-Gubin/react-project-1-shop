@@ -1,0 +1,23 @@
+@use "scss/common/var";
+@use "scss/common/exented";
+
+.root {
+  .container {
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.947);
+    border-radius: var.$spasing-medium;
+    display: flex;
+    box-shadow: var.$box-shadow;
+
+    .cardContainer {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+
+    }
+
+   
+  }
+}

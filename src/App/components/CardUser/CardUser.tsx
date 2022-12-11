@@ -1,8 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authApi } from "store/rtkQuery";
-import { selectAuth } from "store/slice";
+import { authAction, selectAuth } from "store/slice";
 import { ButtonMain } from "ui";
 import { IUser } from "models";
 import styles from "./CardUser.module.scss";
@@ -14,12 +14,20 @@ interface ICardUserInfo {
 }
 
 const CardUser: React.FC<ICardUserInfo> = ({ setModalActive, user }) => {
-  const { auth, requestFriends } = useSelector(selectAuth); 
+  const { auth, requestFriends } = useSelector(selectAuth);
+  const { data } = authApi.useGetOneAuthQuery(auth._id);
   const [setRequestFriend, {}] = authApi.useGetFriendRequestMutation();
   const [setAddFriend, {}] = authApi.useSetAddFriendMutation();
-  const [useCreateDialogFn] = useCreateDialog()
+  const [useCreateDialogFn] = useCreateDialog();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const handlerUpdateUser = () => {
+    if (data) {
+      navigate("/register");
+      dispatch(authAction.updateAuth(data));
+    }
+  };
 
   return (
     <>
@@ -47,7 +55,7 @@ const CardUser: React.FC<ICardUserInfo> = ({ setModalActive, user }) => {
                     </ButtonMain>
                   </div>
                   <div className={styles.button}>
-                    <ButtonMain onClick={() => navigate("/register")}>
+                    <ButtonMain onClick={() => handlerUpdateUser()}>
                       Изменить данные
                     </ButtonMain>
                   </div>

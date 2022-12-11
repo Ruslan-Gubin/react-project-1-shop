@@ -5,9 +5,9 @@ import {  orderAction, selectOrder } from "store/slice";
 import { formatterRub } from "utils";
 import { ImagesSlider } from "components";
 import { ButtonMain } from "ui";
+import { IProduct } from "models/products";
 
 import styles from "./ProductSinglPage.module.scss";
-import { IProduct } from "models/products";
 
 interface IProductSinglPage {
   data: IProduct
@@ -16,6 +16,11 @@ interface IProductSinglPage {
 const ProductSinglPage: React.FC<IProductSinglPage> = ({data}) => {
   const { order } = useSelector(selectOrder);
   const dispatch = useDispatch();
+  const history = window.history
+
+  const handlerGoBack = () => {
+    history.back()
+  }
 
   const findIdInOrder = order.find((item) => item._id === data._id);
   const filterImageForSwiper = data.images.map(item => item.url)
@@ -41,6 +46,10 @@ const ProductSinglPage: React.FC<IProductSinglPage> = ({data}) => {
                   <div className={styles.discount}>{data.discount} %</div>
                 </div>
                 <div className={styles.button}>
+
+        {data.quantity ?
+       
+<>
                   {findIdInOrder ? (
                     <Link to={"/cart"}>
                       <ButtonMain bgColor="green">Перейти в корзину</ButtonMain>
@@ -53,6 +62,11 @@ const ProductSinglPage: React.FC<IProductSinglPage> = ({data}) => {
                       Добавить в корзину
                     </ButtonMain>
                   )}
+</>
+:
+<ButtonMain onClick={() => handlerGoBack()} bgColor="secondary">Нет на складе</ButtonMain>
+
+ }
                 </div>
               </div>
               <div className={styles.description}>{data.description}</div>

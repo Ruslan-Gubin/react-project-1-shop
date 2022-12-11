@@ -1,15 +1,10 @@
-@use '../var';
+@use 'scss/common/var';
+@use 'scss/common/exented';
+
 
 @mixin button-main($bgColor, $hoverBgColor) {
-    width: 100%;
     background-color: $bgColor;
-    box-shadow: var.$box-shadow;
-    padding: var.$spasing-button;
-    border-radius: var.$border-radius-button;
-    box-sizing: border-box;
-    color: var.$white;
-    font-size: var.$font-size-button;
-    transition: all 0.2s ease-in;
+    @extend %buttonMain;
     &:hover {
         transition: all 0.2s ease-in;
         background-color: $hoverBgColor;

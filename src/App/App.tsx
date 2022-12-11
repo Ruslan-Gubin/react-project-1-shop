@@ -20,6 +20,7 @@ const router = createBrowserRouter(createRoutesFromElements(
           <Route path="user/:id" element={<page.UserSinglPage />} />
           <Route path="dialog/:id" element={<page.DialogSinglPage />} />
           <Route path="cart" element={<page.Basket />} />
+          <Route path="checkout" element={<page.Checkout />} />
           <Route path="*" element={<page.NotfoundPage />} />
         </Route>
 ))

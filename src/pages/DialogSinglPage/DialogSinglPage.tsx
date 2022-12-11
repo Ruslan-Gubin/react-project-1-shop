@@ -22,8 +22,6 @@ const [removeDialogComment, {}] = dialogApi.useRemoveCommentUpdateMutation()
 const [deleteDialog, {}] = dialogApi.useDeleteDialogMutation()
 const navigate = useNavigate()
 const {pathname} = useLocation()
-const path = pathname.match(/\w+/i)
-const categoryName = path && path[0]
 
 React.useEffect(() => {
   if (authData && !isLoadAuth && id && !authData.dialogs.includes(id)) {
@@ -50,7 +48,7 @@ const handlerDeleteDialog = async () => {
 
   return (
     <div className={styles.root}>
-    {id && categoryName && dialogData && !isLoading && <Comments target={{_id: id, category: categoryName}} removeCommentTarget={removeDialogComment} addComment={addDialogComment} arrComments={dialogData.comments}/>}
+    {id &&  dialogData && !isLoading && <Comments target={{_id: id, category: pathname}} removeCommentTarget={removeDialogComment} addComment={addDialogComment} arrComments={dialogData.comments}/>}
     <ButtonMain onClick={() => handlerDeleteDialog()} bgColor='red'>Удалить диалог</ButtonMain>
     </div>
   );

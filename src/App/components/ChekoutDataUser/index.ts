@@ -1,0 +1,1 @@
+export {ChekoutDataUser} from './ChekoutDataUser';

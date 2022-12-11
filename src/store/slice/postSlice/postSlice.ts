@@ -39,7 +39,7 @@ const postSlice = createSlice({
       }
     },
 
-    setsearchValueUser(state, action: PayloadAction<{ value: string }>) {
+    setsearchValueUser(state, action: PayloadAction<{ value: string  }>) {
       try {
         state.searchUSer = action.payload.value
       } catch (error) {

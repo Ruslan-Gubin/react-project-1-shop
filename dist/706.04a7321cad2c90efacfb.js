@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkreact_webpack=self.webpackChunkreact_webpack||[]).push([[706],{1248:function(c,e,n){n.r(e),n.d(e,{default:function(){return s}});var t=n(7294),a=n(5893);const r=t.memo((()=>{const c=window.history;return(0,a.jsx)("div",{className:"lNndba9jQnfYv1h16ETg",children:(0,a.jsx)("button",{onClick:()=>{c.back()},children:"go back"})})})),s=t.memo(r)}}]);

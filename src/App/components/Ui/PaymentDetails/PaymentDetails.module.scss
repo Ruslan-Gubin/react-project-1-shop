@@ -1,0 +1,42 @@
+@use 'scss/common/var';
+@use "scss/common/exented";
+
+.inputs {
+  width: 50%;
+  color: var.$color-black-hover;
+  padding: 50px;
+  padding-right: 100px;
+  .containerDetails {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    overflow: hidden;
+
+    .title {
+      font-size: var.$font-size-average;
+      font-family: var.$ff-Gilroy-Bold;
+      margin-bottom: var.$spasing-medium;
+    }
+
+    .footer {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .inputContainer {
+      margin-top: var.$spasing-big-medium;
+
+      span {
+        font-size: 0.9rem;
+        color: rgba(0, 0, 0, 0.334);
+        margin-bottom: var.$spasing-small;
+        font-weight: 600;
+      }
+
+      .inputVisa {
+        @extend %inputVisa;
+      }
+    }
+  }
+}

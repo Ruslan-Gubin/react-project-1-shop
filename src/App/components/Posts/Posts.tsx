@@ -16,9 +16,8 @@ const FPosts: React.FC<IFPosts> = ({
   totalLength,
   globalSearchPosts,
 }) => {
-  const { auth } = useSelector(slice.selectAuth);
+  const { auth, status } = useSelector(slice.selectAuth);
   const postState = useSelector(slice.selectPosts);
-  const { status } = useSelector(slice.selectAuth);
   const [modalActive, setModalActive] = React.useState<boolean>(false);
   const [setDeleteFriend, {}] = authApi.useSetDeleteFriendMutation();
   const { data: authSearch, isLoading: idLoadAuthSearch } =
@@ -35,7 +34,6 @@ const FPosts: React.FC<IFPosts> = ({
       .catch((error) => console.log(error));
     navigate("/post");
   };
-  
 
   return (
     <div

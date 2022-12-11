@@ -4,10 +4,10 @@ import ReactMarkdown from "react-markdown";
 import { Link, useNavigate } from "react-router-dom";
 import { postApi } from "store/rtkQuery";
 import { postAction, selectAuth } from "store/slice";
+import { useInView } from 'react-intersection-observer';
 import { IPost } from "models";
 import { Modal, ModalRemoveItem, LilesDislikes } from "components";
 import { icons } from "data";
-
 import styles from "./BlogsItemsCard.module.scss";
 
 interface IBlogsItemsCard {
@@ -22,6 +22,7 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({id, item, singelPage = false
   const { auth } = useSelector(selectAuth);
   const [removePost, {}] = postApi.useDeletePostMutation();
   const [modalActive, setModalActive] = React.useState<boolean>(false);
+  const [ref, isVisible] = useInView({threshold: 0.5, triggerOnce: true})
   const navigate = useNavigate();
   const dispatch = useDispatch();
  
@@ -41,11 +42,12 @@ const BlogsItemsCard: React.FC<IBlogsItemsCard> = ({id, item, singelPage = false
     }
 
   return (
-    <div className={!singelPage ? styles.card : styles.cardSinglPage}>
+    <div ref={ref} className={!singelPage ? styles.card : styles.cardSinglPage}>
       <Link to={`/post/${id}`}>
         <img
+        
           className={!singelPage ? styles.imageUrl : styles.imageUrlSingl}
-          src={item.image ? item.image.url : ""}
+          src={isVisible ? item.image.url : ""}
           alt="image url"
         />
       </Link>

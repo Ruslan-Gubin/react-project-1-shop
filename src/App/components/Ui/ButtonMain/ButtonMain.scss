@@ -1,5 +1,5 @@
-@use '../../../../scss/common/mixin/battonMain';
-@use '../../../../scss/common/var';
+@use 'scss/common/mixin/battonMain';
+@use 'scss/common/var';
 
 .button-main__primary {
     @include battonMain.button-main(var.$color-primary, var.$color-primary-hover)
@@ -29,5 +29,13 @@
   }
   .button-main__nobg {
     @include battonMain.button-main(var.$color-info-nobg, var.$color-info-nobg-hover)
+  }
+  .button-main__visa {
+    background-image: var.$liner-gradient-visa-button;
+    @extend %buttonMain;
+  }
+  .button-main__visaError {
+    background-color: rgba(46, 31, 31, 0.171);
+    @extend %buttonMain;
   }
 

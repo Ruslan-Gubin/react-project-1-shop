@@ -1,0 +1,30 @@
+@use '../../scss/common/exented';
+@use 'scss/common/var';
+
+
+
+.root{
+
+  
+    .goBack {
+      @extend %arrowBack;
+    }
+
+    .titles{
+      display: flex;
+      justify-content: space-around;
+      .title{
+        font-size: var.$font-size-title-normal;
+        color: var.$color-dark-grey;
+        text-align: center;
+      }
+      .titleActive{
+        color: var.$color-card-bg;
+        border-bottom: 1px solid var.$color-card-bg;
+      }
+    }
+
+  
+    
+    
+  }

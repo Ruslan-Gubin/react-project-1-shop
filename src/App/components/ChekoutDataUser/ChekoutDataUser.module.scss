@@ -1,0 +1,77 @@
+
+@use 'scss/common/var';
+
+%input {
+  font-size: var.$font-size-average;
+  color: var.$color-black-hover;
+  width: 100%;
+  padding: var.$spasing-big-medium;
+  margin: var.$spasing-big-medium 0;
+  border-radius: 20px; 
+  font-family: var.$ff-Gilroy-Medium;
+}
+
+.container{
+  font-size: var.$font-size-button;
+  color: var.$color-header-bg-dark;
+  .card{
+    font-family: var.$ff-Gilroy-Medium;
+    
+    .names{
+      display: flex;
+      .firstNameContainer{
+        padding-right: 5px;
+        width: 100%;
+        .firstName{
+          @extend %input;
+          margin-right: 10px;
+        }
+      }
+      .lastNameContainer{
+        padding-left: 5px;
+        width: 100%;
+        .lastName{
+          @extend %input;
+        }
+      }
+    }
+    
+    .fullAddress {
+      display: flex;
+      justify-content: center;
+      .addressContainer{
+        padding-right: 5px;
+        width: 100%;
+        .address {
+          @extend %input;   
+        }
+      }
+      .optionsContainer{
+        padding-left: 5px;
+        width: 100%;
+        .options{
+          @extend %input;
+        }
+      }
+    }
+    
+    
+    
+    .input {
+      @extend %input;
+    }
+    
+    .error {
+      height: 1px;
+      color: var.$color-error-dark;
+      font-size: var.$font-size-button;
+    }
+    
+    .footerBtn{
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+    
+  }
+}

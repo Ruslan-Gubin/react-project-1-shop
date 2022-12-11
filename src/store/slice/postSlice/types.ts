@@ -7,7 +7,7 @@ interface IinitialStatePosts {
   search: string
   searchUSer: string
   category: {label: string, value: string}
-  postUpdate: IPost 
+  postUpdate: IPost | string
   searchValueActive: string
 }
 

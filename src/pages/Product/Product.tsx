@@ -11,12 +11,12 @@ import * as utils from "utils";
 import styles from "./Product.module.scss";
 
 const Product = React.memo(() => {
-  const { order } = useSelector(slice.selectOrder); 
+  const { order } = useSelector(slice.selectOrder);  
   const sliceState = useSelector(slice.selectFilters);
   const {data: products, isLoading, isError,} = productsApi.useGetProductsQuery(sliceState); 
   const { data: category = [], isLoading: isCategory } = productsApi.useGetCategoryQuery( sliceState ); 
   const dispatch = useAppDispatch();
- 
+
 
   return (
     <div className={styles.catalog}>
@@ -70,15 +70,15 @@ const Product = React.memo(() => {
             />
           </div>
         </div>
-        <div className={styles.items}>
-          {!isLoading &&
+        <div  className={styles.items}>
+          {!isLoading && 
             products &&
             products.data.map((product) => ( 
               <component.CardProductCatalog
                 key={product._id}
                 product={product}
               />
-            ))}
+              ))}
         </div>
       </div>
       {products && !isLoading && products.length > sliceState.perPage && (

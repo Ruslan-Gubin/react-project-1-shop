@@ -1,0 +1,91 @@
+@use "scss/common/var";
+
+.root {
+  color: var.$color-card-bg;
+  background-color: var.$color-black-hover;
+  border-radius: var.$border-radius-small;
+  background-image: linear-gradient(to right, #373b3e, #202121);
+  padding: 20px;
+  margin-bottom: var.$spasing-medium;
+  box-shadow: var.$box-shadow;
+  height: 100%;
+
+  &:hover {
+    .title {
+      color: rgb(179, 179, 241);
+      transition: all 0.5s ease;
+    }
+  }
+
+  .title {
+    transition: all 0.5s ease;
+    font-size: var.$font-size-title-normal;
+    text-align: center;
+    margin-bottom: var.$spasing-medium;
+    color: rgb(140, 140, 196);
+  }
+
+  .container {
+    position: relative;
+
+    .item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var.$spasing-small;
+      color: var.$color-card-bg;
+
+      &:hover {
+        background-image: linear-gradient(to right, #3a3d3f, #242525);
+        border-radius: var.$border-radius-small;
+      }
+      .property {
+      }
+
+      .text {
+        font-size: var.$font-size-card-text;
+      }
+
+      .image {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    .hits {
+      position: absolute;
+      top: 0px;
+      left: 260px;
+      scale: 0;
+      transition: all 0.6s ease;
+    }
+
+    &:hover .hits {
+      animation: show-hits 1s;
+      animation-delay: 2s;
+      animation-fill-mode: forwards;
+    }
+  }
+}
+
+@keyframes show-hits {
+  0% {
+    position: absolute;
+    top: 0px;
+    left: 260px;
+    scale: 0;
+  }
+  100% {
+    color: var.$color-black-hover;
+    padding: var.$spasing-small;
+    border-radius: var.$border-radius-small;
+    font-size: var.$font-size-card-text;
+    background-color: var.$color-card-bg;
+    z-index: 1;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+
+    scale: 1;
+  }
+}

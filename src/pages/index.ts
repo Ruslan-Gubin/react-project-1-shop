@@ -12,8 +12,10 @@ const Basket = lazy(() => import('./Basket'))
 const AddPost = lazy(() => import('./AddPost'))
 const UserSinglPage = lazy(() => import('./UserSinglPage'))
 const DialogSinglPage = lazy(() => import('./DialogSinglPage'))
+const Checkout = lazy(() => import('./Checkout'))
 
 export {
+  Checkout,
   DialogSinglPage,
   UserSinglPage,
   AddPost,
