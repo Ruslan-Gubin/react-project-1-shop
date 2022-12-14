@@ -13,8 +13,12 @@ const AddPost = lazy(() => import('./AddPost'))
 const UserSinglPage = lazy(() => import('./UserSinglPage'))
 const DialogSinglPage = lazy(() => import('./DialogSinglPage'))
 const Checkout = lazy(() => import('./Checkout'))
+const About = lazy(() => import('./About'))
+const Game = lazy(() => import('./Game'))
 
 export {
+  Game,
+  About,
   Checkout,
   DialogSinglPage,
   UserSinglPage,

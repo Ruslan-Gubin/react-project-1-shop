@@ -38,7 +38,8 @@
       "assets": ["assets"],
       "components": ["App/components"],
       "ui": ["App/components/Ui"], 
-      "scss": ["scss"] 
+      "game": ["App/components/Game"], 
+      "scss": ["scss"], 
     }
   },
 

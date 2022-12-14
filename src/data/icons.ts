@@ -24,8 +24,12 @@ import findUser from "../assets/img/icons/finduser_1183.png";
 import configIcon from "../assets/img/icons/configuration_config_system_1540.png";
 import simCard from "../assets/img/icons/sim_card_23072.png";
 import info from "../assets/img/icons/info_15260.png";
+import github from "../assets/img/icons/github_alt_macos_bigsur_icon_190138.png";
+import vk from "../assets/img/icons/vk-235235.png";
 
 export const icons = {
+  vk,
+  github,
   info,
   simCard,
   configIcon,

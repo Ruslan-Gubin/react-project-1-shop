@@ -1,0 +1,31 @@
+@use "scss/common/var";
+@use "scss/common/mixin";
+@use 'scss/common/exented';
+
+.stackContainer {
+  .stackTitle {
+    @extend %title-about-me
+  }
+
+  .technologies {
+    display: flex;
+    justify-content: space-between;
+
+    .fronternCard {
+      width: 49%;
+    }
+    .backend {
+      width: 49%;
+    }
+
+    @include mixin.respond(mobile) {
+      flex-direction: column;
+      .fronternCard {
+        width: 100%;
+      }
+      .backend {
+        width: 100%;
+      }
+    }
+  }
+}

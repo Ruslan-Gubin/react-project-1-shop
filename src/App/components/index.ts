@@ -1,3 +1,4 @@
+export {TechnologiesStack} from './TechnologiesStack';
 export {CardProductCatalog} from './CardProductCatalog';
 export {MenuMobileFriends} from './MenuMobileFriends';
 export {ProductSinglPage} from './ProductSinglPage';

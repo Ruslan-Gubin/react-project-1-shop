@@ -2,6 +2,7 @@ export { productSortingArray } from "./productSortingArray";
 export { imagesSwiper } from "./imagesSwiper";
 export { productsCategoriLink } from "./productsCategoriLink";
 export {descriptionFrontend, descriptionBackend} from './descriptionOfTechnologies';
+export {aboutUserData, aboutSitePosts, aboutSiteProduct} from './aboutUserData';
 
 export {
   imagesUrlVk,

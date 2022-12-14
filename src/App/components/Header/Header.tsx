@@ -45,7 +45,13 @@ const Header = React.memo(() => {
                 activeCl={linkClActive}
                 noActive={linkCl}
                 to="/"
-                text="Блог"
+                text="Обо мне"
+              ></CustomLink>
+              <CustomLink
+                activeCl={linkClActive}
+                noActive={linkCl}
+                to="/game"
+                text="Игра"
               ></CustomLink>
               <CustomLink
                 activeCl={linkClActive}

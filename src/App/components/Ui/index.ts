@@ -10,6 +10,7 @@ export {ButtonMain} from './ButtonMain';
 export {FormSearch} from './FormSearch';
 export {InputMain} from './InputMain';
 export {CardSkils} from './CardSkils';
+export {AboutUser} from './AboutUser';
 export {Editor} from './Editor';
 export {Watch} from './Watch';
 

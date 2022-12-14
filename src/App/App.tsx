@@ -7,8 +7,9 @@ import "../scss/style.scss";
 
 const router = createBrowserRouter(createRoutesFromElements(
 <Route path="/" element={<Layout />}>
-          <Route index element={<page.Home />} />
+          <Route index element={<page.About />} />
           <Route path="products" element={<page.Products />} />
+          <Route path="game" element={<page.Game />} />
           <Route path="products/:id" element={<page.Product />} />
           <Route path="products/:id/:id" element={<page.SingelPageProduct />} />
           <Route path="login" element={<page.LoginPage />} />

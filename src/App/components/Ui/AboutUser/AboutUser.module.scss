@@ -1,0 +1,133 @@
+@use "scss/common/var";
+@use "scss/common/exented";
+@use "scss/common/mixin";
+
+%card-info {
+  width: 49%;
+  position: relative;
+  padding: var.$spasing-small;
+  background-image: linear-gradient(to right, #3a3d3f, #242525);
+  padding: 20px;
+  border-radius: var.$border-radius-small;
+  box-shadow: var.$box-shadow;
+  height: 800px;
+}
+
+.root {
+  margin: 20px 0;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    
+    .progectInfo {
+      @extend %card-info;
+      color: var.$color-card-bg;
+      // overflow: auto;
+
+ 
+
+        
+        .titles {
+          font-size: var.$font-size-header-link;
+          text-align: center;
+          margin-bottom: var.$spasing-small;
+          display: flex;
+          text-align: center;
+          justify-content: space-around;
+          cursor: pointer;
+
+          h2 {
+            margin-right: 10px;
+          }
+        }
+        .title {
+          color: rgb(120, 109, 109);
+        }
+
+        .active {
+          color: rgb(218, 212, 212);
+        }
+        
+        .img {
+          height: 25px;
+          width: 25px;
+          margin-right: 10px;
+        }
+        
+        .item {
+          display: flex;
+          align-items: center;
+          margin-bottom: 5px;
+        }
+        
+        p {
+        }
+    
+    }
+
+    .userInfo {
+      @extend %card-info;
+
+      .header {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+
+        .name {
+          color: rgb(221, 206, 206);
+          font-size: var.$font-size-header-link;
+          margin-top: 40px;
+          cursor: pointer;
+          text-align: center;
+          margin: 0 auto;
+          margin-top: 40px;
+        }
+        .image {
+          position: relative;
+          top: -40px;
+          .userImg {
+            width: 200px;
+            height: 200px;
+            border-radius: var.$border-radius-circle;
+          }
+        }
+      }
+
+      .body {
+        height: 500px;
+        overflow: auto;
+
+        color: var.$color-card-bg;
+        .text {
+          margin-right: 10px;
+          line-height: 30px;
+          font-family: var.$ff-Gilroy-Regular;
+          font-size: var.$font-size-button;
+        }
+      }
+      .footer {
+        display: flex;
+        align-items: center;
+        margin-top: var.$spasing-small;
+        .icon {
+          width: 40px;
+          height: 40px;
+        }
+        a {
+          color: white;
+        }
+      }
+    }
+
+    @include mixin.respond(mobile) {
+      flex-direction: column;
+      .progectInfo {
+        width: 100%;
+      }
+      .userInfo {
+        width: 100%;
+      }
+    }
+  }
+}

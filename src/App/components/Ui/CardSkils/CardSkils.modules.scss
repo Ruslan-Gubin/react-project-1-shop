@@ -34,6 +34,7 @@
       justify-content: space-between;
       margin-bottom: var.$spasing-small;
       color: var.$color-card-bg;
+      cursor: pointer;
 
       &:hover {
         background-image: linear-gradient(to right, #3a3d3f, #242525);
