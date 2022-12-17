@@ -1,0 +1,1 @@
+export {MinesBlock} from './MinesBlock';

@@ -1,0 +1,32 @@
+@use 'scss/common/var';
+@use 'scss/common/mixin';
+
+
+.root {
+  height: 100vh;
+  width: 100vw;
+  background-image: url('https://res.cloudinary.com/ds289tkqj/image/upload/v1671096445/Posts/gvhfnljgcghbys2oidbs.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 52px;
+  padding-top: 0px;
+  
+
+  @include mixin.respond(mobile) {
+    padding: 5px;
+  padding-top: 0px;
+  background-image: url('https://res.cloudinary.com/ds289tkqj/image/upload/v1671096445/Posts/gvhfnljgcghbys2oidbs.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 100vh;
+  width: 100vw;
+}
+
+.resurceLink {
+  width: 80px;
+  height: 80px;
+  border-radius: var.$border-radius-circle;
+}
+
+
+}

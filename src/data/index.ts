@@ -3,6 +3,10 @@ export { imagesSwiper } from "./imagesSwiper";
 export { productsCategoriLink } from "./productsCategoriLink";
 export {descriptionFrontend, descriptionBackend} from './descriptionOfTechnologies';
 export {aboutUserData, aboutSitePosts, aboutSiteProduct} from './aboutUserData';
+export {iconsGame} from './iconsGame';
+export {resurceUpdateRuls} from './updateRules';
+export {minesArr} from './minesArr';
+export {resurceBar, resurceBarCount} from './resurceBar';
 
 export {
   imagesUrlVk,

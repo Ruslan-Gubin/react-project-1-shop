@@ -18,7 +18,7 @@ const Product = React.memo(() => {
   const dispatch = useAppDispatch();
 
 
-  return (
+  return ( 
     <div className={styles.catalog}>
       {isLoading && <div>Loading...</div>}
       {isError && <p>Error</p>}

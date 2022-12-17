@@ -12,3 +12,5 @@ export { helperLikesFunction} from './helperLikesFunction';
 export { checkUserLoginForMenu} from './loginMenuArray';
 export { checkCustomValidator, checkImagesValidator, checkAddProductValidator} from './checkCustomValidator'; 
 export {  validVisaCard } from './validVisaCard'; 
+export {  checkResorsUpdate, findNextLevelResurce } from './checkResorsUpdate'; 
+export {  dateGame } from './dateForGameFormat'; 

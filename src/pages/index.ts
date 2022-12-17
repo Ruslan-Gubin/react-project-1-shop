@@ -15,8 +15,10 @@ const DialogSinglPage = lazy(() => import('./DialogSinglPage'))
 const Checkout = lazy(() => import('./Checkout'))
 const About = lazy(() => import('./About'))
 const Game = lazy(() => import('./Game'))
+const GameResurce = lazy(() => import('./GameResurce'))
 
 export {
+  GameResurce,
   Game,
   About,
   Checkout,

@@ -1,0 +1,48 @@
+@use 'scss/common/var';
+@use 'scss/common/mixin';
+
+.root {
+  height: 140px;
+  width: 200px;
+  padding: 15px;
+  background-image: url('https://res.cloudinary.com/ds289tkqj/image/upload/v1671100584/Posts/prdsmkknlit32ac3cyy4.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  box-shadow: var.$box-shadow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  @include mixin.respond(tablet) {
+    height: 120px;
+  width: 160px;
+  }
+//   @include mixin.respond(mobile) {
+//     height: 80px;
+//     width: 100px;
+// }
+
+  .image {
+  }
+
+  .circle {
+    position: absolute;
+    top: 82px;
+    right: 18px;
+
+    @include mixin.respond(tablet) {
+      top: 78px;
+      right: 8px;
+    }
+  //   @include mixin.respond(mobile) {
+  //     height: 100px;
+  //     width: 100px;
+  // }
+
+
+  }
+
+
+
+}

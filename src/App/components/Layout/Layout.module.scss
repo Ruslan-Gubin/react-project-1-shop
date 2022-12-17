@@ -1,25 +1,26 @@
-@use 'scss/common/var';
+@use "scss/common/var";
 @use "scss/common/mixin";
 
-
-.wrapper{
+.wrapper {
   overflow: visible;
   display: flex;
   flex-direction: column;
- 
+
   min-height: 100vh;
   margin: 0;
-  background: linear-gradient(to top , var.$color-black-hover, var.$color-blue-black);
+  background: linear-gradient(
+    to top,
+    var.$color-black-hover,
+    var.$color-blue-black
+  );
+  
 
   @include mixin.respond(mobile) {
     min-height: 100vh;
     overflow: scroll;
   }
 
- 
-
-
-  .main{
+  .main {
     flex: 1 1 auto;
   }
 

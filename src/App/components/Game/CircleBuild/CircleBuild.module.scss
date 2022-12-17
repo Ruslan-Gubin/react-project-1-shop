@@ -1,4 +1,5 @@
 @use 'scss/common/var';
+@use 'scss/common/mixin';
 
 
 .root {
@@ -14,6 +15,17 @@
   &:hover {
     scale: 1.2;
   }
+
+//   @include mixin.respond(tablet) {
+//     height: 20px;
+//   width: 20px;
+//   }
+//   @include mixin.respond(mobile) {
+//     height: 100px;
+//     width: 100px;
+// }
+
+   
   
   .CircleContainer {
     width: 31px;
@@ -24,6 +36,15 @@
     align-items: center;
     justify-content: center;
     border: 1px solid rgb(93, 90, 90);
+
+  //   @include mixin.respond(tablet) {
+  //     height: 20px;
+  //   width: 20px;
+  //   }
+  //   @include mixin.respond(mobile) {
+  //     height: 100px;
+  //     width: 100px;
+  // }
     
     
     .CircleValue {
@@ -37,6 +58,16 @@
       justify-content: center;
       font-weight: 600;
       font-size: var.$font-size-card-text;
+
+    //   @include mixin.respond(tablet) {
+    //     height: 16px;
+    //   width: 16px;
+    //   }
+    //   @include mixin.respond(mobile) {
+    //     height: 100px;
+    //     width: 100px;
+    // }
+
     }  
     
   }
@@ -51,3 +82,4 @@
   // border: 3px solid rgb(196, 204, 48);
   // box-shadow: 1px 1px  1px 1px  rgb(187, 187, 187);
 }
+

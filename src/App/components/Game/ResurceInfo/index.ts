@@ -1,0 +1,1 @@
+export {ResurceInfo} from './ResurceInfo';

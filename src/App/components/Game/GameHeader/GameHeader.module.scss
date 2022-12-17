@@ -1,0 +1,41 @@
+@use 'scss/common/var';
+
+.root {
+  display: flex;
+  justify-content: space-between;
+
+  .start {
+
+  }
+
+
+  .center {
+    display: flex;
+    justify-content: center;
+    .resurceLink {
+      width: 120px;
+      height: 80px;
+      border-radius: var.$border-radius-average;
+    }
+    
+    .settlementLink {
+      background-image: url('https://res.cloudinary.com/ds289tkqj/image/upload/v1671121305/Game/grid_v2_uc7sx9.jpg');
+      background-size: 100%;
+      width: 120px;
+      height: 80px;
+      border-radius: var.$border-radius-average;
+    }
+  }
+    
+
+  .options {
+
+    
+    .exit {
+      width: 50px;
+      height: 40px;
+  }
+    }
+
+  
+}

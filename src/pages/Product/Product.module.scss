@@ -32,25 +32,25 @@
     & img {
         
     }
-
+    
 }
 
 .cart {
-display: flex;
-width: 100px;
-span{
-    font-size: 1.3rem;
-}
-.totalPrice {
-
-}
-
-.cartPng {
-    // position: absolute;
-    // top: 0;
-    // left: -30px;
-    width: 40px;
-    height: 40px;
-    opacity: 0.9;
-}
+    display: flex;
+    width: 100px;
+    span{
+        font-size: 1.3rem;
+    }
+    .totalPrice {
+        
+    }
+    
+    .cartPng {
+        // position: absolute;
+        // top: 0;
+        // left: -30px;
+        width: 40px;
+        height: 40px;
+        opacity: 0.9;
+    }
 }

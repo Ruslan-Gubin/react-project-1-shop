@@ -4,12 +4,13 @@ import * as page from "pages";
 import { BeforLoadingPage } from "ui";
 import { ErrorPage, Layout } from "components";
 import "../scss/style.scss";
+import { GameLayout } from "./components/Game/GameLayout";
 
 const router = createBrowserRouter(createRoutesFromElements(
-<Route path="/" element={<Layout />}>
+  <>
+  <Route path="/" element={<Layout />}>
           <Route index element={<page.About />} />
           <Route path="products" element={<page.Products />} />
-          <Route path="game" element={<page.Game />} />
           <Route path="products/:id" element={<page.Product />} />
           <Route path="products/:id/:id" element={<page.SingelPageProduct />} />
           <Route path="login" element={<page.LoginPage />} />
@@ -24,13 +25,20 @@ const router = createBrowserRouter(createRoutesFromElements(
           <Route path="checkout" element={<page.Checkout />} />
           <Route path="*" element={<page.NotfoundPage />} />
         </Route>
+
+  <Route path="/game" element={<GameLayout />}>
+          <Route index element={<page.Game />} />
+          <Route path="resurce" element={<page.GameResurce />} />
+        </Route>
+</>
 ))
+
 
 const FApp = () => {
   return (
     <>
         <React.Suspense fallback={<BeforLoadingPage />}>
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
         </React.Suspense>
     </>
   );

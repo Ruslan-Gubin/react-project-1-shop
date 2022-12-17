@@ -1,0 +1,1 @@
+export {ResorceItem} from './ResorceItem';

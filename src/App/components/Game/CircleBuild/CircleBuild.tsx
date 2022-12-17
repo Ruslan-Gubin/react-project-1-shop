@@ -1,23 +1,45 @@
+import { iconsGame } from 'data';
+import { MineType } from 'models/GameType';
 import React from 'react';
 
 import styles from './CircleBuild.module.scss';
 
-interface ICircleBuild{
-  active: boolean
+interface ICircleBuild {
+  level: number
+  handlerClickCircle?: (value: MineType) => void
+  mine?: MineType
+  updateActive: boolean
 }
 
-const CircleBuild: React.FC<ICircleBuild> = ({active}) => {
 
-  const value = 3
+const CircleBuild: React.FC<ICircleBuild> = ({ updateActive, level, handlerClickCircle, mine}) => {
+  
 
   return (
-    <div className={active ? `${styles.rootActive} ${styles.root}` : styles.root}>
-      <div className={active ?  `${styles.CircleContainerActive} ${styles.CircleContainer}` : styles.CircleContainer}>
-    <div className={styles.CircleValue}>
-      {value}
-    </div>
+    <div className={styles.container}>
+      {mine && handlerClickCircle && updateActive ? 
+      <div onClick={()=> handlerClickCircle(mine)} className={`${styles.rootActive} ${styles.root}`}> 
+      <div className={`${styles.CircleContainerActive} ${styles.CircleContainer}`}>
+      <div className={styles.CircleValue}>
+      {level}
       </div>
+      </div>
+      </div>
+    :  
+      <div  className={styles.root}> 
+      <div className={styles.CircleContainer}>
+      <div className={styles.CircleValue}>
+      {level}
+      </div>
+      </div>
+      </div>
+    
+    }
+
     </div>
+      
+     
+    
   );
 };
 

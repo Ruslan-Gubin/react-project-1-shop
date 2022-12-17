@@ -1,29 +1,29 @@
-import { CircleBuild } from 'game';
 import React from 'react';
 
 import styles from './Game.module.scss';
 
 const Game: React.FC = () => {
-  const [active, setActive] = React.useState(false)
   
   return (
     <div className={styles.root}>
-      <button onClick={() => setActive(!active)}>push</button>
-      <CircleBuild active={active}/>
+      <ul>
+    <li style={{fontSize: 25, color: 'black'}}>
+     <a href="https://lo9.lordfilm.lu/13121-film-pravda-ili-dejstvie-todd-2018.html" target={'_blank'}>Правда или действие</a>
+    </li>
+    <li style={{fontSize: 25, color: 'black'}}>
+     <a href="https://lordserials.org/zarubezhnye/9007-kabinet-redkostej-gilermo-del-toro-2022.html" target={'_blank'}>Кабинет редкостей Гильермо дель Торо(Сериал)</a>
+    </li>
+    <li style={{fontSize: 25, color: 'black'}}>
+     <a href="https://vg.mwfilm.ru/filmy/6941-umnica-uill-hanting-good-will-hunting-1997.html" target={'_blank'}>Умница Уилл Хантинг</a>
+    </li>
+    <li style={{fontSize: 25, color: 'black'}}>
+     <a href="https://lo9.lordfilm.lu/9506-film-krutye-mery-2016.html" target={'_blank'}>Крутые меры (2016)</a>
+    </li>
 
+      </ul>
+   
     </div>
   );
 };
 
 export {Game};
-
-
-
-{/* <h1>Резюмэ</h1>
-  <p>вся информация внятно подана на одной странице</p>
-  <p>чтобы все самое главное было в верхней части станицы  перед лицом</p>
-  <p> Важное - это контакты</p>
-  <p>Стек </p>
-  <p>Фото</p>
-  <p>Кусочек о себе</p>
-  <p></p> */}

@@ -1,0 +1,76 @@
+@use "scss/common/var";
+
+.root {
+  width: 125px;
+  padding-right: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .icon {
+      width: 25px;
+      height: 25px;
+    }
+
+    .values {
+      .countValue {
+        color: #252525;
+        font-weight: 600;
+      }
+      .totalValue {
+        color: #6d6d6d;
+      }
+    }
+  }
+
+  .progressRoot {
+
+    .progressContainer {
+      width: 100%;
+      background-color: rgb(203, 205, 203);
+      border: 1px solid #4a494948;
+      height: 8px;
+      box-shadow: 0px 4px 1px -2px rgba(0, 0, 0, 0.332) inset;
+    }
+
+    .progressCompleted {
+      background-image: linear-gradient(
+        to bottom,
+        rgb(99, 215, 99),
+        rgb(39, 140, 39)
+      );
+      border: 1px solid #506d00;
+      height: 100%;
+      transition: all 0.5s ease;
+    }
+  }
+
+  .incomConta {
+    position: relative;
+    top: 10px;
+    left: 0;
+    background-image: linear-gradient(to bottom, rgb(249, 248, 248),rgb(148, 144, 144));
+    height: 21px;
+    width: 70px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-top: 0.2px solid #2525253e;
+    box-shadow: var.$box-shadow;
+
+    span {
+color: #252525;
+font-weight: 600;
+    }
+  }
+}
+.beforLine {
+  border-right: 2px solid #12121229;
+}
