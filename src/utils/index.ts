@@ -14,3 +14,6 @@ export { checkCustomValidator, checkImagesValidator, checkAddProductValidator} f
 export {  validVisaCard } from './validVisaCard'; 
 export {  checkResorsUpdate, findNextLevelResurce } from './checkResorsUpdate'; 
 export {  dateGame } from './dateForGameFormat'; 
+export {  incomTotalCount } from './incomTotalCount'; 
+export {  calculateResurceBarUpdate } from './calculateResurceBarUpdate'; 
+export {  providesList } from './providesList'; 

@@ -12,6 +12,33 @@
   .center {
     display: flex;
     justify-content: center;
+
+   & .populations {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-right: var.$spasing-one-rem;
+
+    & .iconContainer {
+      padding: 3px;
+      background-color: rgba(167, 128, 65, 0.815);
+      border-radius: var.$border-radius-circle;
+      & img {
+        
+        width: 25px;
+        height: 25px;
+      }
+    }
+    & span {
+      font-size: var.$font-size-button;
+      color: var.$color-header-bg-dark;
+      font-weight: 600;
+      margin-top: 2px;
+
+    }
+
+    }
+
     .resurceLink {
       width: 120px;
       height: 80px;

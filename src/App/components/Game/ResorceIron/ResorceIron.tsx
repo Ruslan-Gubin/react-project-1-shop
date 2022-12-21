@@ -1,6 +1,9 @@
-import {  resurceBarCount, resurceUpdateRuls } from "data";
+import {  resurceUpdateRuls } from "data";
+import { useMineNextLevelInfo } from "hooks";
 import { MineType } from "models/GameType";
 import React from "react";
+import { useSelector } from "react-redux";
+import {  selectPlayer } from "store/slice";
 import { checkResorsUpdate } from "utils";
 import { CircleBuild } from "../CircleBuild";
 
@@ -8,40 +11,22 @@ import styles from "./ResorceIron.module.scss";
 
 interface ResorceIronType {
   mine: MineType
-  handlerIronValue: (value: MineType) => void
+  handlerIronValue: (value: MineType| null) => void
   handlerClickCircle: (value: MineType) => void
-  mineInfo: MineType
 }
 
-const ResorceIron: React.FC<ResorceIronType> = ({ mine, handlerIronValue, mineInfo, handlerClickCircle }) => {  
-  const minesTargetRef = React.useRef<HTMLDivElement>(null)
-  const [activeUpdate, setActiveUpdate] = React.useState(false);
+const ResorceIron: React.FC<ResorceIronType> = ({ mine, handlerIronValue, handlerClickCircle }) => {  
+  const { resurceBar } = useSelector(selectPlayer);
+  const {minesTargetRef} = useMineNextLevelInfo(mine, handlerIronValue)
+  const [activeUpdate, setActiveUpdate] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    const res = checkResorsUpdate(mine, resurceBarCount, resurceUpdateRuls,)
-    setActiveUpdate(res)
-  },[]) 
-
-
-  const on = () => handlerIronValue(mine);
-  const off = () => handlerIronValue(mineInfo);
-
-  React.useEffect(() => {
-    if (!minesTargetRef.current) {
-      return;
+    if (resurceBar) {
+      const checkResursForUpdate = checkResorsUpdate(mine, resurceBar, resurceUpdateRuls)
+      setActiveUpdate(checkResursForUpdate)
     }
-    const node = minesTargetRef.current;
+  },[resurceBar]) 
 
-    node.addEventListener("mouseenter", on);
-    node.addEventListener('mouseleave', off);
-
-    return function () {
-      node.removeEventListener("mouseenter", on);
-      node.removeEventListener('mouseleave', off);
-    }
-  },[])
-
- 
   return (
     <div ref={minesTargetRef}  className={styles.root}>
       <img className={styles.image} src={mine.imag} alt="resorce field" />

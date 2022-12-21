@@ -1,54 +1,60 @@
-import { resurceUpdateRulsType } from "data/updateRules";
-import { MineType } from "models/GameType";
+import { MineType, NeedResurceMinesArrType, NeedResurceMinesType, PlayerResurceBarType,} from "models/GameType";
 
-interface checkResurce {
-  wood: number;
-  clay:  number;
-  iron:  number;
-  wheat:  number;
-  time: number
-  piple: number
-  level: number
-  income: number
-} 
+type ObjGenericType = Record<string, string>;
 
-const findNextLevelResurce = (object: any, resurce: string, level:number):checkResurce => {
-  let targetUpdate = { wood: 0, clay: 0, iron: 0, wheat: 0, piple: 0, income: 0, time: 0, level: 0};
+const objTest: ObjGenericType = { value: "Ruslan", age: "20" };
 
-  for (const key in object) {
-    if (key === resurce) {
-      const resurceArr = object[key];
-      const target =
-        resurceArr && resurceArr.find((item:checkResurce) => item.level === level);
-      
-      if (target) {
-        targetUpdate = {
-          ...target
-        };
-      }
-    }
+
+const getValue = <T extends object, U extends keyof T, C extends keyof U>(
+  obj: T,
+  prop: U,
+  level: C
+): NeedResurceMinesType => {
+  const map = obj[prop];
+  const res = (map as Array<NeedResurceMinesType>).find(
+    (item) => item.level === level
+  );
+  if (res) {
+    return res;
+  } else {
+    throw new Error("Mine next level undefined");
   }
-  
-  return targetUpdate 
+};
 
-}
+// const getKey = <T extends object, U extends keyof T>(obj: T, value: T[U]): U|null => {
+//   const key = (Object.keys(obj) as Array<U>).find(item => obj[item] === value)
+//   return key || null
+// }
 
-const checkResorsUpdate = ( mine: MineType, resurceBarCount: checkResurce, resurceUpdateRuls: resurceUpdateRulsType): boolean => {
+
+
+const findNextLevelResurce = <
+  T extends object,
+  U extends keyof T,
+  C extends keyof U
+>(
+  object: T,
+  resurce: U,
+  level: C
+) => {
+  const res = getValue(object, resurce, level);
+  return res;
+};
+
+const checkResorsUpdate = <T>( mine: MineType, resurceBar: T, resurceUpdateRuls: NeedResurceMinesArrType): boolean => {
   const resurce = mine.resorse;
   const level = mine.level + 1;
 
-  const nextResurseUpdate = findNextLevelResurce(resurceUpdateRuls, resurce, level)
+  const nextResurseUpdate = getValue(resurceUpdateRuls, resurce, level);
 
-  for (const key in resurceBarCount) {
-    if (resurceBarCount[key] < nextResurseUpdate[key]) {
-      return false;
-    }
+  for (const key in resurceBar) {
+      if (Number( resurceBar[key]) < Number(nextResurseUpdate[key])) {
+        return false;
+      }
   }
 
   return true;
 };
 
-
 export { checkResorsUpdate, findNextLevelResurce };
 
-export type {checkResurce}

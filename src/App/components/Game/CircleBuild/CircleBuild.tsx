@@ -1,4 +1,3 @@
-import { iconsGame } from 'data';
 import { MineType } from 'models/GameType';
 import React from 'react';
 

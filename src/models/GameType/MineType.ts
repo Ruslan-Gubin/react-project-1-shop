@@ -1,7 +1,7 @@
 
 
 interface MineType {
-  id: number;
+  _id: string
   resorse: string;
   level: number;
   imag: string;

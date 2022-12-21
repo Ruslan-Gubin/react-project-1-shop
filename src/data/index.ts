@@ -5,8 +5,6 @@ export {descriptionFrontend, descriptionBackend} from './descriptionOfTechnologi
 export {aboutUserData, aboutSitePosts, aboutSiteProduct} from './aboutUserData';
 export {iconsGame} from './iconsGame';
 export {resurceUpdateRuls} from './updateRules';
-export {minesArr} from './minesArr';
-export {resurceBar, resurceBarCount} from './resurceBar';
 
 export {
   imagesUrlVk,

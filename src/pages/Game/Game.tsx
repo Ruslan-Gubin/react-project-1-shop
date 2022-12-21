@@ -1,27 +1,73 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { playerApi } from 'store/rtkQuery';
+import { playerAction, selectAuth } from 'store/slice';
+import { ButtonMain, InputMain } from 'ui';
 
 import styles from './Game.module.scss';
 
 const Game: React.FC = () => {
-  
+  const { auth } = useSelector(selectAuth); 
+  const [createPlayer] = playerApi.useCreatePlayerMutation();
+  const [removePlayer] = playerApi.useRemovePlayerMutation();
+  const [updatePlayer] = playerApi.useUpdatePlayerMutation();
+  const [text, setText] = React.useState('')
+  const dispatch = useDispatch()
+
+  const handlerCreatePlayer = async () => {
+    try {
+      await createPlayer({ nameSity: text, userId: auth._id }).unwrap()
+      .then((data) => dispatch(playerAction.setPlayer(data)))
+    } catch (error) {
+      console.error('rejected', error)
+    }
+
+  };
+
+  const handlerRemovePlayer = async () => {
+    try{
+       await removePlayer({userId: auth._id}).unwrap()
+    } catch (error){
+      console.error('rejected', error)
+    }
+  };
+
+  const handlerUpdatePlayer = async () => {
+    try{
+       await updatePlayer({text: text, userId: auth._id}).unwrap() 
+       .then((data) => dispatch(playerAction.setPlayer(data)))
+    } catch (error){
+      console.error('rejected', error)
+    }
+  };
+
   return (
     <div className={styles.root}>
-      <ul>
-    <li style={{fontSize: 25, color: 'black'}}>
-     <a href="https://lo9.lordfilm.lu/13121-film-pravda-ili-dejstvie-todd-2018.html" target={'_blank'}>Правда или действие</a>
-    </li>
-    <li style={{fontSize: 25, color: 'black'}}>
-     <a href="https://lordserials.org/zarubezhnye/9007-kabinet-redkostej-gilermo-del-toro-2022.html" target={'_blank'}>Кабинет редкостей Гильермо дель Торо(Сериал)</a>
-    </li>
-    <li style={{fontSize: 25, color: 'black'}}>
-     <a href="https://vg.mwfilm.ru/filmy/6941-umnica-uill-hanting-good-will-hunting-1997.html" target={'_blank'}>Умница Уилл Хантинг</a>
-    </li>
-    <li style={{fontSize: 25, color: 'black'}}>
-     <a href="https://lo9.lordfilm.lu/9506-film-krutye-mery-2016.html" target={'_blank'}>Крутые меры (2016)</a>
-    </li>
+     
+    <ButtonMain
+        width={100}
+        bgColor="info"
+        onClick={() => handlerCreatePlayer()}
+      >
+        Create Sity
+      </ButtonMain>
+      <ButtonMain
+        width={100}
+        bgColor="red"
+        onClick={() => handlerRemovePlayer()}
+      >
+        Remove Sity
+      </ButtonMain>
+      <ButtonMain
+        width={100}
+        bgColor="orange"
+        onClick={() => handlerUpdatePlayer()}
+      >
+        Update Sity
+      </ButtonMain>
 
-      </ul>
-   
+      <InputMain  value={text} onChange={(value) => setText(value)} placeholder={'Введите название Города'}/>
+
     </div>
   );
 };

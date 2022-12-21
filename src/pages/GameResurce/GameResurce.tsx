@@ -1,40 +1,92 @@
-import { minesArr, resurceUpdateRuls } from 'data';
-import { MinesBlock, ResurceInfo } from 'game';
-import { MineType } from 'models/GameType';
-import React from 'react';
-import { findNextLevelResurce } from 'utils';
-import { checkResurce } from 'utils/checkResorsUpdate';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { playerApi } from "store/rtkQuery";
+import { MinesBlock, ResurceInfo } from "game";
+import {  resurceUpdateRuls } from "data";
+import {  MineType } from "models/GameType";
+import { playerAction,  selectAuth,  selectPlayer } from "store/slice";
+import { calculateResurceBarUpdate, findNextLevelResurce } from "utils";
 
-import styles from './GameResurce.module.scss';
+import styles from "./GameResurce.module.scss";
+import { ButtonMain } from "ui";
 
 const GameResurce: React.FC = () => {
-  const [mineInfo, setMineInfo] = React.useState(minesArr[0])
-  const [nextLevelMineUpdate, setNextLevelMineUpdate] = React.useState<checkResurce>({wood:0,iron:0,clay:0,wheat:0,time:0,piple:0,level:0})
-
-  const handlerIronValue = (value: MineType) => {
-    const resource = value.resorse
-    const level = value.level
-    const resurceNeedUpdate = findNextLevelResurce(resurceUpdateRuls,resource, level+1)   
-    setNextLevelMineUpdate(resurceNeedUpdate)
-       setMineInfo(value)
-  }
-
-  const handlerClickCircle = (value: MineType) => {
-    console.log(value);
-  }
+  const {auth} = useSelector(selectAuth)
+  const { nextLevelMinesUpdate, player, resurceBar} = useSelector(selectPlayer);
+  const {data: playerData} = playerApi.useGetPlayerQuery({id: auth._id}) 
+  const [updateMineLevel,{}] = playerApi.useUpdateLevelMineMutation()
+  const [updateFull,{}] = playerApi.useUpdateLevelMineFullMutation()
+  const dispatch = useDispatch()
 
 
-  return (
-    <div className={styles.root}>
-      {mineInfo && 
-      <ResurceInfo nextLevelMineUpdate={nextLevelMineUpdate} minesInfo={mineInfo} />
+  const handlerIronValue = (value: MineType | null) => {
+    if (value) {
+      const resource = value.resorse;
+      const level = value.level;
+      
+      dispatch(playerAction.setLastMinesInfo(value))
+      const resurceNeedUpdate = findNextLevelResurce( resurceUpdateRuls, resource, level + 1 );
+      dispatch(playerAction.setNextLevelMineUpdate(resurceNeedUpdate))
       }
-      {mineInfo &&
-
-      <MinesBlock minesArray={minesArr} handlerClickCircle={handlerClickCircle}  handlerIronValue={handlerIronValue} mineInfo={mineInfo}/>
+    };
+    
+ 
+  const handlerClickCircle = async(value: MineType) => {
+    console.log(value)
+    if (playerData) {
+    const resurceBarCount = {
+        wood: resurceBar.wood - nextLevelMinesUpdate.wood,
+        clay: resurceBar.clay - nextLevelMinesUpdate.clay,
+        iron: resurceBar.iron - nextLevelMinesUpdate.iron,
+        wheat: resurceBar.wheat - nextLevelMinesUpdate.wheat
       }
+      const mimeUpdatedOptions = {
+        level: nextLevelMinesUpdate.level,
+        income: nextLevelMinesUpdate.income,
+        piple: nextLevelMinesUpdate.piple,
+        time: nextLevelMinesUpdate.time,
+        population: nextLevelMinesUpdate.piple - value.piple,
+        resurce: value.resorse,
+        incrementIncome: nextLevelMinesUpdate.income - value.income,
+        playerId: player._id,
+        idMine: value._id,
+        resurceBar: resurceBarCount,
+        resurceBarAfterUpdate: {
+          wood: calculateResurceBarUpdate(resurceBarCount.wood, playerData.income.wood, nextLevelMinesUpdate.time, playerData.capasity.wood),
+          clay: calculateResurceBarUpdate(resurceBarCount.clay, playerData.income.clay, nextLevelMinesUpdate.time, playerData.capasity.clay),
+          iron: calculateResurceBarUpdate(resurceBarCount.iron, playerData.income.iron, nextLevelMinesUpdate.time, playerData.capasity.iron),
+          wheat: calculateResurceBarUpdate(resurceBarCount.wheat, playerData.income.wheat, nextLevelMinesUpdate.time, playerData.capasity.wheat) 
+        }
+      }
+      
+      await updateMineLevel(mimeUpdatedOptions).unwrap()
+      .then((data) => {
+        //@ts-ignore
+        const resourceBar = data.resourceBar
+        dispatch(playerAction.setResurceBarAll(resourceBar))
+        
+        
+      })
+      .catch(error => console.log(error))
+    }
+    };
+    
+    const handlerAddResource = async () => {
+      await updateFull('')
+    }
+    
+    return (
+      <div className={styles.root}>
+      <ButtonMain onClick={() => handlerAddResource()} width={200} bgColor="black">full</ButtonMain> 
+        <ResurceInfo />
+
+        <MinesBlock
+          handlerClickCircle={handlerClickCircle}
+          handlerIronValue={handlerIronValue}
+        />
+    
     </div>
   );
 };
 
-export {GameResurce};
+export { GameResurce };

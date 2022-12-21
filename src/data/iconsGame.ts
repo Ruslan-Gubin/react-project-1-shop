@@ -15,9 +15,9 @@ const resurceLink = 'https://res.cloudinary.com/ds289tkqj/image/upload/v16711199
 const settlement = 'https://res.cloudinary.com/ds289tkqj/image/upload/v1671121731/Game/grid_v2_ztzvax.png'
 
 
+type Obj = Record<string,string> 
 
-
-const iconsGame = {
+const iconsGame: Obj = {
   options,
   refresh,
   clock,

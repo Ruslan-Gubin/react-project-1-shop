@@ -1,34 +1,41 @@
-
 import React from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { playerAction, selectAuth, selectPlayer } from 'store/slice';
+import {  useUpdateCountResurce } from 'hooks';
+import { iconsGame } from 'data';
 import styles from './ResorceItem.module.scss';
+import { playerApi } from 'store/rtkQuery';
 
 interface ResorceItemType {
-  line: boolean
-  icons: string
-  value: {
-    count: number
-    total: number
-    incom: number
-  }
+  updateTime: number
+  lastCount: number
+  incom: number
+  capasity: number
+  name: string
 } 
 
-
-const ResorceItem: React.FC<ResorceItemType> = ({line, icons, value}) => {
+const ResorceItem: React.FC<ResorceItemType> = React.memo(({  name,  capasity, updateTime, lastCount, incom }) => {
+  const {resurceBar} = useSelector(selectPlayer)   
   const [progres, setProgres] = React.useState(0)
-  
-  
-  React.useEffect(() => {
-    setProgres(Math.round((value.count)/(value.total ) * 100))
-  },[])
+  const totalCount = useUpdateCountResurce(updateTime, lastCount, incom, capasity)
+  const dispatch = useDispatch() 
 
+
+  React.useEffect(() => {
+      dispatch(playerAction.setResurceBar({totalCount, name})) 
+  },[totalCount])
+
+  React.useEffect(() => {
+    setProgres(Math.round((Number(resurceBar[name]) / capasity) * 100)) 
+  },[ resurceBar])
+  
   return (
-    <div className={line ? `${styles.root} ${styles.beforLine}` : styles.root}>
+    <div className={name !== 'wheat' ? `${styles.root} ${styles.beforLine}` : styles.root}>
       <div className={styles.header}>
-      <img className={styles.icon} src={icons} alt="icon resource" />
+      <img className={styles.icon} src={iconsGame[name]} alt="icon resource" />
       <div className={styles.values}>
-      <span className={styles.countValue}>{value.count}</span>
-      <span className={styles.totalValue}>/{value.total}</span>
+      <span className={styles.countValue}>{resurceBar[name]}</span>
+      <span className={styles.totalValue}>/{capasity}</span>
       </div>
       </div>
 
@@ -40,12 +47,12 @@ const ResorceItem: React.FC<ResorceItemType> = ({line, icons, value}) => {
       </div>
 
       <div className={styles.incomConta}>
-        <span>+{value.incom}</span>
+        <span>+{incom}</span>
         
       </div>
 
     </div>
   );
-};
+});
 
 export  {ResorceItem};

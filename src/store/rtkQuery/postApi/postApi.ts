@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IinitialStatePosts } from "store/slice/postSlice/types";
 import type { IPost } from "models";
+import { providesList } from "utils";
 
 const postApi = createApi({
   reducerPath: "postApi",
@@ -15,6 +16,7 @@ const postApi = createApi({
   }),
   tagTypes: ["Posts", "Tags", "Length"],
   endpoints: (build) => ({
+
     getPosts: build.query<IPost[], { searchPost: string }>({
       query: (options) => ({
         method: "GET",
@@ -23,13 +25,7 @@ const postApi = createApi({
           searchPost: options.searchPost,
         },
       }),
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.map(({ _id }) => ({ type: "Posts" as const, _id })),
-              { type: "Posts", id: "LIST" },
-            ]
-          : [{ type: "Posts", id: "LIST" }],
+      providesTags: (result) => providesList(result, 'Posts'),
     }),
 
     getUserPost: build.query<IPost[], IinitialStatePosts>({
@@ -40,13 +36,7 @@ const postApi = createApi({
           ...options,
         },
       }),
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.map(({ _id }) => ({ type: "Posts" as const, _id })),
-              { type: "Posts", id: "LIST" },
-            ]
-          : [{ type: "Posts", id: "LIST" }],
+      providesTags: (result) => providesList(result, 'Posts'),
     }),
 
     getOnePost: build.query<IPost, { id: string | undefined }>({

@@ -13,11 +13,14 @@ const rootReducer = combineReducers({
   filters: reducer.filterReducer,
   auth: reducer.authReducer,
   addProduct: reducer.addProductReducer,
+  resurce: reducer.playerReduser,
   [rtkQuery.postApi.reducerPath]: rtkQuery.postApi.reducer,
   [rtkQuery.productsApi.reducerPath]: rtkQuery.productsApi.reducer,
   [rtkQuery.authApi.reducerPath]: rtkQuery.authApi.reducer,
   [rtkQuery.commentApi.reducerPath]: rtkQuery.commentApi.reducer,
-  [rtkQuery.dialogApi.reducerPath]: rtkQuery.dialogApi.reducer 
+  [rtkQuery.dialogApi.reducerPath]: rtkQuery.dialogApi.reducer,
+  [rtkQuery.playerApi.reducerPath]: rtkQuery.playerApi.reducer, 
+  [rtkQuery.mineApi.reducerPath]: rtkQuery.mineApi.reducer, 
 });
 
 const config = getPersistConfig({
@@ -32,7 +35,9 @@ const config = getPersistConfig({
     rtkQuery.postApi.reducerPath,
     rtkQuery.authApi.reducerPath,
     rtkQuery.commentApi.reducerPath,
-    rtkQuery.dialogApi.reducerPath
+    rtkQuery.dialogApi.reducerPath,
+    rtkQuery.playerApi.reducerPath,
+    rtkQuery.mineApi.reducerPath,
   ],
   rootReducer,
 });
@@ -42,7 +47,7 @@ const persistedReducer = persist.persistReducer(config, rootReducer);
 const store = configureStore({
   reducer: persistedReducer,
 
-  middleware: (getDefaultMiddleware) => 
+  middleware: (getDefaultMiddleware) =>  
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [
@@ -60,6 +65,8 @@ const store = configureStore({
       rtkQuery.authApi.middleware,
       rtkQuery.commentApi.middleware, 
       rtkQuery.dialogApi.middleware, 
+      rtkQuery.playerApi.middleware, 
+      rtkQuery.mineApi.middleware, 
     ]),
 });
 

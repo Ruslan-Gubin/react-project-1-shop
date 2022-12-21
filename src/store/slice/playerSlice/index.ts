@@ -1,0 +1,1 @@
+export {playerAction, playerReduser, selectPlayer} from './playerSlice';
