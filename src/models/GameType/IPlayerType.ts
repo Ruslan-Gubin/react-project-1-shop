@@ -10,7 +10,7 @@ interface PlayerResurceBarType extends ObjectType {
   wheat: number;
 }
 
-interface IPlayerType {
+interface IPlayerType  {
   _id: string;
   updatedAt: string
   createdAt?: string

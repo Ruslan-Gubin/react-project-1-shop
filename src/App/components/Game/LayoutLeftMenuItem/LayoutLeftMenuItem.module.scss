@@ -1,0 +1,47 @@
+@use 'scss/common/var';
+
+.root {
+  background-image:  linear-gradient(to bottom, rgb(199, 199, 199),rgb(255, 255, 255),);
+  padding: 5px;
+  padding-right: 0px ;
+  padding-left: 0px;
+  max-width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border: 1px solid rgba(47, 47, 47, 0.483);
+  box-shadow: var.$box-shadow;
+  border-left: none;
+  margin-left: -6px;
+  
+  & .container {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding: 6px;
+background-image: linear-gradient(to top, rgb(141, 131, 131),rgb(255, 255, 255),);
+border-radius: var.$border-radius-circle;
+border: 1px solid rgb(102, 102, 102);
+box-shadow: 1px 1px 6px 1px rgba(0, 0, 0, 0.547);
+
+    &:hover{
+      background-image: linear-gradient(to top, rgb(217, 217, 217),rgb(255, 255, 255),);
+    }
+
+    & img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+    
+   & .hits {
+    position: absolute;
+    top: 6px;
+    left: 80px;
+   } 
+    
+    
+    
+}

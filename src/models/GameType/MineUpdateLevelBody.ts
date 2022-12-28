@@ -6,8 +6,6 @@ interface MineUpdateLevelBody {
   piple: number
   time: number
   population: number
-  resurce: string
-  incrementIncome: number
   playerId: string
   idMine: string
   resurceBar: PlayerResurceBarType

@@ -6,3 +6,24 @@ export {MinesBlock} from './MinesBlock';
 export {GameLayout} from './GameLayout';
 export {GameHeader} from './GameHeader';
 export {ResurceInfo} from './ResurceInfo';
+export {HeaderIconGame} from './HeaderIconGame';
+export {HitsModal} from './HitsModal';
+export {HeaderNavigate} from './HeaderNavigate';
+export {MultiHitsModal} from './MultiHitsModal';
+export {HeaderMenuLeft} from './HeaderMenuLeft';
+export {HeaderMenuRight} from './HeaderMenuRight';
+export {SityList} from './SityList';
+export {LayoutLeftMenu} from './LayoutLeftMenu';
+export {BuildingQueueSlots} from './BuildingQueueSlots';
+export {BuildingQueueItem} from './BuildingQueueItem';
+export {CustomSelectGame} from './CustomSelectGame';
+export {LayoutLeftMenuItem} from './LayoutLeftMenuItem';
+export {MenuLayoutOptions} from './MenuLayoutOptions';
+export {MenuLayoutOptionsItem} from './MenuLayoutOptionsItem';
+export {PlayerProgressBar} from './PlayerProgressBar';
+export {PlayerProgressBarItem} from './PlayerProgressBarItem';
+export {LayoutMiltyHits} from './LayoutMiltyHits';
+export {HeroInfo} from './HeroInfo';
+export {HeroAvatar} from './HeroAvatar';
+
+

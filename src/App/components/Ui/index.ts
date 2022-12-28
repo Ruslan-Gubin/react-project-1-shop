@@ -13,4 +13,6 @@ export {CardSkils} from './CardSkils';
 export {AboutUser} from './AboutUser';
 export {Editor} from './Editor';
 export {Watch} from './Watch';
+export {ProgressGame} from './ProgressGame';
+export {ProgressGameUpdateTime} from './ProgressGameUpdateTime';
 

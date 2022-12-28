@@ -1,0 +1,47 @@
+@use 'scss/common/var';
+
+.root {
+  border: 1px solid var.$color-white;
+  background-color: rgba(220, 220, 220, 0.472);
+  padding: 3px;
+  opacity: 0;
+  animation: activeModal 0.3s ease;
+  animation-delay: 0.4s ;
+  animation-fill-mode: forwards;
+  & .container {
+    background-color: white;
+    border: 1px solid rgba(44, 44, 44, 0.557);
+    padding: 10px 10px;
+
+    & .title {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.265);
+      & h2 {
+        font-family: var.$ff-Gilroy-Bold;
+        font-size: var.$font-size-button;
+        color: var.$color-black-hover;
+        padding-bottom: 5px;
+      }
+    }
+
+    & .text {
+      display: flex;
+      align-items: center;
+    justify-content: space-between;
+      & span {
+        padding-top: var.$spasing-small;
+        font-family: var.$ff-Gilroy-Medium;
+        color: var.$color-black-hover;
+      }
+    }
+}
+
+@keyframes activeModal {
+  0% {
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+
+}
+}

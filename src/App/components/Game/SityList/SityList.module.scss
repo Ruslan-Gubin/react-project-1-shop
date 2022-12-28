@@ -1,0 +1,85 @@
+@use 'scss/common/var';
+
+$border:  1px solid rgba(0, 0, 0, 0.149);
+
+%buttonArrow {
+  background-image: linear-gradient(to top,  rgb(134, 134, 134), rgb(255, 255, 255));
+        border-radius: var.$border-radius-button;
+        padding: 3px 5px;
+        box-shadow: var.$box-shadow;
+        border: $border;
+        border-top: none;
+        border-bottom: none;
+}
+
+.root {
+  margin-top: 8px;
+  margin-left: var.$spasing-small;
+  padding: 3px;
+  background-image: linear-gradient(to top,  rgb(132, 132, 132), rgb(249, 247, 247));
+  box-shadow: var.$box-shadow;
+  border-radius: var.$border-radius-button;
+  border-top: none;
+  max-height: 37px;
+  & .container {
+    background-image: linear-gradient(to top,  rgb(168, 168, 168), rgb(255, 255, 255));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var.$box-shadow;
+    border-radius: var.$border-radius-button;
+    border: $border;
+padding: 2px;
+border-top: none;
+   
+
+      & .prevSityArrow {
+        @extend %buttonArrow;
+        & img {
+          width: 20px;
+          height: 20px;
+        }
+    }
+
+
+    & .selectMenu {
+      width: 58%;
+      
+    }
+
+
+    & .menu {
+      @extend %buttonArrow;
+      padding: 0px 0px;
+      border-radius: 1px;
+      & img {
+        width: 25px;
+          height: 25px;
+      }
+    }
+ 
+
+      & .nextSityArrow {
+        @extend %buttonArrow;
+        & img {
+          rotate: (-180deg);
+          width: 20px;
+          height: 20px;
+        }
+      }
+    
+    }
+      
+    & .hits {
+      position: relative;
+      top: 9px;
+      left: 150px;
+    }
+
+
+
+
+
+
+    
+}

@@ -4,19 +4,25 @@ import { CircleBuild } from '../CircleBuild';
 import {  dateGame, } from 'utils';
 
 import styles from './ResurceInfo.module.scss';
-import { useSelector } from 'react-redux';
-import { selectPlayer } from 'store/slice';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { playerAction, selectAuth, selectPlayer } from 'store/slice';
+import { playerApi } from 'store/rtkQuery';
 
 
 const ResurceInfo: React.FC = () => {
-  const {lastMinesInfo, nextLevelMinesUpdate} = useSelector(selectPlayer) 
+  const { auth } = useSelector(selectAuth);
+  const {data: playerData } = playerApi.useGetPlayerQuery({ id: auth._id });
+  const {lastMinesInfo, nextLevelMinesUpdate, resurceBar, timeAvailableUpdate} = useSelector(selectPlayer) 
   const [nextLevel, setNextLevel] = React.useState(lastMinesInfo.level + 1)
   const [updateTimeCompleted, setUpdateTimeCompleted] = React.useState(dateGame.dateEndUpdateFormat(nextLevelMinesUpdate.time))
+  const dispatch = useDispatch()
 
   React.useEffect(() => {
     setNextLevel(lastMinesInfo.level + 1)
     setUpdateTimeCompleted(dateGame.dateEndUpdateFormat(nextLevelMinesUpdate.time))
+    if (playerData) {
+      dispatch(playerAction.setTimeAvailableUpdate({income: playerData.income}))
+    }
   },[lastMinesInfo])
  
 
@@ -63,28 +69,45 @@ const ResurceInfo: React.FC = () => {
     <span>Время строительства:{dateGame.vievDate(nextLevelMinesUpdate.time)}</span>  
       </div>
 
+
       <div className={styles.endUpdateDate}>
+    {timeAvailableUpdate ?
         <span>
-       Завершится строительство в: {updateTimeCompleted}
+          Cтроительсто будет доступно в:  {dateGame.dateEndUpdateFormat(timeAvailableUpdate )}
         </span>
+      : <span> Завершится строительство в: {updateTimeCompleted}
+        </span>
+    }
       </div>
 
     <div className={styles.icons}>
       <div className={styles.resurce}>
       <img  src={iconsGame['wood']} alt="Icon resurce" />
-      <span className={styles.needResurce}>{nextLevelMinesUpdate.wood}</span>
+      <span
+       style={resurceBar.wood < nextLevelMinesUpdate.wood ? {color: 'red'} : {color: ''}}
+       className={styles.needResurce}
+      >{nextLevelMinesUpdate.wood}</span>
       </div>
       <div className={styles.resurce}>
       <img src={iconsGame['clay']} alt="Icon resurce" />
-      <span className={styles.needResurce}>{nextLevelMinesUpdate.clay}</span>
+      <span 
+      style={resurceBar.clay < nextLevelMinesUpdate.clay ? {color: 'red'} : {color: ''}}
+      className={styles.needResurce}>
+        {nextLevelMinesUpdate.clay}</span>
       </div>
       <div className={styles.resurce}>
       <img src={iconsGame['iron']} alt="Icon resurce" />
-      <span className={styles.needResurce}>{nextLevelMinesUpdate.iron}</span>
+      <span 
+      style={resurceBar.iron < nextLevelMinesUpdate.iron ? {color: 'red'} : {color: ''}}
+      className={styles.needResurce}
+      >{nextLevelMinesUpdate.iron}</span>
       </div>
       <div className={styles.resurce}>
       <img src={iconsGame['wheat']} alt="Icon resurce" />
-      <span className={styles.needResurce}>{nextLevelMinesUpdate.wheat}</span>
+      <span
+      style={resurceBar.wheat < nextLevelMinesUpdate.wheat ? {color: 'red'} : {color: ''}}
+      className={styles.needResurce}
+      >{nextLevelMinesUpdate.wheat}</span>
       </div>
     </div>
       </div>

@@ -8,8 +8,7 @@
   background-image: url('https://res.cloudinary.com/ds289tkqj/image/upload/v1671096445/Posts/gvhfnljgcghbys2oidbs.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  padding: 52px;
-  padding-top: 0px;
+  overflow: scroll;
   
 
   @include mixin.respond(mobile) {

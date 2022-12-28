@@ -22,7 +22,7 @@ const useMineNextLevelInfo = (mine: MineType , callback: (value: MineType| null)
       node.removeEventListener("mouseenter", on);
       node.removeEventListener('mouseleave', off);
     }
-  },[])
+  },[mine])
 
   return {minesTargetRef}
 };

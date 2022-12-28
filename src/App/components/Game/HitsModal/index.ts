@@ -1,0 +1,1 @@
+export {HitsModal} from './HitsModal';

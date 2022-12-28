@@ -1,0 +1,31 @@
+@use "scss/common/var";
+
+%colorProgress {
+  border: 1px solid #506d00;
+    height: 100%;
+    transition: all 0.5s ease;
+}
+
+.progressRoot {
+  .progressContainer {
+    width: 100%;
+    background-color: rgb(203, 205, 203);
+    border: 1px solid #4a494948;
+    height: 8px;
+    box-shadow: 0px 4px 1px -2px rgba(0, 0, 0, 0.332) inset;
+  }
+
+  .green {
+    background-image: linear-gradient( to bottom, rgb(84, 212, 84), #278c27 );
+    @extend %colorProgress;
+  }
+
+  .orange {
+    background-image: linear-gradient( to bottom,  rgb(251, 209, 175), rgb(224, 101, 1) );
+    @extend %colorProgress;
+  }
+  .blue {
+    background-image: linear-gradient( to bottom,  rgb(175, 221, 254), rgb(0, 92, 158) );
+    @extend %colorProgress;
+  }
+}

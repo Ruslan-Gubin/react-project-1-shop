@@ -4,13 +4,15 @@ const options: Intl.DateTimeFormatOptions = {
   second: "2-digit",
 };
 
-const ruDateGame = Intl.DateTimeFormat("ru", options);
+ const ruDateGame = new Intl.DateTimeFormat("ru", options);
+
+
 
 class DateGame {
   constructor() {}
 
-  dateEndUpdateFormat(timer: number) {
-    const endUpdate = this.nowDate.setSeconds( this.nowDate.getSeconds() + timer);
+  dateEndUpdateFormat(timer: Date) {
+    const endUpdate = this.nowDate.setMilliseconds( Number(this.nowDate.getMilliseconds()) + Number(timer));
     return this.formatedTime(endUpdate)
   };
 
@@ -19,16 +21,21 @@ class DateGame {
    return this.formatedTime(dateUpdate)
   }
 
-  public get nowDate() {
+  public get nowDate(): Date {
     return new Date();
   }
 
   public timeTransferMs(value: number) {
-    return new Date(0,0,0,0,0,value);
+    return new Date(0,0,0,0,0,0,value);
+  }
+
+  public nowDateMiliSeconds() {
+    return Date.now();
   }
 
   public formatedTime(value: Date | number) {
-    return ruDateGame.format(value);
+      const ruDateFormat = ruDateGame.format(value)
+      return ruDateFormat;
   }
 }
 

@@ -1,0 +1,53 @@
+@use "scss/common/var";
+
+.root {
+  & .container {
+    display: flex;
+    & .link {
+      background-color: rgba(255, 255, 255, 0.687);
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      box-shadow: var.$box-shadow;
+      border-bottom-left-radius: 30px;
+      & .itemContainer {
+        cursor: pointer;
+        background-color: rgb(131, 131, 131);
+        background-image: linear-gradient(
+          to top,
+          rgb(195, 195, 195),
+          rgb(236, 236, 236)
+        );
+        padding: 3px;
+        border-radius: var.$border-radius-button;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        & span {
+          font-size: 13px;
+        }
+        & .item {
+          width: 23px;
+          height: 23px;
+        }
+      }
+    }
+
+    & .heroAvatar {
+
+    }
+
+    & .LevelLink {
+    }
+  }
+
+  & .reverseBlock {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 30px;
+  }
+
+
+}

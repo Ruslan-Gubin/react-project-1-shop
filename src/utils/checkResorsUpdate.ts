@@ -1,4 +1,4 @@
-import { MineType, NeedResurceMinesArrType, NeedResurceMinesType, PlayerResurceBarType,} from "models/GameType";
+import { MineType, NeedResurceMinesArrType, NeedResurceMinesType} from "models/GameType";
 
 type ObjGenericType = Record<string, string>;
 

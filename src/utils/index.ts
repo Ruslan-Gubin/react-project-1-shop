@@ -17,3 +17,4 @@ export {  dateGame } from './dateForGameFormat';
 export {  incomTotalCount } from './incomTotalCount'; 
 export {  calculateResurceBarUpdate } from './calculateResurceBarUpdate'; 
 export {  providesList } from './providesList'; 
+export {  maxValueInObjects, checkTimeUpdate } from './checkMaxTimeForResource'; 

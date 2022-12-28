@@ -1,10 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { playerAction, selectAuth, selectPlayer } from 'store/slice';
-import {  useUpdateCountResurce } from 'hooks';
+import { playerAction,  selectPlayer } from 'store/slice';
+import {  useHover, useUpdateCountResurce } from 'hooks';
 import { iconsGame } from 'data';
 import styles from './ResorceItem.module.scss';
-import { playerApi } from 'store/rtkQuery';
+import { ProgressGame } from 'ui';
+import { MultiHitsModal } from '../MultiHitsModal';
 
 interface ResorceItemType {
   updateTime: number
@@ -12,14 +13,16 @@ interface ResorceItemType {
   incom: number
   capasity: number
   name: string
+  title: string
 } 
 
-const ResorceItem: React.FC<ResorceItemType> = React.memo(({  name,  capasity, updateTime, lastCount, incom }) => {
+const ResorceItem: React.FC<ResorceItemType> = React.memo(({  name,  capasity, updateTime, lastCount, incom , title}) => {
   const {resurceBar} = useSelector(selectPlayer)   
-  const [progres, setProgres] = React.useState(0)
+  const [progres, setProgres] = React.useState<number>(0)
   const totalCount = useUpdateCountResurce(updateTime, lastCount, incom, capasity)
   const dispatch = useDispatch() 
-
+  const hoverRef = React.useRef<HTMLDivElement>(null)
+  const hover = useHover(hoverRef)
 
   React.useEffect(() => {
       dispatch(playerAction.setResurceBar({totalCount, name})) 
@@ -30,7 +33,7 @@ const ResorceItem: React.FC<ResorceItemType> = React.memo(({  name,  capasity, u
   },[ resurceBar])
   
   return (
-    <div className={name !== 'wheat' ? `${styles.root} ${styles.beforLine}` : styles.root}>
+    <div ref={hoverRef} className={name !== 'wheat' ? `${styles.root} ${styles.beforLine}` : styles.root}>
       <div className={styles.header}>
       <img className={styles.icon} src={iconsGame[name]} alt="icon resource" />
       <div className={styles.values}>
@@ -38,18 +41,18 @@ const ResorceItem: React.FC<ResorceItemType> = React.memo(({  name,  capasity, u
       <span className={styles.totalValue}>/{capasity}</span>
       </div>
       </div>
-
-      <div className={styles.progressRoot}>
-      <div className={styles.progressContainer}>
-      <div className={styles.progressCompleted} style={{width: `${progres}%`}}>
-      </div>
-      </div>
-      </div>
-
+      <ProgressGame progres={progres} /> 
+      
       <div className={styles.incomConta}>
         <span>+{incom}</span>
         
       </div>
+
+      {hover && 
+    <div className={styles.hitsModal}>
+      <MultiHitsModal capasity={capasity} text='Заполнится через:' title={title}  width={230} totalCount={totalCount} incom={incom} />
+    </div>
+      }
 
     </div>
   );

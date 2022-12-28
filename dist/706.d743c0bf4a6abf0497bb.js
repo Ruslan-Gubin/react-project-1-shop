@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkreact_webpack=self.webpackChunkreact_webpack||[]).push([[706],{1248:function(e,a,c){c.r(a),c.d(a,{default:function(){return u}});var n=c(7294),s=c(5893);const t=n.memo((()=>(0,s.jsx)("div",{className:"lNndba9jQnfYv1h16ETg"}))),u=n.memo(t)}}]);

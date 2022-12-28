@@ -1,9 +1,10 @@
+import React from "react";
 import {  resurceUpdateRuls } from "data";
 import { useMineNextLevelInfo } from "hooks";
 import { MineType } from "models/GameType";
-import React from "react";
 import { useSelector } from "react-redux";
 import {  selectPlayer } from "store/slice";
+import { ProgressGameUpdateTime } from "ui";
 import { checkResorsUpdate } from "utils";
 import { CircleBuild } from "../CircleBuild";
 
@@ -16,7 +17,7 @@ interface ResorceIronType {
 }
 
 const ResorceIron: React.FC<ResorceIronType> = ({ mine, handlerIronValue, handlerClickCircle }) => {  
-  const { resurceBar } = useSelector(selectPlayer);
+   const { resurceBar , mineUpdateActive } = useSelector(selectPlayer);
   const {minesTargetRef} = useMineNextLevelInfo(mine, handlerIronValue)
   const [activeUpdate, setActiveUpdate] = React.useState<boolean>(false);
 
@@ -25,7 +26,7 @@ const ResorceIron: React.FC<ResorceIronType> = ({ mine, handlerIronValue, handle
       const checkResursForUpdate = checkResorsUpdate(mine, resurceBar, resurceUpdateRuls)
       setActiveUpdate(checkResursForUpdate)
     }
-  },[resurceBar]) 
+  },[resurceBar, mine]) 
 
   return (
     <div ref={minesTargetRef}  className={styles.root}>
@@ -33,8 +34,13 @@ const ResorceIron: React.FC<ResorceIronType> = ({ mine, handlerIronValue, handle
       <div className={styles.circle}>
         {mine &&
         <CircleBuild handlerClickCircle={handlerClickCircle} mine={mine} updateActive={activeUpdate}  level={mine.level}/>
-        }
+      }
       </div>
+      {mine._id === mineUpdateActive.mineId && 
+      <div className={styles.progress}>
+            <ProgressGameUpdateTime />
+      </div>
+      }
     </div>
   );
 };

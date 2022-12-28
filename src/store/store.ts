@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
   filters: reducer.filterReducer,
   auth: reducer.authReducer,
   addProduct: reducer.addProductReducer,
-  resurce: reducer.playerReduser,
+  player: reducer.playerReduser,
   [rtkQuery.postApi.reducerPath]: rtkQuery.postApi.reducer,
   [rtkQuery.productsApi.reducerPath]: rtkQuery.productsApi.reducer,
   [rtkQuery.authApi.reducerPath]: rtkQuery.authApi.reducer,
