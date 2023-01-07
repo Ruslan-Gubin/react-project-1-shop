@@ -1,1 +1,0 @@
-export {GameResurce as default} from './GameResurce';

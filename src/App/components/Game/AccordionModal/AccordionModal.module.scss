@@ -1,0 +1,60 @@
+@use 'scss/common/var';
+
+.root {
+  margin-top: 2px;
+ & .container {
+  & .header {
+    background-image: linear-gradient(to bottom, white,rgb(175, 175, 175),);
+    padding-left:  var.$spasing-big-medium;
+    padding-top: var.$spasing-big-medium;
+   
+
+    & .links {
+      display: flex;
+      align-items: center;
+
+      & .lindItemContainer {
+        border: 1px solid rgb(167, 167, 167);
+        border-bottom: 0;
+        transition: all 0.3s ease;
+        &:hover{
+          background-color: white;
+          transform: translateY(-6px);
+          padding-bottom: 5px;
+          padding-bottom: 0;
+          transition: all 0.3s ease;
+        }
+
+      & .linkItem {
+        background-image: linear-gradient( to bottom, white,rgb(170, 170, 170));
+        font-weight: 600;
+        color: var.$color-secondary-hover;
+        padding: 5px;
+        font-size: var.$font-size-button;
+        cursor: pointer;
+      }
+    }
+    & .linkActive {
+      transform: translateY(-6px);
+        background-color: white;
+       border: 1px solid rgba(186, 186, 186, 0.299);
+       border-top: none;
+       color: var.$color-white;
+       transition: all 0.4s ease;
+       & .linkItem {
+        color: var.$color-white;
+        background-image: linear-gradient(to top, rgb(82, 139, 2),rgb(174, 235, 87));
+      }
+      }
+
+    }
+  }
+  & .body {
+    padding: 20px;
+    padding-top: 30px;
+    background-color: white;
+  }
+  
+  
+}
+}

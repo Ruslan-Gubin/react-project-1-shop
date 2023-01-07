@@ -32,17 +32,21 @@ import wikiWhite from '../assets/img/icons/game/wiki-White-07826723.png';
 import experience from '../assets/img/icons/game/experience.png';
 import hospital from '../assets/img/icons/game/hospital-872389.png';
 import compass from '../assets/img/icons/game/compass-8963276.png';
+import chatGame from '../assets/img/icons/game/chat-6798623.png';
+import compassAdventure from '../assets/img/icons/game/compass-589232.png';
 const ironeMine = 'https://res.cloudinary.com/ds289tkqj/image/upload/v1671098900/Posts/ebklpqr6iw9s3hlgvrp3.png'
 const woodMine = 'https://res.cloudinary.com/ds289tkqj/image/upload/v1671102328/Posts/ck6ednix2bnlnczmb7gi.png'
 const ferma = 'https://res.cloudinary.com/ds289tkqj/image/upload/v1671104695/Posts/a9px0mcr6jtkdd5vurec.png'
 const kleyIron = 'https://res.cloudinary.com/ds289tkqj/image/upload/v1671105417/Posts/smniheogjkymwqbcgzxf.png'
-const resurceLink = 'https://res.cloudinary.com/ds289tkqj/image/upload/v1671119922/Posts/lu5j3fmmbkzfqfo3ypso.png'
+const resourceLink = 'https://res.cloudinary.com/ds289tkqj/image/upload/v1671119922/Posts/lu5j3fmmbkzfqfo3ypso.png'
 const settlement = 'https://res.cloudinary.com/ds289tkqj/image/upload/v1672001107/Game/settlin-234424_adnrfr.jpg'
 
 
 type Obj = Record<string,string> 
 
 const iconsGame: Obj = {
+  compassAdventure,
+  chatGame,
   compass,
   experience,
   hospital,
@@ -74,7 +78,7 @@ const iconsGame: Obj = {
   population,
   exit,
   settlement,
-  resurceLink,
+  resourceLink,
   kleyIron,
   ferma,
   woodMine,

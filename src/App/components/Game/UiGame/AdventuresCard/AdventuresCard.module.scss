@@ -1,0 +1,82 @@
+@use "scss/common/var";
+
+%text-title {
+  font-family: var.$ff-Gilroy-Bold;
+  font-size: var.$font-size-card-text;
+  color: var.$color-black-hover;
+}
+
+.adventuresCard {
+  width: 218px;
+  border: 1px solid rgba(46, 45, 45, 0.427);
+  background-image: linear-gradient(
+    to top,
+    rgb(171, 171, 171),
+    rgb(225, 225, 225)
+  );
+  padding: 3px;
+  margin-bottom: 5px;
+  &:hover {
+    background-image: linear-gradient(
+      to bottom,
+      rgb(121, 207, 0),
+      rgb(121, 201, 8)
+    );
+  }
+  & .adventuresCardContainer {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(255, 255, 255);
+    background-image: linear-gradient(
+      to top,
+      rgb(242, 242, 242),
+      rgb(189, 189, 189)
+    );
+    &:hover {
+      background-image: linear-gradient(
+        to top,
+        rgb(157, 229, 55),
+        rgb(222, 255, 175)
+      );
+    }
+    & .adventuresCardTitle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var.$spasing-small;
+      & h2 {
+        @extend %text-title;
+      }
+    }
+    & .adventuresCardTitleLine {
+      width: 2px;
+      height: 3px;
+      background-image: linear-gradient(
+        to bottom,
+        rgba(148, 148, 148, 0.993),
+        rgb(255, 255, 255)
+      );
+      width: 90%;
+      box-shadow: var.$box-shadow;
+      margin: 0 auto;
+    }
+    & .image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var.$spasing-small 0;
+      & img {
+        width: 50px;
+        height: 50px;
+      }
+    }
+  }
+  .active {
+    background-image: linear-gradient(
+      to top,
+      rgb(106, 181, 1),
+      rgb(195, 253, 113)
+    );
+  }
+}

@@ -3,11 +3,22 @@ import { MineType } from "./MineType";
 
 type ObjectType = Record<string, number>
 
-interface PlayerResurceBarType extends ObjectType {
+interface PlayerResourceBarType extends ObjectType {
   wood: number;
   clay: number;
   iron: number;
   wheat: number;
+}
+
+interface InventoryPlayerType {
+  bonus: string;
+  image: string;
+  name: string;
+  purpose: string;
+  status: boolean;
+  cell: number;
+  order: number;
+  _id: string
 }
 
 interface IPlayerType  {
@@ -17,10 +28,12 @@ interface IPlayerType  {
   user: IUser;
   nameSity: string;
   population: number;
-  resourceBar: PlayerResurceBarType;
-  capasity: PlayerResurceBarType;
-  income: PlayerResurceBarType;
+  resourceBar: PlayerResourceBarType;
+  capasity: PlayerResourceBarType;
+  income: PlayerResourceBarType;
   mines: MineType[];
+  inventory: InventoryPlayerType[]
+  compass: number
 }
 
-export type { IPlayerType , PlayerResurceBarType};
+export type { IPlayerType , PlayerResourceBarType, InventoryPlayerType};

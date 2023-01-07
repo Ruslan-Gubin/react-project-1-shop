@@ -39,37 +39,17 @@
       left: 0px;
     }
 
-    .center {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin-top: 25px;
+   & .center {
+position: relative;
+top: -53px;
 
-      & .centerLinkMenu {
-        padding-left: 25px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        position: relative;
+@media (max-width: 1200px) {
+  left: -20px;
+}
 
-        & .headerIconsLeft {
-          display: flex;
-        }
-
-        & .headerIconsRight {
-          display: flex;
-        }
-
-        & .navigate {
-          display: flex;
-        }
-      }
-
-      & .resourceBar {
-        margin-top: -10px;
-      }
     }
+
+  
 
     .headerMenuRight {
 

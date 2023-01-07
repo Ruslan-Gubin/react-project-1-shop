@@ -1,18 +1,35 @@
 import {
   IPlayerType,
   MineType,
-  NeedResurceMinesType,
-  PlayerResurceBarType,
+  NeedResourceMinesType,
+  PlayerResourceBarType,
 } from "models/GameType";
-import { calculateResurceBarUpdate } from "utils";
+import { calculateResourceBarUpdate } from "utils";
 
 type IncomeUpdateType = Record<string, any>;
+
+interface MineUpdatedOptionsType {
+    level: number;
+    income: number;
+    piple: number;
+    time: number;
+    population: number;
+    playerId: string;
+    idMine: string;
+    resourceBar: {
+        wood: number;
+        clay: number;
+        iron: number;
+        wheat: number;
+    };
+    incomeUpdate: IncomeUpdateType;
+}
 
 const mineUpdateObjOptions = (
   value: MineType,
   playerData: IPlayerType ,
-  resurceBar: PlayerResurceBarType,
-  nextLevelMinesUpdate: NeedResurceMinesType
+  resourceBar: PlayerResourceBarType,
+  nextLevelMinesUpdate: NeedResourceMinesType
 ) => {
  
   
@@ -28,14 +45,14 @@ const mineUpdateObjOptions = (
     }
   }
   
-  const resurceBarCount = {
-    wood: resurceBar.wood - nextLevelMinesUpdate.wood,
-    clay: resurceBar.clay - nextLevelMinesUpdate.clay,
-    iron: resurceBar.iron - nextLevelMinesUpdate.iron,
-    wheat: resurceBar.wheat - nextLevelMinesUpdate.wheat,
+  const resourceBarCount = {
+    wood: resourceBar.wood - nextLevelMinesUpdate.wood,
+    clay: resourceBar.clay - nextLevelMinesUpdate.clay,
+    iron: resourceBar.iron - nextLevelMinesUpdate.iron,
+    wheat: resourceBar.wheat - nextLevelMinesUpdate.wheat,
   };
 
-  const mimeUpdatedOptions = {
+  const mineUpdatedOptions:MineUpdatedOptionsType = {
     level: nextLevelMinesUpdate.level,
     income: nextLevelMinesUpdate.income,
     piple: nextLevelMinesUpdate.piple,
@@ -43,28 +60,28 @@ const mineUpdateObjOptions = (
     population: nextLevelMinesUpdate.piple - value.piple,
     playerId: playerData._id,
     idMine: value._id,
-    resurceBar: resurceBarCount,
-    resurceBarAfterUpdate: {
-      wood: calculateResurceBarUpdate(
-        resurceBarCount.wood,
+    // resourceBar: resourceBarCount,
+    resourceBar: {
+      wood: calculateResourceBarUpdate(
+        resourceBarCount.wood,
         playerData.income.wood,
         nextLevelMinesUpdate.time,
         playerData.capasity.wood
         ),
-        clay: calculateResurceBarUpdate(
-        resurceBarCount.clay,
+        clay: calculateResourceBarUpdate(
+        resourceBarCount.clay,
         playerData.income.clay,
         nextLevelMinesUpdate.time,
         playerData.capasity.clay
       ),
-      iron: calculateResurceBarUpdate(
-        resurceBarCount.iron,
+      iron: calculateResourceBarUpdate(
+        resourceBarCount.iron,
         playerData.income.iron,
         nextLevelMinesUpdate.time,
         playerData.capasity.iron
       ),
-      wheat: calculateResurceBarUpdate(
-        resurceBarCount.wheat,
+      wheat: calculateResourceBarUpdate(
+        resourceBarCount.wheat,
         playerData.income.wheat,
         nextLevelMinesUpdate.time,
         playerData.capasity.wheat
@@ -72,8 +89,9 @@ const mineUpdateObjOptions = (
     },
     incomeUpdate,
   };
-  return { mimeUpdatedOptions, resurceBarCount };
+  return { mineUpdatedOptions, resourceBarCount };
 
 };
 
 export { mineUpdateObjOptions };
+export type {MineUpdatedOptionsType}

@@ -2,8 +2,8 @@
   const checkTimeUpdate = (resource: number, incom: number, needResource: number): number => {
     const MS_IN_HOURS = 3600000 /** в часе миллисекунд */
     const timeDifference = needResource - resource /** сколько требуется ресурсов */
-    const incomeResurce = incom /** прибыль в n/в.ч данного ресурса */
-    const updatePeriod = MS_IN_HOURS / incomeResurce /** период обновления */
+    const incomeResource = incom /** прибыль в n/в.ч данного ресурса */
+    const updatePeriod = MS_IN_HOURS / incomeResource /** период обновления */
     const result = Math.floor((updatePeriod * timeDifference) )
     return result 
   }

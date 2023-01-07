@@ -23,7 +23,7 @@ const HeaderNavigate: React.FC<HeaderNavigateType> = ({ icon, link, text }) => {
       <div className={href === link ? `${styles.container} ${styles.activeLink}` : styles.container}>
         {href === link && <div></div>}
       <Link to={link}>
-        <img className={styles.resurceLink} src={icon} alt="resurce link" />
+        <img className={styles.resourceLink} src={icon} alt="resource link" />
       </Link>
       {hover && 
       <div className={styles.hitsModal}>

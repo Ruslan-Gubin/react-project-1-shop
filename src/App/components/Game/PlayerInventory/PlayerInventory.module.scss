@@ -1,0 +1,61 @@
+@use "scss/common/var";
+
+.root {
+  
+  & .container {
+    display: flex;
+    align-items: center;
+
+    & .title {
+      position: relative;
+      top: -10px;
+      text-align: center;
+      margin-bottom: var.$spasing-medium;
+      & span {
+        padding: 5px 15px;
+        border-radius: var.$border-radius-button;
+        background-image: linear-gradient(to top, rgb(198, 198, 198), white);
+        font-family: var.$ff-Gilroy-Bold;
+        font-size: var.$font-size-button;
+        color: #373b3e;
+        box-shadow: var.$box-shadow;
+      }
+    }
+
+    & .hero {
+      height: 465px;
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+      border: 1px solid rgba(161, 161, 161, 0.896);
+      border-right: none;
+      padding-bottom: 30px;
+      background-image: linear-gradient(
+        to right,
+        rgb(204, 204, 204),
+        white,
+        rgb(204, 204, 204)
+      );
+
+      & .playerBlockInventary {
+        display: flex;
+        flex-wrap: wrap;
+      }
+    }
+
+    & .inventary {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(161, 161, 161, 0.896);
+      padding: 5px;
+
+      .cellsContainer {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}

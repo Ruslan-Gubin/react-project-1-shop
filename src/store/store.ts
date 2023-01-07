@@ -14,6 +14,7 @@ const rootReducer = combineReducers({
   auth: reducer.authReducer,
   addProduct: reducer.addProductReducer,
   player: reducer.playerReduser,
+  gameModal: reducer.gameModalReducer,
   [rtkQuery.postApi.reducerPath]: rtkQuery.postApi.reducer,
   [rtkQuery.productsApi.reducerPath]: rtkQuery.productsApi.reducer,
   [rtkQuery.authApi.reducerPath]: rtkQuery.authApi.reducer,

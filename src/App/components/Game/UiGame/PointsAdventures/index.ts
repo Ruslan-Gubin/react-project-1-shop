@@ -1,0 +1,1 @@
+export {PointsAdventures} from './PointsAdventures';

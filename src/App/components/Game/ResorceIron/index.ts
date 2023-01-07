@@ -1,1 +1,0 @@
-export {ResorceIron} from './ResorceIron';

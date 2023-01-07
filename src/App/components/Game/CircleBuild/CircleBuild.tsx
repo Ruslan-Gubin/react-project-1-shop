@@ -13,7 +13,7 @@ interface ICircleBuild {
 }
 
 
-const CircleBuild: React.FC<ICircleBuild> = ({ updateActive, level, handlerClickCircle, mine}) => {
+const CircleBuild: React.FC<ICircleBuild> = React.memo(({ updateActive, level, handlerClickCircle, mine}) => {
   const { mineUpdateActive } = useSelector(selectPlayer)
   
 
@@ -44,6 +44,6 @@ const CircleBuild: React.FC<ICircleBuild> = ({ updateActive, level, handlerClick
      
     
   );
-};
+});
 
 export {CircleBuild};

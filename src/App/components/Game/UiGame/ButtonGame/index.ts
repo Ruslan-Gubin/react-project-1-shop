@@ -1,0 +1,1 @@
+export {ButtonGame} from './ButtonGame';

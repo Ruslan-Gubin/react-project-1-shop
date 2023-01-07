@@ -1,0 +1,131 @@
+@use "scss/common/var";
+
+.root {
+  width: 750px;
+
+  .container {
+    background-image: url("https://res.cloudinary.com/ds289tkqj/image/upload/v1671124693/Game/scrollText_gekikk.png");
+    background-size: 100% 100%;
+    min-width: 300px;
+    max-width: 60%;
+    padding: 10px;
+    margin: 20px auto;
+    margin-bottom: 5px;
+    text-align: center;
+    color: var.$color-black-hover;
+    font-family: var.$ff-Gilroy-Bold;
+    opacity: 0;
+    animation: activeModal 0.3s ease;
+    animation-delay: 0.4s ;
+    animation-fill-mode: forwards;
+
+
+    .title {
+      font-size: var.$font-size-title-normal;
+      font-family: var.$ff-Gilroy-Bold;
+      margin-bottom: var.$spasing-small;
+    }
+
+    .text {
+      font-size: var.$font-size-card-text;
+      padding-bottom: 5px;
+    }
+
+    .updateInfo {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 30px;
+      padding-bottom: 0;
+      border-top: 3px solid rgba(57, 57, 57, 0.162);
+      font-size: var.$font-size-button;
+
+      & .level {
+      }
+
+      & .population {
+        & img {
+          height: 20px;
+          width: 20px;
+          margin-right: 5px;
+          opacity: 0.8;
+        }
+        & span {
+        }
+      }
+
+      & .refreshIcon {
+        width: 35px;
+        height: 35px;
+
+        &:hover {
+          animation: updateIcon 7s normal 1 none;
+        }
+      }
+
+      & .nextLevel {
+      }
+    }
+
+    .timeUpdate {
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      & img {
+        margin-right: 5px;
+        height: 18px;
+        width: 18px;
+        opacity: 0.5;
+      }
+    }
+
+    .icons {
+      display: flex;
+      justify-content: space-around;
+      border-top: 3px solid rgba(57, 57, 57, 0.162);
+      padding-top: 5px;
+
+      & img {
+        height: 35px;
+        width: 35px;
+      }
+      .resurce {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 0;
+        margin-bottom: var.$spasing-small;
+        border-right: 3px solid rgba(57, 57, 57, 0.162);
+        width: 100%;
+
+        &:nth-last-child(1) {
+          border-right: none;
+        }
+
+        & .needResurce {
+          font-size: var.$font-size-average;
+          font-family: var.$ff-BebasNeue-Regular;
+        }
+      }
+    }
+  }
+  @keyframes activeModal {
+    0% {
+      opacity: 0;
+    }
+    100%{
+      opacity: 1;
+    }
+  
+  }
+}
+
+@keyframes updateIcon {
+  0% {
+  }
+  100% {
+    rotate: (3600deg);
+  }
+}

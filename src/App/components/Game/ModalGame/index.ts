@@ -1,0 +1,1 @@
+export {ModalGame} from './ModalGame';

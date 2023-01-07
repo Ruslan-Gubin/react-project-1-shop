@@ -1,0 +1,1 @@
+export {FooterGameChatMenu} from './FooterGameChatMenu';

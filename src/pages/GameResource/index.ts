@@ -1,0 +1,1 @@
+export {GameResource as default} from './GameResource';

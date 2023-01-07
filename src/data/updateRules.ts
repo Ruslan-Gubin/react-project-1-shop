@@ -1,6 +1,6 @@
-import { NeedResurceMinesArrType, NeedResurceWarhousType } from "models/GameType"
+import { NeedResourceMinesArrType, NeedResourceWarhousType } from "models/GameType"
 
-const resurceUpdateRuls: NeedResurceMinesArrType = {
+const resourceUpdateRuls: NeedResourceMinesArrType = {
    wood: [
     {level: 1, wood: 30, clay: 80, iron: 40, wheat: 50, time: 50000, piple: 2, income: 5},
     {level: 2, wood: 65, clay: 165, iron: 85, wheat: 100, time: 100000, piple: 3, income: 9},
@@ -52,7 +52,7 @@ const resurceUpdateRuls: NeedResurceMinesArrType = {
 
 }
 
-const warehouse: NeedResurceWarhousType[] = [
+const warehouse: NeedResourceWarhousType[] = [
   {level: 1, wood: 140, clay: 180, iron: 100, wheat: 0, time: 35000, piple: 1, capasity: 1200},
   {level: 2, wood: 185, clay: 240, iron: 135, wheat: 0, time: 240000, piple: 2, capasity: 1700},
   {level: 3, wood: 225, clay: 320, iron: 150, wheat: 0, time: 500000, piple: 3, capasity: 2300},
@@ -61,7 +61,7 @@ const warehouse: NeedResurceWarhousType[] = [
   {level: 6, wood: 585, clay: 750, iron: 415, wheat: 0, time: 5100000, piple: 6, capasity: 5000},
   {level: 7, wood: 775, clay: 995, iron: 555, wheat: 0, time: 7800000, piple: 7, capasity: 6300},
 ]
-const theBarn: NeedResurceWarhousType[] = [
+const theBarn: NeedResourceWarhousType[] = [
   {level: 1, wood: 80, clay: 100, iron: 70, wheat: 20, time: 35000, piple: 1, capasity: 1200},
   {level: 2, wood: 105, clay: 135, iron: 95, wheat: 25, time: 230000, piple: 2, capasity: 2300},
   {level: 3, wood: 130, clay: 180, iron: 130, wheat: 30, time: 50000, piple: 3, capasity: 3100},
@@ -70,4 +70,4 @@ const theBarn: NeedResurceWarhousType[] = [
   {level: 6, wood: 335, clay: 415, iron: 290, wheat: 85, time: 4920000, piple: 6, capasity: 5000},
 ]
 
-export {resurceUpdateRuls, warehouse,theBarn}
+export {resourceUpdateRuls, warehouse,theBarn}

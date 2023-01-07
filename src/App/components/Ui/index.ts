@@ -15,4 +15,3 @@ export {Editor} from './Editor';
 export {Watch} from './Watch';
 export {ProgressGame} from './ProgressGame';
 export {ProgressGameUpdateTime} from './ProgressGameUpdateTime';
-

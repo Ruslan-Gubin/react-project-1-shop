@@ -1,0 +1,12 @@
+@use 'scss/common/var';
+@use 'scss/common/mixin';
+
+
+.root {
+display: flex;
+flex-direction: column;
+padding: 0 120px;
+padding-top: 70px;
+
+  
+}

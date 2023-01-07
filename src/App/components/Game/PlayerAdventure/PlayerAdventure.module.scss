@@ -1,0 +1,23 @@
+@use "scss/common/var";
+
+
+
+.root {
+  & .container {
+    border: 1px solid rgba(46, 45, 45, 0.427);
+    padding: var.$spasing-small;
+    display: flex;
+    height: 465px;
+    & .adventuresLinks {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    & .adventuresInfo {
+      border: 1px solid rgba(90, 90, 90, 0.759);
+      margin-left: 5px;
+      width: 100%;
+    }
+    }
+  }
+  

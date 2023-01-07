@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { playerApi } from 'store/rtkQuery';
-import { playerAction, selectAuth } from 'store/slice';
+import { gameModalAction, playerAction, selectAuth } from 'store/slice';
 import { ButtonMain, InputMain } from 'ui';
 
 import styles from './Game.module.scss';
@@ -17,7 +17,7 @@ const Game: React.FC = () => {
   const handlerCreatePlayer = async () => {
     try {
       await createPlayer({ nameSity: text, userId: auth._id }).unwrap()
-      .then((data) => dispatch(playerAction.setPlayer(data)))
+      // .then((data) => dispatch(playerAction.setPlayer(data))) 
     } catch (error) {
       console.error('rejected', error)
     }
@@ -35,7 +35,7 @@ const Game: React.FC = () => {
   const handlerUpdatePlayer = async () => {
     try{
        await updatePlayer({text: text, userId: auth._id}).unwrap() 
-       .then((data) => dispatch(playerAction.setPlayer(data)))
+      //  .then((data) => dispatch(playerAction.setPlayer(data)))
     } catch (error){
       console.error('rejected', error)
     }
@@ -43,33 +43,39 @@ const Game: React.FC = () => {
 
   return (
     <div className={styles.root}>
-     
-    <ButtonMain
-        width={100}
-        bgColor="info"
-        onClick={() => handlerCreatePlayer()}
+      <ButtonMain
+      width={100}
+      bgColor="black"
+      onClick={() => dispatch(gameModalAction.linkOptionsActive())}
+      >
+        dispatch
+      </ButtonMain>
+      <ButtonMain
+      width={100}
+      bgColor="info"
+      onClick={() => handlerCreatePlayer()}
       >
         Create Sity
       </ButtonMain>
       <ButtonMain
-        width={100}
-        bgColor="red"
-        onClick={() => handlerRemovePlayer()}
+      width={100}
+      bgColor="red"
+      onClick={() => handlerRemovePlayer()}
       >
         Remove Sity
       </ButtonMain>
       <ButtonMain
-        width={100}
-        bgColor="orange"
-        onClick={() => handlerUpdatePlayer()}
+      width={100}
+      bgColor="orange"
+      onClick={() => handlerUpdatePlayer()}
       >
         Update Sity
       </ButtonMain>
 
-      <InputMain  value={text} onChange={(value) => setText(value)} placeholder={'Введите название Города'}/>
+<InputMain  value={text} onChange={(value) => setText(value)} placeholder={'Введите название Города'}/>
 
-    </div>
-  );
+</div>
+);
 };
 
 export {Game};

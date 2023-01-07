@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TypeRootState } from "store/store";
-import { MineType, NeedResurceMinesType, PlayerResurceBarType } from "models/GameType";
-import { ResurceBarType, ResurceSliceInitType } from "./types";
+import { MineType, NeedResourceMinesType, PlayerResourceBarType } from "models/GameType";
+import { ResourceBarType, ResourceSliceInitType } from "./types";
 import { dateGame, maxValueInObjects } from "utils";
 
 
 
-const initialState: ResurceSliceInitType = {
+const initialState: ResourceSliceInitType = {
   lastMinesInfo: {} as MineType,
-  nextLevelMinesUpdate: {} as NeedResurceMinesType,
-  resurceBar: {} as ResurceBarType,
+  nextLevelMinesUpdate: {} as NeedResourceMinesType,
+  resourceBar: {} as ResourceBarType,
   mineUpdateActive: {
     status: false,
     mineId: "",
@@ -28,25 +28,25 @@ const playerSlice = createSlice({
       state.lastMinesInfo = action.payload;
     },
 
-    setNextLevelMineUpdate(state, action: PayloadAction<NeedResurceMinesType>) {
+    setNextLevelMineUpdate(state, action: PayloadAction<NeedResourceMinesType>) {
       state.nextLevelMinesUpdate = action.payload;
     },
 
-    setResurceBar(
+    setResourceBar(
       state,
       action: PayloadAction<{ totalCount: number; name: string }>
     ) {
       const count = action.payload.totalCount;
       const name = action.payload.name;
-      state.resurceBar[name] = count;
+      state.resourceBar[name] = count;
     },
 
-    setResurceBarAll(state, action: PayloadAction<ResurceBarType>) {
-      state.resurceBar = action.payload;
+    setResourceBarAll(state, action: PayloadAction<ResourceBarType>) {
+      state.resourceBar = action.payload;
     },
 
-    resetResurceBarAll(state) {
-      state.resurceBar = {} as ResurceBarType;
+    resetResourceBarAll(state) {
+      state.resourceBar = {} as ResourceBarType;
     },
 
     setMineUpdateActive(state, action: PayloadAction<{mineId: string, timeUpdateValue: number}>) {
@@ -70,9 +70,9 @@ const playerSlice = createSlice({
       state.mineUpdateActive = resetState;
     },
 
-    setTimeAvailableUpdate (state, action: PayloadAction<{income: PlayerResurceBarType}>) {
+    setTimeAvailableUpdate (state, action: PayloadAction<{income: PlayerResourceBarType}>) {
       const incomeObj = action.payload.income
-      const resourceBar = state.resurceBar
+      const resourceBar = state.resourceBar
       const needResource = state.nextLevelMinesUpdate
       const time = maxValueInObjects(resourceBar, needResource, incomeObj)
       state.timeAvailableUpdate = time ? time : 0

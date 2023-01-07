@@ -1,6 +1,6 @@
 import { IPlayerType, MineType } from "models/GameType";
 import React from "react";
-import { ResorceIron } from "../ResorceIron";
+import { ResourceIron } from "../ResourceIron";
 
 import styles from "./MinesBlock.module.scss";
 
@@ -10,7 +10,7 @@ interface MenesBlockType {
   playerData: IPlayerType;
 }
 
-const MinesBlock: React.FC<MenesBlockType> = ({
+const MinesBlockF: React.FC<MenesBlockType> = ({
   handlerIronValue,
   handlerClickCircle,
   playerData,
@@ -22,7 +22,7 @@ const MinesBlock: React.FC<MenesBlockType> = ({
           {playerData &&
             playerData.mines.map((mine) => (
               <li key={mine._id}>
-                <ResorceIron
+                <ResourceIron
                   handlerIronValue={handlerIronValue}
                   mine={mine}
                   handlerClickCircle={handlerClickCircle}
@@ -35,4 +35,4 @@ const MinesBlock: React.FC<MenesBlockType> = ({
   );
 };
 
-export { MinesBlock };
+export const MinesBlock = React.memo(MinesBlockF);

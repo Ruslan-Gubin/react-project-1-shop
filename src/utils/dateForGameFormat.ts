@@ -11,7 +11,7 @@ const options: Intl.DateTimeFormatOptions = {
 class DateGame {
   constructor() {}
 
-  dateEndUpdateFormat(timer: Date) {
+  dateEndUpdateFormat(timer: number) {
     const endUpdate = this.nowDate.setMilliseconds( Number(this.nowDate.getMilliseconds()) + Number(timer));
     return this.formatedTime(endUpdate)
   };

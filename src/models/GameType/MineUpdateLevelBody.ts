@@ -1,4 +1,4 @@
-import { PlayerResurceBarType } from "./IPlayerType"
+import { PlayerResourceBarType } from "./IPlayerType"
 
 interface MineUpdateLevelBody {
   level: number
@@ -8,8 +8,8 @@ interface MineUpdateLevelBody {
   population: number
   playerId: string
   idMine: string
-  resurceBar: PlayerResurceBarType
-  resurceBarAfterUpdate: PlayerResurceBarType
+  resourceBar: PlayerResourceBarType
+  resourceBarAfterUpdate: PlayerResourceBarType
 }
 
 export type {MineUpdateLevelBody}

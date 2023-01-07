@@ -28,7 +28,7 @@ const router = createBrowserRouter(createRoutesFromElements(
 
   <Route path="/game" element={<GameLayout />}>
           <Route index element={<page.Game />} />
-          <Route path="resurce" element={<page.GameResurce />} />
+          <Route path="resource" element={<page.GameResource />} /> 
         </Route>
 </>
 ))

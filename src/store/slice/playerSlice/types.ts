@@ -1,6 +1,6 @@
-import { MineType, NeedResurceMinesType } from "models/GameType";
+import { MineType, NeedResourceMinesType } from "models/GameType";
 
-interface ResurceBarType extends Record<string, number> {
+interface ResourceBarType extends Record<string, number> {
   wood: number;
   clay: number;
   iron: number;
@@ -16,12 +16,12 @@ interface MineUpdateActiveType {
 }
 
 
-interface ResurceSliceInitType {
+interface ResourceSliceInitType {
   lastMinesInfo: MineType;
-  nextLevelMinesUpdate: NeedResurceMinesType;
-  resurceBar: ResurceBarType;
+  nextLevelMinesUpdate: NeedResourceMinesType;
+  resourceBar: ResourceBarType;
   mineUpdateActive: MineUpdateActiveType;
   timeAvailableUpdate: number;
 }
 
-export type { ResurceBarType, ResurceSliceInitType };
+export type { ResourceBarType, ResourceSliceInitType };

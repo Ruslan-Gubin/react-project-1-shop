@@ -1,0 +1,28 @@
+@use 'scss/common/var';
+
+.root {
+  background-color: rgba(231, 231, 231, 0.753);
+  padding: 3px;
+  transition: all 0.3s ease;
+  &:hover{
+    background-color: rgb(225, 225, 225);
+    box-shadow: var.$box-shadow;
+  }
+ & .container {
+  border: 2px solid #a2c913;
+  text-align: center;
+  & button {
+    font-family: var.$ff-Gilroy-Bold;
+    padding: 3px 10px;
+    font-size: var.$font-size-card-text;
+
+    background-image: var.$liner-gradient-button-game;
+    color: white;
+    border: 1px solid white;
+    text-shadow: 1px 0 0 #7da100, 0 1px 0 #7da100, -1px 0 0 #7da100, 0 -1px 0 #7da100;
+    &:hover {
+      background-image: linear-gradient(to bottom, #a1cd02, #86aa02);
+     }
+  }
+}
+}

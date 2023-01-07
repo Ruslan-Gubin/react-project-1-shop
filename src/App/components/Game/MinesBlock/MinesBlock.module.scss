@@ -1,19 +1,14 @@
-@use 'scss/common/var';
+@use "scss/common/var";
 
 .root {
-
-
-
-
   .mines {
- 
-
   }
 
   .mine {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    
     flex-wrap: wrap;
   }
-
-  
 }

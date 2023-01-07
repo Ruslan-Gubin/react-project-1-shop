@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { IPlayerType, MineUpdateLevelBody } from "models/GameType";
+import { MineUpdatedOptionsType } from "data/mineUpdateObjOptions";
+import { InventoryPlayerType, IPlayerType, MineUpdateLevelBody } from "models/GameType";
+import { ResourceBarType } from "store/slice/playerSlice/types";
 
 
 const playerApi = createApi({
@@ -63,7 +65,7 @@ const playerApi = createApi({
       invalidatesTags: [{ type: "Resource", id: "LIST" }],
     }),
 
-    updateLevelMine: build.mutation<{success: boolean}, MineUpdateLevelBody>({
+    updateLevelMine: build.mutation<{success: boolean}, MineUpdatedOptionsType>({
       query: (body) => ({
         method: 'PATCH',
         url: 'mine-update-level',
@@ -79,6 +81,35 @@ const playerApi = createApi({
       }),
       invalidatesTags:  [{type: 'Resource', id: 'LIST'},{type: 'Mines', id: 'LIST'}], 
     }),
+
+    setInventoryUpdate: build.mutation<InventoryPlayerType[], {inventoryUpdate: InventoryPlayerType[], playerId: string,resourceBar: ResourceBarType } >({
+      query: (body) => ({
+        method: 'PATCH',
+        url: 'inventory-order-update',
+        body,
+      }),
+      invalidatesTags:  [{type: 'Resource', id: 'LIST'},{type: 'Mines', id: 'LIST'}],
+    }),
+
+    activeInventory: build.mutation<{success: boolean}, {inventoryUpdate: InventoryPlayerType[], playerId: string,resourceBar: ResourceBarType}>({ 
+      query: (body) => ({
+        method: 'PATCH',
+        url: 'inventory-active',
+        body,
+      }),
+      invalidatesTags:  [{type: 'Resource', id: 'LIST'},{type: 'Mines', id: 'LIST'}],
+    }),
+
+    activeAdventure: build.mutation<{success: boolean}, {compasCost: number, timeMs: number, resourceBar: ResourceBarType}>({
+      query: (body) => ({
+        method: 'PATCH',
+        url: 'adventure-active',
+        body,
+      }),
+      invalidatesTags:  [{type: 'Resource', id: 'LIST'},{type: 'Mines', id: 'LIST'}],
+    }),
+
+    
 
 
   })

@@ -1,0 +1,42 @@
+@use 'scss/common/var';
+
+.root {
+  & .container {
+    border: 1px solid rgba(151, 150, 150, 0.434);
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+    height: 60px;
+    position: relative;
+    cursor: grab;
+    
+    & .imag {
+      width: 60px;
+   max-height: 60px;
+   height: 100%;
+   overflow: hidden;
+
+   &:hover {
+    background-image: linear-gradient(to top, rgb(212, 212, 212), white);
+   }
+    
+    & img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover ;
+    }
+  }
+
+  & .active {
+    border: 3px solid rgba(255, 238, 1, 0.632);
+  }
+
+  & .hits {
+    position: absolute;
+    width: 500px;
+    top: 60px;
+    left: 0px;
+  }
+}
+}

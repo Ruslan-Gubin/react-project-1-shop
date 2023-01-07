@@ -1,4 +1,4 @@
-export {useUpdateCountResurce} from './useUpdateCountResurce';
+export {useUpdateCountResource} from './useUpdateCountResource';
 export {useMineNextLevelInfo} from './useMineNextLevelInfo';
 export {useWhyDidYouUpdate} from './useWhyDidYouUpdate';
 export {useLocationParams} from './useLocationParams';
@@ -20,3 +20,5 @@ export {useInput}    from './useInput';
 export {useToggle} from './useToggle';
 export {useScroll} from './useScroll';
 export {useHover} from './useHover';
+export {useHoverHits} from './useHoverHits';
+export {useDragElement} from './useDragElement';
