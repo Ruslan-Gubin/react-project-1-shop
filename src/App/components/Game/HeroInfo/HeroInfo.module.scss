@@ -1,6 +1,7 @@
 @use "scss/common/var";
 
 .root {
+  margin-right: 15px;
   & .container {
     display: flex;
     position: relative;

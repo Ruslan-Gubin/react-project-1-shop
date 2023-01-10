@@ -1,19 +1,16 @@
+import { IPlayerType } from "models/GameType";
 import React from "react";
-import { useSelector } from "react-redux";
 import { playerApi } from "store/rtkQuery";
-import { selectAuth, selectPlayer } from "store/slice";
 import { AdventuresCard, AdventuresInfo, PointsAdventures } from "../UiGame";
 
 import styles from "./PlayerAdventure.module.scss";
 
-interface PlayerAdventureType {}
+interface PlayerAdventureType {
+  playerData:IPlayerType
+  refetch: () => void
+}
 
-const PlayerAdventure: React.FC<PlayerAdventureType> = () => {
-  const { resourceBar } = useSelector(selectPlayer);
-  const { auth } = useSelector(selectAuth);
-  const { data: playerData, isLoading } = playerApi.useGetPlayerQuery({
-    id: auth._id,
-  });
+const PlayerAdventure: React.FC<PlayerAdventureType> = ({playerData, refetch}) => {
   const [adventure, {}] = playerApi.useActiveAdventureMutation();
   const [adventuresActive, setAdventuresActive] = React.useState<{
     numberCard: number;
@@ -22,18 +19,25 @@ const PlayerAdventure: React.FC<PlayerAdventureType> = () => {
 
   const handleCardActive = (value: { numberCard: number; title: string }) => {
     setAdventuresActive(() => {
-      return { numberCard: value.numberCard, title: value.title, resourceBar };
+      return { numberCard: value.numberCard, title: value.title };
     });
   };
 
   const handlerAdventure = async (adventureData: {
-    compasCost: number;
+    compassCost: number;
     adventureTime: string;
     timeMs: number;
   }) => {
+    if (playerData && playerData.compass < adventureData.compassCost) {
+      return false
+    } 
+    if (playerData) {
     const { adventureTime, ...rest } = adventureData;
-
-    await adventure({...rest, resourceBar}); 
+     return await adventure({...rest,  playerId: playerData?._id})
+      .unwrap()
+      .then(() => {})
+      .catch((error) => console.error(error)) 
+    }
   };
 
   return (
@@ -52,15 +56,19 @@ const PlayerAdventure: React.FC<PlayerAdventureType> = () => {
             title={"Длинное приключение"}
             handleCardActive={handleCardActive}
           />
-          {playerData && !isLoading && (
+          {playerData &&  (
             <PointsAdventures compassCount={playerData.compass} />
           )}
         </div>
         <div className={styles.adventuresInfo}>
+          {playerData && 
           <AdventuresInfo
-            adventureActive={handlerAdventure}
-            title={adventuresActive.title}
+          compassState={playerData.compass !== 0}
+          adventureStatus={playerData.adventure.status}
+          adventureActive={handlerAdventure}
+          title={adventuresActive.title}
           />
+        }
         </div>
       </div>
     </div>

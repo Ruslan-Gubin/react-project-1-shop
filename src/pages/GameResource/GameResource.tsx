@@ -1,19 +1,20 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { playerApi } from "store/rtkQuery";
-import { AccordionModal, MinesBlock, ModalGame, PlayerModalOptions } from "game";
+import { MinesBlock } from "game";
 import { mineUpdateObjOptions, resourceUpdateRuls } from "data";
 import { MineType } from "models/GameType";
-import { playerAction, selectAuth, selectGameModal, selectPlayer } from "store/slice";
+import { playerAction, selectAuth, selectPlayer } from "store/slice";
 import { findNextLevelResource } from "utils";
 
 import styles from "./GameResource.module.scss";
 
 const GameResource: React.FC = () => {
-  const {playerOptionsModal, modalStatus} = useSelector(selectGameModal)
   const { auth } = useSelector(selectAuth);
   const { nextLevelMinesUpdate, resourceBar } = useSelector(selectPlayer);
-  const { data: playerData, isLoading } = playerApi.useGetPlayerQuery({ id: auth._id, });
+  const { data: playerData, isLoading } = playerApi.useGetPlayerQuery({
+    id: auth._id,
+  });
   const [updateMineLevel, {}] = playerApi.useUpdateLevelMineMutation();
   const dispatch = useDispatch();
 
@@ -30,9 +31,9 @@ const GameResource: React.FC = () => {
       );
       dispatch(playerAction.setNextLevelMineUpdate(resurceNeedUpdate));
     }
-  },[]);
+  }, []);
 
-  const handlerClickCircle =  async(value: MineType) => {
+  const handlerClickCircle = async (value: MineType) => {
     const timeUpdate = nextLevelMinesUpdate.time;
     if (!isLoading && playerData) {
       const { mineUpdatedOptions, resourceBarCount } = mineUpdateObjOptions(
@@ -53,7 +54,7 @@ const GameResource: React.FC = () => {
       await updateMineLevel(mineUpdatedOptions)
         .unwrap()
         .then(async () => {})
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error)); 
     }
   };
 
@@ -66,13 +67,6 @@ const GameResource: React.FC = () => {
           handlerIronValue={handlerIronValue}
         />
       )}
-      {modalStatus && 
-      <ModalGame title={`${auth.fullName} - Уровень: ${0}`} >
-      <AccordionModal links={playerOptionsModal}>
-        <PlayerModalOptions />
-      </AccordionModal>
-      </ModalGame>
-      }
     </div>
   );
 };

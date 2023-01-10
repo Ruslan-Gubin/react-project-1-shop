@@ -40,7 +40,7 @@ export {PlayerAuction} from './PlayerAuction';
 export {PlayerAdventure} from './PlayerAdventure';
 export {InventoryActive} from './InventoryActive';
 export {CellInventary} from './CellInventary';
-
+export {EventProgressGame} from './EventProgressGame';
 
 
 

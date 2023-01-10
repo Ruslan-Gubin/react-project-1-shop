@@ -1,18 +1,17 @@
 import React from "react";
-import { InventoryActive } from "../InventoryActive";
+import { playerApi } from "store/rtkQuery";
 
+import { InventoryActive } from "../InventoryActive";
 import { CellInventary } from "../CellInventary";
 import {  dragUpdateArray, inventoryActiveFilter } from "utils";
 import styles from "./PlayerInventory.module.scss";
-import { playerApi } from "store/rtkQuery";
-import { useSelector } from "react-redux";
-import { selectAuth, selectPlayer } from "store/slice";
-import { InventoryPlayerType } from "models/GameType";
+import { InventoryPlayerType, IPlayerType } from "models/GameType";
 
-const PlayerInventory: React.FC = () => {
-  const {resourceBar} = useSelector(selectPlayer) 
-  const { auth } = useSelector(selectAuth);
-  const { data: playerData, isLoading: playerLoading } = playerApi.useGetPlayerQuery({ id: auth._id });
+interface PlayerInventoryType {
+  playerData: IPlayerType
+}
+
+const PlayerInventory: React.FC<PlayerInventoryType> = ({playerData}) => {
   const [setInventaryOrder, {}] = playerApi.useSetInventoryUpdateMutation();
   const [activeInventory, { status }] = playerApi.useActiveInventoryMutation();
   const [currentInventory, setCurrentInventory] = React.useState<InventoryPlayerType | null>(null);
@@ -27,7 +26,7 @@ const PlayerInventory: React.FC = () => {
           inventory,
           playerData.inventory
         );
-        await activeInventory({ inventoryUpdate, playerId: playerData._id, resourceBar });
+        await activeInventory({ inventoryUpdate, playerId: playerData._id });
       }
     } catch (error) {
       console.error(error);
@@ -48,7 +47,7 @@ const PlayerInventory: React.FC = () => {
     if (playerData && currentInventory) {
       const inventoryUpdate = dragUpdateArray( playerData.inventory, inventory, currentInventory
       );
-      await setInventaryOrder({ inventoryUpdate, playerId: playerData._id, resourceBar });
+      await setInventaryOrder({ inventoryUpdate, playerId: playerData._id });
     }
   };
 
@@ -86,7 +85,6 @@ const PlayerInventory: React.FC = () => {
           </div>
           <ul className={styles.cellsContainer}>
             {playerData &&
-              !playerLoading &&
               playerData.inventory.map((obj) => (
                 <li key={obj._id}>
                   <CellInventary

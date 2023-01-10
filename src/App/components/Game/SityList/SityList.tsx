@@ -1,21 +1,17 @@
 import React from 'react';
-import { playerApi } from 'store/rtkQuery';
-import { selectAuth } from 'store/slice';
-import { useSelector } from 'react-redux';
 import { icons, iconsGame } from 'data';
 
 import styles from './SityList.module.scss';
 import { CustomSelectGame } from '../CustomSelectGame';
 import { HitsModal } from '../HitsModal';
 import { useHover } from 'hooks';
+import { IPlayerType } from 'models/GameType';
 
 interface SityListType {
-
+  playerData: IPlayerType
 }
 
-const SityList: React.FC<SityListType> = () => {
-  const {auth} = useSelector(selectAuth)
-  const {data: playerData} = playerApi.useGetPlayerQuery({id: auth._id})
+const SityList: React.FC<SityListType> = ({playerData}) => {
   const hitsRef = React.useRef<HTMLDivElement>(null)
   const hover = useHover(hitsRef)
 
@@ -33,7 +29,7 @@ const SityList: React.FC<SityListType> = () => {
        </div>
     <div className={styles.selectMenu}>
       {playerData && 
-      <CustomSelectGame onChange={(value) => {}} options={[{value: defautSelectValue, label: defautSelectValue}]} defaultValue={{label: playerData?.nameSity, value: playerData?.nameSity}}/>
+      <CustomSelectGame onChange={(value) => {}} options={[{value: defautSelectValue, label: defautSelectValue}]} defaultValue={{label: playerData.nameSity, value: playerData.nameSity}}/>
       }
     </div>
     <div ref={hitsRef} className={styles.menu}>

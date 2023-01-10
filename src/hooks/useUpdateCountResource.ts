@@ -4,7 +4,7 @@ import { useInterval } from './useInterval';
 
 const MS_IN_HOURS = 3600000 /** в часе миллисекунд */
 
-const useUpdateCountResource = (updateTime: number, lastCount: number, incom: number, capasity: number) => {
+const useUpdateCountResource = ( updateTime: number, lastCount: number, incom: number, capasity: number) => {
   const lastUpdateTimePlayer = updateTime /**последнее обновление игрока */
   const nowDate = Date.now() /**текущее время */
   const lastCountUpdateResource = lastCount/** последняя сумма после обновления */
@@ -14,6 +14,8 @@ const useUpdateCountResource = (updateTime: number, lastCount: number, incom: nu
   const count = Math.round(timeDifference / updatePeriod) + lastCountUpdateResource
   const [totalCount, setTotalCount] = React.useState<number>(count)
   const [delayActive, setDelayActive] = React.useState(false)
+
+  
  
 
   React.useEffect(() => {

@@ -10,6 +10,7 @@
   overflow: scroll;
   display: flex;
   flex-direction: column;
+  position: relative;
 
   @include mixin.respond(mobile) {
     padding: 5px;
@@ -30,9 +31,14 @@
   }
   
   & .footer {
-    position: absolute;
-    bottom: 8px;
+    position: fixed;
+    bottom: 10px;
     left: 0;
     width: 100%;
+  }
+
+  & .modal {
+    position: static;
+   
   }
 }

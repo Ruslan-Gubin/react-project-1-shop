@@ -1,0 +1,42 @@
+@use 'scss/common/var';
+
+.root {
+  width: 100vw;
+  height: 100vh;
+  background-image: url('https://res.cloudinary.com/ds289tkqj/image/upload/v1673091553/Game/adventures-3726_buosh9.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20%;
+  justify-content: center;
+  
+  & .header {
+    color: var.$color-black-hover;
+    font-size: var.$font-size-header-link;
+    
+  }
+  
+  & .body {
+    display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+margin: 10px ;
+    & .button {
+      margin-top: var.$spasing-medium;
+      display: flex;
+      flex-direction: column;
+
+      & .cancel {
+        margin-top: var.$spasing-small;
+      }
+    }
+  }
+
+  & .footer {
+
+  }
+}

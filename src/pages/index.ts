@@ -16,8 +16,10 @@ const Checkout = lazy(() => import('./Checkout'))
 const About = lazy(() => import('./About'))
 const Game = lazy(() => import('./Game'))
 const GameResource = lazy(() => import('./GameResource')) 
+const RegisterGame = lazy(() => import('./RegisterGame')) 
 
 export {
+  RegisterGame,
   GameResource,
   Game,
   About,

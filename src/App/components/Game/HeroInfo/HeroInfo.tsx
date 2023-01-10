@@ -8,10 +8,11 @@ import { HitsModal } from "../HitsModal";
 
 import styles from "./HeroInfo.module.scss";
 
-interface HeroInfoType {}
+interface HeroInfoType {
+  playerLevel: number;
+}
 
-const HeroInfo: React.FC<HeroInfoType> = () => {
-  const playerLevel = 1;
+const HeroInfo: React.FC<HeroInfoType> = ({playerLevel}) => {
   const {hover:hoverCompass, hoverRef: hoverRefCompass} = useHoverHits()
   const {hover:parametersHover, hoverRef: parametersRef} = useHoverHits()
   const dispatch = useDispatch()

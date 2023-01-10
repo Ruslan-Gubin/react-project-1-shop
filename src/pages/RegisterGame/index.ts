@@ -1,0 +1,1 @@
+export {RegisterGame as default} from './RegisterGame';

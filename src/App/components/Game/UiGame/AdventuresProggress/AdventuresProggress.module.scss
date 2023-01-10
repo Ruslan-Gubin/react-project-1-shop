@@ -1,0 +1,55 @@
+@use 'scss/common/var';
+
+.root {
+  cursor: pointer;
+    & .hitsGoAdventures {
+      position: relative;
+      top: -23px;
+      right: 310px;
+    }
+    
+    & .hitsGoHome {
+      position: relative;
+      top: -23px;
+      right: 410px;
+    }
+    
+    & .modal {
+      background-color: rgba(255, 255, 255, 0.668);
+      border: 1px solid var.$color-white;
+      padding: 1px var.$spasing-small;
+      border-top-left-radius: var.$spasing-small;
+      border-bottom-left-radius: var.$spasing-small;
+      display: flex;
+      align-items: center; 
+
+
+      & .arrowLeft {
+        width: 25px;
+        height: 25px;
+        margin-right: var.$spasing-small;
+      }
+      & .arrowRight {
+        width: 25px;
+        height: 25px;
+        margin-right: var.$spasing-small;
+        rotate: (180deg);
+      }
+      
+      & .image {
+        margin-right: var.$spasing-small;
+        & img {
+      width: 20px;
+      height: 20px;
+    }
+    
+  }
+  
+  & .time {
+    color: var.$color-black-hover;
+    font-weight: 600;
+  }
+}
+  
+
+}

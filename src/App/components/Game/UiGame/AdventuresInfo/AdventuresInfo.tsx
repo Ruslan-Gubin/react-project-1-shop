@@ -5,18 +5,22 @@ import { ButtonGame } from "../ButtonGame";
 import styles from "./AdventuresInfo.module.scss";
 
 interface AdventuresInfoType {
+  compassState: boolean
   title: string;
-  adventureActive: (value: {compasCost: number, adventureTime: string, timeMs: number}) => void;
+  adventureActive: (value: {compassCost: number, adventureTime: string, timeMs: number}) => void;
+  adventureStatus: boolean
 }
 
 const AdventuresInfo: React.FC<AdventuresInfoType> = ({
+  compassState,
   title,
   adventureActive,
+  adventureStatus,
 }) => {
   const checkTitle = title === "Короткое приключение";
 
   const adventureData = {
-    compasCost: checkTitle ? 1 : 2,
+    compassCost: checkTitle ? 1 : 2,
     adventureTime: checkTitle ? "00:08:00" : "01:04:16",
     timeMs: checkTitle ? 480000 : 3600000,
   }
@@ -48,18 +52,23 @@ const AdventuresInfo: React.FC<AdventuresInfoType> = ({
             </p>
           )}
           <div className={styles.timeAdventure}>
+          {!adventureStatus ?
+            <>
             <img src={iconsGame["clock"]} alt="icon clock" />
             <span>{adventureData.adventureTime}</span>
+          </>
+            : <span>Идет приключение...</span>
+          }
           </div>
         </div>
         <div className={styles.footer}>
           <div className={styles.count}>
             <p>Стоит :</p>
             <img src={iconsGame["compassAdventure"]} alt="icon compass" />
-            <span> x {adventureData.compasCost}</span>
+            <span> x {adventureData.compassCost}</span>
           </div>
           <div className={styles.button}>
-            <ButtonGame onClick={() => adventureActive(adventureData)}>
+            <ButtonGame disabled={adventureStatus || !compassState} onClick={() => adventureActive(adventureData)}>
               Начать приключение
             </ButtonGame>
           </div>

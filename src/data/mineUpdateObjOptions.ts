@@ -4,7 +4,6 @@ import {
   NeedResourceMinesType,
   PlayerResourceBarType,
 } from "models/GameType";
-import { calculateResourceBarUpdate } from "utils";
 
 type IncomeUpdateType = Record<string, any>;
 
@@ -60,33 +59,7 @@ const mineUpdateObjOptions = (
     population: nextLevelMinesUpdate.piple - value.piple,
     playerId: playerData._id,
     idMine: value._id,
-    // resourceBar: resourceBarCount,
-    resourceBar: {
-      wood: calculateResourceBarUpdate(
-        resourceBarCount.wood,
-        playerData.income.wood,
-        nextLevelMinesUpdate.time,
-        playerData.capasity.wood
-        ),
-        clay: calculateResourceBarUpdate(
-        resourceBarCount.clay,
-        playerData.income.clay,
-        nextLevelMinesUpdate.time,
-        playerData.capasity.clay
-      ),
-      iron: calculateResourceBarUpdate(
-        resourceBarCount.iron,
-        playerData.income.iron,
-        nextLevelMinesUpdate.time,
-        playerData.capasity.iron
-      ),
-      wheat: calculateResourceBarUpdate(
-        resourceBarCount.wheat,
-        playerData.income.wheat,
-        nextLevelMinesUpdate.time,
-        playerData.capasity.wheat
-      ),
-    },
+    resourceBar: resourceBarCount,
     incomeUpdate,
   };
   return { mineUpdatedOptions, resourceBarCount };

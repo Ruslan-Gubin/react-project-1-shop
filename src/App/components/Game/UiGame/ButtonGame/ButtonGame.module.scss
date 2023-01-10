@@ -11,7 +11,7 @@
  & .container {
   border: 2px solid #a2c913;
   text-align: center;
-  & button {
+  & .button {
     font-family: var.$ff-Gilroy-Bold;
     padding: 3px 10px;
     font-size: var.$font-size-card-text;
@@ -24,5 +24,14 @@
       background-image: linear-gradient(to bottom, #a1cd02, #86aa02);
      }
   }
+  .disabled {
+  background-image: linear-gradient(to top,rgb(207, 207, 207), rgb(175, 175, 175));
+  color: rgba(0, 0, 0, 0.49);
+  text-shadow: none;
+  &:hover{
+    background-image: linear-gradient(to top,rgb(207, 207, 207), rgb(175, 175, 175));
+  }
+  }
 }
+
 }

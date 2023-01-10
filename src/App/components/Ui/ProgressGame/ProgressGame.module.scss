@@ -28,4 +28,8 @@
     background-image: linear-gradient( to bottom,  rgb(175, 221, 254), rgb(0, 92, 158) );
     @extend %colorProgress;
   }
+  .red {
+    background-image: linear-gradient( to bottom,  rgb(249, 137, 137), rgb(132, 20, 20) );
+    @extend %colorProgress;
+  }
 }

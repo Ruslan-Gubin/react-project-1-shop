@@ -18,7 +18,6 @@ const Header = React.memo(() => {
   const dispatch = useDispatch();
   const linkClActive = styles["links-default"];
   const linkCl = styles["links-active"];
-
  
   const handlerClickAutLogin = () => {
     dispatch(authAction.resetAuth());

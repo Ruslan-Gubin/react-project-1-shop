@@ -5,8 +5,8 @@ import type {  IDialog, IUser } from "models";
 const dialogApi = createApi({
   reducerPath: "dialogApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:4444/api",
-    // baseUrl: "https://project1-pkez.onrender.com/api",
+    // baseUrl: "http://localhost:4444/api",
+    baseUrl: "https://project1-pkez.onrender.com/api",
     prepareHeaders: (headers) => {
       const token = window.localStorage.getItem("token");
       if (token) headers.set("authorization", token);

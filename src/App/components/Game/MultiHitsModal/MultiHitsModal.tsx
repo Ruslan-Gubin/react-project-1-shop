@@ -1,4 +1,4 @@
-import React from "react";
+import  { useEffect, useState, FC } from "react";
 import { dateGame } from "utils";
 
 import styles from "./MultiHitsModal.module.scss";
@@ -12,12 +12,12 @@ interface MultiHitsModalType {
   incom: number;
 }
 
-const MultiHitsModal: React.FC<MultiHitsModalType> = (props) => {
+const MultiHitsModal: FC<MultiHitsModalType> = (props) => {
   const { capasity, incom, text, title, totalCount, width } = props;
-  const [timeFullCapasity, setTimeFullCapasity] = React.useState(0);
+  const [timeFullCapasity, setTimeFullCapasity] = useState(0);
 
 
-    React.useEffect(() => {
+    useEffect(() => {
       const needRes =  capasity - totalCount
       const needTime = Math.floor(((needRes / incom) * 60) * 1000)
       setTimeFullCapasity(needTime)

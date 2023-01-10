@@ -21,3 +21,4 @@ export {  maxValueInObjects, checkTimeUpdate } from './checkMaxTimeForResource';
 export {  inventoryActiveFilter } from './inventoryActiveFilter'; 
 export {  dragUpdateArray } from './dragUpdateArray'; 
 export {  modalActiveAccordion } from './modalActiveAccordion'; 
+export {  levelCheckNextUp } from './levelCheckNextUp'; 

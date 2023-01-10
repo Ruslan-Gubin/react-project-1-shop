@@ -1,7 +1,7 @@
 import { IUser } from "models/user";
 import { MineType } from "./MineType";
 
-type ObjectType = Record<string, number>
+type ObjectType = Record<string, number>;
 
 interface PlayerResourceBarType extends ObjectType {
   wood: number;
@@ -18,13 +18,21 @@ interface InventoryPlayerType {
   status: boolean;
   cell: number;
   order: number;
-  _id: string
+  _id: string;
 }
 
-interface IPlayerType  {
+interface AdventureType {
+  status: boolean;
+  extraction: PlayerResourceBarType;
+  startTime: number;
+  endTime: number;
+  goBackTime: number;
+}
+
+interface IPlayerType {
   _id: string;
-  updatedAt: string
-  createdAt?: string
+  updatedAt: string;
+  createdAt?: string;
   user: IUser;
   nameSity: string;
   population: number;
@@ -32,8 +40,13 @@ interface IPlayerType  {
   capasity: PlayerResourceBarType;
   income: PlayerResourceBarType;
   mines: MineType[];
-  inventory: InventoryPlayerType[]
-  compass: number
+  inventory: InventoryPlayerType[];
+  compass: number;
+  health: number;
+  adventureStatus: boolean;
+  level: number;
+  experience: number;
+  adventure: AdventureType;
 }
 
-export type { IPlayerType , PlayerResourceBarType, InventoryPlayerType};
+export type { IPlayerType, PlayerResourceBarType, InventoryPlayerType };

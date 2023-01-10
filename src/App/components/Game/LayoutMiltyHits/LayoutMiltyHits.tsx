@@ -5,11 +5,12 @@ import styles from './LayoutMiltyHits.module.scss';
 interface LayoutMiltyHitsType {
 title: string
 text: string
+width?: number
 }
 
-const LayoutMiltyHits:React.FC<LayoutMiltyHitsType> = ({title, text}) => {
+const LayoutMiltyHits:React.FC<LayoutMiltyHitsType> = ({title, text, width}) => {
   return (
-    <div className={styles.root}>
+    <div style={{width: width}} className={styles.root}>
     <div className={styles.containerHits}>
             <div className={styles.title}>
               <h2>{title}</h2>

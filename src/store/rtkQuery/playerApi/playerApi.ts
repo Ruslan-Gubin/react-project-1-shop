@@ -1,14 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { MineUpdatedOptionsType } from "data/mineUpdateObjOptions";
-import { InventoryPlayerType, IPlayerType, MineUpdateLevelBody } from "models/GameType";
-import { ResourceBarType } from "store/slice/playerSlice/types";
+import { InventoryPlayerType, IPlayerType } from "models/GameType";
 
 
 const playerApi = createApi({
   reducerPath: 'resourceGame',
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:4444/api",
-    // baseUrl: "https://project1-pkez.onrender.com/api",
+    // baseUrl: "http://localhost:4444/api",
+    baseUrl: "https://project1-pkez.onrender.com/api",
     prepareHeaders: (headers) => {
       const token = window.localStorage.getItem("token");
       if (token) headers.set("authorization", token);
@@ -82,7 +81,7 @@ const playerApi = createApi({
       invalidatesTags:  [{type: 'Resource', id: 'LIST'},{type: 'Mines', id: 'LIST'}], 
     }),
 
-    setInventoryUpdate: build.mutation<InventoryPlayerType[], {inventoryUpdate: InventoryPlayerType[], playerId: string,resourceBar: ResourceBarType } >({
+    setInventoryUpdate: build.mutation<InventoryPlayerType[], {inventoryUpdate: InventoryPlayerType[], playerId: string } >({
       query: (body) => ({
         method: 'PATCH',
         url: 'inventory-order-update',
@@ -91,7 +90,7 @@ const playerApi = createApi({
       invalidatesTags:  [{type: 'Resource', id: 'LIST'},{type: 'Mines', id: 'LIST'}],
     }),
 
-    activeInventory: build.mutation<{success: boolean}, {inventoryUpdate: InventoryPlayerType[], playerId: string,resourceBar: ResourceBarType}>({ 
+    activeInventory: build.mutation<{success: boolean}, {inventoryUpdate: InventoryPlayerType[], playerId: string}>({ 
       query: (body) => ({
         method: 'PATCH',
         url: 'inventory-active',
@@ -100,7 +99,7 @@ const playerApi = createApi({
       invalidatesTags:  [{type: 'Resource', id: 'LIST'},{type: 'Mines', id: 'LIST'}],
     }),
 
-    activeAdventure: build.mutation<{success: boolean}, {compasCost: number, timeMs: number, resourceBar: ResourceBarType}>({
+    activeAdventure: build.mutation<{success: boolean}, {compassCost: number, timeMs: number, playerId: string}>({
       query: (body) => ({
         method: 'PATCH',
         url: 'adventure-active',
