@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
+import { BASE_URL } from "constants/root";
 import { MineUpdatedOptionsType } from "data/mineUpdateObjOptions";
 import { InventoryPlayerType, IPlayerType } from "models/GameType";
 
@@ -6,8 +7,7 @@ import { InventoryPlayerType, IPlayerType } from "models/GameType";
 const playerApi = createApi({
   reducerPath: 'resourceGame',
   baseQuery: fetchBaseQuery({
-    // baseUrl: "http://localhost:4444/api",
-    baseUrl: "https://project1-pkez.onrender.com/api",
+    baseUrl: BASE_URL,
     prepareHeaders: (headers) => {
       const token = window.localStorage.getItem("token");
       if (token) headers.set("authorization", token);

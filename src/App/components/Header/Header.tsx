@@ -46,12 +46,12 @@ const Header = React.memo(() => {
                 to="/"
                 text="Обо мне"
               ></CustomLink>
-              <CustomLink
-                activeCl={linkClActive}
-                noActive={linkCl}
-                to="/game"
-                text="Игра"
-              ></CustomLink>
+                <CustomLink
+                  activeCl={linkClActive}
+                  noActive={linkCl}
+                  to="/post"
+                  text="Посты"
+                ></CustomLink>
               <CustomLink
                 activeCl={linkClActive}
                 noActive={linkCl}
@@ -61,8 +61,8 @@ const Header = React.memo(() => {
               <CustomLink
                 activeCl={linkClActive}
                 noActive={linkCl}
-                to="/post"
-                text="Посты"
+                to="/game"
+                text="Игра"
               ></CustomLink>
 
               {!status ? (

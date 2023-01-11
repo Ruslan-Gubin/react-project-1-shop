@@ -2,13 +2,14 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectAuth } from "store/slice";
-import { aboutSitePosts, aboutSiteProduct, aboutUserData, icons } from "data";
+import { aboutSitePosts, aboutSiteProduct, aboutUserData, icons, aboutGameProduct } from "data";
 
 import styles from "./AboutUser.module.scss";
 
 const category = [
   { text: "Посты", id: 1, data: aboutSitePosts },
   { text: "Продукция", id: 2, data: aboutSiteProduct },
+  { text: "Игра", id: 3, data: aboutGameProduct },
 ];
 
 const AboutUser: React.FC = () => {
@@ -45,7 +46,8 @@ const AboutUser: React.FC = () => {
                   item.id === titleActive?.id ? styles.active : styles.title
                 }
               >
-                {item.text}
+                <nav>{item.text}</nav>
+                
               </h2>
             ))}
           </div>
@@ -59,7 +61,7 @@ const AboutUser: React.FC = () => {
                     src={icons.okGreen}
                     alt="icon ok"
                   />
-                  <p>{item}</p>
+                  <p className={styles.text}>{item}</p>
                 </li>
               ))}
           </ul>

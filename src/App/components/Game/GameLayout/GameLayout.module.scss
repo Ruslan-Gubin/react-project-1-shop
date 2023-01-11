@@ -11,6 +11,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  
 
   @include mixin.respond(mobile) {
     padding: 5px;
@@ -39,6 +40,5 @@
 
   & .modal {
     position: static;
-   
   }
 }

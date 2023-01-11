@@ -12,7 +12,7 @@ const GameLayout: React.FC = () => {
   const {data: playerData, isLoading, refetch} = playerApi.useGetPlayerQuery({id: auth._id})
   const {playerOptionsModal, modalStatus} = useSelector(selectGameModal)
 
-  return (
+  return ( 
     <div className={styles.root}>
       <div className={styles.header}>
         {playerData && !isLoading && refetch &&

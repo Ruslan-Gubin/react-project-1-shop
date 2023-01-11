@@ -5,48 +5,63 @@
 %card-info {
   width: 49%;
   position: relative;
-  padding: var.$spasing-small;
   background-image: linear-gradient(to right, #3a3d3f, #242525);
   padding: 20px;
+  padding-top: 10px;
   border-radius: var.$border-radius-small;
   box-shadow: var.$box-shadow;
-  height: 800px;
+  height: 550px;
+ 
 }
 
 .root {
   margin: 20px 0;
-
+  
   .container {
     display: flex;
     justify-content: space-between;
-    
     .progectInfo {
       @extend %card-info;
       color: var.$color-card-bg;
-      // overflow: auto;
-
- 
-
+      overflow: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      
+      
+      
+      .titles {
+        font-size: var.$font-size-header-link;
+        text-align: center;
+        display: flex;
+        text-align: center;
+        margin-bottom: var.$spasing-small;
+        justify-content: space-around;
+        background-image: var.$linear-gradient-grey;
+        box-shadow: var.$box-shadow;
+        border-radius: var.$border-radius-small;
+        padding: 10px 0;
+        position: sticky;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+       
         
-        .titles {
-          font-size: var.$font-size-header-link;
-          text-align: center;
-          margin-bottom: var.$spasing-small;
-          display: flex;
-          text-align: center;
-          justify-content: space-around;
-          cursor: pointer;
-
-          h2 {
-            margin-right: 10px;
-          }
+        
+        
+        h2 {
+          margin-right: 10px;
+        }
+      }
+        .text {
+          font-size: var.$font-size-card-text;
         }
         .title {
-          color: rgb(120, 109, 109);
+          color: rgb(49, 49, 49);
         }
 
         .active {
-          color: rgb(218, 212, 212);
+          color: rgb(255, 255, 255);
         }
         
         .img {
@@ -58,7 +73,7 @@
         .item {
           display: flex;
           align-items: center;
-          margin-bottom: 5px;
+          margin-bottom: 15px;
         }
         
         p {
@@ -68,20 +83,18 @@
 
     .userInfo {
       @extend %card-info;
-
       .header {
         position: relative;
         display: flex;
         justify-content: space-between;
-
         .name {
           color: rgb(221, 206, 206);
           font-size: var.$font-size-header-link;
-          margin-top: 40px;
           cursor: pointer;
           text-align: center;
           margin: 0 auto;
-          margin-top: 40px;
+          margin-top: 60px;
+        
         }
         .image {
           position: relative;
@@ -95,9 +108,8 @@
       }
 
       .body {
-        height: 500px;
         overflow: auto;
-
+        padding-bottom: var.$spasing-medium;
         color: var.$color-card-bg;
         .text {
           margin-right: 10px;
@@ -109,7 +121,9 @@
       .footer {
         display: flex;
         align-items: center;
-        margin-top: var.$spasing-small;
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
         .icon {
           width: 40px;
           height: 40px;

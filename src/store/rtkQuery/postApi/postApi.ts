@@ -2,12 +2,12 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IinitialStatePosts } from "store/slice/postSlice/types";
 import type { IPost } from "models";
 import { providesList } from "utils";
+import { BASE_URL } from "constants/root";
 
 const postApi = createApi({
   reducerPath: "postApi",
   baseQuery: fetchBaseQuery({
-    // baseUrl: "http://localhost:4444/api",
-    baseUrl: "https://project1-pkez.onrender.com/api",
+    baseUrl: BASE_URL,
     prepareHeaders: (headers) => {
       const token = window.localStorage.getItem("token");
       if (token) headers.set("authorization", token);

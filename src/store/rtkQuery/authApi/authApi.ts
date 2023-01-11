@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { BASE_URL } from "constants/root";
 import { IuseToggle } from "hooks/useToggle";
 import {  IUser } from "../../../models";
 
 const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({ 
-    // baseUrl: "http://localhost:4444/api",
-    baseUrl: "https://project1-pkez.onrender.com/api",
+    baseUrl: BASE_URL,
   prepareHeaders: (headers) => {
     const token = window.localStorage.getItem('token')
     if (token) headers.set('authorization', token)  

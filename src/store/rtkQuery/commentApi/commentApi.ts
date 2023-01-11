@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
+import { BASE_URL } from "constants/root";
 import { IuseToggle } from "hooks/useToggle";
 import { IComments } from "models";
 
@@ -9,8 +10,7 @@ interface IUpdateComments extends IComments {
 const commentApi = createApi({
   reducerPath: "commentApi",
   baseQuery: fetchBaseQuery({
-    // baseUrl: "http://localhost:4444/api",
-    baseUrl: "https://project1-pkez.onrender.com/api",
+    baseUrl: BASE_URL,
     prepareHeaders: (headers) => {
       const token = window.localStorage.getItem("token");
       if (token) headers.set("authorization", token);
