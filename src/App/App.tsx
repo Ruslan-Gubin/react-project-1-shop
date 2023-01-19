@@ -28,11 +28,18 @@ const router = createBrowserRouter(
         <Route path="*" element={<page.NotfoundPage />} />
       </Route>
 
+
+
       <Route path="/game" element={<GameLayout />}>
         <Route index element={<page.Game />} />
         <Route path="resource" element={<page.GameResource />} />
       </Route>
+
       
+      <Route path="/test-router" element={<page.TestTask />}/>
+     <Route path="/test-router/main" element={<page.TestMain />} /> 
+      <Route path="/test-router/about" element={<page.TestAbout />} />
+
       <Route path="/game/register" element={<page.RegisterGame />} />
     </>
   )

@@ -17,8 +17,14 @@ const About = lazy(() => import('./About'))
 const Game = lazy(() => import('./Game'))
 const GameResource = lazy(() => import('./GameResource')) 
 const RegisterGame = lazy(() => import('./RegisterGame')) 
+const TestTask = lazy(() => import('./TestTask')) 
+const TestMain = lazy(() => import('./TestMain')) 
+const TestAbout = lazy(() => import('./TestAbout')) 
 
 export {
+  TestAbout,
+  TestMain,
+  TestTask,
   RegisterGame,
   GameResource,
   Game,

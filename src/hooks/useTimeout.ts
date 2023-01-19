@@ -10,9 +10,13 @@ const useTimeout = (callback: () => void, delay: number) => {
 
  React.useEffect(() => {
    const tick = () => savedCallbackRef.current();
+
   if (typeof delay !== 'number') return;
+  
   const timer = setTimeout(tick, delay)
+
   return () => clearTimeout(timer)
+  
  },[delay])
 
 };

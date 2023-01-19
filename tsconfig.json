@@ -43,7 +43,8 @@
     }
   },
 
-  "include": ["src/**/*.tsx", "src/**/*.ts"]
+  "include": ["src/**/*.tsx", "src/**/*.ts"],
+  "exclude": ["node_modules", "src/**/*.test.ts"]
 }
 
 // "noImplicitThis": true  нет неявного htis, если this будет указывать на функцию не ()=>

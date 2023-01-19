@@ -1,0 +1,1 @@
+export {TestMain as default  } from './TestMain';

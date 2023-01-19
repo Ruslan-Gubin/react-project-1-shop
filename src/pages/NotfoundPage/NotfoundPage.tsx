@@ -4,7 +4,8 @@ import { NotFoundBlock } from "components";
 
 const NotfoundPage = React.memo(() => {
     return (
-        <div>
+        <div data-testid='not-found-page'>
+            not
             <NotFoundBlock />
         </div>
     );

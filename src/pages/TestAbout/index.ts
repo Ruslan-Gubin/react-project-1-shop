@@ -1,0 +1,1 @@
+export {TestAbout as default} from './TestAbout';

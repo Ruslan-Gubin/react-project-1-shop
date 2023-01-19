@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Получаем данные с jsonplaceholder Коррекное значение 1`] = `
+[
+  "1",
+  "2",
+  "3",
+]
+`;

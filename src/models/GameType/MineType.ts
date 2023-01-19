@@ -2,7 +2,7 @@
 
 interface MineType {
   _id: string
-  resorse: string;
+  resouces: string;
   level: number;
   imag: string;
   title: string;

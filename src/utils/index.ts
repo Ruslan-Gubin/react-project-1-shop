@@ -22,3 +22,7 @@ export {  inventoryActiveFilter } from './inventoryActiveFilter';
 export {  dragUpdateArray } from './dragUpdateArray'; 
 export {  modalActiveAccordion } from './modalActiveAccordion'; 
 export {  levelCheckNextUp } from './levelCheckNextUp'; 
+export {  delay } from './delay'; 
+export {  mapArrayToString } from './mapArrayToString'; 
+export {  getData } from './getData'; 
+export {  square } from './square'; 

@@ -43,7 +43,7 @@ module.exports = {
       ui: path.resolve(__dirname, "src/App/components/Ui/"),
       game: path.resolve(__dirname, "src/App/components/Game/"),
     },
-    extensions: [".tsx", ".ts", ".js", ".css", ".scss"],
+    extensions: [".tsx", "jsx", ".ts", ".js", ".css", ".scss"],
   },
   module: {
     rules: [

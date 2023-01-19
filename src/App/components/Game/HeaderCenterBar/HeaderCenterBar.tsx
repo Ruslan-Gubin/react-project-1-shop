@@ -1,5 +1,5 @@
 import React from "react";
-import { iconsGame } from "data";
+import { iconsGame } from "../../../../data";
 import { HeaderIconGame } from "../HeaderIconGame";
 import { HeaderNavigate } from "../HeaderNavigate";
 import { ResourceBar } from "../ResourceBar";
@@ -32,11 +32,13 @@ const HeaderCenterBar: React.FC<HeaderCenterBarType> = ({ playerData }) => {
             icon={String(iconsGame["settlement"])}
             link={"/game"}
             text={"Город"}
+            data-testid='game-link'
           />
           <HeaderNavigate
             icon={String(iconsGame["resourceLink"])}
             link={"/game/resource"}
             text={"Ресурсы"}
+            data-testid='game-resource'
           />
         </div>
         <div className={styles.headerIconsRight}>
@@ -52,7 +54,7 @@ const HeaderCenterBar: React.FC<HeaderCenterBarType> = ({ playerData }) => {
           />
         </div>
       </div>
-      <div className={styles.resourceBar}>
+      <div className={styles.resourceBar} data-testid='check-in-document'>
         {playerData && <ResourceBar playerData={playerData} />}
       </div>
     </div>

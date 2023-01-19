@@ -41,6 +41,7 @@ const Header = React.memo(() => {
             </div>
             <div className={styles.links}>
               <CustomLink
+                data-testid='link-about-main'
                 activeCl={linkClActive}
                 noActive={linkCl}
                 to="/"
@@ -97,4 +98,4 @@ const Header = React.memo(() => {
   );
 });
 
-export { Header };
+export {Header} ;

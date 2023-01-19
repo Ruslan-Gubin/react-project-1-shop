@@ -1,3 +1,4 @@
+import { AsyncTesting } from '../../App/components';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -23,8 +24,8 @@ const Game: React.FC = () => {
 
 
   return (
-    <div className={styles.root}>
-   
+    <div className={styles.root} data-testid='game-page'>
+   <AsyncTesting />
 </div>
 );
 };
